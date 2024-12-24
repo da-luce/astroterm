@@ -52,6 +52,7 @@ int main(int argc, char *argv[])
         .color = false,
         .grid = false,
         .constell = false,
+        .meta = false,
     };
 
     // Parse command line args and convert to internal representations
@@ -153,34 +154,35 @@ int main(int argc, char *argv[])
         }
 
         // Update metadata content
+        if (config.meta)
+        {
+            werase(metadata_win);
 
-        werase(metadata_win);
+            // Gregorian Date
+            int year, month, day;
+            julian_to_gregorian(julian_date, &year, &month, &day);
+            mvwprintw(metadata_win, 0, 0, "Gregorian Date: %02d-%02d-%04d", day, month, year);
 
-        // Gregorian Date
-        int year, month, day;
-        julian_to_gregorian(julian_date, &year, &month, &day);
-        mvwprintw(metadata_win, 0, 0, "Gregorian Date: %02d-%02d-%04d", day, month, year);
+            // Zodiac
+            const char *zodiac = get_zodiac_sign(day, month);
+            mvwprintw(metadata_win, 1, 0, "Zodiac: %s", zodiac);
 
-        // Zodiac
-        const char *zodiac = get_zodiac_sign(day, month);
-        mvwprintw(metadata_win, 1, 0, "Zodiac: %s", zodiac);
+            // Lunar phase
+            const char *lunar_phase = get_moon_phase_description(julian_date);
+            mvwprintw(metadata_win, 2, 0, "Lunar phase: %s", lunar_phase);
 
-        // Lunar phase
-        const char *lunar_phase = get_moon_phase_description(julian_date);
-        mvwprintw(metadata_win, 2, 0, "Lunar phase: %s", lunar_phase);
+            // Lat and Lon (convert back to degrees)
+            mvwprintw(metadata_win, 3, 0, "Lat: %.6f°", config.latitude * 180 / M_PI);
+            mvwprintw(metadata_win, 4, 0, "Lon: %.6f°", config.longitude * 180 / M_PI);
 
-        // Lat and Lon (convert back to degrees)
-        mvwprintw(metadata_win, 3, 0, "Lat: %.6f°", config.latitude * 180 / M_PI);
-        mvwprintw(metadata_win, 4, 0, "Lon: %.6f°", config.longitude * 180 / M_PI);
+            // Elapsed time
+            int eyears, edays, ehours, emins, esecs;
+            elapsed_time_to_components(julian_date - julian_date_start, &eyears, &edays, &ehours, &emins, &esecs);
+            mvwprintw(metadata_win, 5, 0, "Elapsed Time: %d years, %d days, %02d:%02d:%02d", eyears, edays, ehours, emins,
+                      esecs);
 
-        // Elapsed time
-        int eyears, edays, ehours, emins, esecs;
-        elapsed_time_to_components(julian_date - julian_date_start, &eyears, &edays, &ehours, &emins, &esecs);
-        mvwprintw(metadata_win, 5, 0, "Elapsed Time: %d years, %d days, %02d:%02d:%02d", eyears, edays, ehours, emins, esecs);
-
-        // Display metadata
-
-        wrefresh(metadata_win);
+            wrefresh(metadata_win);
+        }
 
         // Exit if ESC or q is pressed
         int ch = wgetch(main_win);
@@ -240,12 +242,13 @@ void parse_options(int argc, char *argv[], struct conf *config)
                                             "drawn if all stars in the figure are over the threshold");
     struct arg_lit *grid_arg = arg_lit0(NULL, "grid", "Draw an azimuthal grid");
     struct arg_lit *ascii_arg = arg_lit0(NULL, "ascii", "Only use ASCII characters");
+    struct arg_lit *meta_arg = arg_lit0("m", "meta", "Display metadata");
     struct arg_lit *help_arg = arg_lit0("h", "help", "Print this help message");
     struct arg_end *end = arg_end(20);
 
     // Create argtable array
-    void *argtable[] = {latitude_arg, longitude_arg, datetime_arg, threshold_arg, label_arg, fps_arg, anim_arg,
-                        color_arg,    constell_arg,  grid_arg,     ascii_arg,     help_arg,  end};
+    void *argtable[] = {latitude_arg, longitude_arg, datetime_arg, threshold_arg, label_arg, fps_arg,  anim_arg,
+                        color_arg,    constell_arg,  grid_arg,     ascii_arg,     meta_arg,  help_arg, end};
 
     // Parse the arguments
     int nerrors = arg_parse(argc, argv, argtable);
@@ -324,6 +327,11 @@ void parse_options(int argc, char *argv[], struct conf *config)
     if (constell_arg->count > 0)
     {
         config->constell = TRUE;
+    }
+
+    if (meta_arg->count > 0)
+    {
+        config->meta = TRUE;
     }
 
     if (grid_arg->count > 0)
