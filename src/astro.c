@@ -361,17 +361,17 @@ const char *get_zodiac_sign(int day, int month)
     // Define Zodiac signs and date ranges
     static const char *zodiac_signs[] = {"Capricorn", "Aquarius", "Pisces", "Aries",   "Taurus",      "Gemini",   "Cancer",
                                          "Leo",       "Virgo",    "Libra",  "Scorpio", "Sagittarius", "Capricorn"};
+
+    static const char *zodiac_symbols[] = {"♑", "♒", "♓", "♈", "♉", "♊", "♋", "♌", "♍", "♎", "♏", "♐", "♑"};
+
     static const int zodiac_start_days[] = {20, 19, 21, 21, 21, 21, 23, 23, 23, 23, 23, 22, 31};
 
-    // Check if the date falls before or after the Zodiac sign's start date
-    if (day < zodiac_start_days[month - 1])
-    {
-        return zodiac_signs[month - 1];
-    }
-    else
-    {
-        return zodiac_signs[month];
-    }
+    int index = (day < zodiac_start_days[month - 1]) ? (month - 1) : month;
+
+    // Return the sign combined with its symbol
+    static char result[50];
+    snprintf(result, sizeof(result), "%s %s", zodiac_symbols[index], zodiac_signs[index]);
+    return result;
 }
 
 const char *get_moon_phase_description(double julian_date)

@@ -165,20 +165,20 @@ int main(int argc, char *argv[])
 
             // Zodiac
             const char *zodiac = get_zodiac_sign(day, month);
-            mvwprintw(metadata_win, 1, 0, "Zodiac: %s", zodiac);
+            mvwprintw(metadata_win, 1, 0, "Zodiac: \t%s", zodiac);
 
             // Lunar phase
             const char *lunar_phase = get_moon_phase_description(julian_date);
-            mvwprintw(metadata_win, 2, 0, "Lunar phase: %s", lunar_phase);
+            mvwprintw(metadata_win, 2, 0, "Lunar phase: \t%s", lunar_phase);
 
             // Lat and Lon (convert back to degrees)
-            mvwprintw(metadata_win, 3, 0, "Lat: %.6f°", config.latitude * 180 / M_PI);
-            mvwprintw(metadata_win, 4, 0, "Lon: %.6f°", config.longitude * 180 / M_PI);
+            mvwprintw(metadata_win, 3, 0, "Latitude: \t%.6f°", config.latitude * 180 / M_PI);
+            mvwprintw(metadata_win, 4, 0, "Longitude: \t%.6f°", config.longitude * 180 / M_PI);
 
             // Elapsed time
             int eyears, edays, ehours, emins, esecs;
             elapsed_time_to_components(julian_date - julian_date_start, &eyears, &edays, &ehours, &emins, &esecs);
-            mvwprintw(metadata_win, 5, 0, "Elapsed Time: %d years, %d days, %02d:%02d:%02d", eyears, edays, ehours, emins,
+            mvwprintw(metadata_win, 5, 0, "Elapsed Time: \t%d years, %d days, %02d:%02d:%02d", eyears, edays, ehours, emins,
                       esecs);
 
             wrefresh(metadata_win);
