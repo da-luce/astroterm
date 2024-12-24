@@ -142,4 +142,10 @@ int map_float_to_int_range(double min_float, double max_float, int min_int, int 
  */
 bool string_to_time(const char *string, struct tm *time);
 
+/* Convert elapsed time in days into years, days, hours, minutes, and seconds.
+ * The input represents total elapsed time as a double (in days), and the
+ * results are stored in the provided integer pointers.
+ */
+void elapsed_time_to_components(double elapsed_days, int *years, int *days, int *hours, int *minutes, int *seconds);
+
 #endif // CORE_H

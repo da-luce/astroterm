@@ -31,6 +31,11 @@ static void convert_options(struct conf *config);
 // Track current simulation time
 // Default to current time in dt_string_utc is NULL
 double julian_date = 0.0;
+double julian_date_start = 0.0; // Note of when we started
+
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 
 int main(int argc, char *argv[])
 {
@@ -99,10 +104,16 @@ int main(int argc, char *argv[])
 
     // Ncurses initialization
     ncurses_init(config.color != 0);
-    WINDOW *win = newwin(0, 0, 0, 0);
-    wtimeout(win, 0); // Non-blocking read for wgetch
-    win_resize_square(win, get_cell_aspect_ratio());
-    win_position_center(win);
+
+    // Add the main (projection) window
+    WINDOW *main_win = newwin(0, 0, 0, 0);
+    wtimeout(main_win, 0); // Non-blocking read for wgetch
+    win_resize_square(main_win, get_cell_aspect_ratio());
+    win_position_center(main_win);
+
+    // Add a metadata window
+    WINDOW *metadata_win = newwin(10, COLS, 0, 0); // Position at top right
+    wtimeout(metadata_win, 0);                     // Non-blocking read for wgetch
 
     // Render loop
     while (true)
@@ -110,12 +121,12 @@ int main(int argc, char *argv[])
         struct sw_timestamp frame_begin;
         sw_gettime(&frame_begin);
 
-        werase(win);
+        werase(main_win);
 
         if (perform_resize)
         {
             // Putting this after erasing the window reduces flickering
-            handle_resize(win);
+            handle_resize(main_win);
         }
 
         // Update object positions
@@ -125,24 +136,54 @@ int main(int argc, char *argv[])
         update_moon_phase(&moon_object, julian_date, config.latitude);
 
         // Render
-        render_stars_stereo(win, &config, star_table, num_stars, num_by_mag);
+        render_stars_stereo(main_win, &config, star_table, num_stars, num_by_mag);
         if (config.constell != 0)
         {
-            render_constells(win, &config, &constell_table, num_const, star_table);
+            render_constells(main_win, &config, &constell_table, num_const, star_table);
         }
-        render_planets_stereo(win, &config, planet_table);
-        render_moon_stereo(win, &config, moon_object);
+        render_planets_stereo(main_win, &config, planet_table);
+        render_moon_stereo(main_win, &config, moon_object);
         if (config.grid != 0)
         {
-            render_azimuthal_grid(win, &config);
+            render_azimuthal_grid(main_win, &config);
         }
         else
         {
-            render_cardinal_directions(win, &config);
+            render_cardinal_directions(main_win, &config);
         }
 
+        // Update metadata content
+
+        werase(metadata_win);
+
+        // Gregorian Date
+        int year, month, day;
+        julian_to_gregorian(julian_date, &year, &month, &day);
+        mvwprintw(metadata_win, 0, 0, "Gregorian Date: %02d-%02d-%04d", day, month, year);
+
+        // Zodiac
+        const char *zodiac = get_zodiac_sign(day, month);
+        mvwprintw(metadata_win, 1, 0, "Zodiac: %s", zodiac);
+
+        // Lunar phase
+        const char *lunar_phase = get_moon_phase_description(julian_date);
+        mvwprintw(metadata_win, 2, 0, "Lunar phase: %s", lunar_phase);
+
+        // Lat and Lon (convert back to degrees)
+        mvwprintw(metadata_win, 3, 0, "Lat: %.6f°", config.latitude * 180 / M_PI);
+        mvwprintw(metadata_win, 4, 0, "Lon: %.6f°", config.longitude * 180 / M_PI);
+
+        // Elapsed time
+        int eyears, edays, ehours, emins, esecs;
+        elapsed_time_to_components(julian_date - julian_date_start, &eyears, &edays, &ehours, &emins, &esecs);
+        mvwprintw(metadata_win, 5, 0, "Elapsed Time: %d years, %d days, %02d:%02d:%02d", eyears, edays, ehours, emins, esecs);
+
+        // Display metadata
+
+        wrefresh(metadata_win);
+
         // Exit if ESC or q is pressed
-        int ch = wgetch(win);
+        int ch = wgetch(main_win);
         if (ch == 27 || ch == 'q')
         {
             // Note: wgetch also calls wrefresh(win), so we want this at the
@@ -313,7 +354,8 @@ void convert_options(struct conf *config)
     if (config->dt_string_utc == NULL)
     {
         // Set julian date to current time
-        julian_date = current_julian_date();
+        julian_date_start = current_julian_date();
+        julian_date = julian_date_start;
     }
     else
     {
@@ -326,7 +368,8 @@ void convert_options(struct conf *config)
                    config->dt_string_utc);
             exit(EXIT_FAILURE);
         }
-        julian_date = datetime_to_julian_date(&datetime);
+        julian_date_start = datetime_to_julian_date(&datetime);
+        julian_date = julian_date_start;
     }
 
     return;

@@ -577,3 +577,28 @@ bool string_to_time(const char *string, struct tm *time)
 
     return true;
 }
+
+void elapsed_time_to_components(double elapsed_days, int *years, int *days, int *hours, int *minutes, int *seconds)
+{
+    // Constants
+    const double days_in_year = 365.25;
+    const int hours_in_day = 24;
+    const int minutes_in_hour = 60;
+    const int seconds_in_minute = 60;
+
+    // Calculate years
+    *years = (int)(elapsed_days / days_in_year);
+    double remaining_days = elapsed_days - (*years * days_in_year);
+
+    // Calculate days
+    *days = (int)remaining_days;
+    double remaining_hours = (remaining_days - *days) * hours_in_day;
+
+    // Calculate hours
+    *hours = (int)remaining_hours;
+    double remaining_minutes = (remaining_hours - *hours) * minutes_in_hour;
+
+    // Calculate minutes
+    *minutes = (int)remaining_minutes;
+    *seconds = (int)((remaining_minutes - *minutes) * seconds_in_minute);
+}

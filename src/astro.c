@@ -339,3 +339,75 @@ double calc_moon_phase(double julian_date)
     double age = (julian_date - 2451550.1) / synodic_month;
     return age - floor(age);
 }
+
+void julian_to_gregorian(double jd, int *year, int *month, int *day)
+{
+    // https://quasar.as.utexas.edu/BillInfo/JulianDatesG.html
+    int J = (int)(jd + 0.5);
+    int j_alpha = (int)(((J - 1867216.25) / 36524.25));
+    int b = J + 1 + j_alpha - (int)(j_alpha / 4);
+    int c = b + 1524;
+    int d = (int)((c - 122.1) / 365.25);
+    int e = (int)(365.25 * d);
+    int g = (int)((c - e) / 30.6001);
+
+    *day = c - e - (int)(30.6001 * g);
+    *month = (g < 13.5) ? (g - 1) : (g - 13);
+    *year = (*month > 2) ? (d - 4716) : (d - 4715);
+}
+
+const char *get_zodiac_sign(int day, int month)
+{
+    // Define Zodiac signs and date ranges
+    static const char *zodiac_signs[] = {"Capricorn", "Aquarius", "Pisces", "Aries",   "Taurus",      "Gemini",   "Cancer",
+                                         "Leo",       "Virgo",    "Libra",  "Scorpio", "Sagittarius", "Capricorn"};
+    static const int zodiac_start_days[] = {20, 19, 21, 21, 21, 21, 23, 23, 23, 23, 23, 22, 31};
+
+    // Check if the date falls before or after the Zodiac sign's start date
+    if (day < zodiac_start_days[month - 1])
+    {
+        return zodiac_signs[month - 1];
+    }
+    else
+    {
+        return zodiac_signs[month];
+    }
+}
+
+const char *get_moon_phase_description(double julian_date)
+{
+    double phase = calc_moon_phase(julian_date);
+
+    if (phase < 0.03 || phase > 0.97)
+    {
+        return "New Moon";
+    }
+    else if (phase < 0.25)
+    {
+        return "Waxing Crescent";
+    }
+    else if (phase < 0.27)
+    {
+        return "First Quarter";
+    }
+    else if (phase < 0.50)
+    {
+        return "Waxing Gibbous";
+    }
+    else if (phase < 0.53)
+    {
+        return "Full Moon";
+    }
+    else if (phase < 0.75)
+    {
+        return "Waning Gibbous";
+    }
+    else if (phase < 0.77)
+    {
+        return "Last Quarter";
+    }
+    else
+    {
+        return "Waning Crescent";
+    }
+}

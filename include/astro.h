@@ -115,4 +115,17 @@ double calc_moon_phase(double julian_date);
  */
 double earth_rotation_angle_rad(double jd);
 
+/* Convert a Julian date to Gregorian calendar date
+ */
+void julian_to_gregorian(double jd, int *year, int *month, int *day);
+
+/* Get the zodiac sign of a month and day
+ */
+const char *get_zodiac_sign(int day, int month);
+
+/* Return the phase of the Moon as a descriptive string (e.g., "Full Moon",
+ * "Waxing Crescent") based on the Moon's age within the synodic month.
+ */
+const char *get_moon_phase_description(double julian_date);
+
 #endif // ASTRO_H
