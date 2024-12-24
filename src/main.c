@@ -104,7 +104,7 @@ int main(int argc, char *argv[])
     signal(SIGWINCH, catch_winch); // Capture window resizes
 
     // Ncurses initialization
-    ncurses_init(config.color != 0);
+    ncurses_init(config.color);
 
     // Add the main (projection) window
     WINDOW *main_win = newwin(0, 0, 0, 0);
@@ -138,13 +138,13 @@ int main(int argc, char *argv[])
 
         // Render
         render_stars_stereo(main_win, &config, star_table, num_stars, num_by_mag);
-        if (config.constell != 0)
+        if (config.constell)
         {
             render_constells(main_win, &config, &constell_table, num_const, star_table);
         }
         render_planets_stereo(main_win, &config, planet_table);
         render_moon_stereo(main_win, &config, moon_object);
-        if (config.grid != 0)
+        if (config.grid)
         {
             render_azimuthal_grid(main_win, &config);
         }
