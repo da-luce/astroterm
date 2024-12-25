@@ -27,6 +27,7 @@ static void catch_winch(int sig);
 static void handle_resize(WINDOW *win);
 static void parse_options(int argc, char *argv[], struct conf *config);
 static void convert_options(struct conf *config);
+static void render_metadata(WINDOW *win, struct conf *config);
 
 // Track current simulation time
 // Default to current time in dt_string_utc is NULL
@@ -113,8 +114,10 @@ int main(int argc, char *argv[])
     win_position_center(main_win);
 
     // Add a metadata window
-    WINDOW *metadata_win = newwin(10, COLS, 0, 0); // Position at top right
-    wtimeout(metadata_win, 0);                     // Non-blocking read for wgetch
+    const int meta_rows = 6;                                   // Allows for 6 rows
+    const int meta_cols = 48;                                  // Set to allow enough room for longest line (elapsed time)
+    WINDOW *metadata_win = newwin(meta_rows, meta_cols, 0, 0); // Position at top right
+    wtimeout(metadata_win, 0);                                 // Non-blocking read for wgetch
 
     // Render loop
     while (true)
@@ -153,45 +156,27 @@ int main(int argc, char *argv[])
             render_cardinal_directions(main_win, &config);
         }
 
-        // Update metadata content
         if (config.meta)
         {
             werase(metadata_win);
+        }
 
-            // Gregorian Date
-            int year, month, day;
-            julian_to_gregorian(julian_date, &year, &month, &day);
-            mvwprintw(metadata_win, 0, 0, "Gregorian Date: %02d-%02d-%04d", day, month, year);
-
-            // Zodiac
-            const char *zodiac = get_zodiac_sign(day, month);
-            mvwprintw(metadata_win, 1, 0, "Zodiac: \t%s", zodiac);
-
-            // Lunar phase
-            const char *lunar_phase = get_moon_phase_description(julian_date);
-            mvwprintw(metadata_win, 2, 0, "Lunar phase: \t%s", lunar_phase);
-
-            // Lat and Lon (convert back to degrees)
-            mvwprintw(metadata_win, 3, 0, "Latitude: \t%.6f°", config.latitude * 180 / M_PI);
-            mvwprintw(metadata_win, 4, 0, "Longitude: \t%.6f°", config.longitude * 180 / M_PI);
-
-            // Elapsed time
-            int eyears, edays, ehours, emins, esecs;
-            elapsed_time_to_components(julian_date - julian_date_start, &eyears, &edays, &ehours, &emins, &esecs);
-            mvwprintw(metadata_win, 5, 0, "Elapsed Time: \t%d years, %d days, %02d:%02d:%02d", eyears, edays, ehours, emins,
-                      esecs);
-
-            wrefresh(metadata_win);
+        if (config.meta)
+        {
+            render_metadata(metadata_win, &config);
         }
 
         // Exit if ESC or q is pressed
-        int ch = wgetch(main_win);
+        int ch = getch();
         if (ch == 27 || ch == 'q')
         {
-            // Note: wgetch also calls wrefresh(win), so we want this at the
-            // bottom after the virtual screen is updated
             break;
         }
+
+        // Use double buffering to avoid flickering while updating
+        wnoutrefresh(main_win);
+        wnoutrefresh(metadata_win);
+        doupdate();
 
         // TODO: this timing scheme *should* minimize any drift or divergence
         // between simulation time and realtime. Check this to make sure.
@@ -408,4 +393,31 @@ void handle_resize(WINDOW *win)
     win_position_center(win);
 
     perform_resize = false;
+}
+
+void render_metadata(WINDOW *win, struct conf *config)
+{
+    // Gregorian Date
+    int year, month, day;
+    julian_to_gregorian(julian_date, &year, &month, &day);
+    mvwprintw(win, 0, 0, "Gregorian Date: %02d-%02d-%04d", day, month, year);
+
+    // Zodiac
+    const char *zodiac = get_zodiac_sign(day, month);
+    mvwprintw(win, 1, 0, "Zodiac: \t%s", zodiac);
+
+    // Lunar phase
+    const char *lunar_phase = get_moon_phase_description(julian_date);
+    mvwprintw(win, 2, 0, "Lunar phase: \t%s", lunar_phase);
+
+    // Lat and Lon (convert back to degrees)
+    mvwprintw(win, 3, 0, "Latitude: \t%.6f°", config->latitude * 180 / M_PI);
+    mvwprintw(win, 4, 0, "Longitude: \t%.6f°", config->longitude * 180 / M_PI);
+
+    // Elapsed time
+    int eyears, edays, ehours, emins, esecs;
+    elapsed_time_to_components(julian_date - julian_date_start, &eyears, &edays, &ehours, &emins, &esecs);
+    mvwprintw(win, 5, 0, "Elapsed Time: \t%d years, %d days, %02d:%02d:%02d", eyears, edays, ehours, emins, esecs);
+
+    return;
 }
