@@ -221,12 +221,12 @@ void parse_options(int argc, char *argv[], struct conf *config)
         arg_dbl0("l", "label-thresh", "<float>", "Label stars brighter than this magnitude (default: 0.5)");
     struct arg_int *fps_arg = arg_int0("f", "fps", "<int>", "Frames per second (default: 24)");
     struct arg_dbl *anim_arg = arg_dbl0("s", "speed", "<float>", "Animation speed multiplier (default: 1.0)");
-    struct arg_lit *color_arg = arg_lit0(NULL, "color", "Enable terminal colors");
-    struct arg_lit *constell_arg = arg_lit0(NULL, "constellations",
+    struct arg_lit *color_arg = arg_lit0("c", "color", "Enable terminal colors");
+    struct arg_lit *constell_arg = arg_lit0("C", "constellations",
                                             "Draw constellations stick figures. Note: a constellation is only "
                                             "drawn if all stars in the figure are over the threshold");
-    struct arg_lit *grid_arg = arg_lit0(NULL, "grid", "Draw an azimuthal grid");
-    struct arg_lit *ascii_arg = arg_lit0(NULL, "ascii", "Only use ASCII characters");
+    struct arg_lit *grid_arg = arg_lit0("g", "grid", "Draw an azimuthal grid");
+    struct arg_lit *ascii_arg = arg_lit0("A", "ascii", "Only use ASCII characters");
     struct arg_lit *meta_arg = arg_lit0("m", "meta", "Display metadata");
     struct arg_lit *help_arg = arg_lit0("h", "help", "Print this help message");
     struct arg_end *end = arg_end(20);

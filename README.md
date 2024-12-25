@@ -69,21 +69,22 @@ Usage: astroterm [OPTION]...
   -a, --latitude=<degrees>  Observer latitude [-90°, 90°] (default: 42.361145)
   -o, --longitude=<degrees> Observer longitude [-180°, 180°] (default:
                             -71.057083)
-  -d, --datetime=<yyyy-mm-ddThh:mm:ss> 
+  -d, --datetime=<yyyy-mm-ddThh:mm:ss>
                             Observation datetime in UTC
   -t, --threshold=<float>   Only render stars brighter than this magnitude
                             (default: 3.0)
-  -l, --label-thresh=<float> 
+  -l, --label-thresh=<float>
                             Label stars brighter than this magnitude (default:
                             0.5)
   -f, --fps=<int>           Frames per second (default: 24)
   -s, --speed=<float>       Animation speed multiplier (default: 1.0)
-      --color               Enable terminal colors
-      --constellations      Draw constellations stick figures. Note: a
+  -c, --color               Enable terminal colors
+  -C, --constellations      Draw constellations stick figures. Note: a
                             constellation is only drawn if all stars in the
                             figure are over the threshold
-      --grid                Draw an azimuthal grid
-      --ascii               Only use ASCII characters
+  -g, --grid                Draw an azimuthal grid
+  -A, --ascii               Only use ASCII characters
+  -m, --meta                Display metadata
   -h, --help                Print this help message
 ```
 
