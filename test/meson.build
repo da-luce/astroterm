@@ -4,9 +4,9 @@ test_files += [
 ]
 
 test_include_dirs += [
-    include_directories('third_party/unity'),
+    include_directories('third_party/unity-v2.6.0'),
 ]
 
 test_infra_source_files += [
-    files('third_party/unity/unity.c')
+    files('third_party/unity-v2.6.0/unity.c')
 ]
