@@ -118,7 +118,10 @@ int main(int argc, char *argv[])
 
     // Metadata window
     WINDOW *metadata_win = newwin(0, 0, 0, 0); // Position at top right
-    resize_meta(metadata_win);
+    if (config.meta)
+    {
+        resize_meta(metadata_win);
+    }
 
     // Render loop
     while (true)
@@ -134,7 +137,11 @@ int main(int argc, char *argv[])
             // Putting this after erasing the window reduces flickering
             resize_ncurses();
             resize_main(main_win);
-            resize_meta(metadata_win);
+            if (config.meta)
+            {
+                resize_meta(metadata_win);
+            }
+            doupdate();
             perform_resize = false;
         }
 
@@ -180,7 +187,10 @@ int main(int argc, char *argv[])
 
         // Use double buffering to avoid flickering while updating
         wnoutrefresh(main_win);
-        wnoutrefresh(metadata_win);
+        if (config.meta)
+        {
+            wnoutrefresh(metadata_win);
+        }
         doupdate();
 
         // TODO: this timing scheme *should* minimize any drift or divergence
@@ -340,10 +350,6 @@ void parse_options(int argc, char *argv[], struct conf *config)
 
 void convert_options(struct conf *config)
 {
-#ifndef M_PI
-#define M_PI 3.14159265358979323846
-#endif
-
     // Convert longitude and latitude to radians
     config->longitude *= M_PI / 180.0;
     config->latitude *= M_PI / 180.0;
@@ -391,7 +397,7 @@ void resize_main(WINDOW *win)
 {
     // ???
     wclear(win);
-    wrefresh(win);
+    wnoutrefresh(win);
 
     // Check cell ratio
     float aspect = get_cell_aspect_ratio();
@@ -405,7 +411,7 @@ void resize_meta(WINDOW *win)
 {
     // ???
     wclear(win);
-    wrefresh(win);
+    wnoutrefresh(win);
 
     const int meta_lines = 6; // Allows for 6 rows
     const int meta_cols = 45; // Set to allow enough room for longest line (elapsed time)
