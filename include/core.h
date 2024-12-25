@@ -26,7 +26,7 @@ struct conf
     bool color;
     bool grid;
     bool constell;
-    bool meta;
+    bool metadata;
 };
 
 // All information pertinent to rendering a celestial body

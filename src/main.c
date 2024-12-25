@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
         .color = false,
         .grid = false,
         .constell = false,
-        .meta = false,
+        .metadata = false,
     };
 
     // Parse command line args and convert to internal representations
@@ -118,7 +118,7 @@ int main(int argc, char *argv[])
 
     // Metadata window
     WINDOW *metadata_win = newwin(0, 0, 0, 0); // Position at top right
-    if (config.meta)
+    if (config.metadata)
     {
         resize_meta(metadata_win);
     }
@@ -137,7 +137,7 @@ int main(int argc, char *argv[])
             // Putting this after erasing the window reduces flickering
             resize_ncurses();
             resize_main(main_win);
-            if (config.meta)
+            if (config.metadata)
             {
                 resize_meta(metadata_win);
             }
@@ -168,12 +168,12 @@ int main(int argc, char *argv[])
             render_cardinal_directions(main_win, &config);
         }
 
-        if (config.meta)
+        if (config.metadata)
         {
             werase(metadata_win);
         }
 
-        if (config.meta)
+        if (config.metadata)
         {
             render_metadata(metadata_win, &config);
         }
@@ -187,7 +187,7 @@ int main(int argc, char *argv[])
 
         // Use double buffering to avoid flickering while updating
         wnoutrefresh(main_win);
-        if (config.meta)
+        if (config.metadata)
         {
             wnoutrefresh(metadata_win);
         }
@@ -242,7 +242,7 @@ void parse_options(int argc, char *argv[], struct conf *config)
                                             "drawn if all stars in the figure are over the threshold");
     struct arg_lit *grid_arg = arg_lit0("g", "grid", "Draw an azimuthal grid");
     struct arg_lit *ascii_arg = arg_lit0("A", "ascii", "Only use ASCII characters");
-    struct arg_lit *meta_arg = arg_lit0("m", "meta", "Display metadata");
+    struct arg_lit *meta_arg = arg_lit0("m", "metadata", "Display metadata");
     struct arg_lit *help_arg = arg_lit0("h", "help", "Print this help message");
     struct arg_end *end = arg_end(20);
 
@@ -331,7 +331,7 @@ void parse_options(int argc, char *argv[], struct conf *config)
 
     if (meta_arg->count > 0)
     {
-        config->meta = TRUE;
+        config->metadata = TRUE;
     }
 
     if (grid_arg->count > 0)
