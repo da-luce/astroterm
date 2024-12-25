@@ -60,19 +60,15 @@ build_with_meson() {
 
     # Run Meson configure step and capture errors
     echo "Configuring project with Meson..."
-    meson setup $MESON_FLAGS "$BUILD_DIR" "$SCRIPT_DIR" --wipe >"$CONFIGURE_LOG" 2>&1
-    if [ $? -ne 0 ]; then
-        echo "Error during Meson configuration. See $CONFIGURE_LOG for details."
-        cat "$CONFIGURE_LOG" # Output log content for debugging
+    if ! meson setup $MESON_FLAGS "$BUILD_DIR" "$SCRIPT_DIR" --wipe; then
+        echo "Error: Meson configuration failed." >&2
         exit 1
     fi
 
-    # Run Meson build step and capture errors
+    # Build step
     echo "Building project with Ninja..."
-    meson compile -C "$BUILD_DIR" >"$BUILD_LOG" 2>&1
-    if [ $? -ne 0 ]; then
-        echo "Error during Meson build. See $BUILD_LOG for details."
-        cat "$BUILD_LOG" # Output log content for debugging
+    if ! meson compile -C "$BUILD_DIR"; then
+        echo "Error: Meson build failed." >&2
         exit 1
     fi
 
