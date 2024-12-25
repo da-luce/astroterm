@@ -24,7 +24,9 @@
 static volatile bool perform_resize = false;
 
 static void catch_winch(int sig);
-static void handle_resize(WINDOW *win);
+static void resize_ncurses(void);
+static void resize_main(WINDOW *win);
+static void resize_meta(WINDOW *win);
 static void parse_options(int argc, char *argv[], struct conf *config);
 static void convert_options(struct conf *config);
 static void render_metadata(WINDOW *win, struct conf *config);
@@ -37,6 +39,9 @@ double julian_date_start = 0.0; // Note of when we started
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
 #endif
+
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
+#define MAX(a, b) ((a) > (b) ? (a) : (b))
 
 int main(int argc, char *argv[])
 {
@@ -107,17 +112,13 @@ int main(int argc, char *argv[])
     // Ncurses initialization
     ncurses_init(config.color);
 
-    // Add the main (projection) window
+    // Main (projection) window
     WINDOW *main_win = newwin(0, 0, 0, 0);
-    wtimeout(main_win, 0); // Non-blocking read for wgetch
-    win_resize_square(main_win, get_cell_aspect_ratio());
-    win_position_center(main_win);
+    resize_main(main_win);
 
-    // Add a metadata window
-    const int meta_rows = 6;                                   // Allows for 6 rows
-    const int meta_cols = 48;                                  // Set to allow enough room for longest line (elapsed time)
-    WINDOW *metadata_win = newwin(meta_rows, meta_cols, 0, 0); // Position at top right
-    wtimeout(metadata_win, 0);                                 // Non-blocking read for wgetch
+    // Metadata window
+    WINDOW *metadata_win = newwin(0, 0, 0, 0); // Position at top right
+    resize_meta(metadata_win);
 
     // Render loop
     while (true)
@@ -125,12 +126,16 @@ int main(int argc, char *argv[])
         struct sw_timestamp frame_begin;
         sw_gettime(&frame_begin);
 
+        werase(metadata_win);
         werase(main_win);
 
         if (perform_resize)
         {
             // Putting this after erasing the window reduces flickering
-            handle_resize(main_win);
+            resize_ncurses();
+            resize_main(main_win);
+            resize_meta(metadata_win);
+            perform_resize = false;
         }
 
         // Update object positions
@@ -373,14 +378,17 @@ void catch_winch(int sig)
     perform_resize = true;
 }
 
-void handle_resize(WINDOW *win)
+void resize_ncurses(void)
 {
     // Resize ncurses internal terminal
     int y;
     int x;
     term_size(&y, &x);
     resizeterm(y, x);
+}
 
+void resize_main(WINDOW *win)
+{
     // ???
     wclear(win);
     wrefresh(win);
@@ -391,8 +399,18 @@ void handle_resize(WINDOW *win)
     // Resize/position application window
     win_resize_square(win, aspect);
     win_position_center(win);
+}
 
-    perform_resize = false;
+void resize_meta(WINDOW *win)
+{
+    // ???
+    wclear(win);
+    wrefresh(win);
+
+    const int meta_lines = 6; // Allows for 6 rows
+    const int meta_cols = 45; // Set to allow enough room for longest line (elapsed time)
+
+    wresize(win, MIN(LINES, meta_lines), MIN(COLS, meta_cols));
 }
 
 void render_metadata(WINDOW *win, struct conf *config)
@@ -417,7 +435,7 @@ void render_metadata(WINDOW *win, struct conf *config)
     // Elapsed time
     int eyears, edays, ehours, emins, esecs;
     elapsed_time_to_components(julian_date - julian_date_start, &eyears, &edays, &ehours, &emins, &esecs);
-    mvwprintw(win, 5, 0, "Elapsed Time: \t%d years, %d days, %02d:%02d:%02d", eyears, edays, ehours, emins, esecs);
+    mvwprintw(win, 5, 0, "Elapsed Time: \t%03d years, %03d days, %02d:%02d:%02d", eyears, edays, ehours, emins, esecs);
 
     return;
 }
