@@ -129,9 +129,6 @@ int main(int argc, char *argv[])
         struct sw_timestamp frame_begin;
         sw_gettime(&frame_begin);
 
-        werase(metadata_win);
-        werase(main_win);
-
         if (perform_resize)
         {
             // Putting this after erasing the window reduces flickering
@@ -143,6 +140,11 @@ int main(int argc, char *argv[])
             }
             doupdate();
             perform_resize = false;
+        }
+        else
+        {
+            werase(metadata_win);
+            werase(main_win);
         }
 
         // Update object positions
@@ -396,7 +398,7 @@ void resize_ncurses(void)
 void resize_main(WINDOW *win)
 {
     // ???
-    wclear(win);
+    werase(win);
     wnoutrefresh(win);
 
     // Check cell ratio
@@ -410,7 +412,7 @@ void resize_main(WINDOW *win)
 void resize_meta(WINDOW *win)
 {
     // ???
-    wclear(win);
+    werase(win);
     wnoutrefresh(win);
 
     const int meta_lines = 6; // Allows for 6 rows
