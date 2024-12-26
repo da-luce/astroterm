@@ -35,6 +35,11 @@ void term_size(int *y, int *x);
 
 /* attempt to get the cell aspect ratio: cell height to width
  * i.e. "how many columns form the apparent height of a row"
+ *
+ * This may be influenced by many factors, including the aspect ratio of the font face, and the line height of the terminal.
+ * Detection does not work in all environments, including:
+ * - Docker images
+ * TODO: find a predictable way to determine weather we can detect cell aspect ratio.
  */
 float get_cell_aspect_ratio(void);
 

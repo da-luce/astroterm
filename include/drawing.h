@@ -1,4 +1,4 @@
-/* ASCII and Unicode ncruses rendering functions. These functions aim to provide
+/* ASCII and Unicode ncurses rendering functions. These functions aim to provide
  * a balance of performance, readability, and style of the resulting render,
  * with more emphasis placed on the latter two objectives. Here, we forgo many
  * of the micro-optimizations (e.g. precomputing frequently used values) of the

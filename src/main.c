@@ -25,8 +25,8 @@ static volatile bool perform_resize = false;
 
 static void catch_winch(int sig);
 static void resize_ncurses(void);
-static void resize_main(WINDOW *win);
 static void resize_meta(WINDOW *win);
+static void resize_main(WINDOW *win, struct conf *config);
 static void parse_options(int argc, char *argv[], struct conf *config);
 static void convert_options(struct conf *config);
 static void render_metadata(WINDOW *win, struct conf *config);
@@ -54,6 +54,7 @@ int main(int argc, char *argv[])
         .label_thresh = 0.5f,
         .fps = 24,
         .animation_mult = 1.0f,
+        .aspect_ratio = 0.0,
         .ascii = true,
         .color = false,
         .grid = false,
@@ -114,7 +115,7 @@ int main(int argc, char *argv[])
 
     // Main (projection) window
     WINDOW *main_win = newwin(0, 0, 0, 0);
-    resize_main(main_win);
+    resize_main(main_win, &config);
 
     // Metadata window
     WINDOW *metadata_win = newwin(0, 0, 0, 0); // Position at top right
@@ -133,7 +134,7 @@ int main(int argc, char *argv[])
         {
             // Putting this after erasing the window reduces flickering
             resize_ncurses();
-            resize_main(main_win);
+            resize_main(main_win, &config);
             if (config.metadata)
             {
                 resize_meta(metadata_win);
@@ -246,11 +247,14 @@ void parse_options(int argc, char *argv[], struct conf *config)
     struct arg_lit *ascii_arg = arg_lit0("A", "ascii", "Only use ASCII characters");
     struct arg_lit *meta_arg = arg_lit0("m", "metadata", "Display metadata");
     struct arg_lit *help_arg = arg_lit0("h", "help", "Print this help message");
+    struct arg_dbl *ratio_arg = arg_dbl0("r", "aspect-ratio", "<float>",
+                                         "Override the calculated terminal cell aspect ratio. Use this if your projection is "
+                                         "not 'square.' A value around 2.0 works well for most cases.");
     struct arg_end *end = arg_end(20);
 
     // Create argtable array
-    void *argtable[] = {latitude_arg, longitude_arg, datetime_arg, threshold_arg, label_arg, fps_arg,  anim_arg,
-                        color_arg,    constell_arg,  grid_arg,     ascii_arg,     meta_arg,  help_arg, end};
+    void *argtable[] = {latitude_arg, longitude_arg, datetime_arg, threshold_arg, label_arg, fps_arg,  anim_arg, color_arg,
+                        constell_arg, grid_arg,      ascii_arg,    meta_arg,      ratio_arg, help_arg, end};
 
     // Parse the arguments
     int nerrors = arg_parse(argc, argv, argtable);
@@ -346,6 +350,11 @@ void parse_options(int argc, char *argv[], struct conf *config)
         config->ascii = FALSE;
     }
 
+    if (ratio_arg->count > 0)
+    {
+        config->aspect_ratio = ratio_arg->dval[0];
+    }
+
     // Free Argtable resources
     arg_freetable(argtable, sizeof(argtable) / sizeof(argtable[0]));
 }
@@ -395,14 +404,22 @@ void resize_ncurses(void)
     resizeterm(y, x);
 }
 
-void resize_main(WINDOW *win)
+void resize_main(WINDOW *win, struct conf *config)
 {
     // ???
     werase(win);
     wnoutrefresh(win);
 
     // Check cell ratio
-    float aspect = get_cell_aspect_ratio();
+    float aspect;
+    if (config->aspect_ratio)
+    {
+        aspect = config->aspect_ratio;
+    }
+    else
+    {
+        aspect = get_cell_aspect_ratio();
+    }
 
     // Resize/position application window
     win_resize_square(win, aspect);

@@ -22,6 +22,7 @@ struct conf
     int fps;
     float animation_mult;
     double julian_date;
+    double aspect_ratio;
     bool ascii;
     bool color;
     bool grid;
