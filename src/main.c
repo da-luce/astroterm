@@ -466,7 +466,12 @@ void render_metadata(WINDOW *win, struct conf *config)
     // Elapsed time
     int eyears, edays, ehours, emins, esecs;
     elapsed_time_to_components(julian_date - julian_date_start, &eyears, &edays, &ehours, &emins, &esecs);
-    mvwprintw(win, 5, 0, "Elapsed Time: \t%03d years, %03d days, %02d:%02d:%02d", eyears, edays, ehours, emins, esecs);
+    const char *year_label = (eyears == 1) ? " year" : "years";
+    const char *day_label = (edays == 1) ? " day" : "days";
+
+    // Display elapsed time with proper labels
+    mvwprintw(win, 5, 0, "Elapsed Time: \t%03d %s, %03d %s, %02d:%02d:%02d", eyears, year_label, edays, day_label, ehours,
+              emins, esecs);
 
     return;
 }
