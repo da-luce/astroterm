@@ -411,3 +411,17 @@ const char *get_moon_phase_description(double julian_date)
         return "Waning Crescent";
     }
 }
+
+void decimal_to_dms(double decimal_value, int *degrees, int *minutes, double *seconds)
+{
+    *degrees = (int)decimal_value;
+    double fractional_part = fabs(decimal_value - *degrees);
+    double total_minutes = fractional_part * 60;
+    *minutes = (int)total_minutes;
+    *seconds = (total_minutes - *minutes) * 60;
+
+    if (decimal_value < 0)
+    {
+        *degrees = *degrees < 0 ? *degrees : -*degrees;
+    }
+}

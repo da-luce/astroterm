@@ -50,8 +50,8 @@ int main(int argc, char *argv[])
         .longitude = -71.057083, // Boston, MA
         .latitude = 42.361145,
         .dt_string_utc = NULL,
-        .threshold = 3.0f,
-        .label_thresh = 0.5f,
+        .threshold = 5.0f,
+        .label_thresh = 0.25f,
         .fps = 24,
         .animation_mult = 1.0f,
         .aspect_ratio = 0.0,
@@ -234,9 +234,9 @@ void parse_options(int argc, char *argv[], struct conf *config)
         arg_dbl0("o", "longitude", "<degrees>", "Observer longitude [-180°, 180°] (default: -71.057083)");
     struct arg_str *datetime_arg = arg_str0("d", "datetime", "<yyyy-mm-ddThh:mm:ss>", "Observation datetime in UTC");
     struct arg_dbl *threshold_arg =
-        arg_dbl0("t", "threshold", "<float>", "Only render stars brighter than this magnitude (default: 3.0)");
+        arg_dbl0("t", "threshold", "<float>", "Only render stars brighter than this magnitude (default: 5.0)");
     struct arg_dbl *label_arg =
-        arg_dbl0("l", "label-thresh", "<float>", "Label stars brighter than this magnitude (default: 0.5)");
+        arg_dbl0("l", "label-thresh", "<float>", "Label stars brighter than this magnitude (default: 0.25)");
     struct arg_int *fps_arg = arg_int0("f", "fps", "<int>", "Frames per second (default: 24)");
     struct arg_dbl *anim_arg = arg_dbl0("s", "speed", "<float>", "Animation speed multiplier (default: 1.0)");
     struct arg_lit *color_arg = arg_lit0("c", "color", "Enable terminal colors");
@@ -443,7 +443,7 @@ void render_metadata(WINDOW *win, struct conf *config)
     // Gregorian Date
     int year, month, day;
     julian_to_gregorian(julian_date, &year, &month, &day);
-    mvwprintw(win, 0, 0, "Gregorian Date: %02d-%02d-%04d", day, month, year);
+    mvwprintw(win, 0, 0, "Date: \t\t%02d-%02d-%04d", day, month, year);
 
     // Zodiac
     const char *zodiac = get_zodiac_sign(day, month);
@@ -454,8 +454,14 @@ void render_metadata(WINDOW *win, struct conf *config)
     mvwprintw(win, 2, 0, "Lunar phase: \t%s", lunar_phase);
 
     // Lat and Lon (convert back to degrees)
-    mvwprintw(win, 3, 0, "Latitude: \t%.6f°", config->latitude * 180 / M_PI);
-    mvwprintw(win, 4, 0, "Longitude: \t%.6f°", config->longitude * 180 / M_PI);
+    int deg, min;
+    double sec;
+    decimal_to_dms(config->latitude * 180 / M_PI, &deg, &min, &sec);
+    mvwprintw(win, 3, 0, "Latitude: \t%d° %d' %.2f\"", deg, min, sec);
+
+    // Longitude
+    decimal_to_dms(config->longitude * 180 / M_PI, &deg, &min, &sec);
+    mvwprintw(win, 4, 0, "Longitude: \t%d° %d' %.2f\"", deg, min, sec);
 
     // Elapsed time
     int eyears, edays, ehours, emins, esecs;

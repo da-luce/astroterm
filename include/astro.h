@@ -128,4 +128,8 @@ const char *get_zodiac_sign(int day, int month);
  */
 const char *get_moon_phase_description(double julian_date);
 
+/* Put an angle in degrees, minutes, seconds format
+ */
+void decimal_to_dms(double decimal_value, int *degrees, int *minutes, double *seconds);
+
 #endif // ASTRO_H
