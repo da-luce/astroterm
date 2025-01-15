@@ -3,7 +3,7 @@
 [![Test Status](https://github.com/da-luce/astroterm/actions/workflows/ci.yml/badge.svg)](https://github.com/da-luce/astroterm/actions?query=branch%3Amain)
 [![codecov](https://codecov.io/gh/da-luce/astroterm/graph/badge.svg?token=80C0ZQBVTM)](https://codecov.io/gh/da-luce/astroterm) [![Latest release](https://img.shields.io/github/v/release/da-luce/astroterm?label=Latest%20Release)](https://github.com/da-luce/astroterm/releases) [![Homebrew Tap Version](https://img.shields.io/badge/dynamic/json.svg?url=https://raw.githubusercontent.com/da-luce/homebrew-astroterm/main/version.json&query=$.versions.stable&label=Homebrew%20Tap)](https://github.com/da-luce/homebrew-astroterm) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-`astroterm` is a terminal-based celestial viewer written in `C` using `ncurses`. It displays the real-time positions of stars, planets, constellations, and more, all within your terminal—no telescope required! Configure sky views by date, time, and location with precise ASCII-rendered visuals. See [usage](#usage) for all supported options!
+`astroterm` is a terminal-based star map written in `C`. It displays the real-time positions of stars, planets, constellations, and more, all within your terminal—no telescope required! Configure sky views by date, time, and location with precise ASCII-rendered visuals. See [usage](#usage) for all supported options!
 
 `astroterm` is constantly improving, and we'd love to hear your ideas! If you have a suggestion or find a bug, please open an issue and share your feedback.
 
@@ -18,8 +18,8 @@ _<p align="center">The night sky above above Singapore on January 2, 2025</p>_
   - [Features](#features)
   - [Installation](#installation)
     - [Homebrew](#homebrew)
+    - [Nix (unstable)](#nix-unstable)
     - [Prebuilt Executable](#prebuilt-executable)
-    - [Nix (coming soon)](#nix-coming-soon)
   - [Building from Source](#building-from-source)
     - [Linux, macOS \& WSL](#linux-macos--wsl)
     - [Windows](#windows-1)
@@ -51,6 +51,16 @@ You can install Astroterm directly from the [custom Homebrew tap](https://github
 ```sh
 brew tap da-luce/astroterm
 brew install astroterm
+```
+
+### Nix (unstable)
+
+As of January 15, 2025, `astroterm` has been merged into the `main` branch of `nixpkgs`. It may take a few days to propagate to the `unstable` branch. Once it is available, you can install it using:
+
+```bash
+nix-channel --add https://nixos.org/channels/nixos-unstable nixos-unstable
+nix-channel --update
+nix-env -iA nixos-unstable.astroterm
 ```
 
 ### Prebuilt Executable
@@ -92,12 +102,6 @@ brew install astroterm
     ```powershell
     .\astroterm.exe
     ```
-
-### Nix (coming soon)
-
-Astroterm will soon (hopefully) be available for Nix users! Follow [this open PR](https://github.com/NixOS/nixpkgs/pull/373316) to track its progress and updates. To help speed up the process, consider adding a 👍 reaction to the PR.
-
-In the meantime, you can build from source by following the [Building from Source](#building-from-source) instructions if none of the other methods suit your needs.
 
 ## Building from Source
 
