@@ -304,6 +304,10 @@ If Unicode characters do not display correctly in the terminal, you may need to 
 <!-- omit in toc -->
 ## Development
 
+### ASCII BSC5
+
+You can use the ASCII version of the BSC5 star catalog by downloading and extracting the [gzip-compressed file](http://tdc-www.harvard.edu/catalogs/ybsc5.gz) to `data/ybsc5` instead of `data/bsc5`.
+
 <!-- omit in toc -->
 ### Testing
 

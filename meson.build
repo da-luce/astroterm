@@ -184,6 +184,13 @@ else
 endif
 
 # ------------------------------------------------------------------------------
+# Build submodules
+# ------------------------------------------------------------------------------
+
+subdir('src')
+subdir('data')
+
+# ------------------------------------------------------------------------------
 # Embed data
 # ------------------------------------------------------------------------------
 
@@ -193,7 +200,6 @@ if is_windows
         'cmd', '/c', 'python', '..\\scripts\\embed.py',
         '--source', '@INPUT@',
         '--header', '@OUTPUT@',
-        '--array-name', '@BASENAME@'
     ]
 else
     # On Unix-like systems, use the shell script
@@ -201,39 +207,35 @@ else
         'sh', '../scripts/embed.sh',
         '--source', '@INPUT0@',
         '--header', '@OUTPUT@',
-        '--array-name', '@BASENAME@'
     ]
 endif
 
 bsc5 = custom_target(
-    input: ['data/bsc5'],
+    # Use bsc5 path from data/meson.build
+    input: ['data/' + bsc5_path],
     output: 'bsc5.h',
-    command: embed_command
+    command: [embed_command, '--array-name', 'bsc5']
 )
 bsc5_constellations = custom_target(
     input: ['data/bsc5_constellations.txt'],
     output: 'bsc5_constellations.h',
-    command: embed_command
+    command: [embed_command, '--array-name', 'bsc5_constellations']
 )
 bsc5_names = custom_target(
     input: ['data/bsc5_names.txt'],
     output: 'bsc5_names.h',
-    command: embed_command
+    command: [embed_command, '--array-name', 'bsc5_names']
 )
 cities = custom_target(
     input: ['data/cities.csv'],
     output: 'cities.h',
-    command: embed_command
+    command: [embed_command, '--array-name', 'cities']
 )
 embedded_files=  [bsc5, bsc5_constellations, bsc5_names, cities]
 
 # ------------------------------------------------------------------------------
 # Application library (for reusability)
 # ------------------------------------------------------------------------------
-
-# Build submodules
-subdir('src')
-subdir('data')
 
 lib_project = static_library(
     'lib_astroterm',
