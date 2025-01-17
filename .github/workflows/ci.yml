@@ -299,6 +299,7 @@ jobs:
           --suppress=style \
           --error-exitcode=1 \
           -i src/strptime.c \
+          -I include \
           src/
 
     - name: Check Formatting
