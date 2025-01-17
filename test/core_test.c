@@ -51,8 +51,8 @@ void tearDown(void)
 #define M_EPSILON 0.06
 
 // The xrpm and xdpm vary slightly between the binary bsc5 file provided at
-// http://tdc-www.harvard.edu/catalogs/BSC5 and the binary file we generate if
-// using the ASCII version (http://tdc-www.harvard.edu/catalogs/ybsc5.gz) as
+// https://web.archive.org/web/20231007085824if_/http://tdc-www.harvard.edu/catalogs/BSC5 and the binary file we generate if
+// using the ASCII version (https://web.archive.org/web/20250114171002if_/http://tdc-www.harvard.edu/catalogs/ybsc5.gz) as
 // the original source.
 #define SMOTION_EPSILON 1e-20
 

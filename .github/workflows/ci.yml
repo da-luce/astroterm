@@ -170,7 +170,7 @@ jobs:
 
       - name: Download BSC5
         env:
-          URL: ${{ matrix.ascii && 'http://tdc-www.harvard.edu/catalogs/ybsc5.gz' || 'http://tdc-www.harvard.edu/catalogs/BSC5' }}
+          URL: ${{ matrix.ascii && 'https://web.archive.org/web/20250114171002if_/http://tdc-www.harvard.edu/catalogs/ybsc5.gz' || 'https://web.archive.org/web/20231007085824if_/http://tdc-www.harvard.edu/catalogs/BSC5' }}
           Path: ${{ matrix.ascii && './data/ybsc5.gz' || './data/bsc5' }}
         run: |
           ${{ matrix.suffix == 'win' && format('Invoke-WebRequest -OutFile {0} -Uri {1}', env.Path, env.URL) || format('curl -L -o {0} {1}', env.Path, env.URL) }}

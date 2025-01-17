@@ -9,9 +9,9 @@ from dataclasses import dataclass
 Script to convert the ASCII BSC5 catalogue to it's binary representation.
 
 Sources:
-    - Gzipped ASCII: http://tdc-www.harvard.edu/catalogs/ybsc5.gz
+    - Gzipped ASCII: https://web.archive.org/web/20250114171002if_/http://tdc-www.harvard.edu/catalogs/ybsc5.gz
         (SHA-256 unzipped: 69797549cc1605aad7ff94e9325e29a1661f2a253917faaa056d9bf20b809afd)
-    - Binary: http://tdc-www.harvard.edu/catalogs/BSC5
+    - Binary: https://web.archive.org/web/20231007085824if_/http://tdc-www.harvard.edu/catalogs/BSC5
         (SHA-256: e471d02eaf4eecb61c12f879a1cb6432ba9d7b68a9a8c5654a1eb42a0c8cc340)
 
 Formats

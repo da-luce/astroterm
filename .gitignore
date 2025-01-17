@@ -1,8 +1,27 @@
+# Binaries
 *.exe
+
+# Compressed files
+*.gz
+*.tar
+*.zip
+*.tgz
+
+# Data files
 data/*bsc5*
-build
-coverage
-build_coverage
+
+# Build directories
+build/
+build_coverage/
+
+# Coverage reports
+coverage/
+
+# macOS system files
 .DS_Store
-log
-install
+
+# Log files
+log/
+
+# Local libraries
+deps/
