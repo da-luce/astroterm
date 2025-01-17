@@ -24,7 +24,7 @@ endif
 
 computed_hash = fs.hash(bsc5_path, 'sha256')
 if computed_hash != expected_hash
-  error(bsc5_path + 'SHA-256 hash mismatch! Build halted.' +
+  error(bsc5_path + ' SHA-256 hash mismatch! Build halted.' +
         '\nExpected:\t' + expected_hash +
         '\nGot:\t\t' + computed_hash)
 else
