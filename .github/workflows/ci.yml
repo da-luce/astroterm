@@ -59,6 +59,19 @@ jobs:
             compiler: gcc
             coverage: true
 
+            # Build with bsc5 ASCII
+
+          - os: ubuntu-20.04
+            suffix: linux
+            arch: x86_64
+            compiler: gcc
+            ascii: true
+
+          - os: windows-latest
+            suffix: win
+            compiler: cl #mscv
+            ascii: true
+
       fail-fast: false
     runs-on: ${{ matrix.os }}
     env:
@@ -156,7 +169,18 @@ jobs:
       # ------------------------------------------------------------------------
 
       - name: Download BSC5
-        run: curl -L -o data/bsc5 http://tdc-www.harvard.edu/catalogs/BSC5 || echo "bsc5 already exists or curl failed"
+        env:
+          URL: ${{ matrix.ascii && 'https://web.archive.org/web/20250114171002if_/http://tdc-www.harvard.edu/catalogs/ybsc5.gz' || 'https://web.archive.org/web/20231007085824if_/http://tdc-www.harvard.edu/catalogs/BSC5' }}
+          Path: ${{ matrix.ascii && './data/ybsc5.gz' || './data/bsc5' }}
+        run: |
+          ${{ matrix.suffix == 'win' && format('Invoke-WebRequest -OutFile {0} -Uri {1}', env.Path, env.URL) || format('curl -L -o {0} {1}', env.Path, env.URL) }}
+
+      - name: Unzip ASCII BSC5
+        if: matrix.ascii
+        run: |
+          cd data
+          ${{ matrix.suffix == 'win' && '7z x ybsc5.gz -so > ybsc5' || 'gunzip ybsc5.gz' }}
+          ls
 
         # Create a static release
       - name: Build
@@ -198,7 +222,7 @@ jobs:
             ${{ matrix.suffix == 'win' &&  'certutil -hashfile build/astroterm.exe SHA256' || 'shasum -a 256 build/astroterm' }} > ${{ env.HashDir }}/${{ env.BinaryName }}.sha256
 
       - name: Upload Hash
-        if: matrix.coverage != true
+        if: ${{ !matrix.coverage && !matrix.ascii }}
         uses: actions/upload-artifact@v4
         with:
             name: ${{ env.BinaryName }}.sha256
@@ -210,13 +234,13 @@ jobs:
       # ------------------------------------------------------------------------
 
       - name: Rename Binary File
-        if: matrix.coverage == false
+        if: ${{ !matrix.coverage && !matrix.ascii }}
         run: |
             mkdir -p ${{env.Bin}}
             mv ${{ matrix.suffix == 'win' && 'build/astroterm.exe' || 'build/astroterm' }} ${{env.Bin}}/${{env.BinaryName}}
 
       - name: Upload Binary
-        if: matrix.coverage == false
+        if: ${{ !matrix.coverage && !matrix.ascii }}
         uses: actions/upload-artifact@v4
         with:
             name: ${{ env.BinaryName }}
@@ -299,6 +323,7 @@ jobs:
           --suppress=style \
           --error-exitcode=1 \
           -i src/strptime.c \
+          -I include \
           src/
 
     - name: Check Formatting

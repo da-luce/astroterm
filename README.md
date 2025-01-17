@@ -141,7 +141,7 @@ nix-env -iA unstable.astroterm
 2. Download star data:
 
   ```sh
-  curl -L -o data/bsc5 http://tdc-www.harvard.edu/catalogs/BSC5
+  curl -L -o data/bsc5 https://web.archive.org/web/20231007085824if_/http://tdc-www.harvard.edu/catalogs/BSC5
   ```
 
 3. Build:
@@ -181,7 +181,7 @@ You may now run the generated `./build/astroterm` binary or add the `astroterm` 
 2. Download star data:
 
   ```sh
-  curl -L -o data/bsc5 http://tdc-www.harvard.edu/catalogs/BSC5
+  curl -L -o data/bsc5 https://web.archive.org/web/20231007085824if_/http://tdc-www.harvard.edu/catalogs/BSC5
   ```
 
 3. Build:
@@ -303,6 +303,10 @@ If Unicode characters do not display correctly in the terminal, you may need to 
 
 <!-- omit in toc -->
 ## Development
+
+### ASCII BSC5
+
+You can use the ASCII version of the BSC5 star catalog by downloading and extracting the [gzip-compressed file](https://web.archive.org/web/20250114171002if_/http://tdc-www.harvard.edu/catalogs/ybsc5.gz) to `data/ybsc5` instead of `data/bsc5`.
 
 <!-- omit in toc -->
 ### Testing

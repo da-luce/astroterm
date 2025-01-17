@@ -30,7 +30,7 @@ int32_t bytes_to_int32_LE(const uint8_t *buffer)
     uint32_t result = 0x0;
     for (size_t i = 0; i < sizeof(int32_t); ++i)
     {
-        result = result | (int32_t)buffer[i] << (8 * i);
+        result = result | (uint32_t)buffer[i] << (8 * i);
     }
     return result;
 }
