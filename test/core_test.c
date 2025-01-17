@@ -50,6 +50,12 @@ void tearDown(void)
 #define P_EPSILON 0.02
 #define M_EPSILON 0.06
 
+// The xrpm and xdpm vary slightly between the binary bsc5 file provided at
+// https://web.archive.org/web/20231007085824if_/http://tdc-www.harvard.edu/catalogs/BSC5 and the binary file we generate if
+// using the ASCII version (https://web.archive.org/web/20250114171002if_/http://tdc-www.harvard.edu/catalogs/ybsc5.gz) as
+// the original source.
+#define SMOTION_EPSILON 1e-20
+
 // Function to trim trailing '\r' characters
 char *trim_string(const char *str)
 {
@@ -82,21 +88,39 @@ void test_generate_star_table(void)
     TEST_ASSERT_EQUAL(1, star_table[0].catalog_number);
     TEST_ASSERT_DOUBLE_WITHIN(S_EPSILON, 0.023, star_table[0].right_ascension);
     TEST_ASSERT_DOUBLE_WITHIN(S_EPSILON, 0.789, star_table[0].declination);
-    TEST_ASSERT_DOUBLE_WITHIN(S_EPSILON, 0.0, star_table[0].ra_motion);
-    TEST_ASSERT_DOUBLE_WITHIN(S_EPSILON, 0.0, star_table[0].dec_motion);
+    TEST_ASSERT_DOUBLE_WITHIN(SMOTION_EPSILON, -0.00000005817764048288, star_table[0].ra_motion);
+    TEST_ASSERT_DOUBLE_WITHIN(SMOTION_EPSILON, -0.00000008726646427704, star_table[0].dec_motion);
     TEST_ASSERT_FLOAT_WITHIN(S_EPSILON, 6.7, star_table[0].magnitude);
 
     // Verify start with name
     TEST_ASSERT_EQUAL(7001, star_table[7000].catalog_number);
     TEST_ASSERT_EQUAL_STRING("Vega", trim_string(star_table[7000].base.label));
 
+    // Verify star with no data
+    int no_data_index = 92 - 1;
+    TEST_ASSERT_EQUAL(92, star_table[no_data_index].catalog_number);
+    TEST_ASSERT_EQUAL(0.0, star_table[no_data_index].right_ascension);
+    TEST_ASSERT_EQUAL(0.0, star_table[no_data_index].declination);
+    TEST_ASSERT_EQUAL(0.0, star_table[no_data_index].ra_motion);
+    TEST_ASSERT_EQUAL(0.0, star_table[no_data_index].dec_motion);
+    TEST_ASSERT_EQUAL(0.0, star_table[no_data_index].magnitude);
+
+    // Verify star within index
+    int index = 2025 - 1;
+    TEST_ASSERT_EQUAL(2025, star_table[index].catalog_number);
+    TEST_ASSERT_DOUBLE_WITHIN(S_EPSILON, 1.53876226281558, star_table[index].right_ascension);
+    TEST_ASSERT_DOUBLE_WITHIN(S_EPSILON, 0.690704355203134, star_table[index].declination);
+    TEST_ASSERT_DOUBLE_WITHIN(SMOTION_EPSILON, -0.000000126051560300766, star_table[index].ra_motion);
+    TEST_ASSERT_DOUBLE_WITHIN(SMOTION_EPSILON, -0.0000000775701920474603, star_table[index].dec_motion);
+    TEST_ASSERT_FLOAT_WITHIN(S_EPSILON, 6.45, star_table[index].magnitude);
+
     // Verify last star
     int last_index = 9110 - 1;
     TEST_ASSERT_EQUAL(9110, star_table[last_index].catalog_number);
     TEST_ASSERT_DOUBLE_WITHIN(S_EPSILON, 0.022267, star_table[last_index].right_ascension);
     TEST_ASSERT_DOUBLE_WITHIN(S_EPSILON, 1.070134, star_table[last_index].declination);
-    TEST_ASSERT_DOUBLE_WITHIN(S_EPSILON, 0.0, star_table[last_index].ra_motion);
-    TEST_ASSERT_DOUBLE_WITHIN(S_EPSILON, 0.0, star_table[last_index].dec_motion);
+    TEST_ASSERT_DOUBLE_WITHIN(SMOTION_EPSILON, 0.0000000727220523799588, star_table[last_index].ra_motion);
+    TEST_ASSERT_DOUBLE_WITHIN(SMOTION_EPSILON, 0.0000000242406841266529, star_table[last_index].dec_motion);
     TEST_ASSERT_FLOAT_WITHIN(S_EPSILON, 5.8, star_table[last_index].magnitude);
 }
 
