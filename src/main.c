@@ -507,14 +507,14 @@ const char *get_timezone(const struct tm *local_time)
 #ifdef _WIN32
     // Windows-specific code
     TIME_ZONE_INFORMATION tz_info;
-    if (GetTimeZoneInformation(&tz_info) == TIME_ZONE_ID_DAYLIGHT && local_time->tm_isdst > 0)
-    {
-        return tz_info.DaylightName; // DST time zone name
-    }
-    else
-    {
-        return tz_info.StandardName; // Standard time zone name
-    }
+    GetTimeZoneInformation(&tz_info);
+
+    static char tzbuf[8];
+    char sign = tz_info.Bias > 0 ? '-' : '+';
+    long hours = labs(tz_info.Bias) / 60;
+    long minutes = labs(tz_info.Bias) % 60;
+    snprintf(tzbuf, sizeof(tzbuf), "%c%02ld:%02ld", sign, hours, minutes);
+    return tzbuf;
 #else
     // Unix-like systems (Linux/macOS) code
     extern char *tzname[2]; // tzname[0] is standard, tzname[1] is DST
