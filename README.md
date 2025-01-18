@@ -1,7 +1,11 @@
 # 🌌 astroterm
 
 [![Test Status](https://github.com/da-luce/astroterm/actions/workflows/ci.yml/badge.svg)](https://github.com/da-luce/astroterm/actions?query=branch%3Amain)
-[![codecov](https://codecov.io/gh/da-luce/astroterm/graph/badge.svg?token=80C0ZQBVTM)](https://codecov.io/gh/da-luce/astroterm) [![Latest release](https://img.shields.io/github/v/release/da-luce/astroterm?label=Latest%20Release)](https://github.com/da-luce/astroterm/releases) [![Homebrew Tap Version](https://img.shields.io/badge/dynamic/json.svg?url=https://raw.githubusercontent.com/da-luce/homebrew-astroterm/main/version.json&query=$.versions.stable&label=Homebrew%20Tap)](https://github.com/da-luce/homebrew-astroterm) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![codecov](https://codecov.io/gh/da-luce/astroterm/graph/badge.svg?token=80C0ZQBVTM)](https://codecov.io/gh/da-luce/astroterm)
+[![Latest release](https://img.shields.io/github/v/release/da-luce/astroterm?label=Latest%20Release&cacheSeconds=3600)](https://github.com/da-luce/astroterm/releases)
+[![Homebrew Tap Version](https://img.shields.io/badge/dynamic/json.svg?url=https://raw.githubusercontent.com/da-luce/homebrew-astroterm/main/version.json&query=$.versions.stable&label=Homebrew%20Tap&cacheSeconds=3600)](https://github.com/da-luce/homebrew-astroterm)
+[![nixpkgs unstable](https://repology.org/badge/version-for-repo/nix_unstable/astroterm.svg?header=nixpkgs%20unstable)](https://repology.org/project/astroterm/versions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 `astroterm` is a terminal-based star map written in `C`. It displays the real-time positions of stars, planets, constellations, and more, all within your terminal—no telescope required! Configure sky views by date, time, and location with precise ASCII-rendered visuals. See [usage](#usage) for all supported options!
 
@@ -9,7 +13,7 @@
 
 ![The night sky above Singapore on January 2, 2025](./assets/SG_2025-01-02.gif)
 
-_<p align="center">The night sky above above Singapore on January 2, 2025</p>_
+_<p align="center">The night sky above Singapore on January 2, 2025</p>_
 
 <!-- omit in toc -->
 ## Table of Contents
@@ -18,7 +22,7 @@ _<p align="center">The night sky above above Singapore on January 2, 2025</p>_
   - [Features](#features)
   - [Installation](#installation)
     - [Homebrew](#homebrew)
-    - [Nix (unstable)](#nix-unstable)
+    - [Nix](#nix)
     - [Prebuilt Executable](#prebuilt-executable)
   - [Building from Source](#building-from-source)
     - [Linux, macOS \& WSL](#linux-macos--wsl)
@@ -53,14 +57,24 @@ brew tap da-luce/astroterm
 brew install astroterm
 ```
 
-### Nix (unstable)
+### Nix
 
-As of January 15, 2025, `astroterm` has been merged into the `main` branch of `nixpkgs`. It may take a few days to propagate to the `unstable` branch. Once it is available, you can install it using:
+You can try the [package](https://search.nixos.org/packages?channel=unstable&from=0&size=50&sort=relevance&type=packages&query=astroterm) in a temporary environment with the following command:
 
-```bash
-nix-channel --add https://nixos.org/channels/nixpkgs-unstable unstable
-nix-channel --update
-nix-env -iA unstable.astroterm
+```sh
+nix-shell -I nixpkgs=channel:nixpkgs-unstable -p astroterm --command astroterm
+```
+
+Argument flags are added by wrapping the command in quotes. For example:
+
+```sh
+nix-shell -I nixpkgs=channel:nixpkgs-unstable -p astroterm --command "astroterm -u -c"
+```
+
+To make `astroterm` available from your `$PATH`, install it with:
+
+```sh
+nix-env -f channel:nixpkgs-unstable -iA astroterm
 ```
 
 ### Prebuilt Executable
@@ -304,6 +318,7 @@ If Unicode characters do not display correctly in the terminal, you may need to 
 <!-- omit in toc -->
 ## Development
 
+<!-- omit in toc -->
 ### ASCII BSC5
 
 You can use the ASCII version of the BSC5 star catalog by downloading and extracting the [gzip-compressed file](https://web.archive.org/web/20250114171002if_/http://tdc-www.harvard.edu/catalogs/ybsc5.gz) to `data/ybsc5` instead of `data/bsc5`.
