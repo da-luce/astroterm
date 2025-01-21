@@ -48,6 +48,16 @@ _<p align="center">Stars over Sydney, Australia on January 6, 2025</p>_
 
 Several installation methods are provided based on your platform. If none of these fit your needs, you can always [build from source](#building-from-source). Refer to [troubleshooting](#troubleshooting) for help resolving any issues.
 
+[![Packaging status](https://repology.org/badge/vertical-allrepos/astroterm.svg)](https://repology.org/project/astroterm/versions)
+
+### Fedora
+
+You can install Astroterm directly from the [Fedora package repository](https://packages.fedoraproject.org/pkgs/astroterm/astroterm) on Fedora 40+.
+
+```sh
+sudo dnf install astroterm
+```
+
 ### Homebrew
 
 You can install Astroterm directly from the [custom Homebrew tap](https://github.com/da-luce/homebrew-astroterm):
