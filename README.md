@@ -52,7 +52,7 @@ Several installation methods are provided based on your platform. If none of the
 
 ### Fedora
 
-You can install Astroterm directly from the [Fedora package repository](https://packages.fedoraproject.org/pkgs/astroterm/astroterm) on Fedora 40+.
+You can install `astroterm` directly from the [Fedora package repository](https://packages.fedoraproject.org/pkgs/astroterm/astroterm) on Fedora 40+.
 
 ```sh
 sudo dnf install astroterm
