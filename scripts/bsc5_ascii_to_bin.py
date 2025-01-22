@@ -150,14 +150,16 @@ def create_binary_header() -> bytes:
 
 def create_binary_entry(entry : CatalogEntry) -> bytes:
     """Write a single catalog entry to the binary file."""
+
+    # Using '<' to force little endian byte order
     binary_entry = (
-        struct.pack('f', entry.XNO) +                # Catalog number (Real*4)
-        struct.pack('d', entry.SRA0) +               # Right Ascension in radians (Real*8)
-        struct.pack('d', entry.SDEC0) +              # Declination in radians (Real*8)
-        entry.IS.encode('ascii').ljust(2, b'\x00') + # Spectral type (Character*2)
-        struct.pack('h', entry.MAG) +                # V Magnitude * 100 (Integer*2)
-        struct.pack('f', entry.XRPM) +               # R.A. proper motion (Real*4)
-        struct.pack('f', entry.XDPM)                 # Dec. proper motion (Real*4)
+        struct.pack('<f', entry.XNO) +                # Catalog number (Real*4)
+        struct.pack('<d', entry.SRA0) +               # Right Ascension in radians (Real*8)
+        struct.pack('<d', entry.SDEC0) +              # Declination in radians (Real*8)
+        entry.IS.encode('ascii').ljust(2, b'\x00') +  # Spectral type (Character*2)
+        struct.pack('<h', entry.MAG) +                # V Magnitude * 100 (Integer*2)
+        struct.pack('<f', entry.XRPM) +               # R.A. proper motion (Real*4)
+        struct.pack('<f', entry.XDPM)                 # Dec. proper motion (Real*4)
     )
 
     assert len(binary_entry) == 32, (
