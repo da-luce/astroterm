@@ -21,6 +21,7 @@ _<p align="center">The night sky above Singapore on January 2, 2025</p>_
 - [🌌 astroterm](#-astroterm)
   - [Features](#features)
   - [Installation](#installation)
+    - [Fedora](#fedora)
     - [Homebrew](#homebrew)
     - [Nix](#nix)
     - [Prebuilt Executable](#prebuilt-executable)
