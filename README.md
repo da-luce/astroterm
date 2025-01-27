@@ -21,6 +21,7 @@ _<p align="center">The night sky above Singapore on January 2, 2025</p>_
 - [🌌 astroterm](#-astroterm)
   - [Features](#features)
   - [Installation](#installation)
+    - [Arch Linux](#arch-linux)
     - [Fedora](#fedora)
     - [Homebrew](#homebrew)
     - [Nix](#nix)
@@ -50,6 +51,14 @@ _<p align="center">Stars over Sydney, Australia on January 6, 2025</p>_
 Several installation methods are provided based on your platform. If none of these fit your needs, you can always [build from source](#building-from-source). Refer to [troubleshooting](#troubleshooting) for help resolving any issues.
 
 [![Packaging status](https://repology.org/badge/vertical-allrepos/astroterm.svg)](https://repology.org/project/astroterm/versions)
+
+### Arch Linux
+
+You can install `astroterm` directly from the [AUR](https://aur.archlinux.org/packages/astroterm) using your favorite AUR helper:
+
+```sh
+paru -S astroterm
+```
 
 ### Fedora
 
