@@ -70,10 +70,9 @@ sudo dnf install astroterm
 
 ### Homebrew
 
-You can install Astroterm directly from the [custom Homebrew tap](https://github.com/da-luce/homebrew-astroterm):
+You can install Astroterm from [Homebrew](https://formulae.brew.sh/formula/astroterm):
 
 ```sh
-brew tap da-luce/astroterm
 brew install astroterm
 ```
 
