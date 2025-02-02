@@ -3,8 +3,6 @@
 [![Test Status](https://github.com/da-luce/astroterm/actions/workflows/ci.yml/badge.svg)](https://github.com/da-luce/astroterm/actions?query=branch%3Amain)
 [![codecov](https://codecov.io/gh/da-luce/astroterm/graph/badge.svg?token=80C0ZQBVTM)](https://codecov.io/gh/da-luce/astroterm)
 [![Latest release](https://img.shields.io/github/v/release/da-luce/astroterm?label=Latest%20Release&cacheSeconds=3600)](https://github.com/da-luce/astroterm/releases)
-[![Homebrew Tap Version](https://img.shields.io/badge/dynamic/json.svg?url=https://raw.githubusercontent.com/da-luce/homebrew-astroterm/main/version.json&query=$.versions.stable&label=Homebrew%20Tap&cacheSeconds=3600)](https://github.com/da-luce/homebrew-astroterm)
-[![nixpkgs unstable](https://repology.org/badge/version-for-repo/nix_unstable/astroterm.svg?header=nixpkgs%20unstable)](https://repology.org/project/astroterm/versions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 `astroterm` is a terminal-based star map written in `C`. It displays the real-time positions of stars, planets, constellations, and more, all within your terminal—no telescope required! Configure sky views by date, time, and location with precise ASCII-rendered visuals. See [usage](#usage) for all supported options!
@@ -13,7 +11,7 @@
 
 ![The night sky above Singapore on January 2, 2025](./assets/SG_2025-01-02.gif)
 
-_<p align="center">The night sky above Singapore on January 2, 2025</p>_
+_<p align="center">The night sky above Singapore on January 2, 2025<br>See <a href="#example-1">usage</a> on how to obtain this view</p>_
 
 <!-- omit in toc -->
 ## Table of Contents
@@ -70,7 +68,7 @@ sudo dnf install astroterm
 
 ### Homebrew
 
-You can install Astroterm from [Homebrew](https://formulae.brew.sh/formula/astroterm):
+You can install `astroterm` from [Homebrew](https://formulae.brew.sh/formula/astroterm) via:
 
 ```sh
 brew install astroterm
@@ -272,7 +270,24 @@ Usage: astroterm [OPTION]...
 ```
 
 <!-- omit in toc -->
-### Example
+### Example 1
+
+To achieve the "spinning globe" effect as shown in the [README GIF](./assets/SG_2025-01-02.gif), use the following flags:
+
+```sh
+astroterm --color --constellations --speed 10000 --fps 64 --city Singapore
+```
+
+or
+
+```sh
+astroterm -cC -s 10000 -f 64 -i Singapore
+```
+
+for short. In fact, any [city](./data/cities.csv) around the equator will work. Locations closer to the poles will look different because the apparent motion of the stars is more circular around the celestial pole rather than sweeping across the sky.
+
+<!-- omit in toc -->
+### Example 2
 
 Say we wanted to view the sky at 5:00 AM (Eastern) on July 16, 1969—the morning
 of the Apollo 11 launch at the Kennedy Space Center in Florida. We would run:
