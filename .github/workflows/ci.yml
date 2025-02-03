@@ -186,9 +186,9 @@ jobs:
       - name: Build
         env:
           CC: ${{ matrix.compiler }}
-          BuildFlag:  ${{ matrix.coverage && '-Db_coverage=true' || '--buildtype=release -Dprefer_static=true'}}
+          BuildFlags:  ${{ matrix.coverage && '-Db_coverage=true' || '--buildtype=release -Dprefer_static=true'}}
         run: |
-          meson setup build $BuildFlag
+          meson setup build ${{ env.BuildFlags }}
           meson compile --verbose -C build
 
       - name: Test
