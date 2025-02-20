@@ -107,7 +107,7 @@ guix time-machine --commit=4b5f0408e66392ab745dc0f7830732217d88f17d -- shell ast
 Or after `guix pull`:
 ```sh
 guix shell astroterm -- astroterm --help  # to try
-guix package --install astroterm          # into your current profile
+guix package --install astroterm          # add to current profile
 ```
 
 ### Prebuilt Executable
