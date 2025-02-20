@@ -102,7 +102,6 @@ commit 4b5f0408e66392ab745dc0f7830732217d88f17d. It will include BSC5 catalog.
 
 ```sh
 guix time-machine --commit=4b5f0408e66392ab745dc0f7830732217d88f17d -- shell astroterm
-
 ```
 
 Or after `guix pull`:
