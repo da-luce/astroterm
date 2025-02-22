@@ -97,7 +97,7 @@ nix-env -f channel:nixpkgs-unstable -iA astroterm
 ### Guix
 
 You can install `astroterm` directly from the [Guix main
-channel](https://packages.guix.gnu.org/packages/astroterm) starting from Guix's
+channel](https://hpc.guix.info/package/astroterm) starting from
 [this commit](https://data.guix.gnu.org/revision/4b5f0408e66392ab745dc0f7830732217d88f17d).
 
 ```sh
@@ -105,6 +105,7 @@ guix time-machine --commit=4b5f0408e66392ab745dc0f7830732217d88f17d -- shell ast
 ```
 
 Or after `guix pull`:
+
 ```sh
 guix shell astroterm -- astroterm --help  # to try
 guix package --install astroterm          # add to current profile
