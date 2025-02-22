@@ -94,6 +94,23 @@ To make `astroterm` available from your `$PATH`, install it with:
 nix-env -f channel:nixpkgs-unstable -iA astroterm
 ```
 
+### Guix
+
+You can install `astroterm` directly from the [Guix main
+channel](https://hpc.guix.info/package/astroterm) starting from
+[this commit](https://data.guix.gnu.org/revision/4b5f0408e66392ab745dc0f7830732217d88f17d).
+
+```sh
+guix time-machine --commit=4b5f0408e66392ab745dc0f7830732217d88f17d -- shell astroterm
+```
+
+Or after `guix pull`:
+
+```sh
+guix shell astroterm -- astroterm --help  # to try
+guix package --install astroterm          # add to current profile
+```
+
 ### Prebuilt Executable
 
 #### Unix
