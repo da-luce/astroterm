@@ -52,10 +52,10 @@ Several installation methods are provided based on your platform. If none of the
 
 ### Arch Linux
 
-You can install `astroterm` directly from the [AUR](https://aur.archlinux.org/packages/astroterm) using your favorite AUR helper:
+You can install `astroterm` from the [extra repository](https://archlinux.org/packages/extra/x86_64/astroterm/) using [pacman](https://wiki.archlinux.org/title/Pacman):
 
 ```sh
-paru -S astroterm
+pacman -S astroterm
 ```
 
 ### Fedora
