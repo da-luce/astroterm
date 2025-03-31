@@ -1,8 +1,8 @@
 /* Coordinate system utilities.
  *
- * Coordinate systems definitons
+ * Coordinate systems definitions
  *  - All angles in radians unless otherwise noted
- *  - Using common mathmatical conventions as opposed to physics
+ *  - Using common mathematical conventions as opposed to physics
  *  - https://en.wikipedia.org/wiki/Spherical_coordinate_system
  *  - FIXME: this is not the ISO standard, maybe we should change it.
  *

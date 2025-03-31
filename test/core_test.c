@@ -218,7 +218,7 @@ void test_update_planet_positions(void)
     TEST_ASSERT_DOUBLE_WITHIN(P_EPSILON, -0.341956, planet_table[MARS].base.altitude);
 
     // Verify Neptune's position is correct
-    // Note that the outer planets have extra kep elements (position takes mroe calculation)
+    // Note that the outer planets have extra kep elements (position takes more calculation)
     // https://stellarium-web.org/skysource/Neptune?fov=120.00&date=2020-10-23T12:00:00Z&lat=42.36&lng=-71.06&elev=0
     TEST_ASSERT_DOUBLE_WITHIN(P_EPSILON, 5.5390816, planet_table[NEPTUNE].base.azimuth);
     TEST_ASSERT_DOUBLE_WITHIN(P_EPSILON, -0.779650, planet_table[NEPTUNE].base.altitude);

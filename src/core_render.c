@@ -263,7 +263,7 @@ void render_azimuthal_grid(WINDOW *win, const struct Conf *config)
     int step_sizes[5] = {10, 15, 30, 45, 90};
     int length = sizeof(step_sizes) / sizeof(step_sizes[0]);
 
-    // Minumum number of rows separating grid line (at end of window)
+    // Minimum number of rows separating grid line (at end of window)
     int min_height = 10;
 
     // Set the step size to the smallest desirable increment
