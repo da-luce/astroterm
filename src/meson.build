@@ -10,6 +10,7 @@ project_source_files += [
     files('stopwatch.c'),
     files('term.c'),
     files('city.c'),
+    files('split_lines.c'),
 ]
 
 # NOTE: We add main.c separately in the root Meson.build file to avoid duplicate "main" functions when compiling tests
