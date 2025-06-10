@@ -16,4 +16,8 @@ CityData *get_city(const char *name);
  */
 void free_city(CityData *city);
 
+/* Apply a callback and some associated data to all city definitions
+ */
+void iter_cities(void (*callback)(const CityData *city, void *data), void *data);
+
 #endif // CITY_H
