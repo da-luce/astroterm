@@ -88,10 +88,13 @@ Argument flags are added by wrapping the command in quotes. For example:
 nix-shell -I nixpkgs=channel:nixpkgs-unstable -p astroterm --command "astroterm -u -c"
 ```
 
-To make `astroterm` available from your `$PATH`, install it with:
+To make `astroterm` available from your `$PATH`, add it to your configuration.nix:
 
 ```sh
-nix-env -f channel:nixpkgs-unstable -iA astroterm
+environment.systemPackages = with pkgs; [
+  ...
+  astroterm
+]
 ```
 
 ### Guix
