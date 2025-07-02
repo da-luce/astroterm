@@ -28,7 +28,7 @@ jobs:
 
             # astroterm-linux-x86_64
             # Use an older Ubuntu version to ensure compatibility with older C libraries
-          - os: ubuntu-20.04
+          - os: ubuntu-22.04
             suffix: linux
             compiler: gcc
             arch: x86_64
@@ -53,15 +53,18 @@ jobs:
 
             # Coverage build
 
-          - os: ubuntu-20.04
+          - os: ubuntu-22.04
             suffix: linux
             arch: x86_64
             compiler: gcc
             coverage: true
 
             # Build with bsc5 ASCII
+            # This is necessary as some package managers do not permit binary content
+            # in sources (e.g. DNF and EPEL).
+            # See https://github.com/da-luce/astroterm/issues/48
 
-          - os: ubuntu-20.04
+          - os: ubuntu-22.04
             suffix: linux
             arch: x86_64
             compiler: gcc
@@ -255,7 +258,7 @@ jobs:
         include:
 
             # astroterm-linux-x86_64
-          - os: ubuntu-20.04
+          - os: ubuntu-22.04
             suffix: linux
             arch: x86_64
 
