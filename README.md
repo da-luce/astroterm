@@ -125,7 +125,7 @@ guix package --install astroterm          # add to current profile
      - **Linux:** `linux`
      - **macOS:** `darwin`
    - Replace `<arch>` with the appropriate architecture:
-     - **Linux:** `x86_64` (arm64 support to come after [Ubuntu arm64 runners](https://github.blog/news-insights/product-news/arm64-on-github-actions-powering-faster-more-efficient-build-systems/) are avilable)
+     - **Linux:** `x86_64` (arm64 support to come after [Ubuntu arm64 runners](https://github.blog/news-insights/product-news/arm64-on-github-actions-powering-faster-more-efficient-build-systems/) are available)
      - **Apple Silicon (M-series):** `aarch64`
      - **Intel-based Macs:** `x86_64`
    - To view all supported combinations, see the [Releases](https://github.com/da-luce/astroterm/releases) page.

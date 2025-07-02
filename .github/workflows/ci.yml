@@ -290,7 +290,7 @@ jobs:
         path: ${{env.Bin}}
         merge-multiple: true
 
-    - name: List Release Directiory
+    - name: List Release Directory
       run: |
         ls -l ${{env.Bin}}
 

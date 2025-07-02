@@ -461,7 +461,7 @@ bool star_numbers_by_magnitude(int **num_by_mag, const struct Star *star_table, 
     memcpy(table_copy, star_table, num_stars * sizeof(*table_copy));
     qsort(table_copy, num_stars, sizeof(struct Star), star_magnitude_comparator);
 
-    // Create and fill array of indicies in table copy
+    // Create and fill array of indices in table copy
     *num_by_mag = malloc(num_stars * sizeof(int));
     if (*num_by_mag == NULL)
     {
