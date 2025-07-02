@@ -27,7 +27,6 @@ jobs:
             # Release builds
 
             # astroterm-linux-x86_64
-            # Use an older Ubuntu version to ensure compatibility with older C libraries
           - os: ubuntu-22.04
             suffix: linux
             compiler: gcc
