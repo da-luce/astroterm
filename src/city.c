@@ -10,7 +10,8 @@
 
 #define MAX_LINE_LENGTH 1024
 
-// Function to normalize a city name: trim spaces and convert to lowercase
+// Function to normalize a city name: trim spaces and convert to lowercase.
+// Since this is used in a binary search of data/cities.csv, it must be sorted accordingly.
 char *normalize_city_name(const char *input)
 {
     if (input == NULL)

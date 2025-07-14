@@ -33,8 +33,8 @@ def process_cities(input_txt, output_csv, population_threshold=15000):
                     # Skip rows with invalid population data
                     continue
 
-        # Sort cities by city_name
-        cities.sort(key=lambda x: x[0])
+        # Sort cities by city_name (the sort key must match the normalization in city.c)
+        cities.sort(key=lambda x: x[0].strip().lower())
 
         # Write sorted data to the output CSV
         with open(output_csv, 'w', encoding='utf-8', newline='') as csv_file:
