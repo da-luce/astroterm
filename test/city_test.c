@@ -27,6 +27,14 @@ void test_get_city(void)
     TEST_ASSERT_EQUAL_FLOAT(-71.05977, city->longitude);
     free_city(city);
 
+    // Test for a city with mixed case and spaces (regression test for PR #79)
+    city = get_city("Rio de Janeiro");
+    TEST_ASSERT_NOT_NULL(city);
+    TEST_ASSERT_EQUAL_STRING("Rio de Janeiro", city->city_name);
+    TEST_ASSERT_EQUAL_FLOAT(-22.90642, city->latitude);
+    TEST_ASSERT_EQUAL_FLOAT(-43.18223, city->longitude);
+    free_city(city);
+
     // Test for a city that does not exist
     city = get_city("NonexistentCity");
     TEST_ASSERT_NULL(city);
