@@ -1,6 +1,6 @@
 city_name,population,country_code,timezone,latitude,longitude
 6th of October City,368650,EG,Africa/Cairo,29.81667,31.05
-A Coruña,246056,ES,Europe/Madrid,43.37135,-8.396
+A Coruña,250438,ES,Europe/Madrid,43.37135,-8.396
 Aachen,265208,DE,Europe/Berlin,50.77664,6.08342
 Aba,1160000,NG,Africa/Lagos,5.10658,7.36667
 Abadan,370180,IR,Asia/Tehran,30.3392,48.3043
@@ -20,13 +20,13 @@ Adachi,695043,JP,Asia/Tokyo,35.76318,139.80761
 Adana,1816750,TR,Europe/Istanbul,36.98615,35.32531
 Adapazarı,286787,TR,Europe/Istanbul,40.78056,30.40333
 Addis Ababa,3860000,ET,Africa/Addis_Ababa,9.02497,38.74689
-Adelaide,1387290,AU,Australia/Adelaide,-34.92866,138.59863
-Aden,863000,YE,Asia/Aden,12.77944,45.03667
+Adelaide,1469163,AU,Australia/Adelaide,-34.92866,138.59863
+Aden,1079670,YE,Asia/Aden,12.77944,45.03667
 Ado-Ekiti,435000,NG,Africa/Lagos,7.62329,5.22087
 Adıyaman,267131,TR,Europe/Istanbul,37.76441,38.27629
 Afyonkarahisar,251799,TR,Europe/Istanbul,38.75667,30.54333
 Agadir,698310,MA,Africa/Casablanca,30.42018,-9.59815
-Agartala,203264,IN,Asia/Kolkata,23.83605,91.27939
+Agartala,400004,IN,Asia/Kolkata,23.83605,91.27939
 Ageo,226940,JP,Asia/Tokyo,35.97145,139.61382
 Agra,1430055,IN,Asia/Kolkata,27.18333,78.01667
 Aguascalientes,722250,MX,America/Mexico_City,21.88262,-102.2843
@@ -34,10 +34,10 @@ Ahilyanagar,367140,IN,Asia/Kolkata,19.09457,74.73843
 Ahmedabad,6357693,IN,Asia/Kolkata,23.02579,72.58727
 Ahvaz,841145,IR,Asia/Tehran,31.31901,48.6842
 Aihara,725493,JP,Asia/Tokyo,35.6,139.31667
-Aizawl,265331,IN,Asia/Kolkata,23.72894,92.71791
+Aizawl,293416,IN,Asia/Kolkata,23.72894,92.71791
 Ajegunle,550000,NG,Africa/Lagos,6.45197,3.33115
 Ajman City,490035,AE,Asia/Dubai,25.40177,55.47878
-Ajmer,517911,IN,Asia/Kolkata,26.4521,74.63867
+Ajmer,542321,IN,Asia/Kolkata,26.4521,74.63867
 Akashi,303601,JP,Asia/Tokyo,34.65524,135.00687
 Akita,307672,JP,Asia/Tokyo,39.71667,140.11667
 Akola,428857,IN,Asia/Kolkata,20.70957,76.9981
@@ -67,43 +67,43 @@ Al Qurnah,286073,IQ,Asia/Baghdad,31.01547,47.43362
 Al Qāhirah al Jadīdah,313139,EG,Africa/Cairo,30.04214,31.44446
 Al Ḩasakah,422445,SY,Asia/Damascus,36.50237,40.74772
 Al Ḩillah,455700,IQ,Asia/Baghdad,32.46367,44.41963
-Al Ḩudaydah,617871,YE,Asia/Aden,14.79781,42.95452
+Al Ḩudaydah,734699,YE,Asia/Aden,14.79781,42.95452
 Al ‘Amārah,323302,IQ,Asia/Baghdad,31.83561,47.14483
 Al ‘Āshir min Ramaḑān,246148,EG,Africa/Cairo,30.29636,31.74633
 Alanya,364180,TR,Europe/Istanbul,36.54375,31.99982
 Alappuzha,240991,IN,Asia/Kolkata,9.49004,76.3264
-Albuquerque,559121,US,America/Denver,35.08449,-106.65114
-Alcalá de Henares,204574,ES,Europe/Madrid,40.48205,-3.35996
+Albuquerque,564559,US,America/Denver,35.08449,-106.65114
 Aleppo,2098210,SY,Asia/Damascus,36.20124,37.16117
 Alexandria,5263542,EG,Africa/Cairo,31.20176,29.91582
 Algiers,2364230,DZ,Africa/Algiers,36.73225,3.08746
 Aliayabiagba,228000,NG,Africa/Lagos,6.45,3.33333
-Alicante,334757,ES,Europe/Madrid,38.34517,-0.48149
+Alicante,348901,ES,Europe/Madrid,38.34517,-0.48149
 Alimosho,308290,NG,Africa/Lagos,6.60656,3.30235
-Almaty,1977011,KZ,Asia/Almaty,43.25,76.91667
+Almaty,1977011,KZ,Asia/Almaty,43.25249,76.9115
 Almendares,240000,CU,America/Havana,23.11012,-82.42322
 Alor Setar,417800,MY,Asia/Kuala_Lumpur,6.12104,100.36014
 Alto Barinas,284289,VE,America/Caracas,8.5931,-70.2261
 Altona,250192,DE,Europe/Berlin,53.55,9.93333
-Alwar,283228,IN,Asia/Kolkata,27.56246,76.625
+Alwar,322568,IN,Asia/Kolkata,27.56246,76.625
 Alīgarh,753207,IN,Asia/Kolkata,27.88145,78.07464
 Amagasaki,459593,JP,Asia/Tokyo,34.71667,135.41667
 Amarapura,237618,MM,Asia/Yangon,21.90709,96.04894
 Ambarnath,253475,IN,Asia/Kolkata,19.2,73.16667
 Ambato,387309,EC,America/Guayaquil,-1.24908,-78.61675
-Ambattūr,341049,IN,Asia/Kolkata,13.09818,80.16152
+Ambattur,466205,IN,Asia/Kolkata,13.09818,80.16152
 Ambon,347288,ID,Asia/Jayapura,-3.69583,128.18333
 Americana,246655,BR,America/Sao_Paulo,-22.73917,-47.33139
 Amman,1275857,JO,Asia/Amman,31.95522,35.94503
 Amravati,647057,IN,Asia/Kolkata,20.93333,77.75
-Amritsar,1092450,IN,Asia/Kolkata,31.62234,74.87534
+Amritsar,1159227,IN,Asia/Kolkata,31.62234,74.87534
 Amsterdam,741636,NL,Europe/Amsterdam,52.37403,4.88969
+An Nhơn,308396,VN,Asia/Ho_Chi_Minh,13.88579,109.10823
 Anaheim,350742,US,America/Los_Angeles,33.83529,-117.9145
 Anand,209410,IN,Asia/Kolkata,22.55251,72.9552
 Ananindeua,433956,BR,America/Belem,-1.36556,-48.37222
 Anantapur,267161,IN,Asia/Kolkata,14.67784,77.60813
-Anchorage,291247,US,America/Anchorage,61.21806,-149.90028
-Andijon,447800,UZ,Asia/Tashkent,40.78206,72.34424
+Anchorage,289600,US,America/Anchorage,61.21806,-149.90028
+Andijon,747800,UZ,Asia/Tashkent,40.78338,72.35067
 Angarsk,243158,RU,Asia/Irkutsk,52.55968,103.91413
 Angeles City,299391,PH,Asia/Manila,15.15,120.58333
 Ankang,870126,CN,Asia/Shanghai,32.68,109.01722
@@ -144,6 +144,7 @@ Arlington,207627,US,America/New_York,38.88101,-77.10428
 Armenia,304314,CO,America/Bogota,4.53656,-75.67263
 Arrah,261430,IN,Asia/Kolkata,25.55629,84.66335
 Arroyo Naranjo,210053,CU,America/Havana,23.03811,-82.37703
+Artux,285000,CN,Asia/Urumqi,39.70842,76.17971
 Arusha,617631,TZ,Africa/Dar_es_Salaam,-3.36667,36.68333
 Arāk,503647,IR,Asia/Tehran,34.09493,49.69809
 As Sulaymānīyah,878146,IQ,Asia/Baghdad,35.56496,45.4329
@@ -163,13 +164,14 @@ Athlone,237414,ZA,Africa/Johannesburg,-33.96722,18.50214
 Atlanta,510823,US,America/New_York,33.749,-84.38798
 Atsiaman,202932,GH,Africa/Accra,5.69775,-0.32824
 Atsugi,223960,JP,Asia/Tokyo,35.44272,139.36931
-Atyrau,290700,KZ,Asia/Atyrau,47.11667,51.88333
-Auckland,1531400,NZ,Pacific/Auckland,-36.84853,174.76349
+Atyrau,290700,KZ,Asia/Atyrau,47.1048,51.88427
+Auckland,1530500,NZ,Pacific/Auckland,-36.84853,174.76349
 Augsburg,259196,DE,Europe/Berlin,48.37154,10.89851
 Aurangabad,1175116,IN,Asia/Kolkata,19.87757,75.34226
 Aurora,200661,US,America/Chicago,41.76058,-88.32007
 Aurora,359407,US,America/Denver,39.72943,-104.83192
 Austin,974447,US,America/Chicago,30.26715,-97.74306
+Avadi,345996,IN,Asia/Kolkata,13.1147,80.10981
 Awasa,422200,ET,Africa/Addis_Ababa,7.06205,38.47635
 Az Zāwīyah,200000,LY,Africa/Tripoli,32.7571,12.72764
 Azcapotzalco,414711,MX,America/Mexico_City,19.48698,-99.18594
@@ -178,7 +180,7 @@ Bab Ezzouar,275630,DZ,Africa/Algiers,36.72615,3.18291
 Bachuan,208520,CN,Asia/Shanghai,29.84863,106.05046
 Bacolod City,454898,PH,Asia/Manila,10.66667,122.95
 Bacoor,356974,PH,Asia/Manila,14.45896,120.93851
-Badalona,219547,ES,Europe/Madrid,41.45004,2.24741
+Badalona,217741,ES,Europe/Madrid,41.45004,2.24741
 Bade,209148,TW,Asia/Taipei,24.92981,121.28372
 Bafoussam,373268,CM,Africa/Douala,5.47775,10.41759
 Bagerhat,266388,BD,Asia/Dhaka,22.65657,89.79123
@@ -198,7 +200,7 @@ Bakersfield,373640,US,America/Los_Angeles,35.37329,-119.01871
 Baku,1116513,AZ,Asia/Baku,40.37767,49.89201
 Balikpapan,695287,ID,Asia/Makassar,-1.26753,116.82887
 Ballari,410445,IN,Asia/Kolkata,15.14205,76.92398
-Baltimore,576498,US,America/New_York,39.29038,-76.61219
+Baltimore,585708,US,America/New_York,39.29038,-76.61219
 Balıkesir,238151,TR,Europe/Istanbul,39.64917,27.88611
 Bamako,4227569,ML,Africa/Bamako,12.60915,-7.97522
 Bamenda,420445,CM,Africa/Douala,5.9597,10.14597
@@ -217,7 +219,7 @@ Banja Luka,221106,BA,Europe/Sarajevo,44.77842,17.19386
 Banjar,200970,ID,Asia/Jakarta,-7.1955,107.4313
 Banjarmasin,657663,ID,Asia/Makassar,-3.31987,114.59075
 Bannu,1357890,PK,Asia/Karachi,32.98527,70.60403
-Banqiao,543342,TW,Asia/Taipei,25.01427,121.46719
+Banqiao,551221,TW,Asia/Taipei,25.01427,121.46719
 Banī Suwayf,273151,EG,Africa/Cairo,29.07441,31.09785
 Bao'an,4476554,CN,Asia/Shanghai,22.55213,113.88288
 Baoding,2739887,CN,Asia/Shanghai,38.87288,115.46246
@@ -242,7 +244,7 @@ Basrah,1326564,IQ,Asia/Baghdad,30.50852,47.7804
 Basuo,444458,CN,Asia/Shanghai,19.10267,108.66565
 Batam,1164352,ID,Asia/Jakarta,1.14937,104.02491
 Batangas,237370,PH,Asia/Manila,13.7567,121.0584
-Bathinda,242800,IN,Asia/Kolkata,30.20747,74.93893
+Bathinda,285788,IN,Asia/Kolkata,30.20747,74.93893
 Batikent,300000,TR,Europe/Istanbul,39.96833,32.73083
 Batman,452157,TR,Europe/Istanbul,37.88738,41.13221
 Batna City,289504,DZ,Africa/Algiers,35.55597,6.17414
@@ -285,31 +287,32 @@ Benito Juárez,385439,MX,America/Mexico_City,19.3727,-99.1564
 Benoni,605344,ZA,Africa/Johannesburg,-26.18848,28.32078
 Benxi,987717,CN,Asia/Shanghai,41.28861,123.765
 Berbera,242344,SO,Africa/Mogadishu,10.43959,45.01432
-Bergen,285911,NO,Europe/Oslo,60.39299,5.32415
+Bergen,294029,NO,Europe/Oslo,60.39299,5.32415
 Berlin,3426354,DE,Europe/Berlin,52.52437,13.41053
 Betim,384000,BR,America/Sao_Paulo,-19.96778,-44.19833
 Bexley,228000,GB,Europe/London,51.44162,0.14866
-Bharatpur,229384,IN,Asia/Kolkata,27.21731,77.49009
+Bharatpur,252838,IN,Asia/Kolkata,27.21731,77.49009
 Bharatpur,369377,NP,Asia/Kathmandu,27.6768,84.43589
 Bhavnagar,605882,IN,Asia/Kolkata,21.76287,72.15331
 Bhayandar,809378,IN,Asia/Kolkata,19.30157,72.85107
 Bhilai,627734,IN,Asia/Kolkata,21.20919,81.4285
+Bhilwara,359483,IN,Asia/Kolkata,25.34707,74.64081
 Bhimber,342900,PK,Asia/Karachi,32.97465,74.07846
 Bhiwandi,874032,IN,Asia/Kolkata,19.30023,73.05881
 Bhopal,1798218,IN,Asia/Kolkata,23.25469,77.40289
-Bhubaneswar,837000,IN,Asia/Kolkata,20.27241,85.83385
+Bhubaneswar,885363,IN,Asia/Kolkata,20.27241,85.83385
 Bhāgalpur,400146,IN,Asia/Kolkata,25.24446,86.97183
 Bhātpāra,483129,IN,Asia/Kolkata,22.86643,88.40113
 Bhātāra,324300,BD,Asia/Dhaka,23.8,90.45
-Bhīlwāra,326431,IN,Asia/Kolkata,25.34707,74.64081
 Białystok,291855,PL,Europe/Warsaw,53.13333,23.16433
 Bida,400000,NG,Africa/Lagos,9.08044,6.0099
 Bidar,216020,IN,Asia/Kolkata,17.90802,77.51524
 Bielefeld,331906,DE,Europe/Berlin,52.03333,8.53333
 Bihār Sharīf,297268,IN,Asia/Kolkata,25.20084,85.52389
 Bijie,1137383,CN,Asia/Shanghai,27.30193,105.28627
+Bikaner,644406,IN,Asia/Kolkata,28.01762,73.31495
 Bila Tserkva,207273,UA,Europe/Kyiv,49.8004,30.12851
-Bilbao,345821,ES,Europe/Madrid,43.26271,-2.92528
+Bilbao,347342,ES,Europe/Madrid,43.26271,-2.92528
 Bilimora,510879,IN,Asia/Kolkata,20.76957,72.96134
 Bilāspur,365579,IN,Asia/Kolkata,22.08005,82.15543
 Bimbo,348802,CF,Africa/Bangui,4.25671,18.41583
@@ -320,8 +323,7 @@ Binzhou,682717,CN,Asia/Shanghai,37.36667,118.01667
 Biratnagar,244750,NP,Asia/Kathmandu,26.45505,87.27007
 Birgañj,268273,NP,Asia/Kathmandu,27.01709,84.8808
 Birkenhead,325264,GB,Europe/London,53.39337,-3.01479
-Birmingham,1144919,GB,Europe/London,52.48142,-1.89983
-Birmingham,212461,US,America/Chicago,33.52066,-86.80249
+Birmingham,1157603,GB,Europe/London,52.48142,-1.89983
 Bishan,204702,CN,Asia/Shanghai,29.59491,106.22476
 Bishkek,900000,KG,Asia/Bishkek,42.87,74.59
 Bishoftu,207400,ET,Africa/Addis_Ababa,8.75225,38.97846
@@ -329,7 +331,7 @@ Biskra,204661,DZ,Africa/Algiers,34.85038,5.72805
 Bissau,439704,GW,Africa/Bissau,11.86357,-15.59767
 Bitung,225134,ID,Asia/Makassar,1.44059,125.12824
 Biysk,215430,RU,Asia/Barnaul,52.53423,85.19661
-Biên Hòa,830829,VN,Asia/Ho_Chi_Minh,10.94469,106.82432
+Biên Hòa,1272235,VN,Asia/Ho_Chi_Minh,10.94469,106.82432
 Biñan,300000,PH,Asia/Manila,14.34267,121.08071
 Blagoveshchensk,225091,RU,Asia/Yakutsk,50.27961,127.5405
 Blantyre,902588,MW,Africa/Blantyre,-15.78499,35.00854
@@ -341,7 +343,6 @@ Boa Vista,419652,BR,America/Boa_Vista,2.81972,-60.67333
 Bobo-Dioulasso,904920,BF,Africa/Ouagadougou,11.17715,-4.2979
 Bobruysk,207351,BY,Europe/Minsk,53.14636,29.20552
 Bochum,385729,DE,Europe/Berlin,51.48165,7.21648
-Bochum-Hordel,380000,DE,Europe/Berlin,51.50168,7.1756
 Bogor,1127408,ID,Asia/Jakarta,-6.59444,106.78917
 Bogotá,7674366,CO,America/Bogota,4.60971,-74.08175
 Bogra,210000,BD,Asia/Dhaka,24.85098,89.37108
@@ -361,9 +362,9 @@ Botshabelo,309714,ZA,Africa/Johannesburg,-29.26737,26.72595
 Bouaké,832371,CI,Africa/Abidjan,7.69385,-5.03031
 Bozhou,1409436,CN,Asia/Shanghai,33.87722,115.77028
 Bradford,366187,GB,Europe/London,53.79391,-1.75206
-Brahmapur,324726,IN,Asia/Kolkata,19.31151,84.7929
+Brahmapur,356598,IN,Asia/Kolkata,19.31151,84.7929
 Brakpan,305692,ZA,Africa/Johannesburg,-26.23656,28.36938
-Brampton,593638,CA,America/Toronto,43.68341,-79.76633
+Brampton,656480,CA,America/Toronto,43.68341,-79.76633
 Brasilandia,243273,BR,America/Sao_Paulo,-23.44859,-46.68839
 Brasília,2207718,BR,America/Sao_Paulo,-15.77972,-47.92972
 Bratislava,423737,SK,Europe/Bratislava,48.14816,17.10674
@@ -374,14 +375,15 @@ Braşov,253200,RO,Europe/Bucharest,45.64861,25.60613
 Bremen,546501,DE,Europe/Berlin,53.07582,8.80717
 Brent,329100,GB,Europe/London,51.55306,-0.3023
 Brescia,200423,IT,Europe/Rome,45.53558,10.21472
-Brest,344470,BY,Europe/Minsk,52.09755,23.68775
+Brest,344470,BY,Europe/Minsk,52.10894,23.71749
 Brighton,277103,GB,Europe/London,50.82838,-0.13947
-Brisbane,2582007,AU,Australia/Brisbane,-27.46794,153.02809
-Bristol,465866,GB,Europe/London,51.45523,-2.59665
+Brisbane,2780063,AU,Australia/Brisbane,-27.46794,153.02809
+Bristol,479024,GB,Europe/London,51.45523,-2.59665
 Brno,379466,CZ,Europe/Prague,49.19522,16.60796
 Brooklyn,2736074,US,America/New_York,40.6501,-73.94958
 Brussels,1019022,BE,Europe/Brussels,50.85045,4.34878
 Bryansk,427236,RU,Europe/Moscow,53.25209,34.37167
+Brāhmanbāria,264326,BD,Asia/Dhaka,23.97464,91.11228
 Bucaramanga,581130,CO,America/Bogota,7.125,-73.11895
 Bucharest,1877155,RO,Europe/Bucharest,44.43225,26.10626
 Bucheon-si,850731,KR,Asia/Seoul,37.49889,126.78306
@@ -394,29 +396,33 @@ Buenos Aires,2891082,AR,America/Argentina/Buenos_Aires,-34.61315,-58.37723
 Buffalo,258071,US,America/New_York,42.88645,-78.87837
 Bujumbura,769317,BI,Africa/Bujumbura,-3.38193,29.36142
 Bukavu,816811,CD,Africa/Lubumbashi,-2.49077,28.84281
-Bukhara,280187,UZ,Asia/Samarkand,39.77472,64.42861
+Bukhara,280187,UZ,Asia/Samarkand,39.77026,64.43069
 Bukit Jalil,200000,MY,Asia/Kuala_Lumpur,3.04913,101.68036
 Bukit Mertajam,212329,MY,Asia/Kuala_Lumpur,5.36301,100.4667
 Bukit Rahman Putra,607000,MY,Asia/Kuala_Lumpur,3.21727,101.5608
-Bulawayo,1200337,ZW,Africa/Harare,-20.15,28.58333
+Bulawayo,665952,ZW,Africa/Harare,-20.15,28.58333
 Bunamwaya,413400,UG,Africa/Kampala,0.25344,32.55723
 Bunia,399282,CD,Africa/Lubumbashi,1.55941,30.25224
 Bunkyo,240069,JP,Asia/Tokyo,35.5331,139.4217
 Buraydah,745353,SA,Asia/Riyadh,26.32599,43.97497
 Burhānpur,210886,IN,Asia/Kolkata,21.30868,76.23026
-Burnaby,202799,CA,America/Vancouver,49.26636,-122.95263
+Burnaby,249125,CA,America/Vancouver,49.26636,-122.95263
 Bursa,3101833,TR,Europe/Istanbul,40.19559,29.06013
-Busan,3678555,KR,Asia/Seoul,35.10168,129.03004
+Busan,3343903,KR,Asia/Seoul,35.10168,129.03004
 Butembo,286242,CD,Africa/Lubumbashi,0.14164,29.29117
 Butuan,309709,PH,Asia/Manila,8.94917,125.54361
+Buôn Ma Thuột,434256,VN,Asia/Ho_Chi_Minh,12.66747,108.03775
 Bydgoszcz,366452,PL,Europe/Warsaw,53.1235,18.00762
 Bégoua,264067,CF,Africa/Bangui,4.45437,18.53475
 Bābol,202796,IR,Asia/Tehran,36.55102,52.6786
 Bāli,296973,IN,Asia/Kolkata,22.64859,88.34115
 Bāndarban,495272,BD,Asia/Dhaka,22.19534,92.21946
 Bārāsat,298127,IN,Asia/Kolkata,22.72154,88.48198
-Bīkaner,576015,IN,Asia/Kolkata,28.01762,73.31495
 Būkān,213331,IR,Asia/Tehran,36.521,46.2089
+Bắc Giang,450000,VN,Asia/Bangkok,21.27307,106.1946
+Bắc Ninh,287658,VN,Asia/Bangkok,21.18608,106.07631
+Bắc Từ Liêm,340605,VN,Asia/Ho_Chi_Minh,21.06532,105.74661
+Bến Cát,364578,VN,Asia/Ho_Chi_Minh,11.15,106.6
 Cabanatuan City,327325,PH,Asia/Manila,15.48586,120.96648
 Cabimas,351736,VE,America/Caracas,10.39907,-71.45206
 Cabinda,550000,AO,Africa/Luanda,-5.56198,12.19476
@@ -429,7 +435,7 @@ Cairo,9606916,EG,Africa/Cairo,30.06263,31.24967
 Cajamarca,201329,PE,America/Lima,-7.16378,-78.50027
 Calabar,540000,NG,Africa/Lagos,4.95893,8.32695
 Calamba,539671,PH,Asia/Manila,14.21167,121.16528
-Calgary,1019942,CA,America/Edmonton,51.05011,-114.08529
+Calgary,1306784,CA,America/Edmonton,51.05011,-114.08529
 Cali,2392877,CO,America/Bogota,3.43054,-76.5199
 Callao,1300000,PE,America/Lima,-12.05162,-77.13452
 Caloocan City,1661584,PH,Asia/Manila,14.64953,120.96788
@@ -439,15 +445,16 @@ Campeche,220389,MX,America/Merida,19.84073,-90.51676
 Campina Grande,348936,BR,America/Fortaleza,-7.23056,-35.88111
 Campinas,1031554,BR,America/Sao_Paulo,-22.90556,-47.06083
 Campo Grande,906092,BR,America/Campo_Grande,-20.44278,-54.64639
-Campo Limpo de Goiás,236162,BR,America/Sao_Paulo,-16.29345,-49.09083
+Campo Limpo,236162,BR,America/Sao_Paulo,-23.63634,-46.76565
 Campos dos Goytacazes,511168,BR,America/Sao_Paulo,-21.75227,-41.33044
 Canberra,367752,AU,Australia/Sydney,-35.28346,149.12807
 Cancún,628306,MX,America/Cancun,21.17429,-86.84656
 Cangzhou,527681,CN,Asia/Shanghai,38.31124,116.85334
 Canoas,328291,BR,America/Sao_Paulo,-29.91778,-51.18361
+Cao Lãnh,211912,VN,Asia/Ho_Chi_Minh,10.46017,105.63294
 Capao Redondo,270767,BR,America/Sao_Paulo,-23.66877,-46.78051
 Cape Coast,212426,GH,Africa/Accra,5.10535,-1.2466
-Cape Town,4710000,ZA,Africa/Johannesburg,-33.92584,18.42322
+Cape Town,4772846,ZA,Africa/Johannesburg,-33.92584,18.42322
 Carabanchel,253678,ES,Europe/Madrid,40.39094,-3.7242
 Caracas,3000000,VE,America/Caracas,10.48801,-66.87919
 Carapicuíba,386984,BR,America/Sao_Paulo,-23.52272,-46.835
@@ -455,7 +462,7 @@ Cardiff,372089,GB,Europe/London,51.48,-3.18
 Cariacica,353491,BR,America/Sao_Paulo,-20.26389,-40.42
 Carrefour,442156,HT,America/Port-au-Prince,18.54114,-72.39922
 Cartagena,914552,CO,America/Bogota,10.39817,-75.49328
-Cartagena,211996,ES,Europe/Madrid,37.60197,-0.98397
+Cartagena,213943,ES,Europe/Madrid,37.60197,-0.98397
 Caruaru,402290,BR,America/Recife,-8.28333,-35.97611
 Casablanca,3665954,MA,Africa/Casablanca,33.58831,-7.61138
 Cascavel,257172,BR,America/Sao_Paulo,-24.95583,-53.45528
@@ -463,12 +470,14 @@ Catania,311584,IT,Europe/Rome,37.49223,15.07041
 Caucaia,355679,BR,America/Fortaleza,-3.73611,-38.65306
 Caxias do Sul,381270,BR,America/Sao_Paulo,-29.16806,-51.17944
 Cebu City,964169,PH,Asia/Manila,10.31672,123.89071
+Ceilândia,287023,BR,America/Sao_Paulo,-15.8091,-48.13096
 Celaya,340387,MX,America/Mexico_City,20.52353,-100.8157
 Centralniy,214625,RU,Europe/Moscow,59.93111,30.36072
 Centurion,236580,ZA,Africa/Johannesburg,-25.85891,28.18577
 Chakwama,200000,NG,Africa/Lagos,11.55965,9.66407
 Chandigarh,970602,IN,Asia/Kolkata,30.73629,76.7884
 Chandler,260828,US,America/Phoenix,33.30616,-111.84125
+Chang-hua,226564,TW,Asia/Taipei,24.07327,120.56276
 Changam-ch'on,207299,KP,Asia/Pyongyang,40.60611,128.78194
 Changchun,4714996,CN,Asia/Shanghai,43.88,125.32278
 Changde,1457419,CN,Asia/Shanghai,29.03205,111.69844
@@ -486,7 +495,7 @@ Changzhou,3290918,CN,Asia/Shanghai,31.77359,119.95401
 Chaoyang,410005,CN,Asia/Shanghai,41.57028,120.45861
 Chaozhou,1750945,CN,Asia/Shanghai,23.65396,116.62262
 Charleroi,200132,BE,Europe/Brussels,50.41136,4.44448
-Charlotte,874579,US,America/New_York,35.22709,-80.84313
+Charlotte,911311,US,America/New_York,35.22709,-80.84313
 Chattogram,3920222,BD,Asia/Dhaka,22.3384,91.83168
 Cheboksary,492331,RU,Europe/Moscow,56.13222,47.25194
 Chelyabinsk,1202371,RU,Asia/Yekaterinburg,55.15402,61.42915
@@ -497,10 +506,10 @@ Chengzhong,265886,CN,Asia/Shanghai,30.94454,113.55284
 Chennai,4681087,IN,Asia/Kolkata,13.08784,80.27847
 Chenzhou,822534,CN,Asia/Shanghai,25.8,113.03333
 Cheonan,658831,KR,Asia/Seoul,36.8065,127.1522
-Cheongju-si,846291,KR,Asia/Seoul,36.63722,127.48972
+Cheongju-si,853938,KR,Asia/Seoul,36.63722,127.48972
 Cherepovets,315738,RU,Europe/Moscow,59.13333,37.9
 Cherkasy,272651,UA,Europe/Kyiv,49.44452,32.05738
-Chernihiv,285234,UA,Europe/Kyiv,51.50551,31.28487
+Chernihiv,285234,UA,Europe/Kyiv,51.50541,31.28656
 Chernivtsi,265471,UA,Europe/Kyiv,48.29045,25.93241
 Chesapeake,235429,US,America/New_York,36.81904,-76.27494
 Chiayi City,263188,TW,Asia/Taipei,23.47917,120.44889
@@ -510,13 +519,14 @@ Chiclayo,552508,PE,America/Lima,-6.77008,-79.85495
 Chifeng,346654,CN,Asia/Shanghai,42.26833,118.96361
 Chigasaki,242798,JP,Asia/Tokyo,35.33638,139.40434
 Chihuahua,925762,MX,America/Chihuahua,28.63528,-106.08889
+Chilanzar,260700,UZ,Asia/Tashkent,41.28194,69.18111
 Chimbote,316966,PE,America/Lima,-9.07508,-78.59373
 Chimoio,422046,MZ,Africa/Maputo,-19.11639,33.48333
 Chingola,256560,ZM,Africa/Lusaka,-12.52897,27.88382
 Chiniot,318165,PK,Asia/Karachi,31.72091,72.97836
 Chinju,307242,KR,Asia/Seoul,35.19278,128.08472
 Chipata,327059,ZM,Africa/Lusaka,-13.63333,32.65
-Chisinau,635994,MD,Europe/Chisinau,47.00556,28.8575
+Chisinau,635994,MD,Europe/Chisinau,47.00902,28.85938
 Chita,349005,RU,Asia/Chita,52.03171,113.50087
 Chitato,246880,AO,Africa/Luanda,-7.3,20.73333
 Chitungwiza,371246,ZW,Africa/Harare,-18.01274,31.07555
@@ -525,13 +535,15 @@ Chon Buri,219164,TH,Asia/Bangkok,13.3622,100.98345
 Chongjin,327000,KP,Asia/Pyongyang,41.79556,129.77583
 Chongqing,7457599,CN,Asia/Shanghai,29.56026,106.55771
 Chongzuo,384905,CN,Asia/Shanghai,22.38161,107.3683
-Christchurch,415100,NZ,Pacific/Auckland,-43.53333,172.63333
+Christchurch,412000,NZ,Pacific/Auckland,-43.53333,172.63333
 Chula Vista,265757,US,America/Los_Angeles,32.64005,-117.0842
-Chuncheon,209746,KR,Asia/Seoul,37.87472,127.73417
+Chuncheon,286124,KR,Asia/Seoul,37.87472,127.73417
 Chungju,209483,KR,Asia/Seoul,36.97666,127.9287
+Chuxiong,555081,CN,Asia/Shanghai,25.03639,101.54556
 Chuzhou,782671,CN,Asia/Shanghai,32.32194,118.29778
-Chí Linh,220421,VN,Asia/Bangkok,21.06667,106.31667
+Chí Linh,220421,VN,Asia/Ho_Chi_Minh,21.06667,106.31667
 Chānda,328351,IN,Asia/Kolkata,19.95076,79.29523
+Chāndpur,203000,BD,Asia/Dhaka,23.22714,90.65433
 Chāpra,202352,IN,Asia/Kolkata,25.78031,84.74709
 Chōfu,242614,JP,Asia/Tokyo,35.65924,139.54837
 Chợ Lớn,561000,VN,Asia/Ho_Chi_Minh,10.75,106.65
@@ -548,19 +560,20 @@ Cirebon,341980,ID,Asia/Jakarta,-6.7063,108.557
 Citeureup,214668,ID,Asia/Jakarta,-6.48556,106.88194
 City of Westminster,247614,GB,Europe/London,51.4975,-0.1357
 Ciudad Apodaca,467157,MX,America/Monterrey,25.78195,-100.18839
+Ciudad Benito Juárez,308285,MX,America/Monterrey,25.64724,-100.09582
 Ciudad Bolívar,412619,VE,America/Caracas,8.12366,-63.54694
 Ciudad del Este,301815,PY,America/Asuncion,-25.5036,-54.65067
-Ciudad General Escobedo,352444,MX,America/Monterrey,25.79698,-100.31791
-Ciudad Guayana,950000,VE,America/Caracas,8.35122,-62.64102
-Ciudad Juárez,1501551,MX,America/Ciudad_Juarez,31.72024,-106.46084
+Ciudad General Escobedo,454967,MX,America/Monterrey,25.79698,-100.31791
+Ciudad Guayana,978202,VE,America/Caracas,8.35122,-62.64102
+Ciudad Juárez,1512450,MX,America/Ciudad_Juarez,31.72024,-106.46084
 Ciudad Lineal,228171,ES,Europe/Madrid,40.44505,-3.65132
 Ciudad López Mateos,489160,MX,America/Mexico_City,19.55793,-99.25675
 Ciudad Nezahualcoyotl,1104585,MX,America/Mexico_City,19.40061,-99.01483
-Ciudad Obregón,436484,MX,America/Hermosillo,27.48642,-109.94079
+Ciudad Obregón,329404,MX,America/Hermosillo,27.48642,-109.94079
 Ciudad Ojeda,240283,VE,America/Caracas,10.20161,-71.3148
 Ciudad Victoria,332100,MX,America/Monterrey,23.74061,-99.14364
 Cixi,1457510,CN,Asia/Shanghai,30.1764,121.2457
-Cleveland,388072,US,America/New_York,41.4995,-81.69541
+Cleveland,365379,US,America/New_York,41.4995,-81.69541
 Cluj-Napoca,286598,RO,Europe/Bucharest,46.76667,23.6
 Coacalco,277959,MX,America/Mexico_City,19.62923,-99.10689
 Coatzacoalcos,235983,MX,America/Mexico_City,18.14905,-94.4447
@@ -581,7 +594,7 @@ Constanţa,317832,RO,Europe/Bucharest,44.18073,28.63432
 Contagem,627123,BR,America/Sao_Paulo,-19.93167,-44.05361
 Copenhagen,1153615,DK,Europe/Copenhagen,55.67594,12.56553
 Coro,246657,VE,America/Caracas,11.40769,-69.67822
-Corpus Christi,326586,US,America/Chicago,27.80058,-97.39638
+Corpus Christi,316239,US,America/Chicago,27.80058,-97.39638
 Corrientes,346334,AR,America/Argentina/Cordoba,-27.46784,-58.8344
 Cotabato,325079,PH,Asia/Manila,7.22361,124.24639
 Cotia,253608,BR,America/Sao_Paulo,-23.60389,-46.91917
@@ -600,22 +613,24 @@ Culiacán,808416,MX,America/Mazatlan,24.80209,-107.39421
 Cumaná,405626,VE,America/Caracas,10.4639,-64.17859
 Curitiba,1948626,BR,America/Sao_Paulo,-25.42778,-49.27306
 Cusco,428450,PE,America/Lima,-13.53188,-71.96701
-Cuttack,580000,IN,Asia/Kolkata,20.46497,85.87927
+Cuttack,610189,IN,Asia/Kolkata,20.46497,85.87927
 Cuíto,355423,AO,Africa/Luanda,-12.38333,16.93333
+Cypress,200839,US,America/Chicago,29.96911,-95.69717
 Częstochowa,248125,PL,Europe/Warsaw,50.79646,19.12409
-Córdoba,1317298,AR,America/Argentina/Cordoba,-31.40648,-64.18853
+Cà Mau,226372,VN,Asia/Ho_Chi_Minh,9.17682,105.15242
+Córdoba,2106734,AR,America/Argentina/Cordoba,-31.40648,-64.18853
 Córdoba,325708,ES,Europe/Madrid,37.89155,-4.77275
 Cúcuta,777106,CO,America/Bogota,7.90745,-72.5049
-Cần Thơ,812088,VN,Asia/Ho_Chi_Minh,10.03711,105.78825
-Da Nang,988561,VN,Asia/Ho_Chi_Minh,16.06778,108.22083
+Cần Thơ,1507187,VN,Asia/Ho_Chi_Minh,10.03711,105.78825
+Da Nang,1276000,VN,Asia/Ho_Chi_Minh,16.06778,108.22083
 Dadu,201017,PK,Asia/Karachi,26.73033,67.7769
-Daegu,2566540,KR,Asia/Seoul,35.87028,128.59111
-Daejeon,1469543,KR,Asia/Seoul,36.34913,127.38493
+Daegu,2365523,KR,Asia/Seoul,35.87028,128.59111
+Daejeon,1470336,KR,Asia/Seoul,36.34913,127.38493
 Dakar,2646503,SN,Africa/Dakar,14.6937,-17.44406
 Dali,235305,CN,Asia/Shanghai,25.58474,100.21229
 Dalian,4913879,CN,Asia/Shanghai,38.91222,121.60222
 Daliang,210411,CN,Asia/Shanghai,22.84067,113.2503
-Dallas,1300092,US,America/Chicago,32.78306,-96.80667
+Dallas,1326087,US,America/Chicago,32.78306,-96.80667
 Daloa,421871,CI,Africa/Abidjan,6.87735,-6.45022
 Damanhur,318207,EG,Africa/Cairo,31.03408,30.46823
 Damascus,1569394,SY,Asia/Damascus,33.5102,36.29128
@@ -629,6 +644,7 @@ Dasmariñas,441876,PH,Asia/Manila,14.32944,120.93667
 Datong,1850000,CN,Asia/Shanghai,40.09361,113.29139
 Davangere,435128,IN,Asia/Kolkata,14.46693,75.92694
 Davao,1776949,PH,Asia/Manila,7.07306,125.61278
+Daye,347406,CN,Asia/Shanghai,30.08333,114.95
 Dayrah,400000,AE,Asia/Dubai,25.27143,55.30207
 Dazhou,1589435,CN,Asia/Shanghai,31.2106,107.46308
 Debrecen,202402,HU,Europe/Budapest,47.53167,21.62444
@@ -648,7 +664,7 @@ Dera Ismail Khan,763195,PK,Asia/Karachi,31.83129,70.9017
 Derby,270468,GB,Europe/London,52.92277,-1.47663
 Des Moines,214133,US,America/Chicago,41.60054,-93.60911
 Dessie,270400,ET,Africa/Addis_Ababa,11.13333,39.63333
-Detroit,677116,US,America/Detroit,42.33143,-83.04575
+Detroit,645705,US,America/Detroit,42.33143,-83.04575
 Dewas,289550,IN,Asia/Kolkata,22.96585,76.05526
 Deyang,735070,CN,Asia/Shanghai,31.13019,104.38198
 Dezhou,679535,CN,Asia/Shanghai,37.44661,116.36706
@@ -659,11 +675,12 @@ Dhule,375559,IN,Asia/Kolkata,20.9013,74.77737
 Diadema,393237,BR,America/Sao_Paulo,-23.68611,-46.62278
 Diepsloot,350000,ZA,Africa/Johannesburg,-25.93312,28.01213
 Diez de Octubre,227293,CU,America/Havana,23.0881,-82.3597
-Dihok,340900,IQ,Asia/Baghdad,36.86709,42.98845
+Dihok,340900,IQ,Asia/Baghdad,36.86608,42.9879
 Dinajpur,206234,BD,Asia/Dhaka,25.62745,88.63779
 Dindigul,292512,IN,Asia/Kolkata,10.36896,77.98036
 Dingxi,420614,CN,Asia/Shanghai,35.57088,104.62303
 Dire Dawa,343000,ET,Africa/Addis_Ababa,9.59306,41.86611
+Divinópolis,231091,BR,America/Sao_Paulo,-20.14355,-44.89065
 Diyarbakır,1791373,TR,Europe/Istanbul,37.91363,40.21721
 Djelfa,265833,DZ,Africa/Algiers,34.67279,3.263
 Djibouti,626512,DJ,Africa/Djibouti,11.58901,43.14503
@@ -692,7 +709,7 @@ Durham,257636,US,America/New_York,35.99403,-78.89862
 Dushanbe,679400,TJ,Asia/Dushanbe,38.53575,68.77905
 Dzerzhinsk,233126,RU,Europe/Moscow,56.24422,43.45543
 Düsseldorf,620523,DE,Europe/Berlin,51.22172,6.77616
-Dĩ An,474681,VN,Asia/Ho_Chi_Minh,10.90682,106.7694
+Dĩ An,463023,VN,Asia/Ho_Chi_Minh,10.90682,106.7694
 E'zhou,668727,CN,Asia/Shanghai,30.39607,114.88655
 East Jerusalem,428304,PS,Asia/Hebron,31.78336,35.23388
 East London,478676,ZA,Africa/Johannesburg,-33.01529,27.91162
@@ -709,16 +726,16 @@ El Daein,264734,SD,Africa/Khartoum,11.46186,26.12583
 El Fasher,252609,SD,Africa/Khartoum,13.62793,25.34936
 El Jadida,212863,MA,Africa/Casablanca,33.25682,-8.50882
 El Obeid,393311,SD,Africa/Khartoum,13.18421,30.21669
-El Paso,681124,US,America/Denver,31.75872,-106.48693
+El Paso,678815,US,America/Denver,31.75872,-106.48693
 El Tigre,222450,VE,America/Caracas,8.88902,-64.2527
 Elazığ,443363,TR,Europe/Istanbul,38.67431,39.22321
-Elche,230112,ES,Europe/Madrid,38.26218,-0.70107
+Elche,234765,ES,Europe/Madrid,38.26218,-0.70107
 Eldoret,475716,KE,Africa/Nairobi,0.52036,35.26993
 Eloy Alfaro,315724,EC,America/Guayaquil,-2.16919,-79.83987
 Eluru,218020,IN,Asia/Kolkata,16.71311,81.10437
 Emalahleni,373403,ZA,Africa/Johannesburg,-25.87133,29.23323
-Embu das Artes,221733,BR,America/Sao_Paulo,-23.64889,-46.85222
-Ensenada,279765,MX,America/Tijuana,31.87149,-116.60071
+Embu das Artes,250691,BR,America/Sao_Paulo,-23.64889,-46.85222
+Ensenada,443807,MX,America/Tijuana,31.87149,-116.60071
 Enshi,279185,CN,Asia/Shanghai,30.3,109.48333
 Enugu,950000,NG,Africa/Lagos,6.44132,7.49883
 Epworth,206368,ZW,Africa/Harare,-17.89,31.1475
@@ -746,6 +763,7 @@ Fayetteville,201963,US,America/New_York,35.05266,-78.87836
 Feira de Santana,619609,BR,America/Bahia,-12.26667,-38.96667
 Fendou,226298,CN,Asia/Shanghai,46.64142,124.86283
 Fenghuang,370000,CN,Asia/Shanghai,27.93557,109.59961
+Fengshan,356463,TW,Asia/Taipei,22.62659,120.36126
 Fergana,299200,UZ,Asia/Tashkent,40.38421,71.78432
 Fes,1191905,MA,Africa/Casablanca,34.03313,-5.00028
 Fianarantsoa,203105,MG,Indian/Antananarivo,-21.45267,47.08569
@@ -755,7 +773,7 @@ Floridablanca,267591,CO,America/Bogota,7.06222,-73.08644
 Fontana,212704,US,America/Los_Angeles,34.09223,-117.43505
 Formosa,222226,AR,America/Argentina/Cordoba,-26.18489,-58.17313
 Fort Wayne,260326,US,America/Indiana/Indianapolis,41.1306,-85.12886
-Fort Worth,918915,US,America/Chicago,32.72541,-97.32085
+Fort Worth,1008106,US,America/Chicago,32.72541,-97.32085
 Fortaleza,2400000,BR,America/Fortaleza,-3.71722,-38.54306
 Foshan,9042509,CN,Asia/Shanghai,23.02677,113.13148
 Foz do Iguaçu,258248,BR,America/Sao_Paulo,-25.54778,-54.58806
@@ -764,7 +782,7 @@ Frankfurt am Main,650000,DE,Europe/Berlin,50.11552,8.68417
 Freetown,802639,SL,Africa/Freetown,8.48714,-13.2356
 Freiburg,215966,DE,Europe/Berlin,47.9959,7.85222
 Fremont,232206,US,America/Los_Angeles,37.54827,-121.98857
-Fresno,520052,US,America/Los_Angeles,36.74773,-119.77237
+Fresno,542107,US,America/Los_Angeles,36.74773,-119.77237
 Fuchū,262790,JP,Asia/Tokyo,35.67452,139.48216
 Fuencarral,238765,ES,Europe/Madrid,40.5,-3.68333
 Fuencarral-El Pardo,220085,ES,Europe/Madrid,40.4984,-3.7314
@@ -787,7 +805,6 @@ Gajuwaka,258944,IN,Asia/Kolkata,17.7,83.21667
 Galaţi,217851,RO,Europe/Bucharest,45.43687,28.05028
 Gandajika,208051,CD,Africa/Lubumbashi,-6.74504,23.95328
 Gandhinagar,292797,IN,Asia/Kolkata,23.21667,72.68333
-Gangānagar,231838,IN,Asia/Kolkata,29.92009,73.87496
 Ganja,335600,AZ,Asia/Baku,40.68278,46.36056
 Ganzhou,1977253,CN,Asia/Shanghai,25.84664,114.9326
 Gaomi,391986,CN,Asia/Shanghai,36.38333,119.75278
@@ -810,11 +827,13 @@ Gelsenkirchen,270028,DE,Europe/Berlin,51.50508,7.09654
 General Santos,697315,PH,Asia/Manila,6.11278,125.17167
 Genoa,580097,IT,Europe/Rome,44.40478,8.94439
 Gent,265086,BE,Europe/Brussels,51.05,3.71667
+Genève,201741,CH,Europe/Zurich,46.20222,6.14569
 Georgetown,235017,GY,America/Guyana,6.80448,-58.15527
 Ghulja,269158,CN,Asia/Urumqi,43.91515,81.32151
 Ghāziābād,1199191,IN,Asia/Kolkata,28.66535,77.43915
+Gia Lâm,309353,VN,Asia/Bangkok,21.05352,106.00712
 Gifu,402557,JP,Asia/Tokyo,35.42291,136.76039
-Gijón,277554,ES,Europe/Madrid,43.53573,-5.66152
+Gijón,271780,ES,Europe/Madrid,43.53573,-5.66152
 Gilbert,247542,US,America/Phoenix,33.35283,-111.78903
 Gilgit,216760,PK,Asia/Karachi,35.91869,74.31245
 Giza,4367343,EG,Africa/Cairo,30.00944,31.20861
@@ -834,21 +853,18 @@ Gorakhpur,674246,IN,Asia/Kolkata,26.76628,83.36889
 Gorgān,244937,IR,Asia/Tehran,36.8427,54.44391
 Gosāba,222764,IN,Asia/Kolkata,22.16547,88.8007
 Governador Valadares,250878,BR,America/Sao_Paulo,-18.85111,-41.94944
-Goyang-si,1073069,KR,Asia/Seoul,37.65639,126.835
-Grajaú,384373,BR,America/Sao_Paulo,-23.76979,-46.67112
-Granada,234325,ES,Europe/Madrid,37.18817,-3.60667
-Gravataí,238778,BR,America/Sao_Paulo,-29.94218,-50.99278
+Goyang-si,1074784,KR,Asia/Seoul,37.65639,126.835
+Grajaú,384873,BR,America/Sao_Paulo,-23.76979,-46.67112
+Granada,233532,ES,Europe/Madrid,37.18817,-3.60667
+Gravataí,265074,BR,America/Sao_Paulo,-29.94218,-50.99278
 Graz,303270,AT,Europe/Vienna,47.06667,15.45
 Greater Noida,293908,IN,Asia/Kolkata,28.49615,77.53601
 Greensboro,285342,US,America/New_York,36.07264,-79.79198
 Groningen,238147,NL,Europe/Amsterdam,53.21917,6.56667
 Grozny,297137,RU,Europe/Moscow,43.31195,45.68895
-Großzschocher,597493,DE,Europe/Berlin,51.30147,12.32322
 Guadalajara,1385629,MX,America/Mexico_City,20.67738,-103.34749
 Guadalupe,673616,MX,America/Monterrey,25.67678,-100.25646
-Guadalupe,215000,MX,America/Mexico_City,22.74753,-102.51874
 Guang'an,858159,CN,Asia/Shanghai,30.47413,106.63696
-Guangminglu,285000,CN,Asia/Urumqi,39.70842,76.17971
 Guangyuan,516424,CN,Asia/Shanghai,32.44201,105.823
 Guangzhou,16096724,CN,Asia/Shanghai,23.11667,113.25
 Guankou,1380000,CN,Asia/Shanghai,28.15861,113.62709
@@ -866,8 +882,9 @@ Gujangbagh,408894,CN,Asia/Urumqi,37.10927,79.93433
 Gujranwala,2511118,PK,Asia/Karachi,32.15567,74.18705
 Gujrat,574240,PK,Asia/Karachi,32.5742,74.07542
 Guli,536000,CN,Asia/Shanghai,28.88162,120.03308
-Gumi,427770,KR,Asia/Seoul,36.1136,128.336
+Gumi,404691,KR,Asia/Seoul,36.1136,128.336
 Gunan,208010,CN,Asia/Shanghai,29.0231,106.648
+Gundupālaiyam,300104,IN,Asia/Kolkata,11.94096,79.80294
 Gunpo,286485,KR,Asia/Seoul,37.3675,126.94694
 Gunsan,264656,KR,Asia/Seoul,35.97861,126.71139
 Guntur,670073,IN,Asia/Kolkata,16.29974,80.45729
@@ -878,11 +895,12 @@ Guwahati,962334,IN,Asia/Kolkata,26.1844,91.7458
 Guyuan,411854,CN,Asia/Shanghai,36.00667,106.28083
 Guédiawaye,329659,SN,Africa/Dakar,14.77446,-17.40212
 Gwalior,1054420,IN,Asia/Kolkata,26.22983,78.17337
-Gwangju,1490092,KR,Asia/Seoul,35.15472,126.91556
+Gwangju,1411357,KR,Asia/Seoul,35.15472,126.91556
 Gwangmyeong,357545,KR,Asia/Seoul,37.47722,126.86639
 Gyeongju,245365,KR,Asia/Seoul,35.84278,129.21167
+Gyeongsan-si,266951,KR,Asia/Seoul,35.82333,128.73778
 Gyānpur,200000,IN,Asia/Kolkata,25.33268,82.46637
-Gómez Palacio,257352,MX,America/Monterrey,25.56985,-103.49588
+Gómez Palacio,257352,MX,America/Monterrey,25.56871,-103.4996
 Göteborg,608462,SE,Europe/Stockholm,57.70716,11.96679
 Gāndhīdhām,247992,IN,Asia/Kolkata,23.08333,70.13333
 Ha'il,605930,SA,Asia/Riyadh,27.52188,41.69073
@@ -894,9 +912,9 @@ Hafizabad,318621,PK,Asia/Karachi,32.07095,73.68802
 Haifa,285316,IL,Asia/Jerusalem,32.81303,34.99928
 Haikou,2873358,CN,Asia/Shanghai,20.03421,110.34651
 Hailar,211066,CN,Asia/Shanghai,49.2,119.7
-Haiphong,841520,VN,Asia/Bangkok,20.86481,106.68345
+Haiphong,2625200,VN,Asia/Bangkok,20.86481,106.68345
 Hakodate,275730,JP,Asia/Tokyo,41.77583,140.73667
-Halifax,439819,CA,America/Halifax,44.64269,-63.57688
+Halifax,471559,CA,America/Halifax,44.64269,-63.57688
 Halle (Saale),237865,DE,Europe/Berlin,51.48158,11.97947
 Hamadān,528256,IR,Asia/Tehran,34.79922,48.51456
 Hamamatsu,791707,JP,Asia/Tokyo,34.7,137.73333
@@ -905,7 +923,7 @@ Hamburg-Mitte,301231,DE,Europe/Berlin,53.55,10.01667
 Hamburg-Nord,315514,DE,Europe/Berlin,53.58935,9.984
 Hamhŭng,559056,KP,Asia/Pyongyang,39.91833,127.53639
 Hami,246373,CN,Asia/Urumqi,42.83393,93.50601
-Hamilton,519949,CA,America/Toronto,43.25011,-79.84963
+Hamilton,569353,CA,America/Toronto,43.25011,-79.84963
 Hanam,254415,KR,Asia/Seoul,37.54,127.20556
 Handan,1358318,CN,Asia/Shanghai,36.60999,114.48764
 Hangu,208369,CN,Asia/Shanghai,39.24889,117.78917
@@ -941,11 +959,11 @@ Hirakata,406331,JP,Asia/Tokyo,34.81352,135.64914
 Hiratsuka,258422,JP,Asia/Tokyo,35.32785,139.33735
 Hiroshima,1200754,JP,Asia/Tokyo,34.4,132.45
 Hisar,307024,IN,Asia/Kolkata,29.15394,75.72294
-Ho Chi Minh City,8993082,VN,Asia/Ho_Chi_Minh,10.82302,106.62965
-Hobart,247086,AU,Australia/Hobart,-42.87936,147.32941
+Ho Chi Minh City,14002598,VN,Asia/Ho_Chi_Minh,10.82302,106.62965
+Hobart,252639,AU,Australia/Hobart,-42.87936,147.32941
 Hohhot,2350000,CN,Asia/Shanghai,40.81056,111.65222
 Holguín,319102,CU,America/Havana,20.88722,-76.26306
-Homs,775404,SY,Asia/Damascus,34.72682,36.72339
+Homs,775404,SY,Asia/Damascus,34.72405,36.72559
 Homyel',501102,BY,Europe/Minsk,52.4345,30.9754
 Honchō,644668,JP,Asia/Tokyo,35.70129,139.98648
 Hong Kong,7396076,HK,Asia/Hong_Kong,22.27832,114.17469
@@ -958,13 +976,12 @@ Hosūr,229528,IN,Asia/Kolkata,12.73647,77.83264
 Hougang New Town,227560,SG,Asia/Singapore,1.35667,103.89083
 Houston,2314157,US,America/Chicago,29.76328,-95.36327
 Howrah,1027672,IN,Asia/Kolkata,22.57688,88.31857
-Hrodna,361115,BY,Europe/Minsk,53.6884,23.8258
-Hsinchu,404109,TW,Asia/Taipei,24.80361,120.96861
+Hrodna,361115,BY,Europe/Minsk,53.6758,23.82887
+Hsinchu,453536,TW,Asia/Taipei,24.80361,120.96861
 Huai'an,2494013,CN,Asia/Shanghai,33.58861,119.01917
 Huaibei,1113321,CN,Asia/Shanghai,33.97444,116.79167
 Huaihua,552622,CN,Asia/Shanghai,27.56337,110.00404
 Huainan,1666826,CN,Asia/Shanghai,32.62639,116.99694
-Hualien City,350468,TW,Asia/Taipei,23.97694,121.60444
 Huambo,595304,AO,Africa/Luanda,-12.77611,15.73917
 Huancayo,456250,PE,America/Lima,-12.06866,-75.21027
 Huanggang,225956,CN,Asia/Shanghai,23.67704,116.99961
@@ -981,19 +998,21 @@ Huntsville,215006,US,America/Chicago,34.7304,-86.58594
 Huocheng,360000,CN,Asia/Urumqi,44.05305,80.87173
 Hurghada,207132,EG,Africa/Cairo,27.25738,33.81291
 Huzhou,1015937,CN,Asia/Shanghai,30.8703,120.0933
-Huế,351456,VN,Asia/Bangkok,16.4619,107.59546
+Huế,1380000,VN,Asia/Bangkok,16.4619,107.59546
 Hwaseong-si,640890,KR,Asia/Seoul,37.20682,126.8169
+Hyderabad,6993262,IN,Asia/Kolkata,17.38405,78.45636
 Hyderabad,1921275,PK,Asia/Karachi,25.39689,68.37718
-Hyderābād,6809970,IN,Asia/Kolkata,17.38405,78.45636
 Hāpur,242920,IN,Asia/Kolkata,28.72985,77.78068
 Hāthazāri,498179,BD,Asia/Dhaka,22.50515,91.81339
 Hŭngnam,346082,KP,Asia/Pyongyang,39.84198,127.63206
+Hạ Long,270054,VN,Asia/Bangkok,20.95045,107.07336
+Hải Dương,241373,VN,Asia/Bangkok,20.94099,106.33302
 Iaşi,378954,RO,Europe/Bucharest,47.16667,27.6
 Ibadan,3649000,NG,Africa/Lagos,7.37756,3.90591
 Ibagué,529635,CO,America/Bogota,4.43573,-75.20289
 Ibaraki,287730,JP,Asia/Tokyo,34.81641,135.56828
 Ibarra,221149,EC,America/Guayaquil,0.34881,-78.12462
-Ibb,234837,YE,Asia/Aden,13.96667,44.18333
+Ibb,771514,YE,Asia/Aden,13.96667,44.18333
 Ica,282407,PE,America/Lima,-14.07538,-75.73422
 Ichalkaranji,287353,IN,Asia/Kolkata,16.69117,74.46054
 Ichihara,283531,JP,Asia/Tokyo,35.51667,140.08333
@@ -1013,14 +1032,15 @@ Iligan City,312323,PH,Asia/Manila,8.25,124.4
 Iloilo,457626,PH,Asia/Manila,10.69694,122.56444
 Ilorin,1080000,NG,Africa/Lagos,8.49664,4.54214
 Imperatriz,218106,BR,America/Fortaleza,-5.52639,-47.49167
-Imphāl,223523,IN,Asia/Kolkata,24.80805,93.9442
+Imphal,277196,IN,Asia/Kolkata,24.80805,93.9442
 Imus,216099,PH,Asia/Manila,14.42972,120.93667
-Incheon,2954955,KR,Asia/Seoul,37.45646,126.70515
+Incheon,3016250,KR,Asia/Seoul,37.45646,126.70515
 Indaiatuba,256223,BR,America/Sao_Paulo,-23.08842,-47.2119
 Indianapolis,887642,US,America/Indiana/Indianapolis,39.76838,-86.15804
 Indore,1994397,IN,Asia/Kolkata,22.71792,75.8333
+Insein,247675,MM,Asia/Yangon,16.88874,96.10257
 Ipatinga,228746,BR,America/Sao_Paulo,-19.46833,-42.53667
-Ipoh,840000,MY,Asia/Kuala_Lumpur,4.5841,101.0829
+Ipoh,759952,MY,Asia/Kuala_Lumpur,4.5841,101.0829
 Iquitos,377609,PE,America/Lima,-3.74814,-73.2529
 Irapuato,380941,MX,America/Mexico_City,20.67675,-101.35628
 Irbid,569068,JO,Asia/Amman,32.55556,35.85
@@ -1063,11 +1083,11 @@ Jabaquara,214958,BR,America/Sao_Paulo,-23.65055,-46.64591
 Jaboatão,702621,BR,America/Recife,-8.18028,-35.00139
 Jaboatão dos Guararapes,644037,BR,America/Recife,-8.11278,-35.01472
 Jacareí,213110,BR,America/Sao_Paulo,-23.30528,-45.96583
-Jacksonville,954614,US,America/New_York,30.33218,-81.65565
+Jacksonville,1009833,US,America/New_York,30.33218,-81.65565
 Jacobabad,219315,PK,Asia/Karachi,28.28187,68.43761
-Jaipur,2711758,IN,Asia/Kolkata,26.91962,75.78781
+Jaipur,3046163,IN,Asia/Kolkata,26.91962,75.78781
 Jakarta,8540121,ID,Asia/Jakarta,-6.21462,106.84513
-Jalandhar,785178,IN,Asia/Kolkata,31.32556,75.57917
+Jalandhar,868929,IN,Asia/Kolkata,31.32556,75.57917
 Jalgaon,460228,IN,Asia/Kolkata,21.00292,75.56602
 Jalālābād,271900,AF,Asia/Kabul,34.42647,70.45153
 Jamaica,216866,US,America/New_York,40.69149,-73.80569
@@ -1077,15 +1097,15 @@ Jamnagar,600943,IN,Asia/Kolkata,22.47292,70.06673
 Jamshedpur,1339438,IN,Asia/Kolkata,22.80278,86.18545
 Jaraguá,211610,BR,America/Sao_Paulo,-23.44077,-46.73774
 Jardim Angela,311432,BR,America/Sao_Paulo,-23.71636,-46.76872
-Jardim Sao Luis,259277,BR,America/Sao_Paulo,-23.68073,-46.7394
+Jardim Sao Luis,259377,BR,America/Sao_Paulo,-23.68073,-46.7394
 Jayapura,404004,ID,Asia/Jayapura,-2.53371,140.71813
 Jebel Ali,210000,AE,Asia/Dubai,25.00255,55.10811
 Jeddah,4697000,SA,Asia/Riyadh,21.49012,39.18624
-Jeju City,486306,KR,Asia/Seoul,33.50972,126.52194
+Jeju City,488844,KR,Asia/Seoul,33.50972,126.52194
 Jember,298585,ID,Asia/Jakarta,-8.17211,113.69953
-Jeonju,652392,KR,Asia/Seoul,35.82194,127.14889
+Jeonju,638019,KR,Asia/Seoul,35.82194,127.14889
 Jepara,1257912,ID,Asia/Jakarta,-6.5924,110.671
-Jerez de la Frontera,207532,ES,Europe/Madrid,36.68645,-6.13606
+Jerez de la Frontera,212879,ES,Europe/Madrid,36.68645,-6.13606
 Jersey City,264290,US,America/New_York,40.72816,-74.07764
 Jerusalem,971800,IL,Asia/Jerusalem,31.76904,35.21633
 Jessore,243987,BD,Asia/Dhaka,23.16971,89.21371
@@ -1126,13 +1146,14 @@ Jiuquan,428346,CN,Asia/Shanghai,39.74318,98.51736
 Jixi,403759,CN,Asia/Shanghai,45.29322,130.96217
 Jiyuan,242143,CN,Asia/Shanghai,35.08912,112.58815
 Jizhou,362013,CN,Asia/Shanghai,37.55054,115.56871
-Jodhpur,921476,IN,Asia/Kolkata,26.26841,73.00594
+Jodhpur,1056191,IN,Asia/Kolkata,26.26841,73.00594
 Johannesburg,9418183,ZA,Africa/Johannesburg,-26.20227,28.04363
 Johor Bahru,858118,MY,Asia/Kuala_Lumpur,1.4655,103.7578
 Joinville,461304,BR,America/Sao_Paulo,-26.30444,-48.84556
 Jos,1040000,NG,Africa/Lagos,9.92849,8.89212
 José C. Paz,230208,AR,America/Argentina/Buenos_Aires,-34.51541,-58.76813
 João Pessoa,817511,BR,America/Fortaleza,-7.115,-34.86306
+Juazeiro,237821,BR,America/Bahia,-9.41167,-40.49861
 Juazeiro do Norte,225230,BR,America/Fortaleza,-7.21306,-39.31528
 Juba,450000,SS,Africa/Juba,4.85165,31.58247
 Juiz de Fora,573285,BR,America/Sao_Paulo,-21.76417,-43.35028
@@ -1152,7 +1173,6 @@ Kaesŏng,338155,KP,Asia/Pyongyang,37.97083,126.55444
 Kagoshima,595049,JP,Asia/Tokyo,31.56667,130.55
 Kahama,453654,TZ,Africa/Dar_es_Salaam,-3.83333,32.6
 Kahramanmaraş,384953,TR,Europe/Istanbul,37.5847,36.92641
-Kahrīz,766706,IR,Asia/Tehran,34.38347,47.05544
 Kaifeng,1451741,CN,Asia/Shanghai,34.7986,114.30742
 Kaili,275745,CN,Asia/Shanghai,26.58583,107.97972
 Kakamega,1867579,KE,Africa/Nairobi,0.28422,34.75229
@@ -1180,7 +1200,7 @@ Kankan,221428,GN,Africa/Conakry,10.38542,-9.30568
 Kano,4910000,NG,Africa/Lagos,12.00012,8.51672
 Kanpur,2823249,IN,Asia/Kolkata,26.46523,80.34975
 Kansas City,475378,US,America/Chicago,39.09973,-94.57857
-Kaohsiung,1519711,TW,Asia/Taipei,22.61626,120.31333
+Kaohsiung,2737660,TW,Asia/Taipei,22.61626,120.31333
 Kaolack,298904,SN,Africa/Dakar,14.15197,-16.07259
 Kapar,269627,MY,Asia/Kuala_Lumpur,3.13333,101.38333
 Karabağlar,458000,TR,Europe/Istanbul,38.382,27.132
@@ -1196,7 +1216,7 @@ Karnāl,302140,IN,Asia/Kolkata,29.69197,76.98448
 Karol Bāgh,505241,IN,Asia/Kolkata,28.65136,77.19072
 Karur,234191,IN,Asia/Kolkata,10.95771,78.08095
 Karāwalnagar,224281,IN,Asia/Kolkata,28.72712,77.27047
-Karīmnagar,228745,IN,Asia/Kolkata,18.43915,79.12856
+Karīmnagar,289821,IN,Asia/Kolkata,18.43915,79.12856
 Kasangati,207800,UG,Africa/Kampala,0.43803,32.60246
 Kashgar,506640,CN,Asia/Urumqi,39.46718,75.98675
 Kashiwa,433436,JP,Asia/Tokyo,35.86224,139.97732
@@ -1217,19 +1237,19 @@ Kawasaki,1538262,JP,Asia/Tokyo,35.52056,139.71722
 Kayseri,1434357,TR,Europe/Istanbul,38.73222,35.48528
 Kazan,1243500,RU,Europe/Moscow,55.78874,49.12214
 Kediri,235143,ID,Asia/Jakarta,-7.81667,112.01667
-Keelung,397515,TW,Asia/Taipei,25.13089,121.74094
+Keelung,362487,TW,Asia/Taipei,25.13089,121.74094
 Kelar,250000,IQ,Asia/Baghdad,34.62805,45.31852
 Kemerovo,558973,RU,Asia/Novokuznetsk,55.33333,86.08333
 Kendari,345107,ID,Asia/Makassar,-3.9778,122.51507
 Kenitra,470949,MA,Africa/Casablanca,34.26101,-6.5802
 Kerman,577514,IR,Asia/Tehran,30.28321,57.07879
 Kermanshah,621100,IR,Asia/Tehran,34.31417,47.065
-Khabarovsk,618150,RU,Asia/Vladivostok,48.48271,135.08379
+Khabarovsk,618150,RU,Asia/Vladivostok,48.48032,135.08822
 Khabarovsk Vtoroy,578303,RU,Asia/Vladivostok,48.43787,135.12994
 Khamis Mushait,387553,SA,Asia/Riyadh,18.3,42.73333
 Khandwa,200738,IN,Asia/Kolkata,21.82427,76.35086
 Kharagpur,219665,IN,Asia/Kolkata,22.33971,87.32501
-Kharkiv,1433886,UA,Europe/Kyiv,49.98081,36.25272
+Kharkiv,1433886,UA,Europe/Kyiv,49.98177,36.25475
 Khartoum,1974647,SD,Africa/Khartoum,15.55177,32.53241
 Khartoum North,1012211,SD,Africa/Khartoum,15.64925,32.53458
 Kherson,283649,UA,Europe/Kyiv,46.63695,32.61458
@@ -1265,7 +1285,6 @@ Kitakyushu,940978,JP,Asia/Tokyo,33.85181,130.85034
 Kitchener,256885,CA,America/Toronto,43.42537,-80.5112
 Kitwe,665961,ZM,Africa/Lusaka,-12.80243,28.21323
 Klang,879867,MY,Asia/Kuala_Lumpur,3.03667,101.44333
-Kleinzschocher,597493,DE,Europe/Berlin,51.31568,12.31979
 Klerksdorp,227039,ZA,Africa/Johannesburg,-26.85213,26.66672
 Kobe,1525152,JP,Asia/Tokyo,34.6913,135.183
 Kochi,633553,IN,Asia/Kolkata,9.93988,76.26022
@@ -1275,6 +1294,7 @@ Kolkata,4631392,IN,Asia/Kolkata,22.56263,88.36304
 Kollam,367107,IN,Asia/Kolkata,8.88113,76.58469
 Kolwezi,790248,CD,Africa/Lubumbashi,-10.71484,25.46674
 Komsomolsk-on-Amur,275908,RU,Asia/Vladivostok,50.55034,137.00995
+Kon Tum,205762,VN,Asia/Ho_Chi_Minh,14.35451,108.00759
 Konibodom,211100,TJ,Asia/Dushanbe,40.29414,70.43122
 Konya,1433861,TR,Europe/Istanbul,37.87135,32.48464
 Korba,419146,IN,Asia/Kolkata,22.3458,82.69633
@@ -1284,7 +1304,7 @@ Koshigaya,345353,JP,Asia/Tokyo,35.89035,139.78916
 Kostanay,210000,KZ,Asia/Qostanay,53.21435,63.62463
 Kosti,345068,SD,Africa/Khartoum,13.1629,32.66347
 Kostroma,277280,RU,Europe/Moscow,57.76647,40.92686
-Kota,763088,IN,Asia/Kolkata,25.18254,75.83907
+Kota,1001694,IN,Asia/Kolkata,25.18254,75.83907
 Kota Bharu,568900,MY,Asia/Kuala_Lumpur,6.12361,102.24333
 Kota Damansara,500000,MY,Asia/Kuala_Lumpur,3.15454,101.58022
 Kota Kinabalu,500421,MY,Asia/Kuching,5.9749,116.0724
@@ -1296,7 +1316,7 @@ Koutiala,218031,ML,Africa/Bamako,12.38723,-5.46507
 Kowloon,2232339,HK,Asia/Hong_Kong,22.31667,114.18333
 Kowloon City,418732,HK,Asia/Hong_Kong,22.33047,114.19222
 Kozhikode,550440,IN,Asia/Kolkata,11.24802,75.7804
-Košice,228249,SK,Europe/Bratislava,48.71395,21.25808
+Košice,225044,SK,Europe/Bratislava,48.71395,21.25808
 Kraków,755050,PL,Europe/Warsaw,50.06143,19.93658
 Krasnodar,899541,RU,Europe/Moscow,45.04484,38.97603
 Krasnogvargeisky,337091,RU,Europe/Moscow,59.97305,30.47607
@@ -1324,6 +1344,7 @@ Kurgan,309285,RU,Asia/Yekaterinburg,55.45,65.33333
 Kurnool,460184,IN,Asia/Kolkata,15.82887,78.03602
 Kursk,448733,RU,Europe/Moscow,51.73758,36.18712
 Kurume,303579,JP,Asia/Tokyo,33.31667,130.51667
+Kushinagar,274403,IN,Asia/Kolkata,26.74134,83.88689
 Kwai Chung,331600,HK,Asia/Hong_Kong,22.36828,114.13877
 Kyain Seikgyi Township,246065,MM,Asia/Yangon,15.82288,98.25257
 Kyengera,285400,UG,Africa/Kampala,0.29517,32.50159
@@ -1353,25 +1374,27 @@ Lankaran,240300,AZ,Asia/Baku,38.75428,48.85062
 Lanzhou,3000000,CN,Asia/Shanghai,36.05701,103.83987
 Laohekou,253112,CN,Asia/Shanghai,32.38583,111.66778
 Lapu-Lapu City,350467,PH,Asia/Manila,10.31028,123.94944
-Laredo,255473,US,America/Chicago,27.50641,-99.50754
+Laredo,256153,US,America/Chicago,27.50641,-99.50754
 Larkana,364033,PK,Asia/Karachi,27.55898,68.21204
 Las Palmas de Gran Canaria,378517,ES,Atlantic/Canary,28.09973,-15.41343
 Las Piñas,590000,PH,Asia/Manila,14.45056,120.98278
 Las Tunas,203684,CU,America/Havana,20.96135,-76.95192
-Las Vegas,623747,US,America/Los_Angeles,36.17497,-115.13722
+Las Vegas,641903,US,America/Los_Angeles,36.17497,-115.13722
 Latacunga,205624,EC,America/Guayaquil,-0.93424,-78.6152
-Latakia,709000,SY,Asia/Damascus,35.53168,35.79011
+Latakia,709000,SY,Asia/Damascus,35.53125,35.79088
 Latina,256644,ES,Europe/Madrid,40.38897,-3.74569
 Latur,382940,IN,Asia/Kolkata,18.39721,76.56784
-Laval,422993,CA,America/Toronto,45.56995,-73.692
-Leeds,516298,GB,Europe/London,53.79648,-1.54785
+Lauro de Freitas,203331,BR,America/Bahia,-12.89444,-38.32722
+Laval,438366,CA,America/Toronto,45.56995,-73.692
+Leeds,536280,GB,Europe/London,53.79648,-1.54785
 Leicester,368600,GB,Europe/London,52.6386,-1.13169
 Leipzig,504971,DE,Europe/Berlin,51.33962,12.37129
 Lekki,401272,NG,Africa/Lagos,6.41222,4.0947
 Leshan,662814,CN,Asia/Shanghai,29.56227,103.76386
 Lexington,320347,US,America/New_York,37.98869,-84.47772
 Lexington-Fayette,314488,US,America/New_York,38.0498,-84.45855
-León de los Aldama,1721199,MX,America/Mexico_City,21.12908,-101.67374
+León de los Aldama,1579803,MX,America/Mexico_City,21.12908,-101.67374
+Lhoka,353700,CN,Asia/Shanghai,29.24301,91.77239
 Lianshan,313247,CN,Asia/Shanghai,40.76432,120.85327
 Lianyungang,2001009,CN,Asia/Shanghai,34.59845,119.21556
 Liaocheng,1229768,CN,Asia/Shanghai,36.45064,116.00247
@@ -1384,7 +1407,7 @@ Likasi,635768,CD,Africa/Lubumbashi,-10.98303,26.7384
 Lille,234475,FR,Europe/Paris,50.63297,3.05858
 Lilongwe,1115815,MW,Africa/Blantyre,-13.96692,33.78725
 Lima,7737002,PE,America/Lima,-12.04318,-77.02824
-Limeira,289665,BR,America/Sao_Paulo,-22.56472,-47.40167
+Limeira,291869,BR,America/Sao_Paulo,-22.56472,-47.40167
 Lincang,323708,CN,Asia/Shanghai,23.87972,100.09455
 Lincoln,294757,US,America/Chicago,40.8,-96.66696
 Linfen,959198,CN,Asia/Shanghai,36.08889,111.51889
@@ -1394,23 +1417,23 @@ Linyi,2743843,CN,Asia/Shanghai,35.06306,118.34278
 Linz,204846,AT,Europe/Vienna,48.30639,14.28611
 Lipa City,212287,PH,Asia/Manila,13.9411,121.1631
 Lipetsk,509735,RU,Europe/Moscow,52.60311,39.57076
-Lisbon,517802,PT,Europe/Lisbon,38.71667,-9.13333
+Lisbon,517802,PT,Europe/Lisbon,38.72509,-9.1498
 Lishui,451418,CN,Asia/Shanghai,28.46042,119.91029
 Little Rock,202591,US,America/Chicago,34.74648,-92.28959
 Liupanshui,1320825,CN,Asia/Shanghai,26.59444,104.83333
 Liuzhou,1436599,CN,Asia/Shanghai,24.32405,109.40698
-Liverpool,864122,GB,Europe/London,53.41058,-2.97794
+Liverpool,496770,GB,Europe/London,53.41058,-2.97794
 Ljubljana,272220,SI,Europe/Ljubljana,46.05108,14.50513
 Loa Janan,212816,ID,Asia/Makassar,-0.58295,117.09503
 Lobito,357950,AO,Africa/Luanda,-12.3644,13.53601
 Logan City,326615,AU,Australia/Brisbane,-27.63917,153.10944
 Loja,274112,EC,America/Guayaquil,-3.99313,-79.20422
 Lomé,2188376,TG,Africa/Lome,6.12874,1.22154
-London,346765,CA,America/Toronto,42.98339,-81.23304
+London,422324,CA,America/Toronto,42.98339,-81.23304
 London,8961989,GB,Europe/London,51.50853,-0.12574
 Londrina,588125,BR,America/Sao_Paulo,-23.31028,-51.16278
 Long Beach,474140,US,America/Los_Angeles,33.76696,-118.18923
-Long Xuyên,272365,VN,Asia/Ho_Chi_Minh,10.38639,105.43518
+Long Xuyên,286140,VN,Asia/Ho_Chi_Minh,10.38639,105.43518
 Longling County,270000,CN,Asia/Shanghai,24.58663,98.68934
 Longshan,465249,CN,Asia/Shanghai,42.88545,125.1367
 Longueuil,229330,CA,America/Toronto,45.5152,-73.46818
@@ -1430,20 +1453,24 @@ Lubuklinggau,234166,ID,Asia/Jakarta,-3.2945,102.8614
 Lubumbashi,2221925,CD,Africa/Lubumbashi,-11.66089,27.47938
 Lucena,228758,PH,Asia/Manila,13.93139,121.61722
 Lucknow,2472011,IN,Asia/Kolkata,26.83928,80.92313
-Ludhiāna,1545368,IN,Asia/Kolkata,30.91204,75.85379
+Ludhiana,1618879,IN,Asia/Kolkata,30.91204,75.85379
 Luena,273675,AO,Africa/Luanda,-11.78333,19.91667
-Luhansk,397677,UA,Europe/Kyiv,48.56952,39.32857
+Luhansk,397677,UA,Europe/Kyiv,48.56814,39.30553
 Luohe,1294974,CN,Asia/Shanghai,33.56394,114.04272
+Luohu District,1143801,CN,Asia/Shanghai,22.54721,114.13149
 Luojiang,212186,CN,Asia/Shanghai,31.30497,104.50484
 Luoyang,1390581,CN,Asia/Shanghai,34.67345,112.43684
 Lusaka,2212301,ZM,Africa/Lusaka,-15.40669,28.28713
 Luton,225262,GB,Europe/London,51.87967,-0.41748
-Lutsk,215986,UA,Europe/Kyiv,50.75932,25.34244
+Lutsk,215986,UA,Europe/Kyiv,50.75784,25.35024
 Luxor,422407,EG,Africa/Cairo,25.69893,32.6421
 Luzhou,998900,CN,Asia/Shanghai,28.8903,105.42575
+Luziânia,209129,BR,America/Sao_Paulo,-16.2525,-47.95028
 Lviv,717273,UA,Europe/Kyiv,49.83826,24.02324
 Lyon,522969,FR,Europe/Paris,45.74846,4.84671
 Lübeck,212207,DE,Europe/Berlin,53.86893,10.68729
+Lüliang,3346500,CN,Asia/Shanghai,37.5192,111.14436
+Lạng Sơn,200108,VN,Asia/Bangkok,21.85264,106.76101
 Ma On Shan,215200,HK,Asia/Hong_Kong,22.40613,114.24079
 Ma'anshan,741531,CN,Asia/Shanghai,31.68579,118.51008
 Macapá,512902,BR,America/Belem,0.03889,-51.06639
@@ -1465,7 +1492,7 @@ Magugpo Poblacion,233254,PH,Asia/Manila,7.4475,125.8046
 Magé,244092,BR,America/Sao_Paulo,-22.65278,-43.04056
 Mahajanga,260556,MG,Indian/Antananarivo,-15.71667,46.31667
 Maheshtala,448317,IN,Asia/Kolkata,22.50862,88.25322
-Mahilyow,353110,BY,Europe/Minsk,53.9168,30.3449
+Mahilyow,353110,BY,Europe/Minsk,53.90876,30.34044
 Maiduguri,1110000,NG,Africa/Lagos,11.84692,13.15712
 Mainz,217123,DE,Europe/Berlin,49.98419,8.2791
 Makassar,1423877,ID,Asia/Makassar,-5.14861,119.43194
@@ -1512,9 +1539,9 @@ Maoming,1307802,CN,Asia/Shanghai,21.66625,110.91364
 Maputo,1254837,MZ,Africa/Maputo,-25.96553,32.58322
 Mar del Plata,593337,AR,America/Argentina/Buenos_Aires,-38.00042,-57.5562
 Mar'ino,243000,RU,Europe/Moscow,55.65,37.71667
-Maracaibo,2225000,VE,America/Caracas,10.64232,-71.61089
+Maracaibo,1752602,VE,America/Caracas,10.64232,-71.61089
 Maracanaú,234509,BR,America/Fortaleza,-3.87667,-38.62556
-Maracay,1754256,VE,America/Caracas,10.24972,-67.59475
+Maracay,464700,VE,America/Caracas,10.24972,-67.59475
 Maradi,361702,NE,Africa/Niamey,13.5,7.10174
 Marcory,214061,CI,Africa/Abidjan,5.31198,-3.99363
 Mardan,300424,PK,Asia/Karachi,34.19794,72.04965
@@ -1524,7 +1551,7 @@ Marienthal,287101,DE,Europe/Berlin,53.56667,10.08333
 Marikina City,450741,PH,Asia/Manila,14.6481,121.1133
 Maringá,311724,BR,America/Sao_Paulo,-23.42528,-51.93861
 Marka,230100,SO,Africa/Mogadishu,1.71594,44.77166
-Markham,328966,CA,America/Toronto,43.86682,-79.2663
+Markham,338503,CA,America/Toronto,43.86682,-79.2663
 Marne La Vallée,318325,FR,Europe/Paris,48.83584,2.64241
 Maroua,314122,CM,Africa/Douala,10.59095,14.31593
 Marrakesh,995871,MA,Africa/Casablanca,31.63416,-7.99994
@@ -1566,8 +1593,9 @@ Meishan,1107742,CN,Asia/Shanghai,30.04392,103.83696
 Meizhou,992351,CN,Asia/Shanghai,24.28859,116.11768
 Mek'ele,457900,ET,Africa/Addis_Ababa,13.49667,39.47528
 Meknes,568295,MA,Africa/Casablanca,33.89352,-5.54727
-Melbourne,4917750,AU,Australia/Melbourne,-37.814,144.96332
+Melbourne,5350705,AU,Australia/Melbourne,-37.814,144.96332
 Memphis,633104,US,America/Chicago,35.14953,-90.04898
+Mengzi,595100,CN,Asia/Shanghai,23.36779,103.38212
 Menongue,251178,AO,Africa/Luanda,-14.6585,17.69099
 Merkezefendi,280341,TR,Europe/Istanbul,37.80544,29.04236
 Merlo,268961,AR,America/Argentina/Buenos_Aires,-34.66536,-58.72744
@@ -1576,27 +1604,27 @@ Mesa,471825,US,America/Phoenix,33.42227,-111.82264
 Messina,219948,IT,Europe/Rome,38.19394,15.55256
 Mexicali,1032686,MX,America/Tijuana,32.62781,-115.45446
 Mexico City,12294193,MX,America/Mexico_City,19.42847,-99.12766
-Miami,441003,US,America/New_York,25.77427,-80.19366
+Miami,487014,US,America/New_York,25.77427,-80.19366
 Mianyang,1550000,CN,Asia/Shanghai,31.46784,104.68168
 "Mianzhu, Deyang, Sichuan",510000,CN,Asia/Shanghai,31.33786,104.22057
 Miguel Hidalgo,372889,MX,America/Mexico_City,19.43411,-99.20024
 Milan,1371498,IT,Europe/Rome,45.46427,9.18951
 Milton Keynes,256385,GB,Europe/London,52.04172,-0.75583
-Milwaukee,600155,US,America/Chicago,43.0389,-87.90647
+Milwaukee,563531,US,America/Chicago,43.0389,-87.90647
 Minamirinkan,224015,JP,Asia/Tokyo,35.49527,139.44279
 Minato,375339,JP,Asia/Tokyo,34.2152,135.1501
 Minato City,260486,JP,Asia/Tokyo,35.6581,139.7515
 Mingora,279914,PK,Asia/Karachi,34.7795,72.36265
 Minna,425000,NG,Africa/Lagos,9.61524,6.54776
 Minneapolis,410939,US,America/Chicago,44.97997,-93.26384
-Minsk,1742124,BY,Europe/Minsk,53.9,27.56667
+Minsk,1742124,BY,Europe/Minsk,53.90019,27.56653
 Minya,283605,EG,Africa/Cairo,28.09193,30.75813
 Miri,300543,MY,Asia/Kuching,4.39928,113.99163
 Mirpur Khas,267833,PK,Asia/Karachi,25.5276,69.01255
 Mirpur Model Thana,546503,BD,Asia/Dhaka,23.80931,90.36093
 Mirzāpur,220029,IN,Asia/Kolkata,25.1449,82.56534
 Misratah,355657,LY,Africa/Tripoli,32.37535,15.09254
-Mississauga,668549,CA,America/Toronto,43.5789,-79.6583
+Mississauga,717961,CA,America/Toronto,43.5789,-79.6583
 Mito,270685,JP,Asia/Tokyo,36.35,140.45
 Mixco,465773,GT,America/Guatemala,14.63077,-90.60711
 Miyazaki,401339,JP,Asia/Tokyo,31.91667,131.41667
@@ -1612,7 +1640,7 @@ Monclova,215271,MX,America/Monterrey,26.90687,-101.42056
 Monrovia,1542549,LR,Africa/Monrovia,6.30054,-10.7969
 Monterrey,1135512,MX,America/Monterrey,25.68435,-100.31721
 Montería,490935,CO,America/Bogota,8.75081,-75.87823
-Montes Claros,332379,BR,America/Sao_Paulo,-16.735,-43.86167
+Montes Claros,414240,BR,America/Sao_Paulo,-16.735,-43.86167
 Montevideo,1270737,UY,America/Montevideo,-34.90328,-56.18816
 Montpellier,248252,FR,Europe/Paris,43.61093,3.87635
 Montréal,1762949,CA,America/Toronto,45.50884,-73.58781
@@ -1632,7 +1660,7 @@ Mpanda,204338,TZ,Africa/Dar_es_Salaam,-6.34379,31.06951
 Mubi,225705,NG,Africa/Lagos,10.26858,13.26701
 Mudanjiang,665915,CN,Asia/Shanghai,44.54804,129.62594
 Mueang Nonthaburi,254375,TH,Asia/Bangkok,13.86075,100.51477
-Mukalla,566000,YE,Asia/Aden,14.54248,49.12424
+Mukalla,594951,YE,Asia/Aden,14.54248,49.12424
 Mukim Pulai,505661,MY,Asia/Kuala_Lumpur,1.53333,103.66667
 Multan,2169915,PK,Asia/Karachi,30.19679,71.47824
 Mulugu,297671,IN,Asia/Kolkata,18.191,79.943
@@ -1645,7 +1673,7 @@ Murmansk,295374,RU,Europe/Moscow,68.97398,33.09747
 Murwāra,221883,IN,Asia/Kolkata,23.83776,80.39405
 Musaffah,243341,AE,Asia/Dubai,24.35893,54.48267
 Muscat,797000,OM,Asia/Muscat,23.58413,58.40778
-Mutare,224804,ZW,Africa/Harare,-18.9707,32.67086
+Mutare,224802,ZW,Africa/Harare,-18.9707,32.67086
 Muzaffargarh,235541,PK,Asia/Karachi,30.07258,71.19379
 Muzaffarnagar,349706,IN,Asia/Kolkata,29.47091,77.70332
 Muzaffarpur,354462,IN,Asia/Kolkata,26.12259,85.39055
@@ -1656,12 +1684,13 @@ Mykolayiv,470011,UA,Europe/Kyiv,46.97625,31.99296
 Mymensingh,225126,BD,Asia/Dhaka,24.75636,90.40646
 Mysuru,920550,IN,Asia/Kolkata,12.29791,76.63925
 Mzuzu,249564,MW,Africa/Blantyre,-11.46556,34.02071
-Málaga,578460,ES,Europe/Madrid,36.72016,-4.42034
+Málaga,591637,ES,Europe/Madrid,36.72016,-4.42034
 Mérida,1201000,MX,America/Merida,20.967,-89.62318
 Mérida,300000,VE,America/Caracas,8.57899,-71.16922
-Móstoles,206478,ES,Europe/Madrid,40.32234,-3.86496
+Móstoles,207095,ES,Europe/Madrid,40.32234,-3.86496
 Mönchengladbach,261742,DE,Europe/Berlin,51.18539,6.44172
 Münster,270184,DE,Europe/Berlin,51.96236,7.62571
+Mỹ Tho,270700,VN,Asia/Ho_Chi_Minh,10.36004,106.35996
 N'Djamena,1359526,TD,Africa/Ndjamena,12.10672,15.0444
 Naberezhnyye Chelny,509870,RU,Europe/Moscow,55.72545,52.41122
 Nacala,239808,MZ,Africa/Maputo,-14.56257,40.68538
@@ -1684,7 +1713,8 @@ Najrān,505652,SA,Asia/Riyadh,17.49326,44.12766
 Nakano,344880,JP,Asia/Tokyo,35.70449,139.66946
 Nakuru,570674,KE,Africa/Nairobi,-0.30719,36.07225
 Nalchik,239300,RU,Europe/Moscow,43.49806,43.61889
-Namangan,1010000,UZ,Asia/Tashkent,40.9983,71.67257
+Nam Định,448225,VN,Asia/Bangkok,20.43389,106.17729
+Namangan,713220,UZ,Asia/Tashkent,40.9983,71.67257
 Namp'o,455000,KP,Asia/Pyongyang,38.7375,125.40778
 Nampula,770379,MZ,Africa/Maputo,-15.11646,39.2666
 Nanchang,2357839,CN,Asia/Shanghai,28.68396,115.85306
@@ -1705,12 +1735,13 @@ Narela,800000,IN,Asia/Kolkata,28.85267,77.09288
 Narsingdi,281080,BD,Asia/Dhaka,23.92298,90.71768
 Nashik,1486053,IN,Asia/Kolkata,19.99727,73.79096
 Nashville,689447,US,America/Chicago,36.16589,-86.78444
+Nasimshahr,200393,IR,Asia/Tehran,35.56528,51.1583
 Nasiriyah,558400,IQ,Asia/Baghdad,31.05799,46.25726
 Nassau,227940,BS,America/Nassau,25.05823,-77.34306
 Nasīm Shahr,200393,IR,Asia/Tehran,35.56504,51.16332
 Natal,896708,BR,America/Fortaleza,-5.795,-35.20944
 Natore,369138,BD,Asia/Dhaka,24.41112,88.98673
-Naucalpan de Juárez,792211,MX,America/Mexico_City,19.47851,-99.23963
+Naucalpan de Juárez,834434,MX,America/Mexico_City,19.47851,-99.23963
 Navi Mumbai,2600000,IN,Asia/Kolkata,19.03681,73.01582
 Navotas,249463,PH,Asia/Manila,14.66667,120.95
 Nawabshah,363138,PK,Asia/Karachi,26.23939,68.40369
@@ -1718,7 +1749,7 @@ Nay Pyi Taw,925000,MM,Asia/Yangon,19.745,96.12972
 Nazrēt,456900,ET,Africa/Addis_Ababa,8.55,39.26667
 Naz̧arābād,213388,IR,Asia/Tehran,35.95411,50.60607
 Ndola,627503,ZM,Africa/Lusaka,-12.95867,28.63659
-Neihu,271594,TW,Asia/Taipei,25.0815,121.58809
+Neihu,274538,TW,Asia/Taipei,25.0815,121.58809
 Neijiang,1251095,CN,Asia/Shanghai,29.58354,105.06216
 Neiva,357392,CO,America/Bogota,2.93001,-75.27973
 Nellore,547621,IN,Asia/Kolkata,14.44992,79.98697
@@ -1728,30 +1759,29 @@ Neuquén,231198,AR,America/Argentina/Salta,-38.95078,-68.0592
 New Cairo,313139,EG,Africa/Cairo,30.03,31.47
 New Delhi,317797,IN,Asia/Kolkata,28.62137,77.2148
 New Kingston,583958,JM,America/Jamaica,18.00747,-76.78319
-New Orleans,389617,US,America/Chicago,29.95465,-90.07507
+New Orleans,362701,US,America/Chicago,29.95465,-90.07507
 New South Memphis,641608,US,America/Chicago,35.08676,-90.05676
 New Taipei City,4004367,TW,Asia/Taipei,25.06199,121.45703
 New Territories,3984077,HK,Asia/Hong_Kong,22.42441,114.11095
 New York City,8804190,US,America/New_York,40.71427,-74.00597
 Newark,281944,US,America/New_York,40.73566,-74.17237
-Newcastle,348539,AU,Australia/Sydney,-32.92953,151.7801
+Newcastle,508437,AU,Australia/Sydney,-32.92953,151.7801
 Newcastle,404838,ZA,Africa/Johannesburg,-27.75796,29.9318
 Newcastle upon Tyne,300125,GB,Europe/London,54.97328,-1.61396
-Newport,306844,GB,Europe/London,51.58774,-2.99835
 Neyagawa,238549,JP,Asia/Tokyo,34.76615,135.62759
 Neyshābūr,220929,IR,Asia/Tehran,36.21329,58.79575
 Ngaoundéré,238196,CM,Africa/Douala,7.32765,13.58472
-Nghi Sơn,302210,VN,Asia/Ho_Chi_Minh,19.33333,105.83333
-Nha Trang,283441,VN,Asia/Ho_Chi_Minh,12.24507,109.19432
+Nghi Sơn,302210,VN,Asia/Bangkok,19.32746,105.82145
+Nha Trang,579000,VN,Asia/Ho_Chi_Minh,12.24507,109.19432
 Niamey,1323691,NE,Africa/Niamey,13.51366,2.1098
 Nianbo,260184,CN,Asia/Shanghai,36.48,102.41639
 Nice,342669,FR,Europe/Paris,43.70313,7.26608
 Nicolás Romero,281799,MX,America/Mexico_City,19.64177,-99.3068
-Nicosia,200452,CY,Asia/Nicosia,35.17531,33.3642
+Nicosia,200452,CY,Asia/Nicosia,35.17284,33.35397
 Niigata,797591,JP,Asia/Tokyo,37.92259,139.04125
 Ningbo,3731203,CN,Asia/Shanghai,29.87819,121.54945
 Ningde,429260,CN,Asia/Shanghai,26.66167,119.52278
-Ninh Hòa,240750,VN,Asia/Ho_Chi_Minh,12.49187,109.12495
+Ninh Hòa,230566,VN,Asia/Ho_Chi_Minh,12.49187,109.12495
 Nishi-Tokyo-shi,207388,JP,Asia/Tokyo,35.72526,139.5383
 Nishinomiya,485587,JP,Asia/Tokyo,34.71562,135.33199
 Niterói,456456,BR,America/Sao_Paulo,-22.88333,-43.10361
@@ -1759,13 +1789,13 @@ Nizhnekamsk,234297,RU,Europe/Moscow,55.63657,51.82447
 Nizhnevartovsk,244937,RU,Asia/Yekaterinburg,60.9344,76.5531
 Nizhniy Novgorod,1259013,RU,Europe/Moscow,56.32867,44.00205
 Nizhny Tagil,381116,RU,Asia/Yekaterinburg,57.91944,59.965
-Nizāmābād,305438,IN,Asia/Kolkata,18.67154,78.0988
+Nizāmābād,311152,IN,Asia/Kolkata,18.67154,78.0988
 Niš,250000,RS,Europe/Belgrade,43.32472,21.90333
 Nogales,212533,MX,America/Hermosillo,31.30862,-110.94217
 Noida,293908,IN,Asia/Kolkata,28.58,77.33
-Norfolk,246393,US,America/New_York,36.84681,-76.28522
+Norfolk,238005,US,America/New_York,36.84681,-76.28522
 North Las Vegas,234807,US,America/Los_Angeles,36.19886,-115.1175
-North Shore,207865,NZ,Pacific/Auckland,-36.8,174.75
+North Shore,258697,NZ,Pacific/Auckland,-36.8,174.75
 Northampton,245899,GB,Europe/London,52.25,-0.88333
 Nottingham,323632,GB,Europe/London,52.9536,-1.15047
 Nouakchott,1184530,MR,Africa/Nouakchott,18.08581,-15.9785
@@ -1777,8 +1807,9 @@ Novorossiysk,241856,RU,Europe/Moscow,44.73188,37.76176
 Novosibirsk,1612833,RU,Asia/Novosibirsk,55.03442,82.94339
 Nowrangapur,1220946,IN,Asia/Kolkata,19.23114,82.54826
 Nuevo Laredo,373725,MX,America/Matamoros,27.47629,-99.51639
-Nukus,332500,UZ,Asia/Samarkand,42.45306,59.61028
+Nukus,332500,UZ,Asia/Samarkand,42.45861,59.60576
 Nyala,565734,SD,Africa/Khartoum,12.04888,24.88069
+Nyingchi,238900,CN,Asia/Shanghai,29.65812,94.35892
 Nzérékoré,226426,GN,Africa/Conakry,7.75624,-8.8179
 Nürnberg,515543,DE,Europe/Berlin,49.45421,11.07752
 Nāgarpur,238422,BD,Asia/Dhaka,24.05783,89.87696
@@ -1786,6 +1817,7 @@ Nāgercoil,224849,IN,Asia/Kolkata,8.17899,77.43227
 Nāngloi Jāt,205596,IN,Asia/Kolkata,28.67957,77.06799
 Nārāyanganj,223622,BD,Asia/Dhaka,23.61352,90.50298
 Oakland,419267,US,America/Los_Angeles,37.80437,-122.2708
+Oakville,213759,CA,America/Toronto,43.45011,-79.68292
 Oaxaca,255029,MX,America/Mexico_City,17.06025,-96.72544
 Obalende,342000,NG,Africa/Lagos,6.44694,3.41528
 Oberhausen,219176,DE,Europe/Berlin,51.47805,6.8625
@@ -1807,13 +1839,12 @@ Ondo,375000,NG,Africa/Lagos,7.09316,4.83528
 Ongole,208344,IN,Asia/Kolkata,15.50357,80.04454
 Onitsha,1553000,NG,Africa/Lagos,6.14978,6.78569
 Ooty,233426,IN,Asia/Kolkata,11.4134,76.69521
-Oradea,206614,RO,Europe/Bucharest,47.0458,21.91833
-Oral,330000,KZ,Asia/Oral,51.23333,51.36667
+Oral,330000,KZ,Asia/Oral,51.24601,51.42558
 Oran,803329,DZ,Africa/Algiers,35.69906,-0.63588
 Ordos,1940653,CN,Asia/Shanghai,39.6086,109.78157
 Ordu,229214,TR,Europe/Istanbul,40.97782,37.89047
 Orenburg,564773,RU,Asia/Yekaterinburg,51.7727,55.0988
-Orlando,307573,US,America/New_York,28.53834,-81.37924
+Orlando,334854,US,America/New_York,28.53834,-81.37924
 Orsk,246836,RU,Asia/Yekaterinburg,51.23206,58.48802
 Oruro,208684,BO,America/La_Paz,-17.97153,-67.0932
 Orël,303696,RU,Europe/Moscow,52.95932,36.07805
@@ -1826,7 +1857,7 @@ Oslo,1082575,NO,Europe/Oslo,59.91273,10.74609
 Osmaniye,202837,TR,Europe/Istanbul,37.07417,36.24778
 Osogbo,645000,NG,Africa/Lagos,7.77104,4.55698
 Ostrava,279791,CZ,Europe/Prague,49.83465,18.28204
-Ottawa,812129,CA,America/Toronto,45.41117,-75.69812
+Ottawa,1017449,CA,America/Toronto,45.41117,-75.69812
 Ouagadougou,2415266,BF,Africa/Ouagadougou,12.36566,-1.53388
 Oujda,539711,MA,Africa/Casablanca,34.68139,-1.90858
 Oulu,209648,FI,Europe/Helsinki,65.01236,25.46816
@@ -1844,6 +1875,7 @@ Palangkaraya,293500,ID,Asia/Pontianak,-2.20833,113.91667
 Palembang,1668848,ID,Asia/Jakarta,-2.91673,104.7458
 Palermo,648260,IT,Europe/Rome,38.1166,13.3636
 Pallabi,597574,BD,Asia/Dhaka,23.825,90.37
+Pallāvaram,233984,IN,Asia/Kolkata,12.96796,80.15025
 Palma,409661,ES,Europe/Madrid,39.56939,2.65024
 Palmas,306296,BR,America/Araguaina,-10.16745,-48.32766
 Palmira,312519,CO,America/Bogota,3.53944,-76.30361
@@ -1873,10 +1905,10 @@ Pasragad Branch,787878,IR,Asia/Tehran,34.77772,48.47168
 Pasto,392930,CO,America/Bogota,1.21456,-77.27846
 Pasuruan,212466,ID,Asia/Jakarta,-7.6453,112.9075
 Pathein,237089,MM,Asia/Yangon,16.77919,94.73212
-Patiāla,329224,IN,Asia/Kolkata,30.33625,76.3922
+Patiāla,446246,IN,Asia/Kolkata,30.33625,76.3922
 Patna,1684297,IN,Asia/Kolkata,25.59408,85.13563
 Paulista,342167,BR,America/Recife,-7.94083,-34.87306
-Pavlodar,329002,KZ,Asia/Almaty,52.28333,76.96667
+Pavlodar,329002,KZ,Asia/Almaty,52.27601,76.96881
 Paya Terubong,226712,MY,Asia/Kuala_Lumpur,5.37278,100.27972
 Pekalongan,317524,ID,Asia/Jakarta,-6.8886,109.6753
 Pekanbaru,1085000,ID,Asia/Jakarta,0.51667,101.44167
@@ -1889,20 +1921,23 @@ Penza,523553,RU,Europe/Moscow,53.20066,45.00464
 Percut,311063,ID,Asia/Jakarta,3.6253,98.864
 Pereira,467269,CO,America/Bogota,4.81428,-75.69488
 Perm,982419,RU,Asia/Yekaterinburg,58.01046,56.25017
-Perth,2192229,AU,Australia/Perth,-31.95224,115.8614
+Perth,2309338,AU,Australia/Perth,-31.95224,115.8614
 Peshawar,4758762,PK,Asia/Karachi,34.008,71.57849
-Petaling Jaya,902086,MY,Asia/Kuala_Lumpur,3.10726,101.60671
+Petaling Jaya,807879,MY,Asia/Kuala_Lumpur,3.10726,101.60671
 Petare,364684,VE,America/Caracas,10.47679,-66.80786
 Petaẖ Tiqva,253529,IL,Asia/Jerusalem,32.08707,34.88747
 Petrolina,386791,BR,America/Recife,-9.39861,-40.50083
-Petropavl,200920,KZ,Asia/Almaty,54.86667,69.15
+Petropavl,200920,KZ,Asia/Almaty,54.87343,69.15065
 Petrozavodsk,279190,RU,Europe/Moscow,61.78491,34.34691
 Petrópolis,272691,BR,America/Sao_Paulo,-22.505,-43.17861
+Phan Rang-Tháp Chàm,207998,VN,Asia/Ho_Chi_Minh,11.56432,108.98858
+Phan Thiết,228536,VN,Asia/Ho_Chi_Minh,10.92889,108.10208
 Philadelphia,1573916,US,America/New_York,39.95238,-75.16362
 Phnom Penh,1573544,KH,Asia/Phnom_Penh,11.56245,104.91601
 Phoenix,1650070,US,America/Phoenix,33.44838,-112.07404
 Phu Quoc,294419,VN,Asia/Ho_Chi_Minh,10.22409,103.97156
-Pietermaritzburg,750845,ZA,Africa/Johannesburg,-29.61679,30.39278
+Phú Mỹ,287055,VN,Asia/Ho_Chi_Minh,10.63333,107.06667
+Pietermaritzburg,839327,ZA,Africa/Johannesburg,-29.61679,30.39278
 Pikine,874062,SN,Africa/Dakar,14.76457,-17.39071
 Pimpri,1284606,IN,Asia/Kolkata,18.62292,73.80696
 Pimpri-Chinchwad,1727692,IN,Asia/Kolkata,18.61867,73.80375
@@ -1915,13 +1950,12 @@ Pittsburgh,304391,US,America/New_York,40.44062,-79.99589
 Piura,484475,PE,America/Lima,-5.18192,-80.65715
 Pizhou,343421,CN,Asia/Shanghai,34.31139,117.95028
 Plano,283558,US,America/Chicago,33.01984,-96.69889
-Ploieşti,228851,RO,Europe/Bucharest,44.95,26.01667
 Plovdiv,346893,BG,Europe/Sofia,42.15,24.75
 Plymouth,260203,GB,Europe/London,50.37153,-4.14305
-Podgorica,236852,ME,Europe/Podgorica,42.44111,19.26361
-Pohang,500000,KR,Asia/Seoul,36.02917,129.36481
+Podgorica,236852,ME,Europe/Podgorica,42.44124,19.26309
+Pohang,492041,KR,Asia/Seoul,36.02917,129.36481
 Pointe-Noire,1032000,CG,Africa/Brazzaville,-4.77609,11.86352
-Pokhara,200000,NP,Asia/Kathmandu,28.26689,83.96851
+Pokhara,599504,NP,Asia/Kathmandu,28.26689,83.96851
 Polokwane,272461,ZA,Africa/Johannesburg,-23.90449,29.46885
 Poltava,283402,UA,Europe/Kyiv,49.58925,34.55367
 Ponta Grossa,292177,BR,America/Sao_Paulo,-25.095,-50.16194
@@ -1947,7 +1981,7 @@ Poznań,570352,PL,Europe/Warsaw,52.40692,16.92993
 Prague,1165581,CZ,Europe/Prague,50.08804,14.42076
 Praia Grande,349935,BR,America/Sao_Paulo,-24.00583,-46.40278
 Prayagraj,1073438,IN,Asia/Kolkata,25.44478,81.84322
-Presidente Prudente,209502,BR,America/Sao_Paulo,-22.12556,-51.38889
+Presidente Prudente,225668,BR,America/Sao_Paulo,-22.12556,-51.38889
 Preston,313332,GB,Europe/London,53.76282,-2.70452
 Pretoria,2112693,ZA,Africa/Johannesburg,-25.74486,28.18783
 Pristina,550000,XK,Europe/Belgrade,42.67272,21.16688
@@ -1967,6 +2001,7 @@ Puerto Vallarta,203342,MX,America/Mexico_City,20.617,-105.23018
 Pune,3124458,IN,Asia/Kolkata,18.51957,73.85535
 Puning,874954,CN,Asia/Shanghai,23.31072,116.16869
 Punāsa,350000,IN,Asia/Kolkata,22.23507,76.39335
+Puri,200564,IN,Asia/Kolkata,19.79825,85.82494
 Purnia,282248,IN,Asia/Kolkata,25.77895,87.47422
 Purwokerto,230235,ID,Asia/Jakarta,-7.42139,109.23444
 Putian,1539389,CN,Asia/Shanghai,25.43944,119.01028
@@ -1975,7 +2010,7 @@ Puyang,655674,CN,Asia/Shanghai,35.75641,115.04363
 Pyeongtaek,364694,KR,Asia/Seoul,36.99472,127.08889
 Pyongyang,3222000,KP,Asia/Pyongyang,39.03385,125.75432
 Pétionville,283052,HT,America/Port-au-Prince,18.5125,-72.28528
-Pāli,210103,IN,Asia/Kolkata,25.77276,73.32335
+Pāli,230075,IN,Asia/Kolkata,25.77276,73.32335
 Pānihāti,378705,IN,Asia/Kolkata,22.69089,88.37404
 Pātan,299283,NP,Asia/Kathmandu,27.67658,85.31417
 Qarchak,251834,IR,Asia/Tehran,35.42873,51.57757
@@ -1983,7 +2018,7 @@ Qarshi,278300,UZ,Asia/Samarkand,38.86056,65.78905
 Qazvin,333635,IR,Asia/Tehran,36.26877,50.0041
 Qina,252883,EG,Africa/Cairo,26.16418,32.72671
 Qingdao,7172451,CN,Asia/Shanghai,36.06488,120.38042
-Qingyang,377528,CN,Asia/Shanghai,35.70976,107.64455
+Qingyang,2125400,CN,Asia/Shanghai,35.70976,107.64455
 Qingyuan,1738424,CN,Asia/Shanghai,23.7,113.03333
 Qingzhou,236406,CN,Asia/Shanghai,36.69667,118.47972
 Qinhuangdao,759718,CN,Asia/Shanghai,39.94104,119.58936
@@ -1994,18 +2029,19 @@ Qitaihe,345033,CN,Asia/Shanghai,45.768,130.9953
 Qom,900000,IR,Asia/Tehran,34.6401,50.8764
 Qo‘qon,259700,UZ,Asia/Tashkent,40.52861,70.9425
 Quanzhou,1469157,CN,Asia/Shanghai,24.91389,118.58583
-Queens,2272771,US,America/New_York,40.68149,-73.83652
+Queens,2316841,US,America/New_York,40.68149,-73.83652
 Quelimane,349842,MZ,Africa/Maputo,-17.87861,36.88833
 Quetta,1565546,PK,Asia/Karachi,30.18414,67.00141
 Quevedo,213842,EC,America/Guayaquil,-1.02881,-79.46264
 Quezon City,2960048,PH,Asia/Manila,14.6488,121.0509
-Qui Nhon,210338,VN,Asia/Ho_Chi_Minh,13.77648,109.22367
+Qui Nhon,519208,VN,Asia/Ho_Chi_Minh,13.77648,109.22367
 Quilmes,262379,AR,America/Argentina/Buenos_Aires,-34.72065,-58.25454
 Quito,2781641,EC,America/Guayaquil,-0.22985,-78.52495
 Qujing,1408500,CN,Asia/Shanghai,25.48333,103.78333
 Quthbullapur,225816,IN,Asia/Kolkata,17.50107,78.45818
 Quzhou,902767,CN,Asia/Shanghai,28.95944,118.86861
 Québec,531902,CA,America/Toronto,46.81228,-71.21454
+Quảng Ngãi,278496,VN,Asia/Ho_Chi_Minh,15.12047,108.79232
 Quận Ba,220375,VN,Asia/Ho_Chi_Minh,10.77494,106.68628
 Quận Mười,399000,VN,Asia/Ho_Chi_Minh,10.76823,106.66632
 Quận Mười Một,332536,VN,Asia/Ho_Chi_Minh,10.76383,106.64355
@@ -2020,7 +2056,7 @@ Rajpur Sonarpur,424368,IN,Asia/Kolkata,22.4382,88.43205
 Rajshahi,763580,BD,Asia/Dhaka,24.374,88.60114
 Raleigh,482295,US,America/New_York,35.7721,-78.63861
 Ramadi,223500,IQ,Asia/Baghdad,33.42056,43.30778
-Ramagundam,235000,IN,Asia/Kolkata,18.755,79.474
+Ramagundam,242979,IN,Asia/Kolkata,18.755,79.474
 Rancagua,212695,CL,America/Santiago,-34.1691,-70.74053
 Ranchi,1120374,IN,Asia/Kolkata,23.34316,85.3094
 Randburg,337053,ZA,Africa/Johannesburg,-26.0941,28.00123
@@ -2033,24 +2069,28 @@ Raurkela Industrial Township,216410,IN,Asia/Kolkata,22.19994,84.86176
 Rawalpindi,3357612,PK,Asia/Karachi,33.59733,73.0479
 Reading,318014,GB,Europe/London,51.45625,-0.97113
 Recife,1653461,BR,America/Recife,-8.05389,-34.88111
+Regina,226404,CA,America/Regina,50.45008,-104.6178
 Rengasdengklok,201463,ID,Asia/Jakarta,-6.15917,107.29806
 Rennes,220488,FR,Europe/Paris,48.11198,-1.67429
-Reno,241445,US,America/Los_Angeles,39.52963,-119.8138
+Reno,264165,US,America/Los_Angeles,39.52963,-119.8138
 Resistencia,290793,AR,America/Argentina/Cordoba,-27.46363,-58.98665
 Rewa,235654,IN,Asia/Kolkata,24.53256,81.29234
 Reynosa,589466,MX,America/Matamoros,26.08005,-98.28456
-Ribeirão das Neves,406802,BR,America/Sao_Paulo,-19.76694,-44.08667
+Ribeirão das Neves,329794,BR,America/Sao_Paulo,-19.76694,-44.08667
 Ribeirão Preto,711825,BR,America/Sao_Paulo,-21.1775,-47.81028
 Richards Bay,252968,ZA,Africa/Johannesburg,-28.78301,32.03768
+Richmond,209937,CA,America/Vancouver,49.17003,-123.13683
 Richmond,226610,US,America/New_York,37.55376,-77.46026
+Richmond Hill,202022,CA,America/Toronto,43.87111,-79.43725
 Riga,742572,LV,Europe/Riga,56.946,24.10589
 Rio Branco,419452,BR,America/Rio_Branco,-9.97472,-67.81
+Rio Claro,201418,BR,America/Sao_Paulo,-22.41139,-47.56139
 Rio de Janeiro,6747815,BR,America/Sao_Paulo,-22.90642,-43.18223
-Rio Verde,229651,BR,America/Sao_Paulo,-17.79806,-50.92806
+Rio Verde,225696,BR,America/Sao_Paulo,-17.79806,-50.92806
 Riobamba,264048,EC,America/Guayaquil,-1.66506,-78.65887
 Rishon LeTsiyyon,258535,IL,Asia/Jerusalem,31.97102,34.78939
-Riverside,322424,US,America/Los_Angeles,33.95335,-117.39616
-Rivne,245289,UA,Europe/Kyiv,50.62308,26.22743
+Riverside,317261,US,America/Los_Angeles,33.95335,-117.39616
+Rivne,245289,UA,Europe/Kyiv,50.62036,26.23695
 Riyadh,4205961,SA,Asia/Riyadh,24.68773,46.72185
 Rizhao,661943,CN,Asia/Shanghai,35.41414,119.52908
 Rochester,209802,US,America/New_York,43.15478,-77.61556
@@ -2063,7 +2103,7 @@ Rosario,948312,AR,America/Argentina/Cordoba,-32.94682,-60.63932
 Rostov-na-Donu,1130305,RU,Europe/Moscow,47.23135,39.72328
 Rotterdam,598199,NL,Europe/Amsterdam,51.9225,4.47917
 Rouen,234475,FR,Europe/Paris,49.44313,1.09932
-Rourkela,536450,IN,Asia/Kolkata,22.22496,84.86414
+Rourkela,273317,IN,Asia/Kolkata,22.22496,84.86414
 Rufisque,295459,SN,Africa/Dakar,14.71542,-17.27334
 Rufisque est,221066,SN,Africa/Dakar,14.7162,-17.27283
 Rugao,257400,CN,Asia/Shanghai,32.37035,120.57649
@@ -2077,12 +2117,13 @@ Rāichūr,234073,IN,Asia/Kolkata,16.20546,77.35567
 Rājkot,1390640,IN,Asia/Kolkata,22.29161,70.79322
 Rāmgundam,452261,IN,Asia/Kolkata,18.80084,79.45206
 Rāmpur,296418,IN,Asia/Kolkata,28.81014,79.02699
+Rāniganj,217910,IN,Asia/Kolkata,17.42841,78.49361
 Rānipet,264330,IN,Asia/Kolkata,12.92471,79.33331
-Rạch Giá,228356,VN,Asia/Ho_Chi_Minh,10.01245,105.08091
-Sa Dec,203588,VN,Asia/Ho_Chi_Minh,10.29085,105.75635
-Sabadell,206493,ES,Europe/Madrid,41.54329,2.10942
+Rạch Giá,459860,VN,Asia/Ho_Chi_Minh,10.01245,105.08091
+Sa Dec,214610,VN,Asia/Ho_Chi_Minh,10.29085,105.75635
+Sabadell,211734,ES,Europe/Madrid,41.54329,2.10942
 Sabzevar,226183,IR,Asia/Tehran,36.2126,57.68191
-Sacoma,261436,BR,America/Sao_Paulo,-23.63083,-46.59817
+Sacomã,261436,BR,America/Sao_Paulo,-23.63083,-46.59817
 Sacramento,524943,US,America/Los_Angeles,38.58157,-121.4944
 Safi,336883,MA,Africa/Casablanca,32.29939,-9.23718
 Saga,233301,JP,Asia/Tokyo,33.23333,130.3
@@ -2094,30 +2135,32 @@ Saint Petersburg,5351935,RU,Europe/Moscow,59.93863,30.31413
 Saint-Louis,254171,SN,Africa/Dakar,16.01793,-16.48962
 Saitama,1324854,JP,Asia/Tokyo,35.90807,139.65657
 Sakai,826161,JP,Asia/Tokyo,34.58216,135.46653
-Salamanca,273417,MX,America/Mexico_City,20.57196,-101.19154
 Salatiga,201369,ID,Asia/Jakarta,-7.33194,110.49278
 Salem,917414,IN,Asia/Kolkata,11.65376,78.15538
 Salt Lake City,215548,US,America/Denver,40.76078,-111.89105
 Salta,520683,AR,America/Argentina/Salta,-24.80645,-65.41999
 Saltillo,709671,MX,America/Monterrey,25.42595,-100.97963
+Saltivka,400000,UA,Europe/Kyiv,50.02207,36.34901
 Salvador,2711840,BR,America/Bahia,-12.97563,-38.49096
 Salé,972299,MA,Africa/Casablanca,34.0531,-6.79846
 Salé Al Jadida,200000,MA,Africa/Casablanca,33.99722,-6.74047
+Samambaia,218840,BR,America/Sao_Paulo,-15.88231,-48.10428
 Samara,1163399,RU,Europe/Samara,53.20007,50.15
 Samarinda,831460,ID,Asia/Makassar,-0.49167,117.14583
-Samarkand,513572,UZ,Asia/Samarkand,39.65417,66.95972
+Samarkand,595200,UZ,Asia/Samarkand,39.65456,66.96445
 Samsun,394050,TR,Europe/Istanbul,41.27976,36.3361
 Samut Prakan,388920,TH,Asia/Bangkok,13.5976,100.5972
-San Antonio,1434625,US,America/Chicago,29.42412,-98.49363
+San Antonio,1526656,US,America/Chicago,29.42412,-98.49363
 San Bernardino,216108,US,America/Los_Angeles,34.10834,-117.28977
 San Bernardo,249858,CL,America/Santiago,-33.59217,-70.6996
 San Cristóbal,289852,VE,America/Caracas,7.76593,-72.23576
-San Diego,1394928,US,America/Los_Angeles,32.71571,-117.16472
+San Cristóbal de las Casas,215874,MX,America/Merida,16.73006,-92.63825
+San Diego,1404452,US,America/Los_Angeles,32.71571,-117.16472
 San Felipe,206270,VE,America/Caracas,10.3401,-68.74297
 San Fernando,251248,PH,Asia/Manila,15.03425,120.68445
 San Fernando de Apure,229197,VE,America/Caracas,7.88963,-67.47181
-San Francisco,864816,US,America/Los_Angeles,37.77493,-122.41942
-San Jose,1026908,US,America/Los_Angeles,37.33939,-121.89496
+San Francisco,827526,US,America/Los_Angeles,37.77493,-122.41942
+San Jose,997368,US,America/Los_Angeles,37.33939,-121.89496
 San Jose del Monte,357828,PH,Asia/Manila,14.81389,121.04528
 San José,335007,CR,America/Costa_Rica,9.93388,-84.08489
 San Juan,418140,PR,America/Puerto_Rico,18.46633,-66.10572
@@ -2134,20 +2177,20 @@ San Pedro Sula,801259,HN,America/Tegucigalpa,15.50585,-88.02588
 San Salvador,525990,SV,America/El_Salvador,13.68935,-89.18718
 San Salvador de Jujuy,257970,AR,America/Argentina/Jujuy,-24.1928,-65.29342
 San-Pédro,390654,CI,Africa/Abidjan,4.74851,-6.6363
-Sanaa,1937451,YE,Asia/Aden,15.35472,44.20667
+Sanaa,1937451,YE,Asia/Aden,15.35452,44.20646
 Sanandaj,349176,IR,Asia/Tehran,35.31495,46.99883
 Sancaktepe,241000,TR,Europe/Istanbul,41.00244,29.23187
 Sandakan,439050,MY,Asia/Kuching,5.8402,118.1179
 Sanmenxia,669307,CN,Asia/Shanghai,34.78081,111.19287
 Sanming,602166,CN,Asia/Shanghai,26.24861,117.61861
 Sant Martí,235719,ES,Europe/Madrid,41.41814,2.19933
-Santa Ana,335400,US,America/Los_Angeles,33.74557,-117.86783
+Santa Ana,310227,US,America/Los_Angeles,33.74557,-117.86783
 Santa Catarina,268347,MX,America/Monterrey,25.67325,-100.45813
 Santa Clara,250512,CU,America/Havana,22.40711,-79.96581
 Santa Cruz de la Sierra,1831434,BO,America/La_Paz,-17.78629,-63.18117
-Santa Cruz de Tenerife,204856,ES,Atlantic/Canary,28.46824,-16.25462
+Santa Cruz de Tenerife,211436,ES,Atlantic/Canary,28.46824,-16.25462
 Santa Fe,391164,AR,America/Argentina/Cordoba,-31.64881,-60.70868
-Santa Luzia,243503,BR,America/Sao_Paulo,-19.76972,-43.85139
+Santa Luzia,219132,BR,America/Sao_Paulo,-19.76972,-43.85139
 Santa Maria,283677,BR,America/Sao_Paulo,-29.68417,-53.80694
 Santa Marta,499192,CO,America/Bogota,11.23855,-74.19427
 Santa María Chimalhuacán,612383,MX,America/Mexico_City,19.42155,-98.95038
@@ -2177,14 +2220,15 @@ Sargodha,975886,PK,Asia/Karachi,32.08586,72.67418
 Sari,255396,IR,Asia/Tehran,36.56332,53.06009
 Sariwŏn-si,310100,KP,Asia/Pyongyang,38.50722,125.75583
 Sasebo,243223,JP,Asia/Tokyo,33.16834,129.72502
+Saskatoon,266141,CA,America/Regina,52.13238,-106.66892
 Satna,282977,IN,Asia/Kolkata,24.57726,80.82719
 Saugor,274556,IN,Asia/Kolkata,23.83877,78.73874
 Saurimo,393000,AO,Africa/Luanda,-9.66078,20.39155
 Savar,286008,BD,Asia/Dhaka,23.84858,90.25002
 Scottsdale,236839,US,America/Phoenix,33.50921,-111.89903
-Seattle,737015,US,America/Los_Angeles,47.60621,-122.33207
+Seattle,780995,US,America/Los_Angeles,47.60621,-122.33207
 Sector 1,225453,RO,Europe/Bucharest,44.49239,26.04831
-Sector 2,345370,RO,Europe/Bucharest,44.4528,26.13321
+Sector 2,290507,RO,Europe/Bucharest,44.4528,26.13321
 Sector 3,385439,RO,Europe/Bucharest,44.4234,26.16874
 Sector 4,287828,RO,Europe/Bucharest,44.37571,26.12085
 Sector 5,271575,RO,Europe/Bucharest,44.38808,26.07144
@@ -2195,7 +2239,7 @@ Sejong,351007,KR,Asia/Seoul,36.59245,127.29223
 Sekondi,285506,GH,Africa/Accra,4.93422,-1.71454
 Selayang Baru Utara,542409,MY,Asia/Kuala_Lumpur,3.2549,101.6668
 Semarang,1653524,ID,Asia/Jakarta,-6.99306,110.42083
-Semey,292780,KZ,Asia/Almaty,50.42675,80.26669
+Semey,292780,KZ,Asia/Almaty,50.42064,80.25025
 Sendai,1096704,JP,Asia/Tokyo,38.26667,140.86667
 Sengkang New Town,244600,SG,Asia/Singapore,1.39167,103.89444
 Seongnam-si,914832,KR,Asia/Seoul,37.43861,127.13778
@@ -2207,10 +2251,10 @@ Seremban,372917,MY,Asia/Kuala_Lumpur,2.7297,101.9381
 Serra,520653,BR,America/Sao_Paulo,-20.12861,-40.30778
 Setagaya,940071,JP,Asia/Tokyo,35.64188,139.64715
 Setapak,353268,MY,Asia/Kuala_Lumpur,3.207,101.727
-Sete Lagoas,201334,BR,America/Sao_Paulo,-19.46583,-44.24667
+Sete Lagoas,227397,BR,America/Sao_Paulo,-19.46583,-44.24667
 Sevastopol,547820,UA,Europe/Simferopol,44.60795,33.52134
 Severnyy,200000,RU,Europe/Moscow,55.93583,37.54889
-Sevilla,684234,ES,Europe/Madrid,37.38283,-5.97317
+Sevilla,687488,ES,Europe/Madrid,37.38283,-5.97317
 Sfax,280566,TN,Africa/Tunis,34.74056,10.76028
 Sha Tin,495200,HK,Asia/Hong_Kong,22.38333,114.18333
 Shagamu,214558,NG,Africa/Lagos,6.8485,3.64633
@@ -2249,7 +2293,7 @@ Shiraz,1249942,IR,Asia/Tehran,29.61031,52.53113
 Shivaji Nagar,1000000,IN,Asia/Kolkata,18.53017,73.85263
 Shivamogga,322650,IN,Asia/Kolkata,13.93157,75.56791
 Shiyan,3460000,CN,Asia/Shanghai,32.6475,110.77806
-Shizuishan,472472,CN,Asia/Shanghai,38.98082,106.3892
+Shizuishan,739400,CN,Asia/Shanghai,38.98082,106.3892
 Shizuoka,693389,JP,Asia/Tokyo,34.98333,138.38333
 Sholapur,997281,IN,Asia/Kolkata,17.67152,75.91044
 Shouguang,473620,CN,Asia/Shanghai,36.88,118.7375
@@ -2257,7 +2301,7 @@ Shrīrāmpur,226317,IN,Asia/Kolkata,22.75278,88.34222
 Shuangyashan,600000,CN,Asia/Shanghai,46.67686,131.13273
 Shubrā al Khaymah,1240289,EG,Africa/Cairo,30.12511,31.25053
 Shyamnagar,441956,IN,Asia/Kolkata,22.83333,88.36667
-Shymkent,1200000,KZ,Asia/Almaty,42.3,69.6
+Shymkent,1200000,KZ,Asia/Almaty,42.30988,69.60042
 Shāhjānpur,320434,IN,Asia/Kolkata,27.88165,79.90918
 Sialkot,911817,PK,Asia/Karachi,32.49268,74.53134
 Sidi Bel Abbes,210146,DZ,Africa/Algiers,35.18994,-0.63085
@@ -2308,9 +2352,10 @@ Southend-on-Sea,295310,GB,Europe/London,51.53782,0.71433
 Soweto,1695047,ZA,Africa/Johannesburg,-26.26781,27.85849
 Soyapango,329708,SV,America/El_Salvador,13.71024,-89.13989
 Soyo,200920,AO,Africa/Luanda,-6.1349,12.36894
-Spokane,213272,US,America/Los_Angeles,47.65966,-117.42908
+Spokane,229447,US,America/Los_Angeles,47.65966,-117.42908
+Sri Ganganagar,237780,IN,Asia/Kolkata,29.92009,73.87496
 Srinagar,1206419,IN,Asia/Kolkata,34.08565,74.80555
-St. Louis,315685,US,America/Chicago,38.62727,-90.19789
+St. Louis,279695,US,America/Chicago,38.62727,-90.19789
 St. Petersburg,257083,US,America/New_York,27.77086,-82.67927
 Stara Darnytsya,339299,UA,Europe/Kyiv,50.43333,30.63333
 Staryy Oskol,226977,RU,Europe/Moscow,51.3025,37.84613
@@ -2342,9 +2387,9 @@ Sumbe,205832,AO,Africa/Luanda,-11.20605,13.84371
 Sumedang,200000,ID,Asia/Jakarta,-6.85861,107.91639
 Sumida,287766,JP,Asia/Tokyo,35.73289,139.82085
 Sumqayıt,358675,AZ,Asia/Baku,40.58972,49.66861
-Sumy,259660,UA,Europe/Kyiv,50.9216,34.80029
+Sumy,259660,UA,Europe/Kyiv,50.91741,34.79906
 Sunch'ŏn,437000,KP,Asia/Pyongyang,39.43167,125.93278
-Suncheon,230796,KR,Asia/Seoul,34.9505,127.48784
+Suncheon,276375,KR,Asia/Seoul,34.9505,127.48784
 Sungai Buloh,222858,MY,Asia/Kuala_Lumpur,3.21,101.561
 Sungai Petani,228843,MY,Asia/Kuala_Lumpur,5.647,100.48772
 Sunshine Coast,346522,AU,Australia/Brisbane,-26.65682,153.07955
@@ -2353,23 +2398,25 @@ Surabaya,2874314,ID,Asia/Jakarta,-7.24917,112.75083
 Surakarta,526870,ID,Asia/Jakarta,-7.55611,110.83167
 Surat,4591246,IN,Asia/Kolkata,21.19594,72.83023
 Surgut,300367,RU,Asia/Yekaterinburg,61.25757,73.41775
-Surrey,394976,CA,America/Vancouver,49.10635,-122.82509
-Suwon,1241311,KR,Asia/Seoul,37.29111,127.00889
+Surrey,568322,CA,America/Vancouver,49.10635,-122.82509
+Suwon,1195045,KR,Asia/Seoul,37.29111,127.00889
 Suzano,307429,BR,America/Sao_Paulo,-23.5425,-46.31083
 Suzhou,1647642,CN,Asia/Shanghai,33.63611,116.97889
 Suzhou,6715559,CN,Asia/Shanghai,31.30408,120.59538
 Swansea,300352,GB,Europe/London,51.62079,-3.94323
 Swindon,201669,GB,Europe/London,51.55797,-1.78116
-Sydney,5231147,AU,Australia/Sydney,-33.86785,151.20732
+Sydney,5557233,AU,Australia/Sydney,-33.86785,151.20732
 Syktyvkar,245083,RU,Europe/Moscow,61.68523,50.80819
 Sylhet,237000,BD,Asia/Dhaka,24.89904,91.87198
 Szczecin,407811,PL,Europe/Warsaw,53.42894,14.55302
 São Bernardo do Campo,743372,BR,America/Sao_Paulo,-23.69389,-46.565
 São Carlos,205035,BR,America/Sao_Paulo,-22.0175,-47.89083
 São José,200000,BR,America/Sao_Paulo,-28.21344,-49.16383
+São José,270299,BR,America/Sao_Paulo,-27.61528,-48.6275
 São José de Ribamar,244579,BR,America/Fortaleza,-2.55572,-44.05992
-São José do Rio Preto,374699,BR,America/Sao_Paulo,-20.81972,-49.37944
+São José do Rio Preto,480393,BR,America/Sao_Paulo,-20.81972,-49.37944
 São José dos Campos,729737,BR,America/Sao_Paulo,-23.17944,-45.88694
+São José dos Pinhais,329628,BR,America/Sao_Paulo,-25.5302,-49.20836
 São João de Meriti,466536,BR,America/Sao_Paulo,-22.80389,-43.37222
 São Leopoldo,209229,BR,America/Sao_Paulo,-29.76028,-51.14722
 São Luís,917237,BR,America/Fortaleza,-2.52972,-44.30278
@@ -2377,28 +2424,31 @@ São Paulo,12400232,BR,America/Sao_Paulo,-23.5475,-46.63611
 São Vicente,329911,BR,America/Sao_Paulo,-23.96306,-46.39194
 Ségou,205787,ML,Africa/Bamako,13.44032,-6.25947
 Sétif,252127,DZ,Africa/Algiers,36.19112,5.41373
+Sóc Trăng,221430,VN,Asia/Ho_Chi_Minh,9.59995,105.97193
 Sāngli,601214,IN,Asia/Kolkata,16.85438,74.56417
+Sīkar,244497,IN,Asia/Kolkata,27.61206,75.13996
 Sōka,249645,JP,Asia/Tokyo,35.83643,139.79957
+Sơn Tây,230577,VN,Asia/Bangkok,21.14053,105.50686
 Ta'if,688693,SA,Asia/Riyadh,21.27028,40.41583
 Tabora,308741,TZ,Africa/Dar_es_Salaam,-5.01622,32.82663
-Taboão da Serra,214523,BR,America/Sao_Paulo,-23.62611,-46.79167
+Taboão da Serra,273542,BR,America/Sao_Paulo,-23.62611,-46.79167
 Tabriz,1424641,IR,Asia/Tehran,38.08,46.2919
 Tabuk,667000,SA,Asia/Riyadh,28.3998,36.57151
 Tacloban,251881,PH,Asia/Manila,11.24333,125.00472
 Tacna,286240,PE,America/Lima,-18.01465,-70.25362
-Tacoma,207948,US,America/Los_Angeles,47.25288,-122.44429
+Tacoma,222906,US,America/Los_Angeles,47.25288,-122.44429
 Taganrog,279056,RU,Europe/Moscow,47.23627,38.9053
 Taguig,644473,PH,Asia/Manila,14.5243,121.0792
 Tai Po,274100,HK,Asia/Hong_Kong,22.45007,114.16877
 Tai'an,1735425,CN,Asia/Shanghai,36.18528,117.12
 Taicang,831113,CN,Asia/Shanghai,31.44778,121.09389
-Taichung,1040725,TW,Asia/Taipei,24.1469,120.6839
-Tainan,771235,TW,Asia/Taipei,22.99083,120.21333
+Taichung,2850285,TW,Asia/Taipei,24.1469,120.6839
+Tainan,1856642,TW,Asia/Taipei,22.99083,120.21333
 Taipei,7871900,TW,Asia/Taipei,25.05306,121.52639
 Taiping,217647,MY,Asia/Kuala_Lumpur,4.85,100.73333
 Taito,211444,JP,Asia/Tokyo,35.70749,139.7788
 Taiyuan,4303673,CN,Asia/Shanghai,37.86944,112.56028
-Taiz,615222,YE,Asia/Aden,13.57952,44.02091
+Taiz,940600,YE,Asia/Aden,13.57952,44.02091
 Taizhou,1607108,CN,Asia/Shanghai,32.49069,119.90812
 Taizhou,1485502,CN,Asia/Shanghai,28.66266,121.43312
 Takamatsu,418994,JP,Asia/Tokyo,34.33333,134.05
@@ -2413,7 +2463,7 @@ Tallinn,394024,EE,Europe/Tallinn,59.43696,24.75353
 Tamale,464316,GH,Africa/Accra,9.40079,-0.8393
 Taman Petaling,423062,MY,Asia/Kuala_Lumpur,3.19916,101.64983
 Tambov,293661,RU,Europe/Moscow,52.73169,41.44326
-Tampa,384959,US,America/New_York,27.94752,-82.45843
+Tampa,414547,US,America/New_York,27.94752,-82.45843
 Tampere,244315,FI,Europe/Helsinki,61.49911,23.78712
 Tampico,309003,MX,America/Monterrey,22.28519,-97.87777
 Tampines Estate,265340,SG,Asia/Singapore,1.35806,103.94028
@@ -2427,10 +2477,11 @@ Tangshan,3372102,CN,Asia/Shanghai,39.64381,118.18319
 Tanjung Pinang,227663,ID,Asia/Jakarta,0.91667,104.45833
 Tanta,576648,EG,Africa/Cairo,30.78847,31.00192
 Tantou,320304,CN,Asia/Shanghai,22.75121,113.83496
+Taoyuan,475798,TW,Asia/Taipei,24.9896,121.3187
 Taoyuan City,402014,TW,Asia/Taipei,24.99368,121.29696
-Tapachula,202672,MX,America/Merida,14.90541,-92.25891
+Tapachula,353706,MX,America/Merida,14.90541,-92.25891
 Tarakan,249960,ID,Asia/Makassar,3.31332,117.59152
-Taraz,358153,KZ,Asia/Almaty,42.9,71.36667
+Taraz,358153,KZ,Asia/Almaty,42.89799,71.37334
 Tarlac City,385398,PH,Asia/Manila,15.48017,120.59794
 Tarsus,350732,TR,Europe/Istanbul,36.91766,34.89277
 Tashkent,1978028,UZ,Asia/Tashkent,41.26465,69.21627
@@ -2438,7 +2489,7 @@ Tasikmalaya,741760,ID,Asia/Jakarta,-7.3274,108.2207
 Taubaté,317915,BR,America/Sao_Paulo,-23.02639,-45.55528
 Tawau,372615,MY,Asia/Kuching,4.24482,117.89115
 Taytay,231460,PH,Asia/Manila,14.55883,121.13285
-Tbilisi,1049498,GE,Asia/Tbilisi,41.69411,44.83368
+Tbilisi,1049498,GE,Asia/Tbilisi,41.69143,44.83412
 Tegal,282781,ID,Asia/Jakarta,-6.8694,109.1402
 Tegucigalpa,850848,HN,America/Tegucigalpa,14.0818,-87.20681
 Tehran,7153309,IR,Asia/Tehran,35.69439,51.42151
@@ -2453,6 +2504,7 @@ Ternate,204920,ID,Asia/Jayapura,0.79065,127.38424
 Ternopil,225238,UA,Europe/Kyiv,49.55404,25.59067
 Terrassa,218535,ES,Europe/Madrid,41.56667,2.01667
 Tete,357000,MZ,Africa/Maputo,-16.15639,33.58667
+Thanh Hóa,850000,VN,Asia/Bangkok,19.8,105.76667
 Thanjavur,291067,IN,Asia/Kolkata,10.78523,79.13909
 The Bronx,1385108,US,America/New_York,40.84985,-73.86641
 The Hague,474292,NL,Europe/Amsterdam,52.07667,4.29861
@@ -2467,8 +2519,9 @@ Thrissur,315957,IN,Asia/Kolkata,10.51667,76.21667
 Thuqbah,248888,SA,Asia/Riyadh,26.26022,50.20486
 Thuận An,588616,VN,Asia/Ho_Chi_Minh,10.9239,106.71428
 Thành Phố Bà Rịa,235192,VN,Asia/Ho_Chi_Minh,10.49626,107.1685
-Thái Nguyên,249004,VN,Asia/Bangkok,21.59422,105.84817
+Thái Nguyên,420000,VN,Asia/Bangkok,21.59422,105.84817
 Thāne,1841488,IN,Asia/Kolkata,19.19704,72.96355
+Thủ Dầu Một,373105,VN,Asia/Ho_Chi_Minh,10.9804,106.6519
 Thủ Đức,524670,VN,Asia/Ho_Chi_Minh,10.84863,106.77209
 Tianjin,11090314,CN,Asia/Shanghai,39.14222,117.17667
 Tianshui,1212791,CN,Asia/Shanghai,34.57952,105.74238
@@ -2476,33 +2529,33 @@ Tieling,333907,CN,Asia/Shanghai,42.29306,123.84139
 Tijuana,1922523,MX,America/Tijuana,32.5027,-117.00371
 Timişoara,250849,RO,Europe/Bucharest,45.75372,21.22571
 Tin Shui Wai,282400,HK,Asia/Hong_Kong,22.45679,114.00234
-Tirana,418495,AL,Europe/Tirane,41.3275,19.81889
+Tirana,418495,AL,Europe/Tirane,41.32744,19.81866
 Tiruchirappalli,1022518,IN,Asia/Kolkata,10.8155,78.69651
 Tirunelveli,1435844,IN,Asia/Kolkata,8.72742,77.6838
 Tirupati,295323,IN,Asia/Kolkata,13.63551,79.41989
 Tiruppur,963173,IN,Asia/Kolkata,11.11541,77.35456
-Tiruvottiyūr,248059,IN,Asia/Kolkata,13.15823,80.30181
+Tiruvottiyūr,249446,IN,Asia/Kolkata,13.15823,80.30181
 Tlalnepantla,653410,MX,America/Mexico_City,19.54005,-99.19538
 Tlalpan,574577,MX,America/Mexico_City,19.29513,-99.16206
-Tlaquepaque,575942,MX,America/Mexico_City,20.64091,-103.29327
+Tlaquepaque,650123,MX,America/Mexico_City,20.64121,-103.29342
 Tláhuac,305076,MX,America/Mexico_City,19.28689,-99.00507
 Toamasina,345107,MG,Indian/Antananarivo,-18.1492,49.40234
 Tokorozawa,344194,JP,Asia/Tokyo,35.79916,139.46903
 Tokushima,267345,JP,Asia/Tokyo,34.06667,134.56667
 Tokyo,9733276,JP,Asia/Tokyo,35.6895,139.69171
 Toledo,207314,PH,Asia/Manila,10.3773,123.6386
-Toledo,279789,US,America/New_York,41.66394,-83.55521
+Toledo,265638,US,America/New_York,41.66394,-83.55521
 Toluca,489333,MX,America/Mexico_City,19.28786,-99.65324
 Tolyatti,702879,RU,Europe/Samara,53.5303,49.3461
 Tomsk,574002,RU,Asia/Tomsk,56.50032,84.98204
-Tonalá,408759,MX,America/Mexico_City,20.62445,-103.23423
+Tonalá,408759,MX,America/Mexico_City,20.62263,-103.24168
 Tongchuan,417740,CN,Asia/Shanghai,34.8988,108.95056
 Tongchuanshi,223603,CN,Asia/Shanghai,35.07474,109.08495
 Tonghua,510000,CN,Asia/Shanghai,41.71972,125.92639
 Tongliao,261110,CN,Asia/Shanghai,43.6125,122.26528
 Tongling,402062,CN,Asia/Shanghai,30.95,117.78333
 Tongshan,329661,CN,Asia/Shanghai,34.18045,117.15707
-Toronto,2600000,CA,America/Toronto,43.70643,-79.39864
+Toronto,2794356,CA,America/Toronto,43.70643,-79.39864
 Torreón,735340,MX,America/Monterrey,25.54389,-103.41898
 Toshima,301599,JP,Asia/Tokyo,35.76126,139.74491
 Touba,1120824,SN,Africa/Dakar,14.85,-15.88333
@@ -2523,7 +2576,7 @@ Tshikapa,634529,CD,Africa/Lubumbashi,-6.41621,20.79995
 Tsu,274537,JP,Asia/Tokyo,34.73333,136.51667
 Tsuen Wan,318916,HK,Asia/Hong_Kong,22.37137,114.11329
 Tsukuba,241656,JP,Asia/Tokyo,36.08333,140.11667
-Tucson,531641,US,America/Phoenix,32.22174,-110.92648
+Tucson,542629,US,America/Phoenix,32.22174,-110.92648
 Tuen Mun,507900,HK,Asia/Hong_Kong,22.39175,113.97157
 Tula,482873,RU,Europe/Moscow,54.19609,37.61822
 Tulsa,413066,US,America/Chicago,36.15398,-95.99277
@@ -2533,19 +2586,20 @@ Tunduma,219309,TZ,Africa/Dar_es_Salaam,-9.3,32.76667
 Tungi,337579,BD,Asia/Dhaka,23.89154,90.40232
 Tunis,693210,TN,Africa/Tunis,36.81897,10.16579
 Turin,847287,IT,Europe/Rome,45.07049,7.68682
-Turkestan,227098,KZ,Asia/Almaty,43.29733,68.25175
+Turkestan,227098,KZ,Asia/Almaty,43.29458,68.25685
 Turmero,344700,VE,America/Caracas,10.22856,-67.47421
 Turpan,273385,CN,Asia/Urumqi,42.94769,89.17886
 Tuxtla,604147,MX,America/Merida,16.75357,-93.11578
 Tver,420065,RU,Europe/Moscow,56.85836,35.90057
 Tyumen,768358,RU,Asia/Yekaterinburg,57.15222,65.52722
 Tân An,215250,VN,Asia/Ho_Chi_Minh,10.53589,106.41366
+Târgu Mureş,212752,RO,Europe/Bucharest,46.54245,24.55747
 Tétouan,415810,MA,Africa/Casablanca,35.57845,-5.36837
 Türkmenabat,234817,TM,Asia/Ashgabat,39.07328,63.57861
 Tŏkch'ŏn,237133,KP,Asia/Pyongyang,39.75261,126.25798
-Uberaba,260843,BR,America/Sao_Paulo,-19.74833,-47.93194
+Uberaba,337836,BR,America/Sao_Paulo,-19.74833,-47.93194
 Uberlândia,563536,BR,America/Sao_Paulo,-18.91861,-48.27722
-Udaipur,422784,IN,Asia/Kolkata,24.58584,73.71346
+Udaipur,451100,IN,Asia/Kolkata,24.58584,73.71346
 Ufa,1120547,RU,Asia/Yekaterinburg,54.74306,55.96779
 Ugep,200276,NG,Africa/Lagos,5.80865,8.08098
 Uijeongbu-si,479141,KR,Asia/Seoul,37.7415,127.0474
@@ -2554,14 +2608,14 @@ Ulan Bator,844818,MN,Asia/Ulaanbaatar,47.90771,106.88324
 Ulan-Ude,360278,RU,Asia/Irkutsk,51.82721,107.60627
 Ulanqab,550231,CN,Asia/Shanghai,40.993,113.133
 Ulhasnagar,516584,IN,Asia/Kolkata,19.21667,73.15
-Ulsan,962865,KR,Asia/Seoul,35.53722,129.31667
+Ulsan,1098728,KR,Asia/Seoul,35.53722,129.31667
 Ulu Bedok,276990,SG,Asia/Singapore,1.33333,103.93333
 Uluberiya,235345,IN,Asia/Kolkata,22.4756,88.09898
 Ulyanovsk,626540,RU,Europe/Ulyanovsk,54.32824,48.38657
 Umraniye,573265,TR,Europe/Istanbul,41.01643,29.12476
 Umuahia,370000,NG,Africa/Lagos,5.52491,7.49461
 Upper West Side,226989,US,America/New_York,40.78705,-73.97542
-Uruapan,356786,MX,America/Mexico_City,19.41116,-102.05644
+Uruapan,299523,MX,America/Mexico_City,19.41116,-102.05644
 Ust-Kamenogorsk,319067,KZ,Asia/Almaty,49.97143,82.60586
 Utrecht,375161,NL,Europe/Amsterdam,52.09083,5.12222
 Utsunomiya,518757,JP,Asia/Tokyo,36.56667,139.88333
@@ -2570,20 +2624,20 @@ Uyo,436606,NG,Africa/Lagos,5.05127,7.9335
 Uíge,322531,AO,Africa/Luanda,-7.60874,15.06131
 Uşak,369433,TR,Europe/Istanbul,38.67351,29.4058
 Vadodara,1822221,IN,Asia/Kolkata,22.29941,73.20812
-Valencia,792492,ES,Europe/Madrid,39.47391,-0.37966
+Valencia,825948,ES,Europe/Madrid,39.47391,-0.37966
 Valencia,1619470,VE,America/Caracas,10.16153,-68.00044
 Valenzuela,714978,PH,Asia/Manila,14.7,120.9667
 Valera,244708,VE,America/Caracas,9.31778,-70.60361
-Valladolid,299265,ES,Europe/Madrid,41.65518,-4.72372
+Valladolid,300618,ES,Europe/Madrid,41.65518,-4.72372
 Valledupar,490075,CO,America/Bogota,10.46538,-73.2531
 Valparaíso,282448,CL,America/Santiago,-33.036,-71.62963
 Van,525016,TR,Europe/Istanbul,38.49457,43.38323
-Vancouver,600000,CA,America/Vancouver,49.24966,-123.11934
+Vancouver,662248,CA,America/Vancouver,49.24966,-123.11934
 Vanderbijlpark,246754,ZA,Africa/Johannesburg,-26.71171,27.83795
 Varanasi,1164404,IN,Asia/Kolkata,25.31668,83.01041
 Varna,312770,BG,Europe/Sofia,43.21667,27.91667
 Vasyl'evsky Ostrov,203058,RU,Europe/Moscow,59.94091,30.25377
-Vaughan,306233,CA,America/Toronto,43.8361,-79.49827
+Vaughan,323103,CA,America/Toronto,43.8361,-79.49827
 Velikiy Novgorod,222868,RU,Europe/Moscow,58.52131,31.27104
 Vellore,484690,IN,Asia/Kolkata,12.9184,79.13255
 Venustiano Carranza,430978,MX,America/Mexico_City,19.44361,-99.10499
@@ -2595,7 +2649,7 @@ Victoria,289625,CA,America/Vancouver,48.4359,-123.35155
 Victoria,956800,HK,Asia/Hong_Kong,22.2875,114.14417
 Victoria de Durango,518709,MX,America/Monterrey,24.02032,-104.65756
 Vienna,1691468,AT,Europe/Vienna,48.20849,16.37208
-Vigo,297332,ES,Europe/Madrid,42.23282,-8.72264
+Vigo,293642,ES,Europe/Madrid,42.23282,-8.72264
 Vijayapura,327427,IN,Asia/Kolkata,16.82442,75.71537
 Vijayawada,1143232,IN,Asia/Kolkata,16.50745,80.6466
 Vila Velha,394930,BR,America/Sao_Paulo,-20.32972,-40.2925
@@ -2603,8 +2657,9 @@ Villa Nueva,618397,GT,America/Guatemala,14.52512,-90.58544
 Villahermosa,353577,MX,America/Merida,17.98625,-92.93928
 Villavicencio,321717,CO,America/Bogota,4.13238,-73.62564
 Vilnius,542366,LT,Europe/Vilnius,54.68916,25.2798
+Vinh,790000,VN,Asia/Bangkok,18.67337,105.69232
 Vinnytsya,369839,UA,Europe/Kyiv,49.2322,28.46871
-Virginia Beach,452745,US,America/New_York,36.85293,-75.97799
+Virginia Beach,454808,US,America/New_York,36.85293,-75.97799
 Virār,1222390,IN,Asia/Kolkata,19.45591,72.81136
 Visakhapatnam,1063178,IN,Asia/Kolkata,17.68009,83.20161
 Vitebsk,358395,BY,Europe/Minsk,55.1904,30.2049
@@ -2612,7 +2667,8 @@ Vitória,312656,BR,America/Sao_Paulo,-20.31944,-40.33778
 Vitória da Conquista,253137,BR,America/Bahia,-14.86611,-40.83944
 Vizianagaram,228720,IN,Asia/Kolkata,18.11692,83.41148
 Viña del Mar,294551,CL,America/Santiago,-33.02457,-71.55183
-Việt Yên,205900,VN,Asia/Bangkok,21.26667,106.13333
+Việt Trì,415280,VN,Asia/Bangkok,21.32274,105.40198
+Việt Yên,205900,VN,Asia/Ho_Chi_Minh,21.26667,106.13333
 Vladikavkaz,306258,RU,Europe/Moscow,43.03667,44.66778
 Vladimir,357024,RU,Europe/Moscow,56.13655,40.39658
 Vladivostok,604901,RU,Asia/Vladivostok,43.10562,131.87353
@@ -2623,7 +2679,7 @@ Volzhsky,323293,RU,Europe/Volgograd,48.78583,44.77973
 Voronezh,1047549,RU,Europe/Moscow,51.67204,39.1843
 Vykhino-Zhulebino,216000,RU,Europe/Moscow,55.70196,37.81178
 Várzea Grande,314627,BR,America/Cuiaba,-15.64667,-56.1325
-Vũng Tàu,341552,VN,Asia/Ho_Chi_Minh,10.34599,107.08426
+Vũng Tàu,464860,VN,Asia/Ho_Chi_Minh,10.34599,107.08426
 Wad Medani,332714,SD,Africa/Khartoum,14.40118,33.51989
 Wafangdian,250591,CN,Asia/Shanghai,39.61833,122.00806
 Wah Cantt,400733,PK,Asia/Karachi,33.77094,72.75116
@@ -2632,8 +2688,8 @@ Wandsbek,411422,DE,Europe/Berlin,53.58334,10.08305
 Wangsa Maju,215600,MY,Asia/Kuala_Lumpur,3.20056,101.73972
 Wanning,545992,CN,Asia/Shanghai,18.79931,110.3841
 Wanxian,859662,CN,Asia/Shanghai,30.81601,108.37407
-Wanzhou,723215,CN,Asia/Shanghai,30.76451,108.39586
-Warangal,557802,IN,Asia/Kolkata,18,79.58333
+Wanzhou,1545900,CN,Asia/Shanghai,30.76451,108.39586
+Warangal,704570,IN,Asia/Kolkata,18,79.58333
 Warri,910000,NG,Africa/Lagos,5.51737,5.75006
 Warsaw,1702139,PL,Europe/Warsaw,52.22977,21.01178
 Washington,689545,US,America/New_York,38.89511,-77.03637
@@ -2650,7 +2706,7 @@ West Raleigh,338759,US,America/New_York,35.78682,-78.66389
 Wichita,396119,US,America/Chicago,37.69224,-97.33754
 Wiesbaden,278609,DE,Europe/Berlin,50.08258,8.24932
 Windhoek,386219,NA,Africa/Windhoek,-22.55941,17.08323
-Windsor,278013,CA,America/Toronto,42.30008,-83.01654
+Windsor,229660,CA,America/Toronto,42.30008,-83.01654
 Winejok,300000,SS,Africa/Juba,9.01222,27.57081
 Winnipeg,749607,CA,America/Winnipeg,49.8844,-97.14704
 Winston-Salem,241218,US,America/New_York,36.09986,-80.24422
@@ -2680,7 +2736,8 @@ Xiantao,239406,CN,Asia/Shanghai,30.3708,113.44294
 Xianyang,1034081,CN,Asia/Shanghai,34.33778,108.70261
 Xiaogan,908266,CN,Asia/Shanghai,30.92689,113.92221
 Xichang,481796,CN,Asia/Shanghai,27.89642,102.26341
-Xico,356352,MX,America/Mexico_City,19.27032,-98.95088
+Xico,384327,MX,America/Mexico_City,19.27032,-98.95088
+Xilinhot,349953,CN,Asia/Shanghai,43.93889,116.07021
 Xingning,274499,CN,Asia/Shanghai,24.1483,115.72272
 Xingtai,798770,CN,Asia/Shanghai,37.06217,114.49272
 Xingyi,322890,CN,Asia/Shanghai,25.09617,104.90639
@@ -2712,7 +2769,7 @@ Yancheng,1615717,CN,Asia/Shanghai,33.3575,120.1573
 Yangjiang,1292987,CN,Asia/Shanghai,21.85563,111.96272
 Yangon,4477638,MM,Asia/Yangon,16.80528,96.15611
 Yangquan,731228,CN,Asia/Shanghai,37.8575,113.56333
-Yangsan,342371,KR,Asia/Seoul,35.34199,129.03358
+Yangsan,358074,KR,Asia/Seoul,35.34199,129.03358
 Yangshuo,300000,CN,Asia/Shanghai,24.78081,110.48967
 Yangzhou,1584237,CN,Asia/Shanghai,32.39722,119.43583
 Yanji,326957,CN,Asia/Shanghai,42.88825,129.50241
@@ -2725,8 +2782,8 @@ Yazd,477905,IR,Asia/Tehran,31.89722,54.3675
 Yei,260720,SS,Africa/Juba,4.09444,30.67639
 Yekaterinburg,1495066,RU,Asia/Yekaterinburg,56.8519,60.6122
 Yenagoa,365000,NG,Africa/Lagos,4.92675,6.26764
-Yeosu,295538,KR,Asia/Seoul,34.76062,127.66215
-Yerevan,1141100,AM,Asia/Yerevan,40.18111,44.51361
+Yeosu,268823,KR,Asia/Seoul,34.76062,127.66215
+Yerevan,1141100,AM,Asia/Yerevan,40.17765,44.5126
 Yibin,836340,CN,Asia/Shanghai,28.7593,104.63994
 Yichang,1350150,CN,Asia/Shanghai,30.71444,111.28472
 Yichun,1045952,CN,Asia/Shanghai,27.83333,114.4
@@ -2744,7 +2801,7 @@ Yokosuka,409478,JP,Asia/Tokyo,35.28361,139.66722
 Yola,460000,NG,Africa/Lagos,9.20839,12.48146
 Yongkang,233730,TW,Asia/Taipei,23.02444,120.25556
 Yongzhou,1020715,CN,Asia/Shanghai,26.42389,111.61306
-Yonkers,201116,US,America/New_York,40.93121,-73.89875
+Yonkers,201116,US,America/New_York,40.9304,-73.89789
 Yoshkar-Ola,268272,RU,Europe/Moscow,56.63877,47.89078
 Yuci,235929,CN,Asia/Shanghai,37.68028,112.73194
 Yuen Long,200000,HK,Asia/Hong_Kong,22.44518,114.02621
@@ -2754,6 +2811,7 @@ Yulin,1056743,CN,Asia/Shanghai,22.6305,110.14686
 Yuncheng,680036,CN,Asia/Shanghai,35.02306,110.99278
 Yunfu,2612800,CN,Asia/Shanghai,22.92787,112.03809
 Yunlong,345393,CN,Asia/Shanghai,34.25281,117.25167
+Yunusobod,352000,UZ,Asia/Tashkent,41.37139,69.27944
 Zagazig,430445,EG,Africa/Cairo,30.58768,31.502
 Zagreb,663592,HR,Europe/Zagreb,45.81444,15.97798
 Zahedan,551980,IR,Asia/Tehran,29.4963,60.8629
@@ -2761,9 +2819,9 @@ Zamboanga,977234,PH,Asia/Manila,6.91028,122.07389
 Zanjan,357471,IR,Asia/Tehran,36.67642,48.49628
 Zanzibar,709809,TZ,Africa/Dar_es_Salaam,-6.16394,39.19793
 Zaozhuang,899753,CN,Asia/Shanghai,34.86472,117.55417
-Zapopan,1476491,MX,America/Mexico_City,20.72356,-103.38479
+Zapopan,1476491,MX,America/Mexico_City,20.72111,-103.38742
 Zaporizhzhya,710052,UA,Europe/Kyiv,47.85167,35.11714
-Zaragoza,675301,ES,Europe/Madrid,41.65606,-0.87734
+Zaragoza,686986,ES,Europe/Madrid,41.65606,-0.87734
 Zaria,980000,NG,Africa/Lagos,11.11128,7.7227
 Zarqa,792665,JO,Asia/Amman,32.07275,36.08796
 Zelenograd,215727,RU,Europe/Moscow,55.9825,37.18139
@@ -2783,11 +2841,12 @@ Zhongshan,3841873,CN,Asia/Shanghai,22.52306,113.37912
 Zhoukou,505171,CN,Asia/Shanghai,33.63333,114.63333
 Zhoushan,882932,CN,Asia/Shanghai,29.98869,122.20488
 Zhu Cheng City,1000000,CN,Asia/Shanghai,35.99502,119.40259
+Zhubei,212695,TW,Asia/Taipei,24.83833,121.00778
 Zhucheng,499285,CN,Asia/Shanghai,35.99472,119.3975
 Zhuhai,2207090,CN,Asia/Shanghai,22.27694,113.56778
 Zhumadian,721670,CN,Asia/Shanghai,32.97944,114.02944
 Zhuzhou,1129687,CN,Asia/Shanghai,27.83333,113.15
-Zhytomyr,261624,UA,Europe/Kyiv,50.26487,28.67669
+Zhytomyr,261624,UA,Europe/Kyiv,50.26235,28.67913
 Zibo,3129228,CN,Asia/Shanghai,36.79056,118.06333
 Zigong,1262064,CN,Asia/Shanghai,29.34162,104.77689
 Ziguinchor,214874,SN,Africa/Dakar,12.56801,-16.27326
@@ -2797,17 +2856,17 @@ Ziyang,905729,CN,Asia/Shanghai,30.12108,104.64811
 Zliten,203790,LY,Africa/Tripoli,32.46739,14.56874
 Zoucheng,277400,CN,Asia/Shanghai,35.40056,116.96556
 Zunyi,2037775,CN,Asia/Shanghai,27.68667,106.90722
-Zürich,341730,CH,Europe/Zurich,47.36667,8.55
+Zürich,415367,CH,Europe/Zurich,47.36667,8.55
 Águas Lindas de Goiás,225693,BR,America/Sao_Paulo,-15.76194,-48.28167
 Álvaro Obregón,726664,MX,America/Mexico_City,19.35867,-99.20329
 Århus,285273,DK,Europe/Copenhagen,56.15674,10.21076
 Çankaya,792189,TR,Europe/Istanbul,39.9179,32.86268
 Çorlu,202578,TR,Europe/Istanbul,41.16069,27.80093
 Çorum,269595,TR,Europe/Istanbul,40.54889,34.95333
+Ðà Lạt,258014,VN,Asia/Ho_Chi_Minh,11.94646,108.44193
 Ürümqi,3029372,CN,Asia/Urumqi,43.80096,87.60046
 Üsküdar,524452,TR,Europe/Istanbul,41.02274,29.01366
 Āsansol,504271,IN,Asia/Kolkata,23.68333,86.98333
-Āvadi,250044,IN,Asia/Kolkata,13.1147,80.10981
 Āzādshahr,514102,IR,Asia/Tehran,34.79049,48.57011
 Điện Bàn,226564,VN,Asia/Ho_Chi_Minh,15.88853,108.25447
 Łódź,768755,PL,Europe/Warsaw,51.77058,19.47395
