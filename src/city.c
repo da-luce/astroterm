@@ -1,6 +1,7 @@
 #include "city.h"
 #include "cities.h"
 #include "macros.h"
+#include "split_lines.h"
 
 #include <ctype.h>
 #include <stdint.h>
@@ -105,10 +106,6 @@ CityData *get_city(const char *name)
         return NULL;
     }
 
-    // Convert the byte array into an array of lines
-    char **lines = NULL;
-    size_t line_count = 0;
-
     char *data = malloc(cities_len + 1);
     if (data == NULL)
     {
@@ -119,35 +116,14 @@ CityData *get_city(const char *name)
     memcpy(data, cities, cities_len);
     data[cities_len] = '\0';
 
-    const char *line = strtok(data, "\n");
-    while (line != NULL)
+    // Convert the byte array into an array of lines
+    int line_count = 0;
+    char **lines = split_lines(data, &line_count);
+    if (lines == NULL)
     {
-        char *line_copy = strdup(line);
-        if (line_copy == NULL)
-        {
-            perror("Memory allocation failed");
-            free(normalized_name);
-            free(data);
-            return NULL;
-        }
-
-        char **temp = realloc(lines, (line_count + 1) * sizeof(char *));
-        if (temp == NULL)
-        {
-            perror("Memory allocation failed");
-            free(normalized_name);
-            free(data);
-            for (size_t i = 0; i < line_count; i++)
-            {
-                free(lines[i]);
-            }
-            free(lines);
-            return NULL;
-        }
-        lines = temp;
-
-        lines[line_count++] = line_copy;
-        line = strtok(NULL, "\n");
+        free(normalized_name);
+        free(data);
+        return NULL;
     }
 
     // Perform binary search with the normalized name
@@ -184,7 +160,7 @@ CityData *get_city(const char *name)
     }
 
     // Clean up lines and data
-    for (size_t i = 0; i < line_count; i++)
+    for (int i = 0; i < line_count; i++)
     {
         free(lines[i]);
     }
@@ -201,5 +177,60 @@ void free_city(CityData *city)
     {
         free((void *)city->city_name);
         free(city);
+    }
+}
+
+/**
+ * @brief Iterates over all cities and applies a callback function to each.
+ *
+ * This function traverses the collection of cities and calls the provided
+ * callback function for each city. The callback receives a pointer to the
+ * city's data and a user-defined data pointer.
+ *
+ * @param callback A function pointer to be called for each city.
+ * @param user_data A pointer to user-defined data that will be passed to the
+ *                  callback function for each city.
+ */
+void iter_cities(void (*callback)(const CityData *city, void *data), void *user_data)
+{
+    if (callback == NULL)
+    {
+        return;
+    }
+
+    // Get the city data as a buffer using split_lines
+    char *data = malloc(cities_len + 1);
+    memcpy(data, cities, cities_len);
+    data[cities_len] = '\0';
+
+    int line_count = 0;
+    char **lines = split_lines(data, &line_count);
+    if (lines == NULL)
+    {
+        free(data);
+        return;
+    }
+
+    for (int i = 1; i < line_count; i++)
+    {
+        char *line = lines[i];
+        const char *city_name, *latitude_str, *longitude_str;
+
+        city_name = strtok(line, ",");
+        strtok(NULL, ","); // Skip population
+        strtok(NULL, ","); // Skip country code
+        strtok(NULL, ","); // Skip timezone
+        latitude_str = strtok(NULL, ",");
+        longitude_str = strtok(NULL, ",");
+
+        if (city_name && latitude_str && longitude_str)
+        {
+            CityData city_data;
+            city_data.city_name = city_name;
+            city_data.latitude = atof(latitude_str);
+            city_data.longitude = atof(longitude_str);
+
+            callback(&city_data, user_data);
+        }
     }
 }
