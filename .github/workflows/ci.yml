@@ -13,20 +13,18 @@ on:
       - dev
 
 env:
-  Bin: ./bin/release  # Where to put release binaries
-  HashDir: ./hash     # Where to put hashes of binaries
-  DepsDir: ./deps     # Where to put local libs (primarily for Windows builds)
+  Bin: ./bin/release # Where to put release binaries
+  HashDir: ./hash # Where to put hashes of binaries
+  DepsDir: ./deps # Where to put local libs (primarily for Windows builds)
 
 jobs:
-
   binary:
     strategy:
       matrix:
         include:
+          # Release builds
 
-            # Release builds
-
-            # astroterm-linux-x86_64
+          # astroterm-linux-x86_64
           - os: ubuntu-22.04
             suffix: linux
             compiler: gcc
@@ -39,7 +37,7 @@ jobs:
             arch: aarch64
 
             # astroterm-darwin-x86_64
-          - os: macos-13
+          - os: macos-15-intel
             suffix: darwin
             compiler: clang
             arch: x86_64
@@ -108,7 +106,7 @@ jobs:
       # macOS Dependencies
       # ------------------------------------------------------------------------
 
-        # Use argtable2 since argtable3 is only available as a dylib
+      # Use argtable2 since argtable3 is only available as a dylib
       - name: Install macOS Dependencies
         if: matrix.suffix == 'darwin'
         run: |
@@ -127,7 +125,7 @@ jobs:
         if: matrix.suffix == 'win'
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
       - name: Install Python Dependencies
         if: matrix.suffix == 'win'
@@ -188,7 +186,7 @@ jobs:
       - name: Build
         env:
           CC: ${{ matrix.compiler }}
-          BuildFlags:  ${{ matrix.coverage && '-Db_coverage=true' || '--buildtype=release -Dprefer_static=true'}}
+          BuildFlags: ${{ matrix.coverage && '-Db_coverage=true' || '--buildtype=release -Dprefer_static=true'}}
         run: |
           meson setup build ${{ env.BuildFlags }}
           meson compile --verbose -C build
@@ -220,16 +218,16 @@ jobs:
 
       - name: Generate Hash
         run: |
-            mkdir -p  ${{ env.HashDir }}
-            ${{ matrix.suffix == 'win' &&  'certutil -hashfile build/astroterm.exe SHA256' || 'shasum -a 256 build/astroterm' }} > ${{ env.HashDir }}/${{ env.BinaryName }}.sha256
+          mkdir -p  ${{ env.HashDir }}
+          ${{ matrix.suffix == 'win' &&  'certutil -hashfile build/astroterm.exe SHA256' || 'shasum -a 256 build/astroterm' }} > ${{ env.HashDir }}/${{ env.BinaryName }}.sha256
 
       - name: Upload Hash
         if: ${{ !matrix.coverage && !matrix.ascii }}
         uses: actions/upload-artifact@v4
         with:
-            name: ${{ env.BinaryName }}.sha256
-            path: ${{ env.HashDir }}/*
-            if-no-files-found: error
+          name: ${{ env.BinaryName }}.sha256
+          path: ${{ env.HashDir }}/*
+          if-no-files-found: error
 
       # ------------------------------------------------------------------------
       # Upload Binary
@@ -238,16 +236,16 @@ jobs:
       - name: Rename Binary File
         if: ${{ !matrix.coverage && !matrix.ascii }}
         run: |
-            mkdir -p ${{env.Bin}}
-            mv ${{ matrix.suffix == 'win' && 'build/astroterm.exe' || 'build/astroterm' }} ${{env.Bin}}/${{env.BinaryName}}
+          mkdir -p ${{env.Bin}}
+          mv ${{ matrix.suffix == 'win' && 'build/astroterm.exe' || 'build/astroterm' }} ${{env.Bin}}/${{env.BinaryName}}
 
       - name: Upload Binary
         if: ${{ !matrix.coverage && !matrix.ascii }}
         uses: actions/upload-artifact@v4
         with:
-            name: ${{ env.BinaryName }}
-            path: ${{env.Bin}}
-            if-no-files-found: error
+          name: ${{ env.BinaryName }}
+          path: ${{env.Bin}}
+          if-no-files-found: error
 
   # Ensure binaries are standalone
   run:
@@ -255,8 +253,7 @@ jobs:
     strategy:
       matrix:
         include:
-
-            # astroterm-linux-x86_64
+          # astroterm-linux-x86_64
           - os: ubuntu-22.04
             suffix: linux
             arch: x86_64
@@ -267,7 +264,7 @@ jobs:
             arch: aarch64
 
             # astroterm-darwin-x86_64
-          - os: macos-13
+          - os: macos-15-intel
             suffix: darwin
             arch: x86_64
 
@@ -282,72 +279,72 @@ jobs:
       BinaryName: ${{ matrix.suffix == 'win' && format('astroterm-{0}-{1}.exe', matrix.suffix, matrix.arch) || format('astroterm-{0}-{1}', matrix.suffix, matrix.arch)}}
 
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-    - name: Download Release Binary
-      uses: actions/download-artifact@v4
-      with:
-        pattern: ${{ env.BinaryName }}*
-        path: ${{env.Bin}}
-        merge-multiple: true
+      - name: Download Release Binary
+        uses: actions/download-artifact@v4
+        with:
+          pattern: ${{ env.BinaryName }}*
+          path: ${{env.Bin}}
+          merge-multiple: true
 
-    - name: List Release Directory
-      run: |
-        ls -l ${{env.Bin}}
+      - name: List Release Directory
+        run: |
+          ls -l ${{env.Bin}}
 
-    - name: Set Executable Permissions
-      if: matrix.suffix != 'win'
-      run: |
-        chmod +x ${{env.Bin}}/${{ env.BinaryName }}
+      - name: Set Executable Permissions
+        if: matrix.suffix != 'win'
+        run: |
+          chmod +x ${{env.Bin}}/${{ env.BinaryName }}
 
-    - name: Run Binary
-      run: |
-        ${{env.Bin}}/${{ env.BinaryName }} -v
+      - name: Run Binary
+        run: |
+          ${{env.Bin}}/${{ env.BinaryName }} -v
 
   code-quality:
     runs-on: ubuntu-latest
     needs: run
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-    - name: Install Code Quality Tools
-      run: |
-        sudo apt-get install -y cppcheck clang-format
+      - name: Install Code Quality Tools
+        run: |
+          sudo apt-get install -y cppcheck clang-format
 
-    - name: Run Cppcheck
-      run: |
-        cppcheck \
-          --suppress=missingIncludeSystem \
-          --suppress=unusedFunction \
-          --suppress=missingInclude \
-          --suppress=style \
-          --error-exitcode=1 \
-          -i src/strptime.c \
-          -I include \
-          src/
+      - name: Run Cppcheck
+        run: |
+          cppcheck \
+            --suppress=missingIncludeSystem \
+            --suppress=unusedFunction \
+            --suppress=missingInclude \
+            --suppress=style \
+            --error-exitcode=1 \
+            -i src/strptime.c \
+            -I include \
+            src/
 
-    - name: Check Formatting
-      run: |
-        sh ./scripts/format.sh --check
+      - name: Check Formatting
+        run: |
+          sh ./scripts/format.sh --check
 
   upload-coverage:
     runs-on: ubuntu-latest
     needs: code-quality
     steps:
-    - name: Download Coverage Reports
-      uses: actions/download-artifact@v4
-      with:
-        name: coverage
-        path: coverage
+      - name: Download Coverage Reports
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage
+          path: coverage
 
-    - name: Upload Coverage to Codecov
-      uses: codecov/codecov-action@v5
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-        files: coverage/coverage.xml
-        fail_ci_if_error: true
+      - name: Upload Coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: coverage/coverage.xml
+          fail_ci_if_error: true
 
   publish-release:
     runs-on: ubuntu-latest
@@ -356,47 +353,45 @@ jobs:
       contents: write
     if: github.ref_type == 'tag' && startsWith(github.ref_name, 'v')
     steps:
+      - name: Download Release Binaries
+        uses: actions/download-artifact@v4
+        with:
+          pattern: astroterm-*
+          path: ${{env.Bin}}
+          merge-multiple: true
 
-    - name: Download Release Binaries
-      uses: actions/download-artifact@v4
-      with:
-        pattern: astroterm-*
-        path: ${{env.Bin}}
-        merge-multiple: true
+      - name: Verify Version Consistency
+        run: |
+          TAG_VERSION="${{ github.ref_name }}"
+          BINARY_PATH="${{env.Bin}}/astroterm-linux-x86_64"
 
-    - name: Verify Version Consistency
-      run: |
-        TAG_VERSION="${{ github.ref_name }}"
-        BINARY_PATH="${{env.Bin}}/astroterm-linux-x86_64"
+          # Ensure the binary is executable
+          chmod +x "$BINARY_PATH"
 
-        # Ensure the binary is executable
-        chmod +x "$BINARY_PATH"
+          # Extract version from binary output
+          BINARY_VERSION=$($BINARY_PATH -v | awk '{print $2}')
 
-        # Extract version from binary output
-        BINARY_VERSION=$($BINARY_PATH -v | awk '{print $2}')
+          # Remove the "v" prefix if present
+          if [[ "$TAG_VERSION" == v* ]]; then
+            TAG_VERSION=${TAG_VERSION:1}
+          fi
 
-        # Remove the "v" prefix if present
-        if [[ "$TAG_VERSION" == v* ]]; then
-          TAG_VERSION=${TAG_VERSION:1}
-        fi
+          # Compare the two versions
+          if [ "$TAG_VERSION" != "$BINARY_VERSION" ]; then
+              echo "Error: Git tag version ($TAG_VERSION) does not match binary version ($BINARY_VERSION)."
+              exit 1
+          fi
 
-        # Compare the two versions
-        if [ "$TAG_VERSION" != "$BINARY_VERSION" ]; then
-            echo "Error: Git tag version ($TAG_VERSION) does not match binary version ($BINARY_VERSION)."
-            exit 1
-        fi
+          echo "Success: Git tag version ($TAG_VERSION) matches binary version ($BINARY_VERSION)."
 
-        echo "Success: Git tag version ($TAG_VERSION) matches binary version ($BINARY_VERSION)."
+      - name: List files in release folder
+        run: ls -al ${{env.Bin}}
 
-
-    - name: List files in release folder
-      run: ls -al ${{env.Bin}}
-
-    - name: Update GitHub Release
-      uses: ncipollo/release-action@58ae73b360456532aafd58ee170c045abbeaee37 # v1.10.0
-      with:
-        artifacts: ${{env.Bin}}/*
-        generateReleaseNotes: true
-        draft: true
-        token: ${{ secrets.GITHUB_TOKEN }}
-        name: ${{ github.ref_name }}
+      - name: Update GitHub Release
+        uses: ncipollo/release-action@58ae73b360456532aafd58ee170c045abbeaee37 # v1.10.0
+        with:
+          artifacts: ${{env.Bin}}/*
+          generateReleaseNotes: true
+          draft: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+          name: ${{ github.ref_name }}
