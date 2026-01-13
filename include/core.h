@@ -10,6 +10,10 @@
 #include <stdbool.h>
 #include <time.h>
 
+
+// Maximum buffer size for parsing constellation file lines
+#define MAX_BUF_SIZE 2048
+
 /* Describes how objects should be rendered
  */
 struct Conf

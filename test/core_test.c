@@ -149,6 +149,28 @@ void test_generate_constell_table(void)
     TEST_ASSERT_EQUAL_INT_ARRAY(expected_star_numbers, constell_table[19].star_numbers, 2);
 }
 
+/**
+ * Ensure no buffer overflows occur
+ * IMPORTANT: requires AddressSanitizer to be enabled!
+ */
+void test_constell_table_no_overflow(void)
+{
+    // GitHub Issue #91: if the constellation data exceeds expected buffer length, ensure no overflow occurs
+    char *string = malloc(MAX_BUF_SIZE + 1); // +1 for null terminator--this exceeds the buffer size by one!
+    memset(string, 'A', MAX_BUF_SIZE);
+    string[MAX_BUF_SIZE] = '\0';
+    string[MAX_BUF_SIZE - 1] = '\n'; // Ensure at least one newline
+
+    struct Constell *table;
+    unsigned int n;
+    bool result = generate_constell_table((const uint8_t *) string, strlen(string), &table, &n);
+
+    TEST_ASSERT_TRUE(result);
+    TEST_ASSERT_EQUAL(1, n);
+    free(string);
+    free_constells(table, n);
+}
+
 void test_star_numbers_by_magnitude(void)
 {
     TEST_ASSERT_NOT_NULL(num_by_mag);
@@ -289,6 +311,7 @@ int main(void)
     RUN_TEST(test_generate_star_table);
     RUN_TEST(test_generate_name_table);
     RUN_TEST(test_generate_constell_table);
+    RUN_TEST(test_constell_table_no_overflow);
     RUN_TEST(test_star_numbers_by_magnitude);
     RUN_TEST(test_update_star_positions);
     RUN_TEST(test_update_planet_positions);

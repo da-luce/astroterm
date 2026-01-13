@@ -220,7 +220,6 @@ bool generate_name_table(const uint8_t *data, size_t data_len, struct StarName *
  *
  * NOTE: line numbers are 0-indexed
  */
-#define MAX_BUF_SIZE 2048
 bool parse_line(const uint8_t *data, struct Constell **constell_table_out, int line_start, int line_end, int line_number)
 {
     // Validate the input range
