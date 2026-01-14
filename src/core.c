@@ -3,6 +3,7 @@
 #include "astro.h"
 #include "parse_BSC5.h"
 #include "strptime.h"
+#include "macros.h"
 
 #include <math.h>
 #include <stdio.h>
@@ -229,10 +230,15 @@ bool parse_line(const uint8_t *data, struct Constell **constell_table_out, int l
     }
 
     // Create a temporary buffer for the line data
-    size_t line_length = line_end - line_start + 1;
-    char buffer[MAX_BUF_SIZE];
+    size_t line_length = line_end - line_start + 1; // +1 to include the last character
 
-    // Copy the relevant data into the buffer (ensure null-termination)
+    // #91: use dynamic allocation to avoid buffer overflow
+    char *buffer = malloc(line_length + 1); // +1 for null terminator
+    if (buffer == NULL)
+    {
+        return false;
+    }
+
     memcpy(buffer, &data[line_start], line_length);
     buffer[line_length] = '\0';
 
@@ -240,6 +246,7 @@ bool parse_line(const uint8_t *data, struct Constell **constell_table_out, int l
     const char *name = strtok(buffer, " "); // First token is the constellation name
     if (name == NULL)
     {
+        free(buffer);
         return false; // Malformed line, no name found
     }
 
@@ -247,12 +254,14 @@ bool parse_line(const uint8_t *data, struct Constell **constell_table_out, int l
     const char *num_segments_str = strtok(NULL, " ");
     if (num_segments_str == NULL)
     {
+        free(buffer);
         return false; // Malformed line, no number of segments
     }
 
     unsigned int num_segments = atoi(num_segments_str);
     if (num_segments == 0)
     {
+        free(buffer);
         return false; // Invalid number of segments
     }
 
@@ -276,8 +285,12 @@ bool parse_line(const uint8_t *data, struct Constell **constell_table_out, int l
     if (i != num_segments * 2)
     {
         free(star_numbers);
+        free(buffer);
         return false; // Malformed line, not enough star numbers
     }
+
+    // We're done with the buffer now
+    free(buffer);
 
     // Allocate memory for the constellations table if necessary
     if (*constell_table_out == NULL)
