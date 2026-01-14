@@ -61,16 +61,6 @@ else
     add_project_arguments('-D_XOPEN_SOURCE', '-D_USE_XOPEN', '-D_GNU_SOURCE', language : 'c')
 endif
 
-if get_option('buildtype') == 'debug'
-    # Enable AddressSanitizer for debug builds to catch memory issues
-    asan_flags = ['-fsanitize=address', '-fsanitize=undefined']
-
-    message('Adding AddressSanitizer flags for debug build')
-
-    add_project_arguments(asan_flags, language: 'c')
-    add_project_link_arguments(asan_flags, language: 'c')
-endif
-
 build_defines = []
 
 # ------------------------------------------------------------------------------

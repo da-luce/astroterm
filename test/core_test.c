@@ -57,6 +57,7 @@ void tearDown(void)
 #define SMOTION_EPSILON 1e-20
 
 // Function to trim trailing '\r' characters
+// FIXME: need to investigate why/where these are present in the first place
 char *trim_string(const char *str)
 {
     if (str == NULL)
@@ -94,7 +95,9 @@ void test_generate_star_table(void)
 
     // Verify start with name
     TEST_ASSERT_EQUAL(7001, star_table[7000].catalog_number);
+    char *vega_name = trim_string(star_table[7000].base.label);
     TEST_ASSERT_EQUAL_STRING("Vega", trim_string(star_table[7000].base.label));
+    free(vega_name);
 
     // Verify star with no data
     int no_data_index = 92 - 1;
@@ -128,10 +131,18 @@ void test_generate_name_table(void)
 {
     // Trim carriage returns so passed on windows
     TEST_ASSERT_NOT_NULL(name_table);
-    TEST_ASSERT_EQUAL_STRING("Acamar", trim_string(name_table[896].name));
-    TEST_ASSERT_EQUAL_STRING("Vega", trim_string(name_table[7000].name));
-    TEST_ASSERT_EQUAL_STRING("Wezen", trim_string(name_table[2692].name));
-    TEST_ASSERT_EQUAL_STRING("Zubeneschamali", trim_string(name_table[5684].name));
+    char *acamar_name = trim_string(name_table[896].name);
+    char *vega_name = trim_string(name_table[7000].name);
+    char *wezen_name = trim_string(name_table[2692].name);
+    char *zubeneschamali_name = trim_string(name_table[5684].name);
+    TEST_ASSERT_EQUAL_STRING("Acamar", acamar_name);
+    TEST_ASSERT_EQUAL_STRING("Vega", vega_name);
+    TEST_ASSERT_EQUAL_STRING("Wezen", wezen_name);
+    TEST_ASSERT_EQUAL_STRING("Zubeneschamali", zubeneschamali_name);
+    free(acamar_name);
+    free(vega_name);
+    free(wezen_name);
+    free(zubeneschamali_name);
 }
 
 void test_generate_constell_table(void)
@@ -186,14 +197,18 @@ void test_update_star_positions(void)
     // Verify Vega's position is correct
     // https://stellarium-web.org/skysource/Vega?fov=120.00&date=2020-10-23T12:00:00Z&lat=42.36&lng=-71.06&elev=0
     TEST_ASSERT_EQUAL(7001, star_table[7000].catalog_number);
+    char *vega_name = trim_string(star_table[7000].base.label);
     TEST_ASSERT_EQUAL_STRING("Vega", trim_string(star_table[7000].base.label));
+    free(vega_name);
     TEST_ASSERT_DOUBLE_WITHIN(S_EPSILON, 0.547246, star_table[7000].base.azimuth);
     TEST_ASSERT_DOUBLE_WITHIN(S_EPSILON, 0.0, star_table[7000].base.altitude);
 
     // Verify Arcturus's position is correct
     // https://stellarium-web.org/skysource/Arcturus?fov=120.00&date=2020-10-23T12:00:00Z&lat=42.36&lng=-71.06&elev=0
     TEST_ASSERT_EQUAL(5340, star_table[5339].catalog_number);
-    TEST_ASSERT_EQUAL_STRING("Arcturus", trim_string(star_table[5339].base.label));
+    char *arcturus_name = trim_string(star_table[5339].base.label);
+    TEST_ASSERT_EQUAL_STRING("Arcturus", arcturus_name);
+    free(arcturus_name);
     TEST_ASSERT_DOUBLE_WITHIN(S_EPSILON, 1.511414, star_table[5339].base.azimuth);
     TEST_ASSERT_DOUBLE_WITHIN(S_EPSILON, 0.440355, star_table[5339].base.altitude);
 }
