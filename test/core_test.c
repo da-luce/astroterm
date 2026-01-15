@@ -43,6 +43,7 @@ void tearDown(void)
     free_moon_object(moon_object);
     free_star_names(name_table, num_stars);
     free(BSC5_entries);
+    free(num_by_mag);
 }
 
 // Tolerance for positions in radians. Planets are slightly less accurate. The moon is even less inaccurate.
