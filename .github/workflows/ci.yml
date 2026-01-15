@@ -186,8 +186,6 @@ jobs:
       - name: Build
         env:
           CC: ${{ matrix.compiler }}
-          # Suppress leaks from third-party libs
-          ASAN_OPTIONS: detect_leaks=1:verbosity=2:suppressions=${{ github.workspace }}/asan.supp:log_path=asan.log
           # Default build type is release. We use debug for coverage to enable AddressSanitizer to catch additional issues
           BuildFlags: ${{ matrix.coverage && '-Db_coverage=true -Db_sanitize=address,undefined --buildtype=debug' || '-Dprefer_static=true'}}
         run: |
@@ -195,6 +193,9 @@ jobs:
           meson compile --verbose -C build
 
       - name: Test
+        env:
+          # Suppress leaks from third-party libs in tests
+          ASAN_OPTIONS: detect_leaks=1:verbosity=2:suppressions=${{ github.workspace }}/asan_suppress.txt:log_path=asan.log
         run: |
           meson test -v -C build
 
