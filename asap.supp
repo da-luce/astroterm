@@ -1,0 +1,2 @@
+# Suppress ncurses/libtinfo intentional leaks at process exit
+leak:_nc_doalloc

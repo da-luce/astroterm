@@ -42,13 +42,15 @@ void tearDown(void)
     free_planets(planet_table, NUM_PLANETS);
     free_moon_object(moon_object);
     free_star_names(name_table, num_stars);
+    free(BSC5_entries);
+    free(num_by_mag);
 }
 
 // Tolerance for positions in radians. Planets are slightly less accurate. The moon is even less inaccurate.
 // However, differences of these scales are very hard to notice on even a large terminal display
-#define S_EPSILON 0.01
-#define P_EPSILON 0.02
-#define M_EPSILON 0.06
+#define S_EPSILON 0.01 // Stars
+#define P_EPSILON 0.02 // Planets (& Sun)
+#define M_EPSILON 0.06 // Moon
 
 // The xrpm and xdpm vary slightly between the binary bsc5 file provided at
 // https://web.archive.org/web/20231007085824if_/http://tdc-www.harvard.edu/catalogs/BSC5 and the binary file we generate if
@@ -96,7 +98,7 @@ void test_generate_star_table(void)
     // Verify start with name
     TEST_ASSERT_EQUAL(7001, star_table[7000].catalog_number);
     char *vega_name = trim_string(star_table[7000].base.label);
-    TEST_ASSERT_EQUAL_STRING("Vega", trim_string(star_table[7000].base.label));
+    TEST_ASSERT_EQUAL_STRING("Vega", vega_name);
     free(vega_name);
 
     // Verify star with no data
@@ -198,7 +200,7 @@ void test_update_star_positions(void)
     // https://stellarium-web.org/skysource/Vega?fov=120.00&date=2020-10-23T12:00:00Z&lat=42.36&lng=-71.06&elev=0
     TEST_ASSERT_EQUAL(7001, star_table[7000].catalog_number);
     char *vega_name = trim_string(star_table[7000].base.label);
-    TEST_ASSERT_EQUAL_STRING("Vega", trim_string(star_table[7000].base.label));
+    TEST_ASSERT_EQUAL_STRING("Vega", vega_name);
     free(vega_name);
     TEST_ASSERT_DOUBLE_WITHIN(S_EPSILON, 0.547246, star_table[7000].base.azimuth);
     TEST_ASSERT_DOUBLE_WITHIN(S_EPSILON, 0.0, star_table[7000].base.altitude);
