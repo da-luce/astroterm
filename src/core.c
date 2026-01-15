@@ -1,9 +1,9 @@
 #include "core.h"
 
 #include "astro.h"
+#include "macros.h"
 #include "parse_BSC5.h"
 #include "strptime.h"
-#include "macros.h"
 
 #include <math.h>
 #include <stdio.h>
@@ -269,6 +269,7 @@ bool parse_line(const uint8_t *data, struct Constell **constell_table_out, int l
     int *star_numbers = malloc(num_segments * 2 * sizeof(int)); // Each segment has two star numbers
     if (star_numbers == NULL)
     {
+        free(buffer);
         return false; // Memory allocation failed
     }
 
