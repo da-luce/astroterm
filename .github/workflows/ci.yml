@@ -195,7 +195,7 @@ jobs:
       - name: Test
         env:
           # Suppress leaks from third-party libs in tests
-          ASAN_OPTIONS: detect_leaks=1:verbosity=2:suppressions=${{ github.workspace }}/asan_suppress.txt:log_path=asan.log
+          ASAN_OPTIONS: suppressions=${{ github.workspace }}/asan_suppress.txt
         run: |
           meson test -v -C build
 
