@@ -178,8 +178,6 @@ void test_star_numbers_by_magnitude(void)
     TEST_ASSERT_EQUAL(2491, num_by_mag[last_index]);
     TEST_ASSERT_EQUAL(2326, num_by_mag[last_index - 1]);
     TEST_ASSERT_EQUAL(5340, num_by_mag[last_index - 2]);
-
-    free(num_by_mag);
 }
 
 void test_update_star_positions(void)
