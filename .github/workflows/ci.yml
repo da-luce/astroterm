@@ -186,12 +186,17 @@ jobs:
       - name: Build
         env:
           CC: ${{ matrix.compiler }}
-          BuildFlags: ${{ matrix.coverage && '-Db_coverage=true' || '--buildtype=release -Dprefer_static=true'}}
+          # Default build type is release. We use debug for coverage to enable AddressSanitizer to catch additional issues
+          BuildFlags: ${{ matrix.coverage && '-Db_coverage=true -Db_sanitize=address,undefined --buildtype=debug' || '-Dprefer_static=true'}}
         run: |
           meson setup build ${{ env.BuildFlags }}
           meson compile --verbose -C build
 
       - name: Test
+        env:
+          # Suppress leaks from third-party libs in tests
+          # ASAN delegates leak detection to LSAN
+          LSAN_OPTIONS: suppressions=${{ github.workspace }}/lsan.supp
         run: |
           meson test -v -C build
 
@@ -258,17 +263,17 @@ jobs:
             suffix: linux
             arch: x86_64
 
-            # astroterm-darwin-aarch64
+          # astroterm-darwin-aarch64
           - os: macos-latest
             suffix: darwin
             arch: aarch64
 
-            # astroterm-darwin-x86_64
+          # astroterm-darwin-x86_64
           - os: macos-15-intel
             suffix: darwin
             arch: x86_64
 
-            # astroterm-win-x86_64
+          # astroterm-win-x86_64
           - os: windows-latest
             suffix: win
             arch: x86_64

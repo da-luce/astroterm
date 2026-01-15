@@ -42,13 +42,15 @@ void tearDown(void)
     free_planets(planet_table, NUM_PLANETS);
     free_moon_object(moon_object);
     free_star_names(name_table, num_stars);
+    free(BSC5_entries);
+    free(num_by_mag);
 }
 
 // Tolerance for positions in radians. Planets are slightly less accurate. The moon is even less inaccurate.
 // However, differences of these scales are very hard to notice on even a large terminal display
-#define S_EPSILON 0.01
-#define P_EPSILON 0.02
-#define M_EPSILON 0.06
+#define S_EPSILON 0.01 // Stars
+#define P_EPSILON 0.02 // Planets (& Sun)
+#define M_EPSILON 0.06 // Moon
 
 // The xrpm and xdpm vary slightly between the binary bsc5 file provided at
 // https://web.archive.org/web/20231007085824if_/http://tdc-www.harvard.edu/catalogs/BSC5 and the binary file we generate if
@@ -57,6 +59,7 @@ void tearDown(void)
 #define SMOTION_EPSILON 1e-20
 
 // Function to trim trailing '\r' characters
+// FIXME: need to investigate why/where these are present in the first place
 char *trim_string(const char *str)
 {
     if (str == NULL)
@@ -94,7 +97,9 @@ void test_generate_star_table(void)
 
     // Verify start with name
     TEST_ASSERT_EQUAL(7001, star_table[7000].catalog_number);
-    TEST_ASSERT_EQUAL_STRING("Vega", trim_string(star_table[7000].base.label));
+    char *vega_name = trim_string(star_table[7000].base.label);
+    TEST_ASSERT_EQUAL_STRING("Vega", vega_name);
+    free(vega_name);
 
     // Verify star with no data
     int no_data_index = 92 - 1;
@@ -128,10 +133,18 @@ void test_generate_name_table(void)
 {
     // Trim carriage returns so passed on windows
     TEST_ASSERT_NOT_NULL(name_table);
-    TEST_ASSERT_EQUAL_STRING("Acamar", trim_string(name_table[896].name));
-    TEST_ASSERT_EQUAL_STRING("Vega", trim_string(name_table[7000].name));
-    TEST_ASSERT_EQUAL_STRING("Wezen", trim_string(name_table[2692].name));
-    TEST_ASSERT_EQUAL_STRING("Zubeneschamali", trim_string(name_table[5684].name));
+    char *acamar_name = trim_string(name_table[896].name);
+    char *vega_name = trim_string(name_table[7000].name);
+    char *wezen_name = trim_string(name_table[2692].name);
+    char *zubeneschamali_name = trim_string(name_table[5684].name);
+    TEST_ASSERT_EQUAL_STRING("Acamar", acamar_name);
+    TEST_ASSERT_EQUAL_STRING("Vega", vega_name);
+    TEST_ASSERT_EQUAL_STRING("Wezen", wezen_name);
+    TEST_ASSERT_EQUAL_STRING("Zubeneschamali", zubeneschamali_name);
+    free(acamar_name);
+    free(vega_name);
+    free(wezen_name);
+    free(zubeneschamali_name);
 }
 
 void test_generate_constell_table(void)
@@ -165,8 +178,6 @@ void test_star_numbers_by_magnitude(void)
     TEST_ASSERT_EQUAL(2491, num_by_mag[last_index]);
     TEST_ASSERT_EQUAL(2326, num_by_mag[last_index - 1]);
     TEST_ASSERT_EQUAL(5340, num_by_mag[last_index - 2]);
-
-    free(num_by_mag);
 }
 
 void test_update_star_positions(void)
@@ -186,14 +197,18 @@ void test_update_star_positions(void)
     // Verify Vega's position is correct
     // https://stellarium-web.org/skysource/Vega?fov=120.00&date=2020-10-23T12:00:00Z&lat=42.36&lng=-71.06&elev=0
     TEST_ASSERT_EQUAL(7001, star_table[7000].catalog_number);
-    TEST_ASSERT_EQUAL_STRING("Vega", trim_string(star_table[7000].base.label));
+    char *vega_name = trim_string(star_table[7000].base.label);
+    TEST_ASSERT_EQUAL_STRING("Vega", vega_name);
+    free(vega_name);
     TEST_ASSERT_DOUBLE_WITHIN(S_EPSILON, 0.547246, star_table[7000].base.azimuth);
     TEST_ASSERT_DOUBLE_WITHIN(S_EPSILON, 0.0, star_table[7000].base.altitude);
 
     // Verify Arcturus's position is correct
     // https://stellarium-web.org/skysource/Arcturus?fov=120.00&date=2020-10-23T12:00:00Z&lat=42.36&lng=-71.06&elev=0
     TEST_ASSERT_EQUAL(5340, star_table[5339].catalog_number);
-    TEST_ASSERT_EQUAL_STRING("Arcturus", trim_string(star_table[5339].base.label));
+    char *arcturus_name = trim_string(star_table[5339].base.label);
+    TEST_ASSERT_EQUAL_STRING("Arcturus", arcturus_name);
+    free(arcturus_name);
     TEST_ASSERT_DOUBLE_WITHIN(S_EPSILON, 1.511414, star_table[5339].base.azimuth);
     TEST_ASSERT_DOUBLE_WITHIN(S_EPSILON, 0.440355, star_table[5339].base.altitude);
 }
