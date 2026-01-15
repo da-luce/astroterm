@@ -1,7 +1,6 @@
 #include "core.h"
 
 #include "astro.h"
-#include "macros.h"
 #include "parse_BSC5.h"
 #include "strptime.h"
 
