@@ -209,6 +209,12 @@ jobs:
         run: |
           ninja coverage-xml -C build
 
+      - name: Debug Codecov config
+        run: |
+          echo "Current directory: $(pwd)"
+          ls -la
+          cat codecov.yml
+
       - name: Upload Coverage
         if: matrix.coverage
         uses: actions/upload-artifact@v4
