@@ -243,40 +243,28 @@ int main(int argc, char *argv[])
     return EXIT_SUCCESS;
 }
 
+void print_city_name_quoted(const CityData *city, void *unused)
+{
+    printf("\"%s\"\n", city->city_name);
+}
+
 void parse_options(int argc, char *argv[], struct Conf *config)
 {
-    struct arg_dbl *latitude_arg = arg_dbl0("a", "latitude", "<degrees>", "Observer latitude [-90°, 90°] (default: 0.0)");
-    struct arg_dbl *longitude_arg = arg_dbl0("o", "longitude", "<degrees>", "Observer longitude [-180°, 180°] (default: 0.0)");
-    struct arg_str *datetime_arg = arg_str0("d", "datetime", "<yyyy-mm-ddThh:mm:ss>", "Observation datetime in UTC");
-    struct arg_dbl *threshold_arg =
-        arg_dbl0("t", "threshold", "<float>", "Only render stars brighter than this magnitude (default: 5.0)");
-    struct arg_dbl *label_arg =
-        arg_dbl0("l", "label-thresh", "<float>", "Label stars brighter than this magnitude (default: 0.25)");
-    struct arg_int *fps_arg = arg_int0("f", "fps", "<int>", "Frames per second (default: 24)");
-    struct arg_dbl *speed_arg = arg_dbl0("s", "speed", "<float>", "Animation speed multiplier (default: 1.0)");
-    struct arg_lit *color_arg = arg_lit0("c", "color", "Enable terminal colors");
-    struct arg_lit *constell_arg = arg_lit0("C", "constellations",
-                                            "Draw constellation stick figures. Note: a constellation is only "
-                                            "drawn if all stars in the figure are over the threshold");
-    struct arg_lit *grid_arg = arg_lit0("g", "grid", "Draw an azimuthal grid");
-    struct arg_lit *unicode_arg = arg_lit0("u", "unicode", "Use unicode characters");
-    struct arg_lit *quit_arg = arg_lit0("q", "quit-on-any", "Quit on any keypress (default is to quit on 'q' or 'ESC' only)");
-    struct arg_lit *meta_arg = arg_lit0("m", "metadata", "Display metadata");
-    struct arg_lit *help_arg = arg_lit0("h", "help", "Print this help message");
-    struct arg_dbl *ratio_arg = arg_dbl0("r", "aspect-ratio", "<float>",
-                                         "Override the calculated terminal cell aspect ratio. Use this if your projection is "
-                                         "not 'square.' A value around 2.0 works well for most cases");
-    struct arg_str *city_arg =
-        arg_str0("i", "city", "<city_name>",
-                 "Use the latitude and longitude of the provided city. If the name contains multiple words, "
-                 "enclose the name in single or double quotes. For a list of available cities, see: "
-                 "https://github.com/da-luce/astroterm/blob/v" PROJ_VERSION "/data/cities.csv");
-    struct arg_lit *version_arg = arg_lit0("v", "version", "Display version info and exit");
+    #define INCLUDE_ARG_DEFINITION_DBL0(token, short_name, long_name, datatype, glossary) \
+        struct arg_dbl *token = arg_dbl0(short_name, long_name, datatype, glossary);
+    #define INCLUDE_ARG_DEFINITION_STR0(token, short_name, long_name, datatype, glossary) \
+        struct arg_str *token = arg_str0(short_name, long_name, datatype, glossary);
+    #define INCLUDE_ARG_DEFINITION_LIT0(token, short_name, long_name, glossary) \
+        struct arg_lit *token = arg_lit0(short_name, long_name, glossary);
+    #define INCLUDE_ARG_DEFINITION_INT0(token, short_name, long_name, datatype, glossary) \
+        struct arg_int *token = arg_int0(short_name, long_name, datatype, glossary);
+    #include "arg_definitions.h"
     struct arg_end *end = arg_end(20);
 
     void *argtable[] = {latitude_arg, longitude_arg, datetime_arg, threshold_arg, label_arg,   fps_arg,
                         speed_arg,    color_arg,     constell_arg, grid_arg,      unicode_arg, quit_arg,
-                        meta_arg,     ratio_arg,     help_arg,     city_arg,      version_arg, end};
+                        meta_arg,     ratio_arg,     help_arg,     completions_arg,
+                        city_arg,      version_arg, end};
 
     int nerrors = arg_parse(argc, argv, argtable);
 
@@ -285,6 +273,45 @@ void parse_options(int argc, char *argv[], struct Conf *config)
         printf("View stars, planets, and more, right in your terminal! ✨🪐\n\n");
         printf("Usage: astroterm [OPTION]...\n\n");
         arg_print_glossary_gnu(stdout, argtable);
+        exit(EXIT_SUCCESS);
+    }
+
+    if (completions_arg->count > 0)
+    {
+        // Print bash completions
+        printf("# Bash completions for astroterm\n");
+        printf("ASTROTERM_OPTIONS=(\n");
+        #define INCLUDE_ARG_DEFINITION_DBL0(token, short_name, long_name, datatype, glossary) \
+            printf("    -%s\n", short_name); printf("    --%s\n", long_name);
+        #define INCLUDE_ARG_DEFINITION_STR0(token, short_name, long_name, datatype, glossary) \
+            printf("    -%s\n", short_name); printf("    --%s\n", long_name);
+        #define INCLUDE_ARG_DEFINITION_LIT0(token, short_name, long_name, glossary) \
+            printf("    -%s\n", short_name); printf("    --%s\n", long_name);
+        #define INCLUDE_ARG_DEFINITION_INT0(token, short_name, long_name, datatype, glossary) \
+            printf("    -%s\n", short_name); printf("    --%s\n", long_name);
+        #include "arg_definitions.h"
+        printf(")\n\n");
+        printf("ASTROTERM_CITIES=(\n");
+        iter_cities(&print_city_name_quoted, NULL);
+        printf(")\n");
+        printf("_astroterm_completions() {\n");
+        printf("    local word=\"${COMP_WORDS[COMP_CWORD]}\"\n");
+        printf("    local prev=\"${COMP_WORDS[COMP_CWORD-1]}\"\n");
+        printf("    case \"$prev\" in\n");
+        printf("        -i|--city)\n");
+        printf("            readarray -t _cities < <(IFS=: compgen -W \"$( printf '%%q:' \"${ASTROTERM_CITIES[@]}\" )\" -- \"${word}\")\n");
+        printf("            COMPREPLY=()\n");
+        printf("            for city in \"${_cities[@]}\"; do\n");
+        printf("                printf -v city_esc '%%q ' \"$city\"\n");
+        printf("                COMPREPLY+=(\"$city_esc\")\n");
+        printf("            done\n");
+        printf("            ;;\n");
+        printf("        *)\n");
+        printf("            COMPREPLY=( $(compgen -W \"${ASTROTERM_OPTIONS[*]}\" -- \"${word}\") )\n");
+        printf("            ;;\n");
+        printf("    esac\n");
+        printf("}\n");
+        printf("complete -o nospace -F _astroterm_completions astroterm\n");
         exit(EXIT_SUCCESS);
     }
 
