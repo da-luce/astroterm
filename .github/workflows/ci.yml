@@ -210,6 +210,7 @@ jobs:
           ninja coverage-xml -C build
 
       - name: Debug Codecov config
+        if: matrix.coverage
         run: |
           echo "Current directory: $(pwd)"
           ls -la
