@@ -338,6 +338,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: code-quality
     steps:
+      # Checkout so Codecov can find codecov.yml
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
       - name: Download Coverage Reports
         uses: actions/download-artifact@v4
         with:

@@ -1,7 +1,9 @@
 ignore:
-  - "test/third_party/**/*"  # Ignore third party code
-  - "src/strptime.c"
-  # Ignore main.c and UI functions, which are not practical to unit test.
-  # Keep main.c minimal and modularize logic into separate functions whenever possible.
-  - "src/main.c"
-  - "src/core_render.c"
+- "test/third_party/**/*" # Ignore third party code
+- "src/strptime.c"
+# Ignore main.c and UI functions, which are not practical to unit test.
+# Keep main.c minimal and modularize logic into separate functions whenever possible.
+- "src/main.c"
+- "src/core_render.c"
+fixes:
+- "/home/runner/work/astroterm/astroterm/::"
