@@ -208,12 +208,7 @@ jobs:
         # Workaround: ninja coverage-xml doesn't produce paths relative to repo root (Codecov needs this). We must use gcovr directly.
         if: matrix.coverage
         run: |
-          # Build your code with coverage enabled
-          ninja -C build
-
-          # Run tests to produce .gcda/.gcno files
-          ninja test -C build
-
+          # In theory, meson should have already run tests with coverage flags
           # Generate coverage XML with paths relative to repo root
           gcovr -r . --xml-pretty -o build/meson-logs/coverage.xml
 
