@@ -3,6 +3,7 @@
 #include <curses.h>
 #include <math.h>
 #include <stdlib.h>
+#include <string.h>
 
 // The difference in logic between drawing an ASCII and unicode line differs
 // enough that having two different functions is warranted
@@ -264,6 +265,118 @@ void draw_line_dotted(WINDOW *win, int ya, int xa, int yb, int xb)
             x += sx;
         }
     }
+}
+
+#define MAX_COLS 1024
+#define MAX_ROWS 1024
+
+static unsigned char braille_layer[MAX_ROWS][MAX_COLS];
+
+void clear_braille_lines(void)
+{
+    memset(braille_layer, 0, sizeof(braille_layer));
+}
+
+void draw_braille_cell(WINDOW *win, int y, int x, unsigned char mask)
+{
+    if (mask == 0) return;
+
+    mask |= braille_layer[y][x];
+    braille_layer[y][x] = mask;
+
+    unsigned char utf8[4];
+    utf8[0] = 0xE2;
+    utf8[1] = 0xA0 | (mask >> 6);   // Top 2 bits of mask
+    utf8[2] = 0x80 | (mask & 0x3F); // Bottom 6 bits of mask
+    utf8[3] = '\0';
+
+    mvwaddstr(win, y, x, (char *)utf8);
+}
+
+void draw_line_braille(WINDOW *win, int ya, int xa, int yb, int xb)
+{
+    // ncurses coordinates
+    int curs_xa = xa;
+    int curs_ya = ya;
+
+    // braille coordinates
+    if (xa < xb) {
+        xa = xa * 2 + 1;
+        xb = xb * 2;
+    }
+    else if (xa > xb) {
+        xa = xa * 2;
+        xb = xb * 2 + 1;
+    }
+    else {
+        xa = xa * 2;
+        xb = xb * 2;
+    }
+
+    if (ya < yb) {
+        ya = ya * 4 + 2;
+        yb = yb * 4 + 1;
+    }
+    else if (ya > yb) {
+        ya = ya * 4 + 1;
+        yb = yb * 4 + 2;
+    }
+    else {
+        ya = ya * 4 + 1;
+        yb = yb * 4 + 1;
+    }
+
+    int dx = abs(xb - xa);
+    int dy = abs(yb - ya);
+
+    int incx = (xa < xb) ? 1 : -1;
+    int incy = (ya < yb) ? 1 : -1;
+
+    int err = ((dx > dy) ? dx : -dy) / 2;
+    int e2 = 0;
+
+    unsigned char braille_mask = 0;
+
+    for(;;)
+    {
+        int curs_x = xa / 2;
+        int curs_y = ya / 4;
+
+        if (curs_x != curs_xa || curs_y != curs_ya)
+        {
+            draw_braille_cell(win, curs_ya, curs_xa, braille_mask);
+            braille_mask = 0;
+            curs_xa = curs_x;
+            curs_ya = curs_y;
+        }
+
+        int dot_x = xa % 2;
+        int dot_y = ya % 4;
+
+        static const unsigned char dot_map[4][2] = {
+            {0x01, 0x08}, {0x02, 0x10}, {0x04, 0x20}, {0x40, 0x80}
+        };
+
+        braille_mask |= dot_map[dot_y][dot_x];
+
+        if (xa == xb && ya == yb) {
+            break;
+        }
+
+        e2 = err;
+        if (e2 > -dx)
+        {
+            err -= dy;
+            xa += incx;
+        }
+        if (e2 < dy)
+        {
+            err += dx;
+            ya += incy;
+        }
+    }
+
+    draw_braille_cell(win, curs_ya, curs_xa, braille_mask);
 }
 
 enum FillType

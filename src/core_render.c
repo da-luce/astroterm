@@ -165,7 +165,14 @@ void render_constellation(WINDOW *win, const struct Conf *config, struct Constel
         // FIXME: this clipping doesn't seem to work or no-unicode for some reason?
         if (config->unicode)
         {
-            draw_line_smooth(win, ya, xa, yb, xb);
+            if (config->braille)
+            {
+                draw_line_braille(win, ya, xa, yb, xb);
+            }
+            else
+            {
+                draw_line_smooth(win, ya, xa, yb, xb);
+            }
             if (!a_clipped)
             {
                 mvwaddstr(win, ya, xa, "\u25CB"); // Unicode circle symbol
@@ -193,6 +200,7 @@ void render_constellation(WINDOW *win, const struct Conf *config, struct Constel
 void render_constells(WINDOW *win, const struct Conf *config, struct Constell **constell_table, int num_const,
                       const struct Star *star_table)
 {
+    clear_braille_lines();
     for (int i = 0; i < num_const; ++i)
     {
         struct Constell *constellation = &((*constell_table)[i]);
