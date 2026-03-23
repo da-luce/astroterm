@@ -266,14 +266,14 @@ void render_azimuthal_grid(WINDOW *win, const struct Conf *config)
     // Minimum number of rows separating grid line (at end of window)
     int min_height = 10;
 
-    // Set the step size to the smallest desirable increment
-    int inc;
-    for (int i = length - 1; i >= 0; --i)
+    int inc = step_sizes[length - 1]; // Fallback to large delta on small windows
+    for (int i = 0; i < length; ++i)
     {
-        inc = step_sizes[i];
-        if (round(rad_vertical * sin(inc * to_rad)) < min_height)
+        // Vertical offset (rows) of the angle at edge of window -- approximately the "arc length" for small angles
+        int vertical_offset = (int) round(rad_vertical * sin(step_sizes[i] * to_rad));
+        if (vertical_offset >= min_height)
         {
-            inc = step_sizes[--i]; // Go back to previous increment
+            inc = step_sizes[i];
             break;
         }
     }
