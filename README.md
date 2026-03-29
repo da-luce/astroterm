@@ -172,6 +172,8 @@ Usage: astroterm [OPTION]...
                             figure are over the threshold
   -g, --grid                Draw an azimuthal grid
   -u, --unicode             Use unicode characters
+  -b, --braille             Use braille characters for constellation lines
+                            (requires Unicode)
   -q, --quit-on-any         Quit on any keypress (default is to quit on 'q' or
                             'ESC' only)
   -m, --metadata            Display metadata
