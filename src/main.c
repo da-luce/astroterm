@@ -261,7 +261,7 @@ void parse_options(int argc, char *argv[], struct Conf *config)
                                             "drawn if all stars in the figure are over the threshold");
     struct arg_lit *grid_arg = arg_lit0("g", "grid", "Draw an azimuthal grid");
     struct arg_lit *unicode_arg = arg_lit0("u", "unicode", "Use unicode characters");
-    struct arg_lit *braille_arg = arg_lit0("b", "braille", "Use braille characters for lines");
+    struct arg_lit *braille_arg = arg_lit0("b", "braille", "Use braille characters for constellation lines (requires Unicode)");
     struct arg_lit *quit_arg = arg_lit0("q", "quit-on-any", "Quit on any keypress (default is to quit on 'q' or 'ESC' only)");
     struct arg_lit *meta_arg = arg_lit0("m", "metadata", "Display metadata");
     struct arg_lit *help_arg = arg_lit0("h", "help", "Print this help message");
