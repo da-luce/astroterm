@@ -41,6 +41,14 @@ void draw_line_smooth(WINDOW *win, int ya, int xa, int yb, int xb);
  */
 void draw_line_dotted(WINDOW *win, int ya, int xa, int yb, int xb);
 
+/* Clear braille lines layer.
+ */
+void clear_braille_lines(void);
+
+/* Draw a line segment from (xa, ya) to (xb, yb) using Braille characters
+ */
+void draw_line_braille(WINDOW *win, int ya, int xa, int yb, int xb);
+
 /* Draw an ellipse. By taking advantage of knowing the cell aspect ratio,
  * this function can generate an "apparent" circle.
  */

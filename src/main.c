@@ -65,6 +65,7 @@ int main(int argc, char *argv[])
         .aspect_ratio = 0.0,
         .quit_on_any = false,
         .unicode = false,
+        .braille = false,
         .color = false,
         .grid = false,
         .constell = false,
@@ -260,6 +261,7 @@ void parse_options(int argc, char *argv[], struct Conf *config)
                                             "drawn if all stars in the figure are over the threshold");
     struct arg_lit *grid_arg = arg_lit0("g", "grid", "Draw an azimuthal grid");
     struct arg_lit *unicode_arg = arg_lit0("u", "unicode", "Use unicode characters");
+    struct arg_lit *braille_arg = arg_lit0("b", "braille", "Use braille characters for constellation lines (requires Unicode)");
     struct arg_lit *quit_arg = arg_lit0("q", "quit-on-any", "Quit on any keypress (default is to quit on 'q' or 'ESC' only)");
     struct arg_lit *meta_arg = arg_lit0("m", "metadata", "Display metadata");
     struct arg_lit *help_arg = arg_lit0("h", "help", "Print this help message");
@@ -274,9 +276,9 @@ void parse_options(int argc, char *argv[], struct Conf *config)
     struct arg_lit *version_arg = arg_lit0("v", "version", "Display version info and exit");
     struct arg_end *end = arg_end(20);
 
-    void *argtable[] = {latitude_arg, longitude_arg, datetime_arg, threshold_arg, label_arg,   fps_arg,
-                        speed_arg,    color_arg,     constell_arg, grid_arg,      unicode_arg, quit_arg,
-                        meta_arg,     ratio_arg,     help_arg,     city_arg,      version_arg, end};
+    void *argtable[] = {latitude_arg, longitude_arg, datetime_arg, threshold_arg, label_arg,   fps_arg,  speed_arg,
+                        color_arg,    constell_arg,  grid_arg,     unicode_arg,   braille_arg, quit_arg, meta_arg,
+                        ratio_arg,    help_arg,      city_arg,     version_arg,   end};
 
     int nerrors = arg_parse(argc, argv, argtable);
 
@@ -374,6 +376,11 @@ void parse_options(int argc, char *argv[], struct Conf *config)
     if (unicode_arg->count > 0)
     {
         config->unicode = true;
+    }
+
+    if (braille_arg->count > 0)
+    {
+        config->braille = true;
     }
 
     if (quit_arg->count > 0)
