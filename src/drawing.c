@@ -279,7 +279,8 @@ void clear_braille_lines(void)
 
 void draw_braille_cell(WINDOW *win, int y, int x, unsigned char mask)
 {
-    if (mask == 0) return;
+    if (mask == 0)
+        return;
 
     mask |= braille_layer[y][x];
     braille_layer[y][x] = mask;
@@ -300,28 +301,34 @@ void draw_line_braille(WINDOW *win, int ya, int xa, int yb, int xb)
     int curs_ya = ya;
 
     // braille coordinates
-    if (xa < xb) {
+    if (xa < xb)
+    {
         xa = xa * 2 + 1;
         xb = xb * 2;
     }
-    else if (xa > xb) {
+    else if (xa > xb)
+    {
         xa = xa * 2;
         xb = xb * 2 + 1;
     }
-    else {
+    else
+    {
         xa = xa * 2;
         xb = xb * 2;
     }
 
-    if (ya < yb) {
+    if (ya < yb)
+    {
         ya = ya * 4 + 2;
         yb = yb * 4 + 1;
     }
-    else if (ya > yb) {
+    else if (ya > yb)
+    {
         ya = ya * 4 + 1;
         yb = yb * 4 + 2;
     }
-    else {
+    else
+    {
         ya = ya * 4 + 1;
         yb = yb * 4 + 1;
     }
@@ -337,7 +344,7 @@ void draw_line_braille(WINDOW *win, int ya, int xa, int yb, int xb)
 
     unsigned char braille_mask = 0;
 
-    for(;;)
+    for (;;)
     {
         int curs_x = xa / 2;
         int curs_y = ya / 4;
@@ -353,13 +360,12 @@ void draw_line_braille(WINDOW *win, int ya, int xa, int yb, int xb)
         int dot_x = xa % 2;
         int dot_y = ya % 4;
 
-        static const unsigned char dot_map[4][2] = {
-            {0x01, 0x08}, {0x02, 0x10}, {0x04, 0x20}, {0x40, 0x80}
-        };
+        static const unsigned char dot_map[4][2] = {{0x01, 0x08}, {0x02, 0x10}, {0x04, 0x20}, {0x40, 0x80}};
 
         braille_mask |= dot_map[dot_y][dot_x];
 
-        if (xa == xb && ya == yb) {
+        if (xa == xb && ya == yb)
+        {
             break;
         }
 

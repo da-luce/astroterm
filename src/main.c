@@ -276,9 +276,9 @@ void parse_options(int argc, char *argv[], struct Conf *config)
     struct arg_lit *version_arg = arg_lit0("v", "version", "Display version info and exit");
     struct arg_end *end = arg_end(20);
 
-    void *argtable[] = {latitude_arg, longitude_arg, datetime_arg, threshold_arg, label_arg,   fps_arg,
-                        speed_arg,    color_arg,     constell_arg, grid_arg,      unicode_arg, braille_arg, quit_arg,
-                        meta_arg,     ratio_arg,     help_arg,     city_arg,      version_arg, end};
+    void *argtable[] = {latitude_arg, longitude_arg, datetime_arg, threshold_arg, label_arg,   fps_arg,  speed_arg,
+                        color_arg,    constell_arg,  grid_arg,     unicode_arg,   braille_arg, quit_arg, meta_arg,
+                        ratio_arg,    help_arg,      city_arg,     version_arg,   end};
 
     int nerrors = arg_parse(argc, argv, argtable);
 
