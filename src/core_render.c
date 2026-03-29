@@ -270,7 +270,7 @@ void render_azimuthal_grid(WINDOW *win, const struct Conf *config)
     for (int i = 0; i < length; ++i)
     {
         // Vertical offset (rows) of the angle at edge of window -- approximately the "arc length" for small angles
-        int vertical_offset = (int) round(rad_vertical * sin(step_sizes[i] * to_rad));
+        int vertical_offset = (int)round(rad_vertical * sin(step_sizes[i] * to_rad));
         if (vertical_offset >= min_height)
         {
             inc = step_sizes[i];
