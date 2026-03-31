@@ -150,8 +150,10 @@ CityData *get_city(const char *name)
             continue;
         }
 
+        char *current_normalized = normalize_city_name(city_name);
+
         // Check for match
-        if (strcmp(normalized_name, normalize_city_name(city_name)) == 0)
+        if (current_normalized && strcmp(normalized_name, current_normalized) == 0)
         {
             int population = atoi(population_str);
             if (population > best_population)
@@ -175,6 +177,7 @@ CityData *get_city(const char *name)
             }
         }
 
+        free(current_normalized);
         free(line);
     }
 
