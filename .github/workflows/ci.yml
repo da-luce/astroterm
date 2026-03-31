@@ -324,7 +324,9 @@ jobs:
           sudo add-apt-repository "deb http://apt.llvm.org/$(lsb_release -cs)/ llvm-toolchain-$(lsb_release -cs)-22 main"
           sudo apt-get update
           sudo apt-get install -y clang-format-22 cppcheck
-          sudo update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-22 100
+          sudo ln -sf /usr/bin/clang-format-22 /usr/bin/clang-format
+          hash -r
+          clang-format --version
           clang-format --version
 
       - name: Run Cppcheck
