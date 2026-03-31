@@ -249,12 +249,16 @@ void print_city_name_quoted(const CityData *city, void *unused)
     const char *s = city->city_name;
 
     putchar('\'');
-    // Single-quote wrapping with escaping--needed for bash completions to 
+    // Single-quote wrapping with escaping--needed for bash completions to
     // handle city names single quotes in them (e.g. "St. John's")
-    while (*s) {
-        if (*s == '\'') {
-            printf("'\\''");  // close, escape, reopen
-        } else {
+    while (*s)
+    {
+        if (*s == '\'')
+        {
+            printf("'\\''"); // close, escape, reopen
+        }
+        else
+        {
             putchar(*s);
         }
         s++;
@@ -265,21 +269,20 @@ void print_city_name_quoted(const CityData *city, void *unused)
 
 void parse_options(int argc, char *argv[], struct Conf *config)
 {
-    #define INCLUDE_ARG_DEFINITION_DBL0(token, short_name, long_name, datatype, glossary) \
-        struct arg_dbl *token = arg_dbl0(short_name, long_name, datatype, glossary);
-    #define INCLUDE_ARG_DEFINITION_STR0(token, short_name, long_name, datatype, glossary) \
-        struct arg_str *token = arg_str0(short_name, long_name, datatype, glossary);
-    #define INCLUDE_ARG_DEFINITION_LIT0(token, short_name, long_name, glossary) \
-        struct arg_lit *token = arg_lit0(short_name, long_name, glossary);
-    #define INCLUDE_ARG_DEFINITION_INT0(token, short_name, long_name, datatype, glossary) \
-        struct arg_int *token = arg_int0(short_name, long_name, datatype, glossary);
-    #include "arg_definitions.h"
+#define INCLUDE_ARG_DEFINITION_DBL0(token, short_name, long_name, datatype, glossary)                                          \
+    struct arg_dbl *token = arg_dbl0(short_name, long_name, datatype, glossary);
+#define INCLUDE_ARG_DEFINITION_STR0(token, short_name, long_name, datatype, glossary)                                          \
+    struct arg_str *token = arg_str0(short_name, long_name, datatype, glossary);
+#define INCLUDE_ARG_DEFINITION_LIT0(token, short_name, long_name, glossary)                                                    \
+    struct arg_lit *token = arg_lit0(short_name, long_name, glossary);
+#define INCLUDE_ARG_DEFINITION_INT0(token, short_name, long_name, datatype, glossary)                                          \
+    struct arg_int *token = arg_int0(short_name, long_name, datatype, glossary);
+#include "arg_definitions.h"
     struct arg_end *end = arg_end(20);
 
-    void *argtable[] = {latitude_arg, longitude_arg, datetime_arg, threshold_arg, label_arg,   fps_arg,
-                        speed_arg,    color_arg,     constell_arg, grid_arg,      unicode_arg, braille_arg,
-                        quit_arg,     meta_arg,      ratio_arg,     help_arg,     completions_arg,
-                        city_arg,      version_arg, end};
+    void *argtable[] = {latitude_arg, longitude_arg, datetime_arg,    threshold_arg, label_arg,   fps_arg,  speed_arg,
+                        color_arg,    constell_arg,  grid_arg,        unicode_arg,   braille_arg, quit_arg, meta_arg,
+                        ratio_arg,    help_arg,      completions_arg, city_arg,      version_arg, end};
 
     int nerrors = arg_parse(argc, argv, argtable);
 
@@ -296,20 +299,24 @@ void parse_options(int argc, char *argv[], struct Conf *config)
         // Print bash completions
         printf("# Bash completions for astroterm\n");
         printf("ASTROTERM_OPTIONS=(\n");
-        #define INCLUDE_ARG_DEFINITION_DBL0(token, short_name, long_name, datatype, glossary) \
-            printf("    -%s\n", short_name); printf("    --%s\n", long_name);
-        #define INCLUDE_ARG_DEFINITION_STR0(token, short_name, long_name, datatype, glossary) \
-            printf("    -%s\n", short_name); printf("    --%s\n", long_name);
-        #define INCLUDE_ARG_DEFINITION_LIT0(token, short_name, long_name, glossary) \
-            printf("    -%s\n", short_name); printf("    --%s\n", long_name);
-        #define INCLUDE_ARG_DEFINITION_INT0(token, short_name, long_name, datatype, glossary) \
-            printf("    -%s\n", short_name); printf("    --%s\n", long_name);
-        #include "arg_definitions.h"
+#define INCLUDE_ARG_DEFINITION_DBL0(token, short_name, long_name, datatype, glossary)                                          \
+    printf("    -%s\n", short_name);                                                                                           \
+    printf("    --%s\n", long_name);
+#define INCLUDE_ARG_DEFINITION_STR0(token, short_name, long_name, datatype, glossary)                                          \
+    printf("    -%s\n", short_name);                                                                                           \
+    printf("    --%s\n", long_name);
+#define INCLUDE_ARG_DEFINITION_LIT0(token, short_name, long_name, glossary)                                                    \
+    printf("    -%s\n", short_name);                                                                                           \
+    printf("    --%s\n", long_name);
+#define INCLUDE_ARG_DEFINITION_INT0(token, short_name, long_name, datatype, glossary)                                          \
+    printf("    -%s\n", short_name);                                                                                           \
+    printf("    --%s\n", long_name);
+#include "arg_definitions.h"
         printf(")\n\n");
         printf("ASTROTERM_CITIES=(\n");
         iter_cities(&print_city_name_quoted, NULL);
         printf(")\n");
-        // Warning: this is a vibe code modified version from PR #80 in order to 
+        // Warning: this is a vibe code modified version from PR #80 in order to
         // get things working on bash 3.2. The cleaning of the input word seems
         // necessary to prevent some weird escaping issues that cause the completions
         // to not work
@@ -320,7 +327,7 @@ void parse_options(int argc, char *argv[], struct Conf *config)
         printf("        -i|--city)\n");
         printf("            local clean_word=\"${word//\\\\/}\"\n");
         printf("            clean_word=\"${clean_word//\\\"/}\"\n");
-        printf("            clean_word=\"${clean_word//\\'/}\"\n"); 
+        printf("            clean_word=\"${clean_word//\\'/}\"\n");
         printf("            COMPREPLY=()\n");
         printf("            for city in \"${ASTROTERM_CITIES[@]}\"; do\n");
         printf("                if [[ \"$city\" == \"${clean_word}\"* ]]; then\n");
