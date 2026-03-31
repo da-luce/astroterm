@@ -1,5 +1,6 @@
 #include "city.h"
 #include "unity.h"
+#include <string.h>
 
 void setUp(void)
 {
@@ -74,11 +75,76 @@ void test_get_city(void)
     TEST_ASSERT_NULL(city);
 }
 
+// -----------------------------------------------------------------------------
+// Callbacks for iter_cities tests
+// -----------------------------------------------------------------------------
+
+// Callback 1: Simply counts the number of cities iterated over
+static void count_cities_cb(const CityData *city, void *data)
+{
+    int *count = (int *)data;
+    (*count)++;
+}
+
+// Callback 2: Looks for "Boston" and records its coordinates in a float array
+// data expects a float array: [0] = found flag, [1] = latitude, [2] = longitude
+static void find_boston_cb(const CityData *city, void *data)
+{
+    float *results = (float *)data;
+
+    if (strcmp(city->city_name, "Boston") == 0)
+    {
+        results[0] = 1.0f;            // Mark as found
+        results[1] = city->latitude;  // Record latitude
+        results[2] = city->longitude; // Record longitude
+    }
+}
+
+//------------------------------------------------------------------------------
+// Tests for iter_cities
+//------------------------------------------------------------------------------
+
+void test_iter_cities_should_iterate_all_rows(void)
+{
+    int city_count = 0;
+
+    iter_cities(count_cities_cb, &city_count);
+
+    // We expect the count to be greater than 0 if data/cities.csv is loaded properly
+    TEST_ASSERT_GREATER_THAN(0, city_count);
+}
+
+void test_iter_cities_should_parse_data_correctly(void)
+{
+    // results array: [found_flag, latitude, longitude]
+    float results[3] = {0.0f, 0.0f, 0.0f};
+
+    iter_cities(find_boston_cb, results);
+
+    // Verify the callback found the city and parsed the floats correctly
+    TEST_ASSERT_EQUAL_FLOAT_MESSAGE(1.0f, results[0], "Boston was not found during iteration");
+    TEST_ASSERT_EQUAL_FLOAT(42.35843, results[1]);
+    TEST_ASSERT_EQUAL_FLOAT(-71.05977, results[2]);
+}
+
+void test_iter_cities_null_callback_should_not_crash(void)
+{
+    // Passing NULL as the callback should safely return immediately
+    iter_cities(NULL, NULL);
+
+    // Dummy assertion to ensure the test passes if we get here without crashing
+    TEST_ASSERT_TRUE(1);
+}
+
 int main(void)
 {
     UNITY_BEGIN();
 
     RUN_TEST(test_get_city);
+
+    RUN_TEST(test_iter_cities_should_iterate_all_rows);
+    RUN_TEST(test_iter_cities_should_parse_data_correctly);
+    RUN_TEST(test_iter_cities_null_callback_should_not_crash);
 
     return UNITY_END();
 }
