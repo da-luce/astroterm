@@ -126,40 +126,59 @@ CityData *get_city(const char *name)
         return NULL;
     }
 
-    // Perform binary search with the normalized name
-    char **result = bsearch(normalized_name, lines, line_count, sizeof(char *), compare_city);
+    // Perform a linear search through the lines to find the best match
+    // (largest population) for the city name. E.g. London UK vs London Ontario.
+    CityData *best_city = NULL;
+    int best_population = -1;
 
-    CityData *city = NULL;
-    if (result != NULL)
+    for (int i = 0; i < line_count; i++)
     {
-        // Parse the line for city data
-        char *matched_line = *result;
-        const char *city_name, *latitude_str, *longitude_str;
+        char *line = strdup(lines[i]); // strtok modifies the string
+        if (!line)
+            continue;
 
-        city_name = strtok(matched_line, ",");
-        strtok(NULL, ","); // Skip population
-        strtok(NULL, ","); // Skip country code
-        strtok(NULL, ","); // Skip timezone
-        latitude_str = strtok(NULL, ",");
-        longitude_str = strtok(NULL, ",");
+        char *city_name = strtok(line, ",");
+        char *population_str = strtok(NULL, ",");
+        char *country_code = strtok(NULL, ",");
+        strtok(NULL, ","); // timezone
+        char *latitude_str = strtok(NULL, ",");
+        char *longitude_str = strtok(NULL, ",");
 
-        if (city_name && latitude_str && longitude_str)
+        if (!city_name || !population_str || !latitude_str || !longitude_str)
         {
-            city = malloc(sizeof(CityData));
-            if (city == NULL)
+            free(line);
+            continue;
+        }
+
+        // Check for match
+        if (strcmp(normalized_name, normalize_city_name(city_name)) == 0)
+        {
+            int population = atoi(population_str);
+            if (population > best_population)
             {
-                perror("Memory allocation failed");
-            }
-            else
-            {
-                city->city_name = strdup(city_name);
-                city->latitude = atof(latitude_str);
-                city->longitude = atof(longitude_str);
+                best_population = population;
+
+                // Free previous best
+                if (best_city)
+                {
+                    free(best_city->city_name);
+                    free(best_city);
+                }
+
+                best_city = malloc(sizeof(CityData));
+                if (best_city)
+                {
+                    best_city->city_name = strdup(city_name);
+                    best_city->latitude = atof(latitude_str);
+                    best_city->longitude = atof(longitude_str);
+                }
             }
         }
+
+        free(line);
     }
 
-    // Clean up lines and data
+    // Clean up
     for (int i = 0; i < line_count; i++)
     {
         free(lines[i]);
@@ -168,7 +187,7 @@ CityData *get_city(const char *name)
     free(data);
     free(normalized_name);
 
-    return city;
+    return best_city;
 }
 
 void free_city(CityData *city)
