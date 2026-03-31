@@ -255,4 +255,12 @@ void iter_cities(void (*callback)(const CityData *city, void *data), void *user_
             callback(&city_data, user_data);
         }
     }
+
+    // Clean up
+    for (int i = 0; i < line_count; i++)
+    {
+        free(lines[i]);
+    }
+    free(lines);
+    free(data);
 }

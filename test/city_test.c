@@ -110,7 +110,8 @@ void test_iter_cities_should_iterate_all_rows(void)
 
     iter_cities(count_cities_cb, &city_count);
 
-    // We expect the count to be greater than 0 if data/cities.csv is loaded properly
+    // We expect the count to be greater than 0 if data/cities.csv is loaded
+    // properly
     TEST_ASSERT_GREATER_THAN(0, city_count);
 }
 
@@ -121,7 +122,6 @@ void test_iter_cities_should_parse_data_correctly(void)
 
     iter_cities(find_boston_cb, results);
 
-    // Verify the callback found the city and parsed the floats correctly
     TEST_ASSERT_EQUAL_FLOAT_MESSAGE(1.0f, results[0], "Boston was not found during iteration");
     TEST_ASSERT_EQUAL_FLOAT(42.35843, results[1]);
     TEST_ASSERT_EQUAL_FLOAT(-71.05977, results[2]);
