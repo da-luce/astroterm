@@ -316,7 +316,16 @@ jobs:
 
       - name: Install Code Quality Tools
         run: |
-          sudo apt-get install -y cppcheck clang-format
+          sudo apt-get update
+
+          # Nonsense to get clang-format-22, which formats different than default 18
+          sudo apt-get install -y wget gnupg lsb-release software-properties-common
+          wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+          sudo add-apt-repository "deb http://apt.llvm.org/$(lsb_release -cs)/ llvm-toolchain-$(lsb_release -cs)-22 main"
+          sudo apt-get update
+          sudo apt-get install -y clang-format-22 cppcheck
+          sudo update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-22 100
+          clang-format --version
 
       - name: Run Cppcheck
         run: |
