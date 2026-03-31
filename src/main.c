@@ -65,6 +65,7 @@ int main(int argc, char *argv[])
         .aspect_ratio = 0.0,
         .quit_on_any = false,
         .unicode = false,
+        .braille = false,
         .color = false,
         .grid = false,
         .constell = false,
@@ -245,7 +246,21 @@ int main(int argc, char *argv[])
 
 void print_city_name_quoted(const CityData *city, void *unused)
 {
-    printf("\"%s\"\n", city->city_name);
+    const char *s = city->city_name;
+
+    putchar('\'');
+    // Single-quote wrapping with escaping--needed for bash completions to 
+    // handle city names single quotes in them (e.g. "St. John's")
+    while (*s) {
+        if (*s == '\'') {
+            printf("'\\''");  // close, escape, reopen
+        } else {
+            putchar(*s);
+        }
+        s++;
+    }
+    putchar('\'');
+    putchar('\n');
 }
 
 void parse_options(int argc, char *argv[], struct Conf *config)
@@ -262,8 +277,8 @@ void parse_options(int argc, char *argv[], struct Conf *config)
     struct arg_end *end = arg_end(20);
 
     void *argtable[] = {latitude_arg, longitude_arg, datetime_arg, threshold_arg, label_arg,   fps_arg,
-                        speed_arg,    color_arg,     constell_arg, grid_arg,      unicode_arg, quit_arg,
-                        meta_arg,     ratio_arg,     help_arg,     completions_arg,
+                        speed_arg,    color_arg,     constell_arg, grid_arg,      unicode_arg, braille_arg,
+                        quit_arg,     meta_arg,      ratio_arg,     help_arg,     completions_arg,
                         city_arg,      version_arg, end};
 
     int nerrors = arg_parse(argc, argv, argtable);
@@ -294,16 +309,24 @@ void parse_options(int argc, char *argv[], struct Conf *config)
         printf("ASTROTERM_CITIES=(\n");
         iter_cities(&print_city_name_quoted, NULL);
         printf(")\n");
+        // Warning: this is a vibe code modified version from PR #80 in order to 
+        // get things working on bash 3.2. The cleaning of the input word seems
+        // necessary to prevent some weird escaping issues that cause the completions
+        // to not work
         printf("_astroterm_completions() {\n");
         printf("    local word=\"${COMP_WORDS[COMP_CWORD]}\"\n");
         printf("    local prev=\"${COMP_WORDS[COMP_CWORD-1]}\"\n");
         printf("    case \"$prev\" in\n");
         printf("        -i|--city)\n");
-        printf("            readarray -t _cities < <(IFS=: compgen -W \"$( printf '%%q:' \"${ASTROTERM_CITIES[@]}\" )\" -- \"${word}\")\n");
+        printf("            local clean_word=\"${word//\\\\/}\"\n");
+        printf("            clean_word=\"${clean_word//\\\"/}\"\n");
+        printf("            clean_word=\"${clean_word//\\'/}\"\n"); 
         printf("            COMPREPLY=()\n");
-        printf("            for city in \"${_cities[@]}\"; do\n");
-        printf("                printf -v city_esc '%%q ' \"$city\"\n");
-        printf("                COMPREPLY+=(\"$city_esc\")\n");
+        printf("            for city in \"${ASTROTERM_CITIES[@]}\"; do\n");
+        printf("                if [[ \"$city\" == \"${clean_word}\"* ]]; then\n");
+        printf("                    printf -v city_esc '%%q ' \"$city\"\n");
+        printf("                    COMPREPLY+=(\"$city_esc\")\n");
+        printf("                fi\n");
         printf("            done\n");
         printf("            ;;\n");
         printf("        *)\n");
@@ -401,6 +424,11 @@ void parse_options(int argc, char *argv[], struct Conf *config)
     if (unicode_arg->count > 0)
     {
         config->unicode = true;
+    }
+
+    if (braille_arg->count > 0)
+    {
+        config->braille = true;
     }
 
     if (quit_arg->count > 0)

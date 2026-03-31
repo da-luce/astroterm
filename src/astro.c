@@ -394,7 +394,7 @@ const char *get_zodiac_symbol(int month, int day)
 /* Takes the normalized age of the moon within the synodic month
  * (phase ∈ [0, 1)), and returns the phase of the moon [0,1,...,7], where
  * 0 : new moon
- * 1 : waxing cresent
+ * 1 : waxing crescent
  * ...
  * 4 : full moon
  * etc.

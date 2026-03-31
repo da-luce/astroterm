@@ -1,6 +1,6 @@
 project('astroterm', 'c',
-    version: '1.0.7',
-    default_options : ['warning_level=3', 'buildtype=debug'],
+    version: '1.1.0',
+    default_options : ['warning_level=3', 'buildtype=release'],
     meson_version: '>=1.4.0',
 )
 

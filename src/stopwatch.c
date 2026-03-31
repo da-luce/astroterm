@@ -6,7 +6,7 @@
 // UNIX headers
 #if defined(__unix__) || (defined(__APPLE__) && defined(__MACH__))
 #include <sys/time.h>
-#include <unistd.h> // Needed for _POSIX_TIMERS definintion & usleep()
+#include <unistd.h> // Needed for _POSIX_TIMERS definition & usleep()
 #endif
 
 // Windows headers

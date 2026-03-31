@@ -391,6 +391,127 @@ void test_horizontal_smooth_11x11(void)
 }
 
 // -----------------------------------------------------------------------------
+// Braille Vertical
+// -----------------------------------------------------------------------------
+
+// clang-format off
+const wchar_t vertical_braille_11x11[MAX_WINDOW_HEIGHT][MAX_WINDOW_WIDTH] = {
+    L"     ⡄     ",
+    L"     ⡇     ",
+    L"     ⡇     ",
+    L"     ⡇     ",
+    L"     ⡇     ",
+    L"     ⡇     ",
+    L"     ⡇     ",
+    L"     ⡇     ",
+    L"     ⡇     ",
+    L"     ⡇     ",
+    L"     ⠃     ",
+};
+// clang-format on
+
+void test_vertical_braille_11x11(void)
+{
+    // Important: Clear the global braille layer state before drawing
+    clear_braille_lines();
+
+    WINDOW *win = newwin(11, 11, 0, 0);
+    wchar_t actual[MAX_WINDOW_HEIGHT][MAX_WINDOW_WIDTH];
+
+    // Draw the line
+    draw_line_braille(win, 0, 5, 10, 5);
+
+    // Read window content into a wide-character array
+    read_window_to_wide_array(win, actual, 11, 11);
+
+    const wchar_t(*const_actual)[MAX_WINDOW_WIDTH] = (const wchar_t(*)[MAX_WINDOW_WIDTH])actual;
+
+    // Compare actual and expected output
+    TEST_ASSERT_TRUE(compare_wide_arrays(const_actual, vertical_braille_11x11, 11, 11));
+
+    delwin(win);
+}
+
+// -----------------------------------------------------------------------------
+// Braille Horizontal
+// -----------------------------------------------------------------------------
+
+// clang-format off
+const wchar_t horizontal_braille_11x11[MAX_WINDOW_HEIGHT][MAX_WINDOW_WIDTH] = {
+    L"           ",
+    L"           ",
+    L"           ",
+    L"           ",
+    L"           ",
+    L"⠐⠒⠒⠒⠒⠒⠒⠒⠒⠒⠂",
+    L"           ",
+    L"           ",
+    L"           ",
+    L"           ",
+    L"           ",
+};
+// clang-format on
+
+void test_horizontal_braille_11x11(void)
+{
+    // Important: Clear the global braille layer state before drawing
+    clear_braille_lines();
+
+    WINDOW *win = newwin(11, 11, 0, 0);
+    wchar_t actual[MAX_WINDOW_HEIGHT][MAX_WINDOW_WIDTH];
+
+    // Draw the line
+    draw_line_braille(win, 5, 0, 5, 10);
+
+    // Read window content into a wide-character array
+    read_window_to_wide_array(win, actual, 11, 11);
+
+    const wchar_t(*const_actual)[MAX_WINDOW_WIDTH] = (const wchar_t(*)[MAX_WINDOW_WIDTH])actual;
+
+    // Compare actual and expected output
+    TEST_ASSERT_TRUE(compare_wide_arrays(const_actual, horizontal_braille_11x11, 11, 11));
+
+    delwin(win);
+}
+
+// -----------------------------------------------------------------------------
+// Braille Diagonal
+// -----------------------------------------------------------------------------
+
+// clang-format off
+const wchar_t diagonal_braille_6x11[MAX_WINDOW_HEIGHT][MAX_WINDOW_WIDTH] = {
+    L"⠠⡀         ",
+    L" ⠈⠢⡀       ",
+    L"   ⠈⠢⡀     ",
+    L"     ⠈⠢⡀   ",
+    L"       ⠈⠢⡀ ",
+    L"         ⠈⠂",
+};
+// clang-format on
+
+void test_diagonal_braille_6x11(void)
+{
+    // Important: Clear the global braille layer state before drawing
+    clear_braille_lines();
+
+    WINDOW *win = newwin(6, 11, 0, 0);
+    wchar_t actual[MAX_WINDOW_HEIGHT][MAX_WINDOW_WIDTH];
+
+    // Draw the line (0,0 to 5,10)
+    draw_line_braille(win, 0, 0, 5, 10);
+
+    // Read window content into a wide-character array
+    read_window_to_wide_array(win, actual, 6, 11);
+
+    const wchar_t(*const_actual)[MAX_WINDOW_WIDTH] = (const wchar_t(*)[MAX_WINDOW_WIDTH])actual;
+
+    // Compare actual and expected output
+    TEST_ASSERT_TRUE(compare_wide_arrays(const_actual, diagonal_braille_6x11, 6, 11));
+
+    delwin(win);
+}
+
+// -----------------------------------------------------------------------------
 // Unity
 // -----------------------------------------------------------------------------
 
@@ -443,6 +564,10 @@ int main(void)
     RUN_TEST(test_diagonal_smooth_opposite_10x10);
     RUN_TEST(test_vertical_smooth_11x11);
     RUN_TEST(test_horizontal_smooth_11x11);
+
+    RUN_TEST(test_vertical_braille_11x11);
+    RUN_TEST(test_horizontal_braille_11x11);
+    RUN_TEST(test_diagonal_braille_6x11);
 
     return UNITY_END();
 }

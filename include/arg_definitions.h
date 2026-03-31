@@ -43,10 +43,11 @@ INCLUDE_ARG_DEFINITION_LIT0(color_arg, "c", "color", "Enable terminal colors");
 INCLUDE_ARG_DEFINITION_LIT0(constell_arg, "C", "constellations", "Draw constellation stick figures. Note: a constellation is only drawn if all stars in the figure are over the threshold");
 INCLUDE_ARG_DEFINITION_LIT0(grid_arg, "g", "grid", "Draw an azimuthal grid");
 INCLUDE_ARG_DEFINITION_LIT0(unicode_arg, "u", "unicode", "Use unicode characters");
+INCLUDE_ARG_DEFINITION_LIT0(braille_arg, "b", "braille", "Use braille characters for constellation lines (requires Unicode)");
 INCLUDE_ARG_DEFINITION_LIT0(quit_arg, "q", "quit-on-any", "Quit on any keypress (default is to quit on 'q' or 'ESC' only)");
 INCLUDE_ARG_DEFINITION_LIT0(meta_arg, "m", "metadata", "Display metadata");
 INCLUDE_ARG_DEFINITION_LIT0(help_arg, "h", "help", "Print this help message");
-INCLUDE_ARG_DEFINITION_LIT0(completions_arg, "b", "bash-completions", "Print bash completions");
+INCLUDE_ARG_DEFINITION_LIT0(completions_arg, "B", "bash-completions", "Print bash completions");
 INCLUDE_ARG_DEFINITION_LIT0(version_arg, "v", "version", "Display version info and exit");
 INCLUDE_ARG_DEFINITION_INT0(fps_arg, "f", "fps", "<int>", "Frames per second (default: 24)");
 

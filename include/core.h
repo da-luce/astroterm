@@ -25,6 +25,7 @@ struct Conf
     double aspect_ratio;
     bool quit_on_any;
     bool unicode;
+    bool braille;
     bool color;
     bool grid;
     bool constell;
