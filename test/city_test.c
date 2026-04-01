@@ -79,15 +79,15 @@ void test_get_city(void)
 // Callbacks for iter_cities tests
 // -----------------------------------------------------------------------------
 
-// Callback 1: Simply counts the number of cities iterated over
+// Counts the number of cities iterated over
 static void count_cities_cb(const CityData *city, void *data)
 {
     int *count = (int *)data;
     (*count)++;
 }
 
-// Callback 2: Looks for "Boston" and records its coordinates in a float array
-// data expects a float array: [0] = found flag, [1] = latitude, [2] = longitude
+// Looks for "Boston" and records its coordinates in a float array
+// [0] = found flag, [1] = latitude, [2] = longitude
 static void find_boston_cb(const CityData *city, void *data)
 {
     float *results = (float *)data;
@@ -129,10 +129,10 @@ void test_iter_cities_should_parse_data_correctly(void)
 
 void test_iter_cities_null_callback_should_not_crash(void)
 {
-    // Passing NULL as the callback should safely return immediately
+    // Passing NULL as the callback should return immediately
     iter_cities(NULL, NULL);
 
-    // Dummy assertion to ensure the test passes if we get here without crashing
+    // Sentinel assertion to ensure test passes if we get here without crashing
     TEST_ASSERT_TRUE(1);
 }
 
