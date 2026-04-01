@@ -74,17 +74,17 @@ bool generate_planet_table(struct Planet **planet_table, const struct KepElems *
         return false;
     }
 
-    const char *planet_symbols_unicode[NUM_PLANETS] = {
-        [SUN] = "☉",     [MERCURY] = "☿", [VENUS] = "♀",  [EARTH] = "🜨",  [MARS] = "♂",
-        [JUPITER] = "♃", [SATURN] = "♄",  [URANUS] = "⛢", [NEPTUNE] = "♆"};
+    const char *planet_symbols_unicode[NUM_PLANETS] = {[SUN] = "☉",    [MERCURY] = "☿", [VENUS] = "♀",
+                                                       [EARTH] = "🜨",  [MARS] = "♂",    [JUPITER] = "♃",
+                                                       [SATURN] = "♄", [URANUS] = "⛢",  [NEPTUNE] = "♆"};
 
-    const char planet_symbols_ASCII[NUM_PLANETS] = {
-        [SUN] = '@',     [MERCURY] = '*', [VENUS] = '*',  [EARTH] = '*',  [MARS] = '*',
-        [JUPITER] = '*', [SATURN] = '*',  [URANUS] = '*', [NEPTUNE] = '*'};
+    const char planet_symbols_ASCII[NUM_PLANETS] = {[SUN] = '@',    [MERCURY] = '*', [VENUS] = '*',
+                                                    [EARTH] = '*',  [MARS] = '*',    [JUPITER] = '*',
+                                                    [SATURN] = '*', [URANUS] = '*',  [NEPTUNE] = '*'};
 
-    const char *planet_labels[NUM_PLANETS] = {
-        [SUN] = "Sun",         [MERCURY] = "Mercury", [VENUS] = "Venus",   [EARTH] = "Earth",    [MARS] = "Mars",
-        [JUPITER] = "Jupiter", [SATURN] = "Saturn",   [URANUS] = "Uranus", [NEPTUNE] = "Neptune"};
+    const char *planet_labels[NUM_PLANETS] = {[SUN] = "Sun",       [MERCURY] = "Mercury", [VENUS] = "Venus",
+                                              [EARTH] = "Earth",   [MARS] = "Mars",       [JUPITER] = "Jupiter",
+                                              [SATURN] = "Saturn", [URANUS] = "Uranus",   [NEPTUNE] = "Neptune"};
 
     // TODO: find better way to map these values
     const int planet_colors[NUM_PLANETS] = {

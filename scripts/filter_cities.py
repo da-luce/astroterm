@@ -32,6 +32,12 @@ def process_cities(input_txt, output_csv, population_threshold=15000):
             for row in reader:
                 try:
                     city_name = row[1].replace("’", "'")
+
+                    # FIX: Handle the "Mianzhu, Deyang, Sichuan" anomaly 
+                    # by splitting at the comma and taking the first element
+                    # (See PR #80)
+                    city_name = city_name.split(',')[0].strip()
+
                     population = int(row[14])
                     country_code = row[8]
                     timezone = row[17]
