@@ -185,6 +185,7 @@ Usage: astroterm [OPTION]...
                             Use this if your projection is not 'square.' A value
                             around 2.0 works well for most cases
   -h, --help                Print this help message
+  -B, --bash-completions    Print bash completions
   -i, --city=<city_name>    Use the latitude and longitude of the provided city.
                             If the name contains multiple words, enclose the
                             name in single or double quotes. For a list of
@@ -192,6 +193,14 @@ Usage: astroterm [OPTION]...
                             https://github.com/da-luce/astroterm/blob/main/data/
                             cities.csv
   -v, --version             Display version info and exit
+```
+
+### Shell Completions
+
+To enable Tab completions in Bash, add the following line to your `~/.bashrc`:
+
+```bash
+source <(astroterm --bash-completions)
 ```
 
 <!-- omit in toc -->
@@ -257,7 +266,7 @@ just download via the [releases page](https://github.com/da-luce/astroterm/relea
 
 If Unicode characters do not display correctly in the terminal, you may need to configure your system's locale to support Unicode.
 
-1. Temporarily set the locale (add this to `.bashrc` or equivalent to permanently enforce)
+1. Temporarily set the locale (add this to `~/.bashrc` or equivalent to permanently enforce)
 
   ```bash
   export LC_ALL="en_US.UTF-8"
