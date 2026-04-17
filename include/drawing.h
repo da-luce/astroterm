@@ -36,6 +36,11 @@ void draw_line_ASCII(WINDOW *win, int ya, int xa, int yb, int xb);
  */
 void draw_line_smooth(WINDOW *win, int ya, int xa, int yb, int xb);
 
+/* Draw a connected polyline in screen coordinates, choosing glyphs from the
+ * combined connectivity at each cell so adjacent segments share proper joints.
+ */
+void draw_polyline_connected(WINDOW *win, const int *rows, const int *cols, int count, bool unicode);
+
 /* Draw an dotted line segment from (xa, ya) and (xb, yb) where y and x
  * are synonymous with row and column, respectively.
  */

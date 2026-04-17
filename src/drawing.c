@@ -216,6 +216,228 @@ void draw_line_smooth(WINDOW *win, int ya, int xa, int yb, int xb)
     }
 }
 
+enum Connectivity
+{
+    CONN_NORTH = 1 << 0,
+    CONN_EAST = 1 << 1,
+    CONN_SOUTH = 1 << 2,
+    CONN_WEST = 1 << 3,
+};
+
+static bool point_in_bounds(int y, int x, int height, int width)
+{
+    return y >= 0 && y < height && x >= 0 && x < width;
+}
+
+static void add_connection(unsigned char *mask, int height, int width, int ya, int xa, int yb, int xb)
+{
+    if (!point_in_bounds(ya, xa, height, width) || !point_in_bounds(yb, xb, height, width))
+    {
+        return;
+    }
+
+    unsigned int index_a = (unsigned int)ya * (unsigned int)width + (unsigned int)xa;
+    unsigned int index_b = (unsigned int)yb * (unsigned int)width + (unsigned int)xb;
+
+    if (ya == yb)
+    {
+        if (xb == xa + 1)
+        {
+            mask[index_a] |= CONN_EAST;
+            mask[index_b] |= CONN_WEST;
+        }
+        else if (xb == xa - 1)
+        {
+            mask[index_a] |= CONN_WEST;
+            mask[index_b] |= CONN_EAST;
+        }
+    }
+    else if (xa == xb)
+    {
+        if (yb == ya + 1)
+        {
+            mask[index_a] |= CONN_SOUTH;
+            mask[index_b] |= CONN_NORTH;
+        }
+        else if (yb == ya - 1)
+        {
+            mask[index_a] |= CONN_NORTH;
+            mask[index_b] |= CONN_SOUTH;
+        }
+    }
+}
+
+static void rasterize_connected_segment(unsigned char *mask, int height, int width, int ya, int xa, int yb, int xb)
+{
+    int dy = yb - ya;
+    int dx = xb - xa;
+
+    if (dy == 0 && dx == 0)
+    {
+        return;
+    }
+
+    if (abs(dy) > abs(dx))
+    {
+        int y = 0;
+        double x = 0.0;
+        int sy = (dy > 0) ? 1 : -1;
+        double sx = (double)dx / abs(dy);
+
+        while (abs(y) < abs(dy))
+        {
+            int curr_y = ya + y;
+            int curr_x = xa + (int)round(x);
+
+            int next_y = ya + y + sy;
+            int next_x = xa + (int)round(x + sx);
+
+            if (curr_x != next_x && curr_x != xb)
+            {
+                add_connection(mask, height, width, curr_y, curr_x, curr_y, next_x);
+                add_connection(mask, height, width, curr_y, next_x, next_y, next_x);
+            }
+            else
+            {
+                add_connection(mask, height, width, curr_y, curr_x, next_y, curr_x);
+            }
+
+            y += sy;
+            x += sx;
+        }
+    }
+    else
+    {
+        double y = 0.0;
+        int x = 0;
+        double sy = (double)dy / abs(dx);
+        int sx = (dx > 0) ? 1 : -1;
+
+        while (abs(x) < abs(dx))
+        {
+            int curr_y = ya + (int)round(y);
+            int curr_x = xa + x;
+
+            int next_y = ya + (int)round(y + sy);
+            int next_x = xa + x + sx;
+
+            if (curr_y != next_y && curr_y != yb)
+            {
+                add_connection(mask, height, width, curr_y, curr_x, next_y, curr_x);
+                add_connection(mask, height, width, next_y, curr_x, next_y, next_x);
+            }
+            else
+            {
+                add_connection(mask, height, width, curr_y, curr_x, curr_y, next_x);
+            }
+
+            y += sy;
+            x += sx;
+        }
+    }
+}
+
+static const char *smooth_connectivity_glyph(unsigned char mask)
+{
+    switch (mask)
+    {
+    case CONN_NORTH:
+    case CONN_SOUTH:
+    case CONN_NORTH | CONN_SOUTH:
+        return "│";
+    case CONN_EAST:
+    case CONN_WEST:
+    case CONN_EAST | CONN_WEST:
+        return "─";
+    case CONN_NORTH | CONN_EAST:
+        return "╰";
+    case CONN_NORTH | CONN_WEST:
+        return "╯";
+    case CONN_SOUTH | CONN_EAST:
+        return "╭";
+    case CONN_SOUTH | CONN_WEST:
+        return "╮";
+    case CONN_NORTH | CONN_SOUTH | CONN_EAST:
+        return "├";
+    case CONN_NORTH | CONN_SOUTH | CONN_WEST:
+        return "┤";
+    case CONN_EAST | CONN_WEST | CONN_SOUTH:
+        return "┬";
+    case CONN_EAST | CONN_WEST | CONN_NORTH:
+        return "┴";
+    case CONN_NORTH | CONN_EAST | CONN_SOUTH | CONN_WEST:
+        return "┼";
+    default:
+        return NULL;
+    }
+}
+
+static char ascii_connectivity_glyph(unsigned char mask)
+{
+    switch (mask)
+    {
+    case CONN_NORTH:
+    case CONN_SOUTH:
+    case CONN_NORTH | CONN_SOUTH:
+        return '|';
+    case CONN_EAST:
+    case CONN_WEST:
+    case CONN_EAST | CONN_WEST:
+        return '-';
+    default:
+        return '+';
+    }
+}
+
+void draw_polyline_connected(WINDOW *win, const int *rows, const int *cols, int count, bool unicode)
+{
+    if (count < 2)
+    {
+        return;
+    }
+
+    int height, width;
+    getmaxyx(win, height, width);
+
+    unsigned char *mask = calloc((size_t)height * (size_t)width, sizeof(unsigned char));
+    if (mask == NULL)
+    {
+        return;
+    }
+
+    for (int i = 0; i < count - 1; ++i)
+    {
+        rasterize_connected_segment(mask, height, width, rows[i], cols[i], rows[i + 1], cols[i + 1]);
+    }
+
+    for (int y = 0; y < height; ++y)
+    {
+        for (int x = 0; x < width; ++x)
+        {
+            unsigned char cell_mask = mask[(size_t)y * (size_t)width + (size_t)x];
+            if (cell_mask == 0)
+            {
+                continue;
+            }
+
+            if (unicode)
+            {
+                const char *glyph = smooth_connectivity_glyph(cell_mask);
+                if (glyph != NULL)
+                {
+                    mvwaddstr(win, y, x, glyph);
+                }
+            }
+            else
+            {
+                mvwaddch(win, y, x, ascii_connectivity_glyph(cell_mask));
+            }
+        }
+    }
+
+    free(mask);
+}
+
 void draw_line_dotted(WINDOW *win, int ya, int xa, int yb, int xb)
 {
     // The logic here is not particularly elegant or efficient

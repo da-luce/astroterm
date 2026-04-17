@@ -10,6 +10,12 @@
 #include <math.h>
 #include <stdlib.h>
 
+enum
+{
+    EQUATOR_COLOR_PAIR = 5,
+    ECLIPTIC_COLOR_PAIR = 4,
+};
+
 void horizontal_to_polar(double azimuth, double altitude, double *radius, double *theta)
 {
     double theta_sphere, phi_sphere;
@@ -18,6 +24,124 @@ void horizontal_to_polar(double azimuth, double altitude, double *radius, double
     project_stereographic_north(1.0, theta_sphere, phi_sphere, radius, theta);
 
     return;
+}
+
+static void equatorial_to_polar_projected(double right_ascension, double declination, double gmst, const struct Conf *config,
+                                          double *radius_polar, double *theta_polar)
+{
+    double azimuth, altitude;
+    equatorial_to_horizontal(right_ascension, declination, gmst, config->latitude, config->longitude, &azimuth, &altitude);
+    horizontal_to_polar(azimuth, altitude, radius_polar, theta_polar);
+}
+
+static void append_polyline_point(int *rows, int *cols, int *count, int y, int x)
+{
+    if (*count > 0 && rows[*count - 1] == y && cols[*count - 1] == x)
+    {
+        return;
+    }
+
+    rows[*count] = y;
+    cols[*count] = x;
+    *count += 1;
+}
+
+static void render_reference_circle(WINDOW *win, const struct Conf *config, bool ecliptic, int color_pair)
+{
+    int height, width;
+    getmaxyx(win, height, width);
+
+    int samples = MAX(height, width) * 4;
+    if (samples < 180)
+    {
+        samples = 180;
+    }
+
+    int *rows = malloc((size_t)(samples + 1) * sizeof(int));
+    int *cols = malloc((size_t)(samples + 1) * sizeof(int));
+    if (rows == NULL || cols == NULL)
+    {
+        free(rows);
+        free(cols);
+        return;
+    }
+
+    double gmst = greenwich_mean_sidereal_time_rad(config->julian_date);
+    double radius_prev, theta_prev;
+    double right_ascension = 0.0;
+    double declination = 0.0;
+
+    if (ecliptic)
+    {
+        ecliptic_to_equatorial(0.0, 0.0, &right_ascension, &declination);
+    }
+
+    equatorial_to_polar_projected(right_ascension, declination, gmst, config, &radius_prev, &theta_prev);
+
+    bool use_color = config->color && color_pair != 0;
+    if (use_color)
+    {
+        wattron(win, COLOR_PAIR(color_pair));
+    }
+
+    int point_count = 0;
+
+    for (int i = 1; i <= samples; ++i)
+    {
+        double angle = 2.0 * M_PI * i / samples;
+
+        if (ecliptic)
+        {
+            ecliptic_to_equatorial(angle, 0.0, &right_ascension, &declination);
+        }
+        else
+        {
+            right_ascension = angle;
+            declination = 0.0;
+        }
+
+        double radius_curr, theta_curr;
+        equatorial_to_polar_projected(right_ascension, declination, gmst, config, &radius_curr, &theta_curr);
+
+        bool prev_visible = fabs(radius_prev) <= 1.0;
+        bool curr_visible = fabs(radius_curr) <= 1.0;
+
+        if (prev_visible || curr_visible)
+        {
+            int ya, xa;
+            int yb, xb;
+            polar_to_win(fmin(radius_prev, 1.0), theta_prev, height, width, &ya, &xa);
+            polar_to_win(fmin(radius_curr, 1.0), theta_curr, height, width, &yb, &xb);
+
+            append_polyline_point(rows, cols, &point_count, ya, xa);
+            append_polyline_point(rows, cols, &point_count, yb, xb);
+        }
+        else if (point_count > 1)
+        {
+            draw_polyline_connected(win, rows, cols, point_count, config->unicode);
+            point_count = 0;
+        }
+        else
+        {
+            point_count = 0;
+        }
+
+        radius_prev = radius_curr;
+        theta_prev = theta_curr;
+    }
+
+    if (point_count > 1)
+    {
+        draw_polyline_connected(win, rows, cols, point_count, config->unicode);
+    }
+
+    if (use_color)
+    {
+        wattroff(win, COLOR_PAIR(color_pair));
+    }
+
+    free(rows);
+    free(cols);
 }
 
 void render_object_stereo(WINDOW *win, struct ObjectBase *object, const struct Conf *config)
@@ -205,6 +329,19 @@ void render_constells(WINDOW *win, const struct Conf *config, struct Constell **
     {
         struct Constell *constellation = &((*constell_table)[i]);
         render_constellation(win, config, constellation, star_table);
+    }
+}
+
+void render_reference_circles(WINDOW *win, const struct Conf *config)
+{
+    if (config->equator)
+    {
+        render_reference_circle(win, config, false, EQUATOR_COLOR_PAIR);
+    }
+
+    if (config->ecliptic)
+    {
+        render_reference_circle(win, config, true, ECLIPTIC_COLOR_PAIR);
     }
 }
 

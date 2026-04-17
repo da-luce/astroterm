@@ -391,6 +391,36 @@ void test_horizontal_smooth_11x11(void)
 }
 
 // -----------------------------------------------------------------------------
+// Unicode Connected Polyline
+// -----------------------------------------------------------------------------
+
+// clang-format off
+const wchar_t connected_polyline_smooth_2x3[MAX_WINDOW_HEIGHT][MAX_WINDOW_WIDTH] = {
+    L" ╭─",
+    L"─╯ ",
+};
+// clang-format on
+
+void test_connected_polyline_smooth_adjacent_corners(void)
+{
+    WINDOW *win = newwin(2, 3, 0, 0);
+    wchar_t actual[MAX_WINDOW_HEIGHT][MAX_WINDOW_WIDTH];
+
+    int rows[] = {1, 1, 0, 0};
+    int cols[] = {0, 1, 1, 2};
+
+    draw_polyline_connected(win, rows, cols, 4, true);
+
+    read_window_to_wide_array(win, actual, 2, 3);
+
+    const wchar_t(*const_actual)[MAX_WINDOW_WIDTH] = (const wchar_t(*)[MAX_WINDOW_WIDTH])actual;
+
+    TEST_ASSERT_TRUE(compare_wide_arrays(const_actual, connected_polyline_smooth_2x3, 2, 3));
+
+    delwin(win);
+}
+
+// -----------------------------------------------------------------------------
 // Braille Vertical
 // -----------------------------------------------------------------------------
 
@@ -564,6 +594,7 @@ int main(void)
     RUN_TEST(test_diagonal_smooth_opposite_10x10);
     RUN_TEST(test_vertical_smooth_11x11);
     RUN_TEST(test_horizontal_smooth_11x11);
+    RUN_TEST(test_connected_polyline_smooth_adjacent_corners);
 
     RUN_TEST(test_vertical_braille_11x11);
     RUN_TEST(test_horizontal_braille_11x11);

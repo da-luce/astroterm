@@ -59,6 +59,11 @@ void equatorial_to_horizontal(double right_ascension, double declination, double
  */
 void equatorial_rectangular_to_spherical(double xeq, double yeq, double zeq, double *right_ascension, double *declination);
 
+/* Converts ecliptic coordinates to equatorial coordinates using the J2000
+ * obliquity of the ecliptic.
+ */
+void ecliptic_to_equatorial(double ecliptic_longitude, double ecliptic_latitude, double *right_ascension, double *declination);
+
 /* Converts horizontal coordinates to spherical coordinates
  */
 void horizontal_to_spherical(double azimuth, double altitude, double *theta_sphere, double *phi_sphere);

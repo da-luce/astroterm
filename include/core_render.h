@@ -25,6 +25,10 @@ void render_moon_stereo(WINDOW *win, const struct Conf *config, struct Moon moon
 void render_constells(WINDOW *win, const struct Conf *config, struct Constell **constell_table, int num_const,
                       const struct Star *star_table);
 
+/* Render celestial reference circles on the polar projection.
+ */
+void render_reference_circles(WINDOW *win, const struct Conf *config);
+
 /* Render an azimuthal grid on a stereographic projection
  */
 void render_azimuthal_grid(WINDOW *win, const struct Conf *config);
