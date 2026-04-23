@@ -1,5 +1,4 @@
 #include "city.h"
-#include "cities.h"
 #include "macros.h"
 #include "split_lines.h"
 
@@ -92,9 +91,9 @@ static int compare_city(const void *key, const void *element)
     return result;
 }
 
-CityData *get_city(const char *name)
+CityData *get_city(const char *name, const unsigned char *data, unsigned int data_len)
 {
-    if (name == NULL || cities_len == 0)
+    if (name == NULL || data == NULL || data_len == 0)
     {
         return NULL;
     }
@@ -106,23 +105,23 @@ CityData *get_city(const char *name)
         return NULL;
     }
 
-    char *data = malloc(cities_len + 1);
-    if (data == NULL)
+    char *buffer = malloc(data_len + 1);
+    if (buffer == NULL)
     {
         free(normalized_name);
         return NULL;
     }
 
-    memcpy(data, cities, cities_len);
-    data[cities_len] = '\0';
+    memcpy(buffer, data, data_len);
+    buffer[data_len] = '\0';
 
     // Convert the byte array into an array of lines
     int line_count = 0;
-    char **lines = split_lines(data, &line_count);
+    char **lines = split_lines(buffer, &line_count);
     if (lines == NULL)
     {
         free(normalized_name);
-        free(data);
+        free(buffer);
         return NULL;
     }
 
@@ -187,7 +186,7 @@ CityData *get_city(const char *name)
         free(lines[i]);
     }
     free(lines);
-    free(data);
+    free(buffer);
     free(normalized_name);
 
     return best_city;
@@ -213,23 +212,28 @@ void free_city(CityData *city)
  * @param user_data A pointer to user-defined data that will be passed to the
  *                  callback function for each city.
  */
-void iter_cities(void (*callback)(const CityData *city, void *data), void *user_data)
+void iter_cities(void (*callback)(const CityData *city, void *data), void *user_data,
+                 const unsigned char *data, unsigned int data_len)
 {
-    if (callback == NULL)
+    if (callback == NULL || data == NULL || data_len == 0)
     {
         return;
     }
 
-    // Get the city data as a buffer using split_lines
-    char *data = malloc(cities_len + 1);
-    memcpy(data, cities, cities_len);
-    data[cities_len] = '\0';
+    // Copy into a writable buffer since split_lines and strtok mutate the input
+    char *buffer = malloc(data_len + 1);
+    if (buffer == NULL)
+    {
+        return;
+    }
+    memcpy(buffer, data, data_len);
+    buffer[data_len] = '\0';
 
     int line_count = 0;
-    char **lines = split_lines(data, &line_count);
+    char **lines = split_lines(buffer, &line_count);
     if (lines == NULL)
     {
-        free(data);
+        free(buffer);
         return;
     }
 
@@ -262,5 +266,5 @@ void iter_cities(void (*callback)(const CityData *city, void *data), void *user_
         free(lines[i]);
     }
     free(lines);
-    free(data);
+    free(buffer);
 }
