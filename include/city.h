@@ -21,7 +21,7 @@ void free_city(CityData *city);
 /* Apply a callback and some associated data to every city row in the provided
  * CSV byte buffer.
  */
-void iter_cities(void (*callback)(const CityData *city, void *data), void *user_data,
-                 const unsigned char *data, unsigned int data_len);
+void iter_cities(void (*callback)(const CityData *city, void *data), void *user_data, const unsigned char *data,
+                 unsigned int data_len);
 
 #endif // CITY_H

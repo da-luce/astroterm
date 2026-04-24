@@ -212,8 +212,8 @@ void free_city(CityData *city)
  * @param user_data A pointer to user-defined data that will be passed to the
  *                  callback function for each city.
  */
-void iter_cities(void (*callback)(const CityData *city, void *data), void *user_data,
-                 const unsigned char *data, unsigned int data_len)
+void iter_cities(void (*callback)(const CityData *city, void *data), void *user_data, const unsigned char *data,
+                 unsigned int data_len)
 {
     if (callback == NULL || data == NULL || data_len == 0)
     {

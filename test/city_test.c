@@ -87,10 +87,9 @@ void test_get_city_duplicate_names(void)
 {
     // CSV schema: city_name,population,country_code,timezone,latitude,longitude
     // Two "London" rows with different populations; the ~8.9M entry must win.
-    const unsigned char small_first[] =
-        "city_name,population,country_code,timezone,latitude,longitude\n"
-        "London,1000,CA,America/Toronto,42.98339,-81.23304\n"
-        "London,8900000,GB,Europe/London,51.50853,-0.12574\n";
+    const unsigned char small_first[] = "city_name,population,country_code,timezone,latitude,longitude\n"
+                                        "London,1000,CA,America/Toronto,42.98339,-81.23304\n"
+                                        "London,8900000,GB,Europe/London,51.50853,-0.12574\n";
 
     CityData *city = get_city("London", small_first, (unsigned int)(sizeof(small_first) - 1));
     TEST_ASSERT_NOT_NULL(city);
@@ -99,10 +98,9 @@ void test_get_city_duplicate_names(void)
     TEST_ASSERT_EQUAL_FLOAT(-0.12574, city->longitude);
     free_city(city);
 
-    const unsigned char big_first[] =
-        "city_name,population,country_code,timezone,latitude,longitude\n"
-        "London,8900000,GB,Europe/London,51.50853,-0.12574\n"
-        "London,1000,CA,America/Toronto,42.98339,-81.23304\n";
+    const unsigned char big_first[] = "city_name,population,country_code,timezone,latitude,longitude\n"
+                                      "London,8900000,GB,Europe/London,51.50853,-0.12574\n"
+                                      "London,1000,CA,America/Toronto,42.98339,-81.23304\n";
 
     city = get_city("London", big_first, (unsigned int)(sizeof(big_first) - 1));
     TEST_ASSERT_NOT_NULL(city);
