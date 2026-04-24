@@ -13,6 +13,7 @@
 #include "bsc5.h"
 #include "bsc5_constellations.h"
 #include "bsc5_names.h"
+#include "cities.h"
 
 // Third party libraries
 #ifdef HAVE_ARGTABLE3
@@ -314,7 +315,7 @@ void parse_options(int argc, char *argv[], struct Conf *config)
 #include "arg_definitions.h"
         printf(")\n\n");
         printf("ASTROTERM_CITIES=(\n");
-        iter_cities(&print_city_name_quoted, NULL);
+        iter_cities(&print_city_name_quoted, NULL, cities, cities_len);
         printf(")\n");
         // Warning: this is a vibe code modified version from PR #80 in order to
         // get things working on bash 3.2. The cleaning of the input word seems
@@ -451,7 +452,7 @@ void parse_options(int argc, char *argv[], struct Conf *config)
     if (city_arg->count > 0)
     {
         const char *city_name = city_arg->sval[0];
-        CityData *city = get_city(city_name);
+        CityData *city = get_city(city_name, cities, cities_len);
 
         if (!city)
         {
