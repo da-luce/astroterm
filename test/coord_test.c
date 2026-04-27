@@ -62,6 +62,10 @@ void test_ecliptic_to_equatorial(void)
     ecliptic_to_equatorial(M_PI, 0.0, &right_ascension, &declination);
     TEST_ASSERT_FLOAT_WITHIN(0.0001, M_PI, right_ascension);
     TEST_ASSERT_FLOAT_WITHIN(0.0001, 0.0, declination);
+
+    ecliptic_to_equatorial(3.0 * M_PI / 2.0, 0.0, &right_ascension, &declination);
+    TEST_ASSERT_FLOAT_WITHIN(0.0001, 3.0 * M_PI / 2.0, right_ascension);
+    TEST_ASSERT_FLOAT_WITHIN(0.0001, -obliquity, declination);
 }
 
 // polar_to_win
