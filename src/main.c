@@ -68,6 +68,8 @@ int main(int argc, char *argv[])
         .braille = false,
         .color = false,
         .grid = false,
+        .equator = false,
+        .ecliptic = false,
         .constell = false,
         .metadata = false,
     };
@@ -170,8 +172,10 @@ int main(int argc, char *argv[])
         update_planet_positions(planet_table, julian_date, config.latitude, config.longitude);
         update_moon_position(&moon_object, julian_date, config.latitude, config.longitude);
         update_moon_phase(&moon_object, julian_date, config.latitude);
+        config.julian_date = julian_date;
 
         // Render objects
+        render_reference_circles(main_win, &config);
         render_stars_stereo(main_win, &config, star_table, num_stars, num_by_mag);
         if (config.constell)
         {
@@ -278,11 +282,12 @@ void parse_options(int argc, char *argv[], struct Conf *config)
 #define INCLUDE_ARG_DEFINITION_INT0(token, short_name, long_name, datatype, glossary)                                          \
     struct arg_int *token = arg_int0(short_name, long_name, datatype, glossary);
 #include "arg_definitions.h"
-    struct arg_end *end = arg_end(20);
+    struct arg_end *end = arg_end(22);
 
-    void *argtable[] = {latitude_arg, longitude_arg, datetime_arg,    threshold_arg, label_arg,   fps_arg,  speed_arg,
-                        color_arg,    constell_arg,  grid_arg,        unicode_arg,   braille_arg, quit_arg, meta_arg,
-                        ratio_arg,    help_arg,      completions_arg, city_arg,      version_arg, end};
+    void *argtable[] = {latitude_arg, longitude_arg, datetime_arg, threshold_arg, label_arg,       fps_arg,     speed_arg,
+                        color_arg,    constell_arg,  equator_arg,  ecliptic_arg,  grid_arg,        unicode_arg, braille_arg,
+                        quit_arg,     meta_arg,      ratio_arg,    help_arg,      completions_arg, city_arg,    version_arg,
+                        end};
 
     int nerrors = arg_parse(argc, argv, argtable);
 
@@ -421,6 +426,16 @@ void parse_options(int argc, char *argv[], struct Conf *config)
     if (meta_arg->count > 0)
     {
         config->metadata = true;
+    }
+
+    if (equator_arg->count > 0)
+    {
+        config->equator = true;
+    }
+
+    if (ecliptic_arg->count > 0)
+    {
+        config->ecliptic = true;
     }
 
     if (grid_arg->count > 0)

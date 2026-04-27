@@ -391,6 +391,228 @@ void test_horizontal_smooth_11x11(void)
 }
 
 // -----------------------------------------------------------------------------
+// Unicode Connected Polyline
+// -----------------------------------------------------------------------------
+
+// clang-format off
+const wchar_t connected_polyline_smooth_2x3[MAX_WINDOW_HEIGHT][MAX_WINDOW_WIDTH] = {
+    L" ╭─",
+    L"─╯ ",
+};
+// clang-format on
+
+void test_connected_polyline_smooth_adjacent_corners(void)
+{
+    WINDOW *win = newwin(2, 3, 0, 0);
+    wchar_t actual[MAX_WINDOW_HEIGHT][MAX_WINDOW_WIDTH];
+
+    int rows[] = {1, 1, 0, 0};
+    int cols[] = {0, 1, 1, 2};
+
+    draw_polyline_connected(win, rows, cols, 4, true);
+
+    read_window_to_wide_array(win, actual, 2, 3);
+
+    const wchar_t(*const_actual)[MAX_WINDOW_WIDTH] = (const wchar_t(*)[MAX_WINDOW_WIDTH])actual;
+    int matches = compare_wide_arrays(const_actual, connected_polyline_smooth_2x3, 2, 3);
+
+    TEST_ASSERT_EQUAL_INT(1, matches);
+
+    delwin(win);
+}
+
+// clang-format off
+const wchar_t connected_polyline_smooth_all_joints_3x5[MAX_WINDOW_HEIGHT][MAX_WINDOW_WIDTH] = {
+    L" ╭┬╮ ",
+    L" ├┼┤ ",
+    L" ╰┴╯ ",
+};
+// clang-format on
+
+void test_connected_polyline_smooth_all_joints(void)
+{
+    WINDOW *win = newwin(3, 5, 0, 0);
+    wchar_t actual[MAX_WINDOW_HEIGHT][MAX_WINDOW_WIDTH];
+
+    int rows[] = {0, 0, 1, 1, 0, 0, 1, 1, 2, 2, 1, 2, 2, 2, 1};
+    int cols[] = {2, 1, 1, 2, 2, 3, 3, 2, 2, 1, 1, 1, 2, 3, 3};
+
+    draw_polyline_connected(win, rows, cols, 15, true);
+
+    read_window_to_wide_array(win, actual, 3, 5);
+
+    const wchar_t(*const_actual)[MAX_WINDOW_WIDTH] = (const wchar_t(*)[MAX_WINDOW_WIDTH])actual;
+    int matches = compare_wide_arrays(const_actual, connected_polyline_smooth_all_joints_3x5, 3, 5);
+
+    TEST_ASSERT_EQUAL_INT(1, matches);
+
+    delwin(win);
+}
+
+// clang-format off
+const wchar_t connected_polyline_smooth_vertical_bend_4x2[MAX_WINDOW_HEIGHT][MAX_WINDOW_WIDTH] = {
+    L"│ ",
+    L"╰╮",
+    L" │",
+    L" │",
+};
+// clang-format on
+
+void test_connected_polyline_smooth_vertical_bend(void)
+{
+    WINDOW *win = newwin(4, 2, 0, 0);
+    wchar_t actual[MAX_WINDOW_HEIGHT][MAX_WINDOW_WIDTH];
+
+    int rows[] = {0, 3};
+    int cols[] = {0, 1};
+
+    draw_polyline_connected(win, rows, cols, 2, true);
+
+    read_window_to_wide_array(win, actual, 4, 2);
+
+    const wchar_t(*const_actual)[MAX_WINDOW_WIDTH] = (const wchar_t(*)[MAX_WINDOW_WIDTH])actual;
+    int matches = compare_wide_arrays(const_actual, connected_polyline_smooth_vertical_bend_4x2, 4, 2);
+
+    TEST_ASSERT_EQUAL_INT(1, matches);
+
+    delwin(win);
+}
+
+// clang-format off
+const wchar_t connected_polyline_smooth_horizontal_bend_2x4[MAX_WINDOW_HEIGHT][MAX_WINDOW_WIDTH] = {
+    L"─╮  ",
+    L" ╰──",
+};
+// clang-format on
+
+void test_connected_polyline_smooth_horizontal_bend(void)
+{
+    WINDOW *win = newwin(2, 4, 0, 0);
+    wchar_t actual[MAX_WINDOW_HEIGHT][MAX_WINDOW_WIDTH];
+
+    int rows[] = {0, 1};
+    int cols[] = {0, 3};
+
+    draw_polyline_connected(win, rows, cols, 2, true);
+
+    read_window_to_wide_array(win, actual, 2, 4);
+
+    const wchar_t(*const_actual)[MAX_WINDOW_WIDTH] = (const wchar_t(*)[MAX_WINDOW_WIDTH])actual;
+    int matches = compare_wide_arrays(const_actual, connected_polyline_smooth_horizontal_bend_2x4, 2, 4);
+
+    TEST_ASSERT_EQUAL_INT(1, matches);
+
+    delwin(win);
+}
+
+// -----------------------------------------------------------------------------
+// ASCII Connected Polyline
+// -----------------------------------------------------------------------------
+
+// clang-format off
+const char connected_polyline_ascii_3x3[MAX_WINDOW_HEIGHT][MAX_WINDOW_WIDTH] = {
+    "  |",
+    "  |",
+    "--+",
+};
+// clang-format on
+
+void test_connected_polyline_ascii(void)
+{
+    WINDOW *win = newwin(3, 3, 0, 0);
+    char actual[MAX_WINDOW_HEIGHT][MAX_WINDOW_WIDTH];
+
+    int rows[] = {2, 2, 0};
+    int cols[] = {0, 2, 2};
+
+    draw_polyline_connected(win, rows, cols, 3, false);
+
+    read_window_to_array(win, actual, 3, 3);
+
+    const char (*const_actual)[MAX_WINDOW_WIDTH] = (const char (*)[MAX_WINDOW_WIDTH])actual;
+    int matches = compare_arrays(const_actual, connected_polyline_ascii_3x3, 3, 3);
+
+    TEST_ASSERT_EQUAL_INT(1, matches);
+
+    delwin(win);
+}
+
+// clang-format off
+const wchar_t connected_polyline_count_too_small_1x1[MAX_WINDOW_HEIGHT][MAX_WINDOW_WIDTH] = {
+    L" ",
+};
+// clang-format on
+
+void test_connected_polyline_count_too_small(void)
+{
+    WINDOW *win = newwin(1, 1, 0, 0);
+    wchar_t actual[MAX_WINDOW_HEIGHT][MAX_WINDOW_WIDTH];
+
+    int rows[] = {0};
+    int cols[] = {0};
+
+    draw_polyline_connected(win, rows, cols, 1, true);
+
+    read_window_to_wide_array(win, actual, 1, 1);
+
+    const wchar_t(*const_actual)[MAX_WINDOW_WIDTH] = (const wchar_t(*)[MAX_WINDOW_WIDTH])actual;
+    int matches = compare_wide_arrays(const_actual, connected_polyline_count_too_small_1x1, 1, 1);
+
+    TEST_ASSERT_EQUAL_INT(1, matches);
+
+    delwin(win);
+}
+
+void test_connected_polyline_zero_length_segment(void)
+{
+    WINDOW *win = newwin(1, 1, 0, 0);
+    wchar_t actual[MAX_WINDOW_HEIGHT][MAX_WINDOW_WIDTH];
+
+    int rows[] = {0, 0};
+    int cols[] = {0, 0};
+
+    draw_polyline_connected(win, rows, cols, 2, true);
+
+    read_window_to_wide_array(win, actual, 1, 1);
+
+    const wchar_t(*const_actual)[MAX_WINDOW_WIDTH] = (const wchar_t(*)[MAX_WINDOW_WIDTH])actual;
+    int matches = compare_wide_arrays(const_actual, connected_polyline_count_too_small_1x1, 1, 1);
+
+    TEST_ASSERT_EQUAL_INT(1, matches);
+
+    delwin(win);
+}
+
+void test_connected_polyline_out_of_bounds(void)
+{
+    WINDOW *win = newwin(1, 1, 0, 0);
+    wchar_t actual[MAX_WINDOW_HEIGHT][MAX_WINDOW_WIDTH];
+
+    int rows_right[] = {0, 0};
+    int cols_right[] = {0, 1};
+    int rows_left[] = {0, 0};
+    int cols_left[] = {-1, 0};
+    int rows_above[] = {-1, 0};
+    int cols_above[] = {0, 0};
+    int rows_below[] = {1, 0};
+    int cols_below[] = {0, 0};
+
+    draw_polyline_connected(win, rows_right, cols_right, 2, true);
+    draw_polyline_connected(win, rows_left, cols_left, 2, true);
+    draw_polyline_connected(win, rows_above, cols_above, 2, true);
+    draw_polyline_connected(win, rows_below, cols_below, 2, true);
+
+    read_window_to_wide_array(win, actual, 1, 1);
+
+    const wchar_t(*const_actual)[MAX_WINDOW_WIDTH] = (const wchar_t(*)[MAX_WINDOW_WIDTH])actual;
+    int matches = compare_wide_arrays(const_actual, connected_polyline_count_too_small_1x1, 1, 1);
+
+    TEST_ASSERT_EQUAL_INT(1, matches);
+
+    delwin(win);
+}
+
+// -----------------------------------------------------------------------------
 // Braille Vertical
 // -----------------------------------------------------------------------------
 
@@ -564,6 +786,14 @@ int main(void)
     RUN_TEST(test_diagonal_smooth_opposite_10x10);
     RUN_TEST(test_vertical_smooth_11x11);
     RUN_TEST(test_horizontal_smooth_11x11);
+    RUN_TEST(test_connected_polyline_smooth_adjacent_corners);
+    RUN_TEST(test_connected_polyline_smooth_all_joints);
+    RUN_TEST(test_connected_polyline_smooth_vertical_bend);
+    RUN_TEST(test_connected_polyline_smooth_horizontal_bend);
+    RUN_TEST(test_connected_polyline_ascii);
+    RUN_TEST(test_connected_polyline_count_too_small);
+    RUN_TEST(test_connected_polyline_zero_length_segment);
+    RUN_TEST(test_connected_polyline_out_of_bounds);
 
     RUN_TEST(test_vertical_braille_11x11);
     RUN_TEST(test_horizontal_braille_11x11);

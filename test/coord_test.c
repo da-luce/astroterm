@@ -45,6 +45,29 @@ void test_project_stereographic_top(void)
     TEST_ASSERT_FLOAT_WITHIN(0.01, expected_theta_polar, theta_polar);
 }
 
+void test_ecliptic_to_equatorial(void)
+{
+    double right_ascension;
+    double declination;
+    double obliquity = 84381.448 / (60.0 * 60.0) * TO_RAD;
+
+    ecliptic_to_equatorial(0.0, 0.0, &right_ascension, &declination);
+    TEST_ASSERT_FLOAT_WITHIN(0.0001, 0.0, right_ascension);
+    TEST_ASSERT_FLOAT_WITHIN(0.0001, 0.0, declination);
+
+    ecliptic_to_equatorial(M_PI / 2.0, 0.0, &right_ascension, &declination);
+    TEST_ASSERT_FLOAT_WITHIN(0.0001, M_PI / 2.0, right_ascension);
+    TEST_ASSERT_FLOAT_WITHIN(0.0001, obliquity, declination);
+
+    ecliptic_to_equatorial(M_PI, 0.0, &right_ascension, &declination);
+    TEST_ASSERT_FLOAT_WITHIN(0.0001, M_PI, right_ascension);
+    TEST_ASSERT_FLOAT_WITHIN(0.0001, 0.0, declination);
+
+    ecliptic_to_equatorial(3.0 * M_PI / 2.0, 0.0, &right_ascension, &declination);
+    TEST_ASSERT_FLOAT_WITHIN(0.0001, 3.0 * M_PI / 2.0, right_ascension);
+    TEST_ASSERT_FLOAT_WITHIN(0.0001, -obliquity, declination);
+}
+
 // polar_to_win
 
 void test_polar_to_win(void)
@@ -72,6 +95,7 @@ int main(void)
     UNITY_BEGIN();
 
     RUN_TEST(test_project_stereographic_top);
+    RUN_TEST(test_ecliptic_to_equatorial);
     RUN_TEST(test_polar_to_win);
 
     return UNITY_END();

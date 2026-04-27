@@ -11,6 +11,21 @@ void equatorial_rectangular_to_spherical(double xeq, double yeq, double zeq, dou
     *declination = atan2(zeq, sqrt(xeq * xeq + yeq * yeq));
 }
 
+void ecliptic_to_equatorial(double ecliptic_longitude, double ecliptic_latitude, double *right_ascension, double *declination)
+{
+    const double obliquity = 84381.448 / (60.0 * 60.0) * TO_RAD;
+
+    *right_ascension =
+        atan2(sin(ecliptic_longitude) * cos(obliquity) - tan(ecliptic_latitude) * sin(obliquity), cos(ecliptic_longitude));
+    if (*right_ascension < 0.0)
+    {
+        *right_ascension += 2.0 * M_PI;
+    }
+
+    *declination =
+        asin(sin(ecliptic_latitude) * cos(obliquity) + cos(ecliptic_latitude) * sin(obliquity) * sin(ecliptic_longitude));
+}
+
 void equatorial_to_horizontal(double right_ascension, double declination, double gmst, double latitude, double longitude,
                               double *azimuth, double *altitude)
 {

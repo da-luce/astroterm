@@ -51,6 +51,8 @@ INCLUDE_ARG_DEFINITION_LIT0(color_arg, "c", "color", "Enable terminal colors");
 INCLUDE_ARG_DEFINITION_LIT0(
     constell_arg, "C", "constellations",
     "Draw constellation stick figures. Note: a constellation is only drawn if all stars in the figure are over the threshold");
+INCLUDE_ARG_DEFINITION_LIT0(equator_arg, "e", "equator", "Draw the celestial equator on the polar projection");
+INCLUDE_ARG_DEFINITION_LIT0(ecliptic_arg, "E", "ecliptic", "Draw the ecliptic on the polar projection");
 INCLUDE_ARG_DEFINITION_LIT0(grid_arg, "g", "grid", "Draw an azimuthal grid");
 INCLUDE_ARG_DEFINITION_LIT0(unicode_arg, "u", "unicode", "Use unicode characters");
 INCLUDE_ARG_DEFINITION_LIT0(braille_arg, "b", "braille", "Use braille characters for constellation lines (requires Unicode)");

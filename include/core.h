@@ -28,6 +28,8 @@ struct Conf
     bool braille;
     bool color;
     bool grid;
+    bool equator;
+    bool ecliptic;
     bool constell;
     bool metadata;
 };

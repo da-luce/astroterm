@@ -173,6 +173,8 @@ Usage: astroterm [OPTION]...
   -C, --constellations      Draw constellation stick figures. Note: a
                             constellation is only drawn if all stars in the
                             figure are over the threshold
+  -e, --equator             Draw the celestial equator on the polar projection
+  -E, --ecliptic            Draw the ecliptic on the polar projection
   -g, --grid                Draw an azimuthal grid
   -u, --unicode             Use unicode characters
   -b, --braille             Use braille characters for constellation lines
