@@ -500,15 +500,11 @@ int map_float_to_int_range(double min_float, double max_float, int min_int, int 
 
 bool string_to_time(const char *string, struct tm *time)
 {
-    const char *pointer = strptime(string, "%Y-%m-%dT%H:%M:%S", time);
-    mktime(time);
+    // Start from a clean struct
+    memset(time, 0, sizeof(*time));
 
-    if (pointer == NULL)
-    {
-        return false;
-    }
-
-    return true;
+    // String is UTC, so don't pass the result to mktime()
+    return strptime(string, "%Y-%m-%dT%H:%M:%S", time) != NULL;
 }
 
 void elapsed_time_to_components(double elapsed_days, int *years, int *days, int *hours, int *minutes, int *seconds)

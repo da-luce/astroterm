@@ -283,6 +283,92 @@ void test_string_to_time(void)
     TEST_ASSERT_EQUAL(56, time.tm_sec);
 }
 
+// Set the local timezone. Returns a copy of the previous TZ value (NULL if unset) to pass to restore_timezone
+static char *set_timezone(const char *tz)
+{
+    const char *previous = getenv("TZ");
+    char *saved = NULL;
+    if (previous != NULL)
+    {
+        saved = malloc(strlen(previous) + 1);
+        strcpy(saved, previous);
+    }
+
+#ifdef _WIN32
+    _putenv_s("TZ", tz);
+#else
+    setenv("TZ", tz, 1);
+#endif
+    tzset();
+
+    return saved;
+}
+
+static void restore_timezone(char *saved)
+{
+#ifdef _WIN32
+    _putenv_s("TZ", saved != NULL ? saved : "");
+#else
+    if (saved != NULL)
+    {
+        setenv("TZ", saved, 1);
+    }
+    else
+    {
+        unsetenv("TZ");
+    }
+#endif
+    tzset();
+
+    free(saved);
+}
+
+void test_datetime_ignores_local_dst(void)
+{
+    // Datetimes are UTC and must not be shifted by the daylight saving rules
+    // of the local timezone. Results are collected before asserting so the
+    // timezone is always restored
+
+    // EST5EDT observes daylight saving time in July. MSVC only knows US
+    // daylight saving rules, so this behaves the same on all platforms
+    char *saved_tz = set_timezone("EST5EDT");
+
+    struct tm parsed_dst;
+    bool parsed_dst_ok = string_to_time("2025-07-01T12:34:56", &parsed_dst);
+    struct tm converted_dst = julian_date_to_datetime(2460858.0); // 2025 July 1 12:00:00 UTC
+
+    restore_timezone(saved_tz);
+
+    // JST-9 never observes daylight saving time. A stale tm_isdst flag
+    // (e.g. from an uninitialized struct) must not shift the result either
+    saved_tz = set_timezone("JST-9");
+
+    struct tm parsed_stale = {.tm_isdst = 1};
+    bool parsed_stale_ok = string_to_time("2025-01-01T12:34:56", &parsed_stale);
+
+    restore_timezone(saved_tz);
+
+    TEST_ASSERT_TRUE(parsed_dst_ok);
+    TEST_ASSERT_EQUAL(2025 - 1900, parsed_dst.tm_year);
+    TEST_ASSERT_EQUAL(6, parsed_dst.tm_mon);
+    TEST_ASSERT_EQUAL(1, parsed_dst.tm_mday);
+    TEST_ASSERT_EQUAL(12, parsed_dst.tm_hour);
+    TEST_ASSERT_EQUAL(34, parsed_dst.tm_min);
+    TEST_ASSERT_EQUAL(56, parsed_dst.tm_sec);
+
+    TEST_ASSERT_EQUAL(2025 - 1900, converted_dst.tm_year);
+    TEST_ASSERT_EQUAL(6, converted_dst.tm_mon);
+    TEST_ASSERT_EQUAL(1, converted_dst.tm_mday);
+    TEST_ASSERT_EQUAL(12, converted_dst.tm_hour);
+    TEST_ASSERT_EQUAL(0, converted_dst.tm_min);
+    TEST_ASSERT_EQUAL(0, converted_dst.tm_sec);
+
+    TEST_ASSERT_TRUE(parsed_stale_ok);
+    TEST_ASSERT_EQUAL(1, parsed_stale.tm_mday);
+    TEST_ASSERT_EQUAL(12, parsed_stale.tm_hour);
+    TEST_ASSERT_EQUAL(34, parsed_stale.tm_min);
+}
+
 void test_elapsed_time_to_components(void)
 {
     double elapsed_days = 365.25 + 30 + (6.0 / 24.0) + (15.0 / 1440.0) + (30.0 / 86400.0);
@@ -310,6 +396,7 @@ int main(void)
     RUN_TEST(test_update_moon_position);
     RUN_TEST(test_map_float_to_int_range);
     RUN_TEST(test_string_to_time);
+    RUN_TEST(test_datetime_ignores_local_dst);
     RUN_TEST(test_elapsed_time_to_components);
 
     return UNITY_END();
