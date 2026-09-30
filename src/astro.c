@@ -92,8 +92,12 @@ double datetime_to_julian_date(const struct tm *time)
 
 struct tm julian_date_to_datetime(double julian_date)
 {
+    // Julian days start at noon. Shifting by half a day makes the day start at midnight,
+    // so the calendar date below is that of the civil day and the time of day never overflows
+    double shifted = julian_date + 0.5;
+
     // https://orbital-mechanics.space/reference/julian-date.html
-    int julian_day_num = (int)julian_date;
+    int julian_day_num = (int)floor(shifted);
 
     int l = julian_day_num + 68569;
     int n = 4 * l / 146097;
@@ -107,9 +111,7 @@ struct tm julian_date_to_datetime(double julian_date)
     int month = j + 2 - 12 * l;
     int year = 100 * (n - 49) + i + l;
 
-    double julian_day_frac = julian_date - julian_day_num;
-
-    double hour_d = julian_day_frac * 24.0 + 12; // add twelve because of weird offset
+    double hour_d = (shifted - julian_day_num) * 24.0;
     double minute_d = (hour_d - floor(hour_d)) * 60.0;
     double second_d = (minute_d - floor(minute_d)) * 60.0;
 
@@ -123,9 +125,8 @@ struct tm julian_date_to_datetime(double julian_date)
         .tm_year = year - 1900,
     };
 
-    // Adjust all fields to usual range
-    mktime(&time);
-
+    // The time is UTC, so don't pass it to mktime(): it interprets the fields as local time and can shift them by the
+    // local daylight saving offset
     return time;
 }
 
