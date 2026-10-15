@@ -223,20 +223,20 @@ for short. In fact, any [city](./data/cities.csv) around the equator will work. 
 <!-- omit in toc -->
 ### Example 2
 
-Say we wanted to view the sky at 5:00 AM (Eastern) on July 16, 1969—the morning
+Say we wanted to view the sky at 5:00 AM (Eastern Daylight Time, 09:00 UTC) on July 16, 1969—the morning
 of the Apollo 11 launch at the Kennedy Space Center in Florida. We would run:
 
 ```sh
-astroterm --latitude 28.573469 --longitude -80.651070 --datetime 1969-7-16T8:00:00
+astroterm --latitude 28.573469 --longitude -80.651070 --datetime 1969-7-16T9:00:00
 ```
 
 Finding the precise coordinates can be cumbersome, so we could also use the nearest major city to achieve a similar result:
 
 ```sh
-astroterm --city Orlando --datetime 1969-7-16T8:00:00 -m
+astroterm --city Orlando --datetime 1969-7-16T9:00:00 -m
 ```
 
-While we're still waiting for someone to invent time travel, we can cheat a little by using [Stellarium](https://stellarium-web.org/skysource/UpsPeg?fov=185.00&date=1969-07-19T09:00:00Z&lat=28.47&lng=-80.56&elev=0) to confirm that this aligns with reality.
+While we're still waiting for someone to invent time travel, we can cheat a little by using [Stellarium](https://stellarium-web.org/skysource/UpsPeg?fov=185.00&date=1969-07-16T09:00:00Z&lat=28.47&lng=-80.56&elev=0) to confirm that this aligns with reality.
 
 If we then wanted to display constellations and add color, we would add `--constellations --color` as options.
 
