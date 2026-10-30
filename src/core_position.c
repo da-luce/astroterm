@@ -3,47 +3,90 @@
 #include "astro.h"
 #include "coord.h"
 #include "core.h"
+#include "macros.h"
 
 #include <math.h>
 
-void update_star_positions(struct Star *star_table, int num_stars, double julian_date, double latitude, double longitude)
+static void cache_object_projection(struct ObjectBase *base)
+{
+    double theta_sphere, phi_sphere;
+    horizontal_to_spherical(base->azimuth, base->altitude, &theta_sphere, &phi_sphere);
+    project_stereographic_north(1.0, theta_sphere, phi_sphere, &base->radius_polar, &base->theta_polar);
+    base->proj_valid = true;
+}
+
+void update_star_positions_threshold(struct Star *star_table, int num_stars, double julian_date, double latitude,
+                                     double longitude, float threshold)
 {
     double gmst = greenwich_mean_sidereal_time_rad(julian_date);
+    double local_sidereal_time = fmod(gmst + longitude, 2.0 * M_PI);
+    double sin_lat = sin(latitude);
+    double cos_lat = cos(latitude);
 
-    int i;
-    for (i = 0; i < num_stars; ++i)
+    const double J2000 = 2451545.0;
+    const double days_per_year = 365.2425;
+    double years_from_epoch = (julian_date - J2000) / days_per_year;
+
+    for (int i = 0; i < num_stars; ++i)
     {
         struct Star *star = &star_table[i];
 
-        double right_ascension, declination;
-        calc_star_position(star->right_ascension, star->ra_motion, star->declination, star->dec_motion, julian_date,
-                           &right_ascension, &declination);
+        if (star->magnitude > threshold)
+        {
+            star->base.proj_valid = false;
+            continue;
+        }
 
-        // Convert to horizontal coordinates
-        double azimuth, altitude;
-        equatorial_to_horizontal(right_ascension, declination, gmst, latitude, longitude, &azimuth, &altitude);
+        double right_ascension = star->right_ascension + star->ra_motion * years_from_epoch;
+        double declination = star->declination + star->dec_motion * years_from_epoch;
+
+        double hour_angle = local_sidereal_time - right_ascension;
+        if (hour_angle < 0.0)
+        {
+            hour_angle += 2.0 * M_PI;
+        }
+        if (hour_angle > M_PI)
+        {
+            hour_angle -= 2.0 * M_PI;
+        }
+
+        double sin_dec = sin(declination);
+        double cos_dec = cos(declination);
+        double sin_ha = sin(hour_angle);
+        double cos_ha = cos(hour_angle);
+
+        double altitude = asin(sin_lat * sin_dec + cos_lat * cos_dec * cos_ha);
+        double azimuth = atan2(sin_ha, cos_ha * sin_lat - (sin_dec / cos_dec) * cos_lat) - M_PI;
+        if (azimuth < 0.0)
+        {
+            azimuth += 2.0 * M_PI;
+        }
 
         star->base.azimuth = azimuth;
         star->base.altitude = altitude;
+        cache_object_projection(&star->base);
     }
+}
 
-    return;
+void update_star_positions(struct Star *star_table, int num_stars, double julian_date, double latitude, double longitude)
+{
+    update_star_positions_threshold(star_table, num_stars, julian_date, latitude, longitude, 100.0f);
 }
 
 void update_planet_positions(struct Planet *planet_table, double julian_date, double latitude, double longitude)
 {
     double gmst = greenwich_mean_sidereal_time_rad(julian_date);
 
+    // Heliocentric coordinates of the Earth-Moon barycenter (computed once per frame)
+    double xe, ye, ze;
+    calc_planet_helio_ICRF(planet_table[EARTH].elements, planet_table[EARTH].rates, planet_table[EARTH].extras, julian_date,
+                           &xe, &ye, &ze);
+
     int i;
     for (i = SUN; i < NUM_PLANETS; ++i)
     {
         // Geocentric rectangular equatorial coordinates
         double xg, yg, zg;
-
-        // Heliocentric coordinates of the Earth-Moon barycenter
-        double xe, ye, ze;
-        calc_planet_helio_ICRF(planet_table[EARTH].elements, planet_table[EARTH].rates, planet_table[EARTH].extras, julian_date,
-                               &xe, &ye, &ze);
 
         if (i == SUN)
         {
@@ -75,6 +118,7 @@ void update_planet_positions(struct Planet *planet_table, double julian_date, do
 
         planet_table[i].base.azimuth = azimuth;
         planet_table[i].base.altitude = altitude;
+        cache_object_projection(&planet_table[i].base);
     }
 }
 
@@ -94,6 +138,7 @@ void update_moon_position(struct Moon *moon_object, double julian_date, double l
 
     moon_object->base.azimuth = azimuth;
     moon_object->base.altitude = altitude;
+    cache_object_projection(&moon_object->base);
 
     return;
 }

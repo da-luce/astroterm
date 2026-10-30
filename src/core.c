@@ -3,12 +3,125 @@
 #include "astro.h"
 #include "parse_BSC5.h"
 #include "strptime.h"
+#include "term.h"
 
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+
+static int spectral_class_index(char spectral_type)
+{
+    switch (spectral_type)
+    {
+    case 'O':
+    case 'o':
+    case 'W':
+        return 0;
+    case 'B':
+    case 'b':
+        return 1;
+    case 'A':
+    case 'a':
+        return 2;
+    case 'F':
+    case 'f':
+        return 3;
+    case 'G':
+    case 'g':
+        return 4;
+    case 'K':
+    case 'k':
+        return 5;
+    case 'M':
+    case 'm':
+    case 'C':
+    case 'N':
+    case 'R':
+    case 'S':
+        return 6;
+    default:
+        return 2; // Default to A (white) if unknown
+    }
+}
+
+int get_star_color_pair(char spectral_type, float magnitude)
+{
+    int spec_idx = spectral_class_index(spectral_type);
+    int tier;
+    if (magnitude <= 1.5f)
+    {
+        tier = 0; // Bright
+    }
+    else if (magnitude <= 3.0f)
+    {
+        tier = 1; // Mid
+    }
+    else if (magnitude <= 4.5f)
+    {
+        tier = 2; // Dim
+    }
+    else
+    {
+        tier = 3; // Faint
+    }
+    return STAR_COLOR_PAIR_BASE + spec_idx * NUM_BRIGHTNESS_TIERS + tier;
+}
+
+void get_star_rgb(char spectral_type, float magnitude, float threshold, uint8_t *r, uint8_t *g, uint8_t *b)
+{
+    // Realistic blackbody chromaticity per Harvard spectral class
+    static const uint8_t base_rgb[NUM_SPECTRAL_CLASSES][3] = {
+        {155, 176, 255}, // O: Blue
+        {170, 191, 255}, // B: Blue-white
+        {215, 226, 255}, // A: White
+        {248, 247, 255}, // F: Yellow-white
+        {255, 244, 234}, // G: Yellow
+        {255, 210, 161}, // K: Orange
+        {255, 180, 115}, // M: Red-orange
+    };
+
+    int spec_idx = spectral_class_index(spectral_type);
+    float max_mag = (threshold > 0.5f) ? threshold : 5.0f;
+    float norm = (max_mag - magnitude) / (max_mag - (-1.46f));
+    if (norm < 0.0f)
+    {
+        norm = 0.0f;
+    }
+    if (norm > 1.0f)
+    {
+        norm = 1.0f;
+    }
+
+    // Scale intensity smoothly between 0.30 (faintest visible) and 1.00 (brightest)
+    float intensity = 0.30f + 0.70f * norm;
+    *r = (uint8_t)roundf(base_rgb[spec_idx][0] * intensity);
+    *g = (uint8_t)roundf(base_rgb[spec_idx][1] * intensity);
+    *b = (uint8_t)roundf(base_rgb[spec_idx][2] * intensity);
+}
+
+void get_planet_rgb(int planet_index, uint8_t *r, uint8_t *g, uint8_t *b)
+{
+    static const uint8_t planet_rgb[NUM_PLANETS][3] = {
+        [SUN] = {255, 230, 100},    [MERCURY] = {200, 200, 205}, [VENUS] = {255, 240, 190},
+        [EARTH] = {100, 160, 255},  [MARS] = {240, 110, 80},     [JUPITER] = {235, 195, 150},
+        [SATURN] = {230, 205, 140}, [URANUS] = {145, 230, 235},  [NEPTUNE] = {100, 145, 255},
+    };
+
+    if (planet_index >= 0 && planet_index < NUM_PLANETS)
+    {
+        *r = planet_rgb[planet_index][0];
+        *g = planet_rgb[planet_index][1];
+        *b = planet_rgb[planet_index][2];
+    }
+    else
+    {
+        *r = 255;
+        *g = 255;
+        *b = 255;
+    }
+}
 
 // Data generation
 
@@ -32,6 +145,7 @@ bool generate_star_table(struct Star **star_table_out, struct Entry *entries, co
         temp_star.ra_motion = (double)entries[i].XRPM;
         temp_star.dec_motion = (double)entries[i].XDPM;
         temp_star.magnitude = entries[i].MAG / 100.0f;
+        temp_star.spectral_type = entries[i].IS[0];
 
         // Star magnitude mapping
         // FIXME: some of these characters render on WSL while not on macOS
@@ -50,9 +164,22 @@ bool generate_star_table(struct Star **star_table_out, struct Entry *entries, co
         const float max_magnitude = 7.96f;
 
         int symbol_index = map_float_to_int_range(min_magnitude, max_magnitude, 0, 9, temp_star.magnitude);
+        if (symbol_index < 0)
+        {
+            symbol_index = 0;
+        }
+        else if (symbol_index > 9)
+        {
+            symbol_index = 9;
+        }
 
         temp_star.base = (struct ObjectBase){
-            .color_pair = 0,
+            .azimuth = 0.0,
+            .altitude = 0.0,
+            .radius_polar = 0.0,
+            .theta_polar = 0.0,
+            .proj_valid = false,
+            .color_pair = get_star_color_pair(temp_star.spectral_type, temp_star.magnitude),
             .symbol_ASCII = (char)mag_map_round_ASCII[symbol_index],
             .symbol_unicode = mag_map_unicode_round[symbol_index],
             .label = name_table[i].name,

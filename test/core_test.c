@@ -297,6 +297,55 @@ void test_elapsed_time_to_components(void)
     TEST_ASSERT_EQUAL(30, seconds);
 }
 
+void test_star_spectral_and_color_mapping(void)
+{
+    // First BSC5 star (HR 1) has spectral type A1 -> 'A'
+    TEST_ASSERT_EQUAL_CHAR('A', star_table[0].spectral_type);
+    // Vega (HR 7001) has spectral type A0 -> 'A'
+    TEST_ASSERT_EQUAL_CHAR('A', star_table[7000].spectral_type);
+    // Arcturus (HR 5340) has spectral type K1.5 -> 'K'
+    TEST_ASSERT_EQUAL_CHAR('K', star_table[5339].spectral_type);
+
+    int pair_o_bright = get_star_color_pair('O', 0.5f);
+    int pair_o_faint = get_star_color_pair('O', 5.5f);
+    int pair_m_bright = get_star_color_pair('M', 0.5f);
+    TEST_ASSERT_TRUE(pair_o_bright < pair_o_faint);
+    TEST_ASSERT_NOT_EQUAL(pair_o_bright, pair_m_bright);
+
+    uint8_t ro_b, go_b, bo_b;
+    uint8_t ro_f, go_f, bo_f;
+    uint8_t rm_b, gm_b, bm_b;
+    get_star_rgb('O', 0.0f, 5.0f, &ro_b, &go_b, &bo_b);
+    get_star_rgb('O', 4.9f, 5.0f, &ro_f, &go_f, &bo_f);
+    get_star_rgb('M', 0.0f, 5.0f, &rm_b, &gm_b, &bm_b);
+
+    // Blue-dominant for O-type, red-dominant for M-type, brighter for lower magnitude
+    TEST_ASSERT_GREATER_THAN(ro_b, bo_b);
+    TEST_ASSERT_GREATER_THAN(bm_b, rm_b);
+    TEST_ASSERT_GREATER_THAN(bo_f, bo_b);
+}
+
+void test_update_star_positions_threshold(void)
+{
+    double julian_date = 2459146.0;
+    double latitude = 42.3601 * M_PI / 180;
+    double longitude = -71.0589 * M_PI / 180;
+
+    update_star_positions_threshold(star_table, num_stars, julian_date, latitude, longitude, 2.0f);
+
+    // Vega (mag 0.03) and Arcturus (mag -0.05) should be updated and projected
+    TEST_ASSERT_TRUE(star_table[7000].base.proj_valid);
+    TEST_ASSERT_DOUBLE_WITHIN(S_EPSILON, 0.547246, star_table[7000].base.azimuth);
+    TEST_ASSERT_DOUBLE_WITHIN(S_EPSILON, 0.0, star_table[7000].base.altitude);
+
+    TEST_ASSERT_TRUE(star_table[5339].base.proj_valid);
+    TEST_ASSERT_DOUBLE_WITHIN(S_EPSILON, 1.511414, star_table[5339].base.azimuth);
+    TEST_ASSERT_DOUBLE_WITHIN(S_EPSILON, 0.440355, star_table[5339].base.altitude);
+
+    // HR 1 (mag 6.7 > 2.0) should be culled
+    TEST_ASSERT_FALSE(star_table[0].base.proj_valid);
+}
+
 int main(void)
 {
     UNITY_BEGIN();
@@ -311,6 +360,8 @@ int main(void)
     RUN_TEST(test_map_float_to_int_range);
     RUN_TEST(test_string_to_time);
     RUN_TEST(test_elapsed_time_to_components);
+    RUN_TEST(test_star_spectral_and_color_mapping);
+    RUN_TEST(test_update_star_positions_threshold);
 
     return UNITY_END();
 }
