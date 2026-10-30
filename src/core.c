@@ -535,3 +535,12 @@ void elapsed_time_to_components(double elapsed_days, int *years, int *days, int 
     *minutes = (int)remaining_minutes;
     *seconds = (int)((remaining_minutes - *minutes) * seconds_in_minute);
 }
+
+double select_simulation_time(const struct Conf *config, double simulation_date, double system_date)
+{
+    if (config->dt_string_utc == NULL && config->speed == 1.0f)
+    {
+        return system_date;
+    }
+    return simulation_date;
+}

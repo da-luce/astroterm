@@ -165,6 +165,9 @@ int main(int argc, char *argv[])
             werase(main_win);
         }
 
+        // Resynchronize the live sky after slow frames or system suspend.
+        julian_date = select_simulation_time(&config, julian_date, current_julian_date());
+
         // Update object positions
         update_star_positions(star_table, num_stars, julian_date, config.latitude, config.longitude);
         update_planet_positions(planet_table, julian_date, config.latitude, config.longitude);
@@ -209,10 +212,7 @@ int main(int argc, char *argv[])
         }
         doupdate();
 
-        // TODO: this timing scheme *should* minimize any drift or divergence
-        // between simulation time and realtime. Check this to make sure.
-
-        // Increment "simulation" time
+        // Increment simulation time. Live mode is resynchronized before the next frame.
         const double microsec_per_day = 24.0 * 60.0 * 60.0 * 1.0E6;
         julian_date += (double)dt / microsec_per_day * config.speed;
 

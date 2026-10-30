@@ -297,6 +297,34 @@ void test_elapsed_time_to_components(void)
     TEST_ASSERT_EQUAL(30, seconds);
 }
 
+void test_live_time_should_follow_system_clock(void)
+{
+    struct Conf config = {.speed = 1.0f};
+    const double simulation_date = 2451545.0;
+
+    // A long interruption must not leave the live sky behind the system clock.
+    TEST_ASSERT_EQUAL_DOUBLE(2451545.5, select_simulation_time(&config, simulation_date, 2451545.5));
+    // A system clock correction may also move time backwards.
+    TEST_ASSERT_EQUAL_DOUBLE(2451544.5, select_simulation_time(&config, simulation_date, 2451544.5));
+}
+
+void test_explicit_date_should_retain_simulation_time(void)
+{
+    struct Conf config = {.speed = 1.0f, .dt_string_utc = "2000-01-01T12:00:00"};
+    TEST_ASSERT_EQUAL_DOUBLE(2451545.0, select_simulation_time(&config, 2451545.0, 2460000.0));
+}
+
+void test_non_unit_speed_should_retain_simulation_time(void)
+{
+    const float speeds[] = {0.0f, -1.0f, 2.0f, 10000.0f};
+    struct Conf config = {0};
+    for (unsigned int i = 0; i < sizeof(speeds) / sizeof(speeds[0]); ++i)
+    {
+        config.speed = speeds[i];
+        TEST_ASSERT_EQUAL_DOUBLE(2451545.0, select_simulation_time(&config, 2451545.0, 2460000.0));
+    }
+}
+
 int main(void)
 {
     UNITY_BEGIN();
@@ -311,6 +339,9 @@ int main(void)
     RUN_TEST(test_map_float_to_int_range);
     RUN_TEST(test_string_to_time);
     RUN_TEST(test_elapsed_time_to_components);
+    RUN_TEST(test_live_time_should_follow_system_clock);
+    RUN_TEST(test_explicit_date_should_retain_simulation_time);
+    RUN_TEST(test_non_unit_speed_should_retain_simulation_time);
 
     return UNITY_END();
 }
