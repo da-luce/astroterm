@@ -422,6 +422,95 @@ void test_term_sync_output(void)
     }
 }
 
+void test_star_spectral_and_color_mapping(void)
+{
+    // First BSC5 star (HR 1) has spectral type A1 -> 'A'
+    TEST_ASSERT_EQUAL_CHAR('A', star_table[0].spectral_type);
+    // Vega (HR 7001) has spectral type A0 -> 'A'
+    TEST_ASSERT_EQUAL_CHAR('A', star_table[7000].spectral_type);
+    // Arcturus (HR 5340) has spectral type K1.5 -> 'K'
+    TEST_ASSERT_EQUAL_CHAR('K', star_table[5339].spectral_type);
+
+    // Test get_star_color_pair for all 7 standard classes in upper and lower case
+    char standard_types[] = {'O', 'B', 'A', 'F', 'G', 'K', 'M', 'o', 'b', 'a', 'f', 'g', 'k', 'm'};
+    for (size_t i = 0; i < sizeof(standard_types); ++i)
+    {
+        int pair = get_star_color_pair(standard_types[i], 1.0f);
+        TEST_ASSERT_TRUE(pair >= STAR_COLOR_PAIR_BASE);
+        TEST_ASSERT_TRUE(pair < STAR_COLOR_PAIR_BASE + NUM_SPECTRAL_CLASSES * NUM_BRIGHTNESS_TIERS);
+    }
+
+    // Test aliases (W -> O, C/N/R/S -> M) in upper and lower case
+    TEST_ASSERT_EQUAL(get_star_color_pair('O', 1.0f), get_star_color_pair('W', 1.0f));
+    TEST_ASSERT_EQUAL(get_star_color_pair('O', 1.0f), get_star_color_pair('w', 1.0f));
+    TEST_ASSERT_EQUAL(get_star_color_pair('M', 1.0f), get_star_color_pair('C', 1.0f));
+    TEST_ASSERT_EQUAL(get_star_color_pair('M', 1.0f), get_star_color_pair('c', 1.0f));
+    TEST_ASSERT_EQUAL(get_star_color_pair('M', 1.0f), get_star_color_pair('N', 1.0f));
+    TEST_ASSERT_EQUAL(get_star_color_pair('M', 1.0f), get_star_color_pair('n', 1.0f));
+    TEST_ASSERT_EQUAL(get_star_color_pair('M', 1.0f), get_star_color_pair('R', 1.0f));
+    TEST_ASSERT_EQUAL(get_star_color_pair('M', 1.0f), get_star_color_pair('r', 1.0f));
+    TEST_ASSERT_EQUAL(get_star_color_pair('M', 1.0f), get_star_color_pair('S', 1.0f));
+    TEST_ASSERT_EQUAL(get_star_color_pair('M', 1.0f), get_star_color_pair('s', 1.0f));
+
+    // Unknown/default falls back to A (white)
+    TEST_ASSERT_EQUAL(get_star_color_pair('A', 1.0f), get_star_color_pair('X', 1.0f));
+    TEST_ASSERT_EQUAL(get_star_color_pair('A', 1.0f), get_star_color_pair('?', 1.0f));
+
+    // Test magnitude tiers (tiers 0, 1, 2, 3)
+    int base_o = STAR_COLOR_PAIR_BASE + 0 * NUM_BRIGHTNESS_TIERS;
+    TEST_ASSERT_EQUAL(base_o + 0, get_star_color_pair('O', 0.5f)); // Tier 0: <= 1.5
+    TEST_ASSERT_EQUAL(base_o + 0, get_star_color_pair('O', 1.5f));
+    TEST_ASSERT_EQUAL(base_o + 1, get_star_color_pair('O', 1.6f)); // Tier 1: <= 3.0
+    TEST_ASSERT_EQUAL(base_o + 1, get_star_color_pair('O', 3.0f));
+    TEST_ASSERT_EQUAL(base_o + 2, get_star_color_pair('O', 3.1f)); // Tier 2: <= 4.5
+    TEST_ASSERT_EQUAL(base_o + 2, get_star_color_pair('O', 4.5f));
+    TEST_ASSERT_EQUAL(base_o + 3, get_star_color_pair('O', 4.6f)); // Tier 3: > 4.5
+    TEST_ASSERT_EQUAL(base_o + 3, get_star_color_pair('O', 6.0f));
+
+    // Test get_star_rgb values
+    uint8_t ro_b, go_b, bo_b;
+    uint8_t ro_f, go_f, bo_f;
+    uint8_t rm_b, gm_b, bm_b;
+    get_star_rgb('O', 0.0f, 5.0f, &ro_b, &go_b, &bo_b);
+    get_star_rgb('O', 4.9f, 5.0f, &ro_f, &go_f, &bo_f);
+    get_star_rgb('M', 0.0f, 5.0f, &rm_b, &gm_b, &bm_b);
+
+    // Blue-dominant for O-type, red-dominant for M-type, brighter for lower magnitude
+    TEST_ASSERT_GREATER_THAN(ro_b, bo_b); // bo_b > ro_b
+    TEST_ASSERT_GREATER_THAN(bm_b, rm_b); // rm_b > bm_b
+    TEST_ASSERT_GREATER_THAN(bo_f, bo_b); // bo_b > bo_f
+
+    // Defensive NULL checks for get_star_rgb
+    uint8_t dummy = 0;
+    get_star_rgb('O', 0.0f, 5.0f, NULL, &dummy, &dummy);
+    get_star_rgb('O', 0.0f, 5.0f, &dummy, NULL, &dummy);
+    get_star_rgb('O', 0.0f, 5.0f, &dummy, &dummy, NULL);
+
+    // Test get_planet_rgb for all valid planets and fallback
+    for (int p = 0; p < NUM_PLANETS; ++p)
+    {
+        uint8_t pr, pg, pb;
+        get_planet_rgb(p, &pr, &pg, &pb);
+        TEST_ASSERT_TRUE(pr > 0 || pg > 0 || pb > 0);
+    }
+    // Out-of-bounds planets return white (255, 255, 255)
+    uint8_t pr_out, pg_out, pb_out;
+    get_planet_rgb(-1, &pr_out, &pg_out, &pb_out);
+    TEST_ASSERT_EQUAL_UINT8(255, pr_out);
+    TEST_ASSERT_EQUAL_UINT8(255, pg_out);
+    TEST_ASSERT_EQUAL_UINT8(255, pb_out);
+
+    get_planet_rgb(NUM_PLANETS, &pr_out, &pg_out, &pb_out);
+    TEST_ASSERT_EQUAL_UINT8(255, pr_out);
+    TEST_ASSERT_EQUAL_UINT8(255, pg_out);
+    TEST_ASSERT_EQUAL_UINT8(255, pb_out);
+
+    // Defensive NULL checks for get_planet_rgb
+    get_planet_rgb(0, NULL, &dummy, &dummy);
+    get_planet_rgb(0, &dummy, NULL, &dummy);
+    get_planet_rgb(0, &dummy, &dummy, NULL);
+}
+
 int main(void)
 {
     UNITY_BEGIN();
@@ -438,6 +527,7 @@ int main(void)
     RUN_TEST(test_string_to_time);
     RUN_TEST(test_elapsed_time_to_components);
     RUN_TEST(test_term_sync_output);
+    RUN_TEST(test_star_spectral_and_color_mapping);
 
     return UNITY_END();
 }

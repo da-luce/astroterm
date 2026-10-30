@@ -8,6 +8,7 @@
 #include "parse_BSC5.h"
 
 #include <stdbool.h>
+#include <stdint.h>
 #include <time.h>
 
 /* Describes how objects should be rendered
@@ -55,6 +56,7 @@ struct Star
     double ra_motion;
     double dec_motion;
     float magnitude;
+    char spectral_type;
 };
 
 struct Planet
@@ -155,5 +157,19 @@ bool string_to_time(const char *string, struct tm *time);
  * results are stored in the provided integer pointers.
  */
 void elapsed_time_to_components(double elapsed_days, int *years, int *days, int *hours, int *minutes, int *seconds);
+
+/* Map a star's Harvard spectral class ('O', 'B', 'A', 'F', 'G', 'K', 'M') and
+ * apparent magnitude to an extended ncurses color pair index.
+ */
+int get_star_color_pair(char spectral_type, float magnitude);
+
+/* Compute 24-bit RGB color for a star given its Harvard spectral class,
+ * apparent magnitude, and visibility threshold.
+ */
+void get_star_rgb(char spectral_type, float magnitude, float threshold, uint8_t *r, uint8_t *g, uint8_t *b);
+
+/* Compute 24-bit RGB color for a solar system planet/Sun.
+ */
+void get_planet_rgb(int planet_index, uint8_t *r, uint8_t *g, uint8_t *b);
 
 #endif // CORE_H

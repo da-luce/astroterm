@@ -9,6 +9,15 @@
 #include <windows.h>
 #endif
 
+// Base color pairs (1-8) match standard ANSI colors.
+// Extended star color pairs start at STAR_COLOR_PAIR_BASE:
+// 7 spectral classes (O, B, A, F, G, K, M) x 4 brightness tiers = 28 pairs (10..37)
+#define STAR_COLOR_PAIR_BASE 10
+#define NUM_SPECTRAL_CLASSES 7
+#define NUM_BRIGHTNESS_TIERS 4
+#define CONSTELL_COLOR_PAIR 38
+#define GRID_COLOR_PAIR 39
+
 /* Initialize ncurses.h
  */
 void ncurses_init(bool color);

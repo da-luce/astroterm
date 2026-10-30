@@ -219,10 +219,18 @@ void render_constells(WINDOW *win, const struct Conf *config, struct Constell **
     {
         clear_braille_lines();
     }
+    if (config->color && CONSTELL_COLOR_PAIR < COLOR_PAIRS)
+    {
+        wattron(win, COLOR_PAIR(CONSTELL_COLOR_PAIR));
+    }
     for (int i = 0; i < num_const; ++i)
     {
         struct Constell *constellation = &((*constell_table)[i]);
         render_constellation(win, config, constellation, star_table);
+    }
+    if (config->color && CONSTELL_COLOR_PAIR < COLOR_PAIRS)
+    {
+        wattroff(win, COLOR_PAIR(CONSTELL_COLOR_PAIR));
     }
 }
 
@@ -314,6 +322,11 @@ void render_azimuthal_grid(WINDOW *win, const struct Conf *config)
     }
     qsort(angles, number_angles, sizeof(int), compare_angles);
 
+    if (config->color && GRID_COLOR_PAIR < COLOR_PAIRS)
+    {
+        wattron(win, COLOR_PAIR(GRID_COLOR_PAIR));
+    }
+
     // Draw angles in all four quadrants
     int quad;
     for (quad = 0; quad < 4; ++quad)
@@ -342,6 +355,11 @@ void render_azimuthal_grid(WINDOW *win, const struct Conf *config)
 
             mvwaddstr(win, y, x + x_off, label);
         }
+    }
+
+    if (config->color && GRID_COLOR_PAIR < COLOR_PAIRS)
+    {
+        wattroff(win, COLOR_PAIR(GRID_COLOR_PAIR));
     }
 
     // while (angle <= 90.0)
