@@ -17,6 +17,18 @@ void ncurses_init(bool color);
  */
 void ncurses_kill(void);
 
+/* Check whether the current terminal supports DECSET 2026 synchronized output
+ */
+bool term_supports_sync_output(void);
+
+/* Begin a synchronized terminal update batch (DECSET 2026)
+ */
+void term_sync_begin(void);
+
+/* End a synchronized terminal update batch (DECRST 2026) and flush stdout
+ */
+void term_sync_end(void);
+
 void wrectangle(WINDOW *win, int ya, int xa, int yb, int xb);
 
 /* Resize window to square with largest possible area
