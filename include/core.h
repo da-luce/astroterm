@@ -153,4 +153,9 @@ bool string_to_time(const char *string, struct tm *time);
  */
 void elapsed_time_to_components(double elapsed_days, int *years, int *days, int *hours, int *minutes, int *seconds);
 
+/* Use system time for the live sky, or retain simulation time for an explicit
+ * date or non-unit speed. Both dates are in Julian days (UTC).
+ */
+double select_simulation_time(const struct Conf *config, double simulation_date, double system_date);
+
 #endif // CORE_H
