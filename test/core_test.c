@@ -6,11 +6,13 @@
 #include "bsc5_names.h"
 #include "core.h"
 #include "core_position.h"
+#include "core_render.h"
 #include "data/keplerian_elements.h"
 #include "macros.h"
 #include "term.h"
 #include "unity.h"
 
+#include <math.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
@@ -215,6 +217,66 @@ void test_update_star_positions(void)
     TEST_ASSERT_DOUBLE_WITHIN(S_EPSILON, 0.440355, star_table[5339].base.altitude);
 }
 
+void test_update_star_positions_threshold(void)
+{
+    double julian_date = 2459146.0;
+    double latitude = 42.3601 * M_PI / 180;
+    double longitude = -71.0589 * M_PI / 180;
+
+    update_star_positions_threshold(star_table, num_stars, julian_date, latitude, longitude, 2.0f);
+
+    // Vega (mag 0.03) and Arcturus (mag -0.05) should be updated and projected
+    TEST_ASSERT_TRUE(star_table[7000].base.proj_valid);
+    TEST_ASSERT_DOUBLE_WITHIN(S_EPSILON, 0.547246, star_table[7000].base.azimuth);
+    TEST_ASSERT_DOUBLE_WITHIN(S_EPSILON, 0.0, star_table[7000].base.altitude);
+
+    TEST_ASSERT_TRUE(star_table[5339].base.proj_valid);
+    TEST_ASSERT_DOUBLE_WITHIN(S_EPSILON, 1.511414, star_table[5339].base.azimuth);
+    TEST_ASSERT_DOUBLE_WITHIN(S_EPSILON, 0.440355, star_table[5339].base.altitude);
+
+    // HR 1 (mag 6.7 > 2.0) should be culled
+    TEST_ASSERT_FALSE(star_table[0].base.proj_valid);
+
+    // Fix 2.3: Verify cached stereographic coordinates and get_object_polar
+    TEST_ASSERT_TRUE(star_table[7000].base.radius_polar > 0.0);
+    double r, theta;
+    get_object_polar(&star_table[7000].base, &r, &theta);
+    TEST_ASSERT_EQUAL_DOUBLE(star_table[7000].base.radius_polar, r);
+    TEST_ASSERT_EQUAL_DOUBLE(star_table[7000].base.theta_polar, theta);
+
+    // Test get_object_polar with an uncached object (fallback to horizontal_to_polar)
+    struct ObjectBase uncached_obj = {0};
+    uncached_obj.proj_valid = false;
+    uncached_obj.azimuth = M_PI / 2.0;
+    uncached_obj.altitude = M_PI / 4.0;
+    double uncached_r, uncached_theta;
+    get_object_polar(&uncached_obj, &uncached_r, &uncached_theta);
+    TEST_ASSERT_TRUE(uncached_r > 0.0);
+
+    // Test get_object_polar defensive NULL checks
+    get_object_polar(NULL, &r, &theta);
+    get_object_polar(&star_table[7000].base, NULL, &theta);
+    get_object_polar(&star_table[7000].base, &r, NULL);
+
+    // Test celestial pole coordinates (declination +90 deg and -90 deg)
+    struct Star pole_stars[2];
+    memset(pole_stars, 0, sizeof(pole_stars));
+    // North pole
+    pole_stars[0].declination = M_PI / 2.0;
+    pole_stars[0].right_ascension = 0.0;
+    pole_stars[0].magnitude = 1.0f;
+    // South pole
+    pole_stars[1].declination = -M_PI / 2.0;
+    pole_stars[1].right_ascension = 0.0;
+    pole_stars[1].magnitude = 1.0f;
+
+    update_star_positions_threshold(pole_stars, 2, julian_date, latitude, longitude, 2.0f);
+    TEST_ASSERT_FALSE(isnan(pole_stars[0].base.azimuth));
+    TEST_ASSERT_FALSE(isnan(pole_stars[0].base.altitude));
+    TEST_ASSERT_FALSE(isnan(pole_stars[1].base.azimuth));
+    TEST_ASSERT_FALSE(isnan(pole_stars[1].base.altitude));
+}
+
 void test_update_planet_positions(void)
 {
     double julian_date = 2459146.0; // 2020 October 23 12:00:00.0 UT1
@@ -369,6 +431,7 @@ int main(void)
     RUN_TEST(test_generate_constell_table);
     RUN_TEST(test_star_numbers_by_magnitude);
     RUN_TEST(test_update_star_positions);
+    RUN_TEST(test_update_star_positions_threshold);
     RUN_TEST(test_update_planet_positions);
     RUN_TEST(test_update_moon_position);
     RUN_TEST(test_map_float_to_int_range);

@@ -222,6 +222,10 @@ void iter_cities(void (*callback)(const CityData *city, void *data), void *user_
 
     // Get the city data as a buffer using split_lines
     char *data = malloc(cities_len + 1);
+    if (data == NULL)
+    {
+        return;
+    }
     memcpy(data, cities, cities_len);
     data[cities_len] = '\0';
 

@@ -8,6 +8,11 @@
 
 #include <curses.h>
 
+/* Return stereographic polar coordinates for an object, using cached values
+ * when available or computing them on demand.
+ */
+void get_object_polar(const struct ObjectBase *object, double *radius_polar, double *theta_polar);
+
 /* Render stars to the screen using a stereographic projection
  */
 void render_stars_stereo(WINDOW *win, const struct Conf *config, struct Star *star_table, int num_stars, const int *num_by_mag);

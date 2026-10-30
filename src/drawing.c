@@ -271,16 +271,33 @@ void draw_line_dotted(WINDOW *win, int ya, int xa, int yb, int xb)
 #define MAX_ROWS 1024
 
 static unsigned char braille_layer[MAX_ROWS][MAX_COLS];
+static int braille_min_row = MAX_ROWS;
+static int braille_max_row = -1;
 
 void clear_braille_lines(void)
 {
-    memset(braille_layer, 0, sizeof(braille_layer));
+    if (braille_max_row >= braille_min_row)
+    {
+        size_t num_rows = (size_t)(braille_max_row - braille_min_row + 1);
+        memset(braille_layer[braille_min_row], 0, num_rows * MAX_COLS * sizeof(unsigned char));
+        braille_min_row = MAX_ROWS;
+        braille_max_row = -1;
+    }
 }
 
 void draw_braille_cell(WINDOW *win, int y, int x, unsigned char mask)
 {
-    if (mask == 0)
+    if (mask == 0 || y < 0 || y >= MAX_ROWS || x < 0 || x >= MAX_COLS)
         return;
+
+    if (y < braille_min_row)
+    {
+        braille_min_row = y;
+    }
+    if (y > braille_max_row)
+    {
+        braille_max_row = y;
+    }
 
     mask |= braille_layer[y][x];
     braille_layer[y][x] = mask;
