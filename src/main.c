@@ -3,6 +3,7 @@
 #include "core_position.h"
 #include "core_render.h"
 #include "data/keplerian_elements.h"
+#include "kitty_render.h"
 #include "macros.h"
 #include "parse_BSC5.h"
 #include "stopwatch.h"
@@ -25,10 +26,14 @@
 #include <curses.h>
 
 #include <locale.h>
+#include <math.h>
 #include <signal.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include <time.h>
+#ifndef _WIN32
+#include <unistd.h>
+#endif
 
 static void catch_winch(int sig);
 static void resize_ncurses(void);
@@ -70,6 +75,7 @@ int main(int argc, char *argv[])
         .grid = false,
         .constell = false,
         .metadata = false,
+        .kitty = false,
     };
 
     // Parse command line args and convert to internal representations
@@ -136,6 +142,22 @@ int main(int argc, char *argv[])
         resize_meta(metadata_win);
     }
 
+    struct KittyCanvas kitty_canvas = {0};
+    if (config.kitty)
+    {
+        int cw, ch;
+        kitty_compute_canvas_size(main_win, &cw, &ch);
+        if (!kitty_canvas_init(&kitty_canvas, cw, ch))
+        {
+            ncurses_kill();
+            exit(EXIT_FAILURE);
+        }
+    }
+
+    bool first_frame = true;
+    double last_sky_jd = 0.0;
+    long long last_meta_sec = -1;
+
     // Render loop
     while (true)
     {
@@ -147,51 +169,85 @@ int main(int argc, char *argv[])
         perform_resize = check_console_window_resize_event(&winsize);
 #endif
 
-        if (perform_resize)
+        bool resized = perform_resize;
+        long long current_meta_sec = (long long)((julian_date - julian_date_start) * 86400.0);
+        bool sky_dirty = first_frame || resized || (fabs(julian_date - last_sky_jd) >= 1.5e-5);
+        bool meta_dirty = config.metadata && (first_frame || resized || (current_meta_sec != last_meta_sec));
+
+        if (resized)
         {
+            if (config.kitty)
+            {
+                kitty_clear_images();
+            }
             resize_ncurses();
             resize_main(main_win, &config);
             if (config.metadata)
             {
                 resize_meta(metadata_win);
             }
+            if (config.kitty)
+            {
+                int cw, ch;
+                kitty_compute_canvas_size(main_win, &cw, &ch);
+                if (!kitty_canvas_resize(&kitty_canvas, cw, ch))
+                {
+                    // Keep existing canvas on failure
+                }
+            }
 
             perform_resize = false;
         }
-        else
-        {
-            werase(metadata_win);
-            werase(main_win);
-        }
 
-        // Update object positions (culling stars fainter than threshold)
-        update_star_positions_threshold(star_table, num_stars, julian_date, config.latitude, config.longitude,
-                                        config.threshold);
-        update_planet_positions(planet_table, julian_date, config.latitude, config.longitude);
-        update_moon_position(&moon_object, julian_date, config.latitude, config.longitude);
-        update_moon_phase(&moon_object, julian_date, config.latitude);
+        if (sky_dirty)
+        {
+            if (!resized)
+            {
+                werase(main_win);
+            }
 
-        // Render objects
-        render_stars_stereo(main_win, &config, star_table, num_stars, num_by_mag);
-        if (config.constell)
-        {
-            render_constells(main_win, &config, &constell_table, num_const, star_table);
-        }
-        render_planets_stereo(main_win, &config, planet_table);
-        render_moon_stereo(main_win, &config, moon_object);
-        if (config.grid)
-        {
-            render_azimuthal_grid(main_win, &config);
-        }
-        else
-        {
-            render_cardinal_directions(main_win, &config);
+            // Update object positions (culling stars fainter than threshold)
+            update_star_positions_threshold(star_table, num_stars, julian_date, config.latitude, config.longitude,
+                                            config.threshold);
+            update_planet_positions(planet_table, julian_date, config.latitude, config.longitude);
+            update_moon_position(&moon_object, julian_date, config.latitude, config.longitude);
+            update_moon_phase(&moon_object, julian_date, config.latitude);
+            config.julian_date = julian_date;
+
+            // Render objects
+            if (config.kitty)
+            {
+                render_kitty_scene(&kitty_canvas, &config, star_table, num_stars, num_by_mag, constell_table, num_const,
+                                   planet_table, moon_object);
+            }
+            render_stars_stereo(main_win, &config, star_table, num_stars, num_by_mag);
+            if (config.constell && !config.kitty)
+            {
+                render_constells(main_win, &config, &constell_table, num_const, star_table);
+            }
+            render_planets_stereo(main_win, &config, planet_table);
+            render_moon_stereo(main_win, &config, moon_object);
+            if (config.grid)
+            {
+                render_azimuthal_grid(main_win, &config);
+            }
+            else
+            {
+                render_cardinal_directions(main_win, &config);
+            }
+
+            last_sky_jd = julian_date;
         }
 
         // Render metadata
-        if (config.metadata)
+        if (meta_dirty)
         {
+            if (!resized)
+            {
+                werase(metadata_win);
+            }
             render_metadata(metadata_win, &config);
+            last_meta_sec = current_meta_sec;
         }
 
         // Exit if ESC or q is pressed
@@ -201,15 +257,26 @@ int main(int argc, char *argv[])
             break;
         }
 
-        // Use double buffering and DECSET 2026 synchronized output to avoid flickering while updating
-        term_sync_begin();
-        wnoutrefresh(main_win);
-        if (config.metadata)
+        if (sky_dirty || meta_dirty)
         {
-            wnoutrefresh(metadata_win);
+            // Use double buffering and DECSET 2026 synchronized output to avoid flickering while updating
+            term_sync_begin();
+            if (sky_dirty)
+            {
+                wnoutrefresh(main_win);
+            }
+            if (meta_dirty)
+            {
+                wnoutrefresh(metadata_win);
+            }
+            doupdate();
+            if (config.kitty && sky_dirty)
+            {
+                kitty_transmit_canvas(&kitty_canvas, main_win);
+            }
+            term_sync_end();
+            first_frame = false;
         }
-        doupdate();
-        term_sync_end();
 
         // TODO: this timing scheme *should* minimize any drift or divergence
         // between simulation time and realtime. Check this to make sure.
@@ -234,6 +301,11 @@ int main(int argc, char *argv[])
     }
 
     // Clean up
+    if (config.kitty)
+    {
+        kitty_clear_images();
+        kitty_canvas_free(&kitty_canvas);
+    }
 
     ncurses_kill();
 
@@ -283,9 +355,9 @@ void parse_options(int argc, char *argv[], struct Conf *config)
 #include "arg_definitions.h"
     struct arg_end *end = arg_end(20);
 
-    void *argtable[] = {latitude_arg, longitude_arg, datetime_arg,    threshold_arg, label_arg,   fps_arg,  speed_arg,
-                        color_arg,    constell_arg,  grid_arg,        unicode_arg,   braille_arg, quit_arg, meta_arg,
-                        ratio_arg,    help_arg,      completions_arg, city_arg,      version_arg, end};
+    void *argtable[] = {latitude_arg, longitude_arg, datetime_arg, threshold_arg,   label_arg,   fps_arg,     speed_arg,
+                        color_arg,    constell_arg,  grid_arg,     unicode_arg,     braille_arg, kitty_arg,   quit_arg,
+                        meta_arg,     ratio_arg,     help_arg,     completions_arg, city_arg,    version_arg, end};
 
     int nerrors = arg_parse(argc, argv, argtable);
 
@@ -439,6 +511,25 @@ void parse_options(int argc, char *argv[], struct Conf *config)
     if (braille_arg->count > 0)
     {
         config->braille = true;
+    }
+
+    if (kitty_arg->count > 0)
+    {
+#if defined(_WIN32)
+        fprintf(stderr, "Notice: Kitty Graphics Protocol is not supported on Windows. Falling back to text mode.\n");
+        config->kitty = false;
+#else
+        if (!isatty(STDOUT_FILENO) || !term_is_kitty())
+        {
+            fprintf(stderr, "Notice: Terminal does not appear to support Kitty Graphics Protocol or stdout is not a TTY. "
+                            "Falling back to text mode.\n");
+            config->kitty = false;
+        }
+        else
+        {
+            config->kitty = true;
+        }
+#endif
     }
 
     if (quit_arg->count > 0)

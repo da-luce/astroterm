@@ -61,14 +61,17 @@ static void render_object_stereo_ex(WINDOW *win, struct ObjectBase *object, cons
         wattron(win, COLOR_PAIR(object->color_pair));
     }
 
-    // Draw object
-    if (config->unicode)
+    // Draw object (unless rendered on the Kitty pixel canvas)
+    if (!config->kitty)
     {
-        mvwaddstr(win, y, x, object->symbol_unicode);
-    }
-    else
-    {
-        mvwaddch(win, y, x, object->symbol_ASCII);
+        if (config->unicode)
+        {
+            mvwaddstr(win, y, x, object->symbol_unicode);
+        }
+        else
+        {
+            mvwaddch(win, y, x, object->symbol_ASCII);
+        }
     }
 
     // Draw label
@@ -106,6 +109,10 @@ void render_stars_stereo(WINDOW *win, const struct Conf *config, struct Star *st
         }
 
         bool show_label = (star->magnitude <= config->label_thresh);
+        if (config->kitty && (!show_label || star->base.label == NULL))
+        {
+            continue;
+        }
         render_object_stereo_ex(win, &star->base, config, show_label);
     }
 
@@ -338,13 +345,16 @@ void render_azimuthal_grid(WINDOW *win, const struct Conf *config)
             int y = rad_vertical - round(rad_vertical * sin(angle * to_rad));
             int x = rad_horizontal + round(rad_horizontal * cos(angle * to_rad));
 
-            if (config->unicode)
+            if (!config->kitty)
             {
-                draw_line_smooth(win, y, x, rad_vertical, rad_horizontal);
-            }
-            else
-            {
-                draw_line_ASCII(win, y, x, rad_vertical, rad_horizontal);
+                if (config->unicode)
+                {
+                    draw_line_smooth(win, y, x, rad_vertical, rad_horizontal);
+                }
+                else
+                {
+                    draw_line_ASCII(win, y, x, rad_vertical, rad_horizontal);
+                }
             }
 
             char label[16];

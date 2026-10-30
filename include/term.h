@@ -57,6 +57,15 @@ void win_position_center(WINDOW *win);
  */
 void term_size(int *y, int *x);
 
+/* Check whether the current terminal is Kitty or supports the Kitty graphics protocol
+ */
+bool term_is_kitty(void);
+
+/* Get the pixel dimensions of the terminal window if reported by the OS/PTY.
+ * Returns true if non-zero pixel dimensions are available, false otherwise.
+ */
+bool term_pixel_size(int *ypixel, int *xpixel);
+
 /* attempt to get the cell aspect ratio: cell height to width
  * i.e. "how many columns form the apparent height of a row"
  *

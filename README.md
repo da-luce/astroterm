@@ -177,6 +177,8 @@ Usage: astroterm [OPTION]...
   -u, --unicode             Use unicode characters
   -b, --braille             Use braille characters for constellation lines
                             (requires Unicode)
+  -k, --kitty               Use the Kitty graphics protocol for high-resolution
+                            pixel rendering
   -q, --quit-on-any         Quit on any keypress (default is to quit on 'q' or
                             'ESC' only)
   -m, --metadata            Display metadata

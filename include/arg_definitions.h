@@ -54,6 +54,7 @@ INCLUDE_ARG_DEFINITION_LIT0(
 INCLUDE_ARG_DEFINITION_LIT0(grid_arg, "g", "grid", "Draw an azimuthal grid");
 INCLUDE_ARG_DEFINITION_LIT0(unicode_arg, "u", "unicode", "Use unicode characters");
 INCLUDE_ARG_DEFINITION_LIT0(braille_arg, "b", "braille", "Use braille characters for constellation lines (requires Unicode)");
+INCLUDE_ARG_DEFINITION_LIT0(kitty_arg, "k", "kitty", "Use the Kitty graphics protocol for high-resolution pixel rendering");
 INCLUDE_ARG_DEFINITION_LIT0(quit_arg, "q", "quit-on-any", "Quit on any keypress (default is to quit on 'q' or 'ESC' only)");
 INCLUDE_ARG_DEFINITION_LIT0(meta_arg, "m", "metadata", "Display metadata");
 INCLUDE_ARG_DEFINITION_LIT0(help_arg, "h", "help", "Print this help message");

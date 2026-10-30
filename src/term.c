@@ -143,6 +143,11 @@ void ncurses_init(bool color)
             init_pair(GRID_COLOR_PAIR, use_256 ? 240 : COLOR_BLUE, -1);
         }
     }
+    else if (has_colors())
+    {
+        start_color();
+        use_default_colors(); // Enable transparent default background (e.g. for Kitty z=-1 graphics)
+    }
 }
 
 void ncurses_kill(void)
@@ -228,6 +233,48 @@ bool stdout_directed_to_console(void)
     return (isatty(fileno(stdout)) != 0);
 
 #endif // _WIN32
+}
+
+bool term_is_kitty(void)
+{
+    if (getenv("KITTY_WINDOW_ID") != NULL)
+    {
+        return true;
+    }
+    const char *term = getenv("TERM");
+    if (term != NULL && (strstr(term, "kitty") != NULL || strstr(term, "ghostty") != NULL))
+    {
+        return true;
+    }
+    const char *term_program = getenv("TERM_PROGRAM");
+    if (term_program != NULL && (strstr(term_program, "kitty") != NULL || strstr(term_program, "ghostty") != NULL ||
+                                 strstr(term_program, "WezTerm") != NULL))
+    {
+        return true;
+    }
+    return false;
+}
+
+bool term_pixel_size(int *ypixel, int *xpixel)
+{
+    if (!stdout_directed_to_console())
+    {
+        return false;
+    }
+#if defined(_WIN32)
+    (void)ypixel;
+    (void)xpixel;
+    return false;
+#else
+    struct winsize ws;
+    if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws) != 0 || ws.ws_ypixel == 0 || ws.ws_xpixel == 0)
+    {
+        return false;
+    }
+    *ypixel = (int)ws.ws_ypixel;
+    *xpixel = (int)ws.ws_xpixel;
+    return true;
+#endif
 }
 
 float get_cell_aspect_ratio(void)

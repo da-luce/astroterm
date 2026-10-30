@@ -31,6 +31,7 @@ struct Conf
     bool grid;
     bool constell;
     bool metadata;
+    bool kitty;
 };
 
 // All information pertinent to rendering a celestial body
