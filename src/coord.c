@@ -14,36 +14,32 @@ void equatorial_rectangular_to_spherical(double xeq, double yeq, double zeq, dou
 void equatorial_to_horizontal(double right_ascension, double declination, double gmst, double latitude, double longitude,
                               double *azimuth, double *altitude)
 {
-    // Astronomical Algorithms, Jean Meeus, eq. 13.5 & 13.6*
-    // *modified so West longitudes are negative and Azimuth 0 is North
-    // as done by Greg Miller (http://www.celestialprogramming.com/)
-
-    // Compute the approximate hour angle (not corrected for nutation)
-    double local_sidereal_time = fmod(gmst + longitude, 2.0 * M_PI);
+    double local_sidereal_time = gmst + longitude;
     double hour_angle = local_sidereal_time - right_ascension;
 
-    // Normalize hour angle to [0, π]...?
-    if (hour_angle < 0.0)
+    double sin_lat = sin(latitude);
+    double cos_lat = cos(latitude);
+    double sin_dec = sin(declination);
+    double cos_dec = cos(declination);
+    double sin_ha = sin(hour_angle);
+    double cos_ha = cos(hour_angle);
+
+    double sin_alt = sin_lat * sin_dec + cos_lat * cos_dec * cos_ha;
+    if (sin_alt > 1.0)
     {
-        hour_angle += 2.0 * M_PI;
+        sin_alt = 1.0;
     }
-    if (hour_angle > M_PI)
+    if (sin_alt < -1.0)
     {
-        hour_angle -= 2.0 * M_PI;
+        sin_alt = -1.0;
     }
+    *altitude = asin(sin_alt);
 
-    *altitude = asin(sin(latitude) * sin(declination) + cos(latitude) * cos(declination) * cos(hour_angle));
-
-    *azimuth = atan2(sin(hour_angle), cos(hour_angle) * sin(latitude) - tan(declination) * cos(latitude));
-
-    // Make Azimuth 0 at North
-    *azimuth -= M_PI;
+    *azimuth = atan2(sin_ha * cos_dec, cos_ha * sin_lat * cos_dec - sin_dec * cos_lat) - M_PI;
     if (*azimuth < 0.0)
     {
         *azimuth += 2.0 * M_PI;
     }
-
-    return;
 }
 
 void horizontal_to_spherical(double azimuth, double altitude, double *point_theta, double *point_phi)

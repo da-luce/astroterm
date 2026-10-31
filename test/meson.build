@@ -6,6 +6,7 @@ test_files += [
     files('core_test.c'),
     files('stopwatch_test.c'),
     files('drawing_test.c'),
+    files('kitty_test.c'),
     files('misc_test.c'),
 ]
 

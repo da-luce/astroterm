@@ -20,21 +20,39 @@ void horizontal_to_polar(double azimuth, double altitude, double *radius, double
     return;
 }
 
-void render_object_stereo(WINDOW *win, struct ObjectBase *object, const struct Conf *config)
+void get_object_polar(const struct ObjectBase *object, double *radius_polar, double *theta_polar)
+{
+    if (object == NULL || radius_polar == NULL || theta_polar == NULL)
+    {
+        return;
+    }
+
+    if (object->proj_valid)
+    {
+        *radius_polar = object->radius_polar;
+        *theta_polar = object->theta_polar;
+    }
+    else
+    {
+        horizontal_to_polar(object->azimuth, object->altitude, radius_polar, theta_polar);
+    }
+}
+
+static void render_object_stereo_ex(WINDOW *win, struct ObjectBase *object, const struct Conf *config, bool show_label)
 {
     double radius_polar, theta_polar;
-    horizontal_to_polar(object->azimuth, object->altitude, &radius_polar, &theta_polar);
+    get_object_polar(object, &radius_polar, &theta_polar);
+
+    // If outside projection, ignore before computing screen coordinates
+    if (fabs(radius_polar) > 1.0)
+    {
+        return;
+    }
 
     int y, x;
     int height, width;
     getmaxyx(win, height, width);
     polar_to_win(radius_polar, theta_polar, height, width, &y, &x);
-
-    // If outside projection, ignore
-    if (fabs(radius_polar) > 1)
-    {
-        return;
-    }
 
     bool use_color = config->color && object->color_pair != 0;
 
@@ -43,18 +61,21 @@ void render_object_stereo(WINDOW *win, struct ObjectBase *object, const struct C
         wattron(win, COLOR_PAIR(object->color_pair));
     }
 
-    // Draw object
-    if (config->unicode)
+    // Draw object (unless rendered on the Kitty pixel canvas)
+    if (!config->kitty)
     {
-        mvwaddstr(win, y, x, object->symbol_unicode);
-    }
-    else
-    {
-        mvwaddch(win, y, x, object->symbol_ASCII);
+        if (config->unicode)
+        {
+            mvwaddstr(win, y, x, object->symbol_unicode);
+        }
+        else
+        {
+            mvwaddch(win, y, x, object->symbol_ASCII);
+        }
     }
 
     // Draw label
-    if (object->label != NULL)
+    if (show_label && object->label != NULL)
     {
         mvwaddstr_truncate(win, y - 1, x + 1, object->label);
     }
@@ -65,6 +86,11 @@ void render_object_stereo(WINDOW *win, struct ObjectBase *object, const struct C
     }
 
     return;
+}
+
+void render_object_stereo(WINDOW *win, struct ObjectBase *object, const struct Conf *config)
+{
+    render_object_stereo_ex(win, object, config, true);
 }
 
 void render_stars_stereo(WINDOW *win, const struct Conf *config, struct Star *star_table, int num_stars, const int *num_by_mag)
@@ -82,13 +108,12 @@ void render_stars_stereo(WINDOW *win, const struct Conf *config, struct Star *st
             continue;
         }
 
-        // FIXME: this is hacky
-        if (star->magnitude > config->label_thresh)
+        bool show_label = (star->magnitude <= config->label_thresh);
+        if (config->kitty && (!show_label || star->base.label == NULL))
         {
-            star->base.label = NULL;
+            continue;
         }
-
-        render_object_stereo(win, &star->base, config);
+        render_object_stereo_ex(win, &star->base, config, show_label);
     }
 
     return;
@@ -103,12 +128,15 @@ void render_constellation(WINDOW *win, const struct Conf *config, struct Constel
     {
         int catalog_num = constellation->star_numbers[i];
         int table_index = catalog_num - 1;
-        struct Star star = star_table[table_index];
-        if (star.magnitude > config->threshold)
+        const struct Star *star = &star_table[table_index];
+        if (star->magnitude > config->threshold)
         {
             return;
         }
     }
+
+    int height, width;
+    getmaxyx(win, height, width);
 
     for (unsigned int i = 0; i < num_segments * 2; i += 2)
     {
@@ -118,15 +146,13 @@ void render_constellation(WINDOW *win, const struct Conf *config, struct Constel
         int table_index_a = catalog_num_a - 1;
         int table_index_b = catalog_num_b - 1;
 
-        struct Star star_a = star_table[table_index_a];
-        struct Star star_b = star_table[table_index_b];
+        const struct Star *star_a = &star_table[table_index_a];
+        const struct Star *star_b = &star_table[table_index_b];
 
-        // TODO: Same code as in render_object_stereo... perhaps refactor this
-        // or cache coordinates
         double radius_a, theta_a;
         double radius_b, theta_b;
-        horizontal_to_polar(star_a.base.azimuth, star_a.base.altitude, &radius_a, &theta_a);
-        horizontal_to_polar(star_b.base.azimuth, star_b.base.altitude, &radius_b, &theta_b);
+        get_object_polar(&star_a->base, &radius_a, &theta_a);
+        get_object_polar(&star_b->base, &radius_b, &theta_b);
 
         // Clip to edge of screen
         if (fabs(radius_a) > 1 && fabs(radius_b) > 1)
@@ -150,13 +176,9 @@ void render_constellation(WINDOW *win, const struct Conf *config, struct Constel
             radius_b = 1.0;
         }
 
-        int height, width;
-        getmaxyx(win, height, width);
-
         int ya, xa;
         int yb, xb;
         polar_to_win(radius_a, theta_a, height, width, &ya, &xa);
-
         polar_to_win(radius_b, theta_b, height, width, &yb, &xb);
 
         // TODO: In old version, constrained line length for some reason... not
@@ -200,11 +222,22 @@ void render_constellation(WINDOW *win, const struct Conf *config, struct Constel
 void render_constells(WINDOW *win, const struct Conf *config, struct Constell **constell_table, int num_const,
                       const struct Star *star_table)
 {
-    clear_braille_lines();
+    if (config->unicode && config->braille)
+    {
+        clear_braille_lines();
+    }
+    if (config->color && CONSTELL_COLOR_PAIR < COLOR_PAIRS)
+    {
+        wattron(win, COLOR_PAIR(CONSTELL_COLOR_PAIR));
+    }
     for (int i = 0; i < num_const; ++i)
     {
         struct Constell *constellation = &((*constell_table)[i]);
         render_constellation(win, config, constellation, star_table);
+    }
+    if (config->color && CONSTELL_COLOR_PAIR < COLOR_PAIRS)
+    {
+        wattroff(win, COLOR_PAIR(CONSTELL_COLOR_PAIR));
     }
 }
 
@@ -288,13 +321,18 @@ void render_azimuthal_grid(WINDOW *win, const struct Conf *config)
 
     // Sort grid angles in the first quadrant by rendering priority
     int number_angles = 90 / inc + 1;
-    int *angles = malloc(number_angles * sizeof(int));
+    int angles[16] = {0};
 
     for (int i = 0; i < number_angles; ++i)
     {
         angles[i] = inc * i;
     }
     qsort(angles, number_angles, sizeof(int), compare_angles);
+
+    if (config->color && GRID_COLOR_PAIR < COLOR_PAIRS)
+    {
+        wattron(win, COLOR_PAIR(GRID_COLOR_PAIR));
+    }
 
     // Draw angles in all four quadrants
     int quad;
@@ -307,27 +345,31 @@ void render_azimuthal_grid(WINDOW *win, const struct Conf *config)
             int y = rad_vertical - round(rad_vertical * sin(angle * to_rad));
             int x = rad_horizontal + round(rad_horizontal * cos(angle * to_rad));
 
-            if (config->unicode)
+            if (!config->kitty)
             {
-                draw_line_smooth(win, y, x, rad_vertical, rad_horizontal);
-            }
-            else
-            {
-                draw_line_ASCII(win, y, x, rad_vertical, rad_horizontal);
+                if (config->unicode)
+                {
+                    draw_line_smooth(win, y, x, rad_vertical, rad_horizontal);
+                }
+                else
+                {
+                    draw_line_ASCII(win, y, x, rad_vertical, rad_horizontal);
+                }
             }
 
-            int str_len = snprintf(NULL, 0, "%d", angle);
-            char *label = malloc(str_len + 1);
-
-            snprintf(label, str_len + 1, "%d", angle);
+            char label[16];
+            int str_len = snprintf(label, sizeof(label), "%d", angle);
 
             // Offset to avoid truncating string
             int x_off = (x < rad_horizontal) ? 0 : -(str_len - 1);
 
             mvwaddstr(win, y, x + x_off, label);
-
-            free(label);
         }
+    }
+
+    if (config->color && GRID_COLOR_PAIR < COLOR_PAIRS)
+    {
+        wattroff(win, COLOR_PAIR(GRID_COLOR_PAIR));
     }
 
     // while (angle <= 90.0)

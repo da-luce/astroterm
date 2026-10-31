@@ -6,6 +6,7 @@ project_source_files += [
     files('core_position.c'),
     files('core_render.c'),
     files('drawing.c'),
+    files('kitty_render.c'),
     files('parse_BSC5.c'),
     files('stopwatch.c'),
     files('term.c'),
