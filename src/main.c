@@ -155,7 +155,6 @@ int main(int argc, char *argv[])
             {
                 resize_meta(metadata_win);
             }
-            doupdate();
 
             perform_resize = false;
         }
@@ -165,8 +164,9 @@ int main(int argc, char *argv[])
             werase(main_win);
         }
 
-        // Update object positions
-        update_star_positions(star_table, num_stars, julian_date, config.latitude, config.longitude);
+        // Update object positions (culling stars fainter than threshold)
+        update_star_positions_threshold(star_table, num_stars, julian_date, config.latitude, config.longitude,
+                                        config.threshold);
         update_planet_positions(planet_table, julian_date, config.latitude, config.longitude);
         update_moon_position(&moon_object, julian_date, config.latitude, config.longitude);
         update_moon_phase(&moon_object, julian_date, config.latitude);
@@ -201,13 +201,15 @@ int main(int argc, char *argv[])
             break;
         }
 
-        // Use double buffering to avoid flickering while updating
+        // Use double buffering and DECSET 2026 synchronized output to avoid flickering while updating
+        term_sync_begin();
         wnoutrefresh(main_win);
         if (config.metadata)
         {
             wnoutrefresh(metadata_win);
         }
         doupdate();
+        term_sync_end();
 
         // TODO: this timing scheme *should* minimize any drift or divergence
         // between simulation time and realtime. Check this to make sure.
@@ -240,6 +242,7 @@ int main(int argc, char *argv[])
     free_planets(planet_table, NUM_PLANETS);
     free_moon_object(moon_object);
     free_star_names(name_table, num_stars);
+    free(num_by_mag);
 
     return EXIT_SUCCESS;
 }
