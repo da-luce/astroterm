@@ -8,10 +8,12 @@
 #include "core_position.h"
 #include "data/keplerian_elements.h"
 #include "macros.h"
+#include "term.h"
 #include "unity.h"
 
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 // Initialize data structs
 static unsigned int num_stars, num_const;
@@ -297,6 +299,67 @@ void test_elapsed_time_to_components(void)
     TEST_ASSERT_EQUAL(30, seconds);
 }
 
+void test_term_sync_output(void)
+{
+    const char *orig_term = getenv("TERM");
+    char *saved_term = orig_term ? strdup(orig_term) : NULL;
+
+    if (isatty(STDOUT_FILENO))
+    {
+        setenv("TERM", "kitty", 1);
+        TEST_ASSERT_TRUE(term_supports_sync_output());
+
+        setenv("TERM", "ghostty", 1);
+        TEST_ASSERT_TRUE(term_supports_sync_output());
+
+        setenv("TERM", "wezterm", 1);
+        TEST_ASSERT_TRUE(term_supports_sync_output());
+
+        setenv("TERM", "alacritty", 1);
+        TEST_ASSERT_TRUE(term_supports_sync_output());
+
+        setenv("TERM", "foot", 1);
+        TEST_ASSERT_TRUE(term_supports_sync_output());
+
+        setenv("TERM", "contour", 1);
+        TEST_ASSERT_TRUE(term_supports_sync_output());
+
+        setenv("TERM", "xterm-256color", 1);
+        TEST_ASSERT_FALSE(term_supports_sync_output());
+
+        setenv("TERM", "vt100", 1);
+        TEST_ASSERT_FALSE(term_supports_sync_output());
+
+        setenv("TERM", "dumb", 1);
+        TEST_ASSERT_FALSE(term_supports_sync_output());
+    }
+    else
+    {
+        setenv("TERM", "kitty", 1);
+        TEST_ASSERT_FALSE(term_supports_sync_output());
+
+        setenv("TERM", "xterm-256color", 1);
+        TEST_ASSERT_FALSE(term_supports_sync_output());
+    }
+
+    term_sync_begin();
+    term_sync_end();
+    term_sync_begin();
+    term_sync_begin();
+    term_sync_end();
+    term_sync_end();
+
+    if (saved_term)
+    {
+        setenv("TERM", saved_term, 1);
+        free(saved_term);
+    }
+    else
+    {
+        unsetenv("TERM");
+    }
+}
+
 int main(void)
 {
     UNITY_BEGIN();
@@ -311,6 +374,7 @@ int main(void)
     RUN_TEST(test_map_float_to_int_range);
     RUN_TEST(test_string_to_time);
     RUN_TEST(test_elapsed_time_to_components);
+    RUN_TEST(test_term_sync_output);
 
     return UNITY_END();
 }
