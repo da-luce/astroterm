@@ -3,17 +3,61 @@
 #include <curses.h>
 #include <math.h>
 #include <stdbool.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #ifdef _WIN32
-#include <stdio.h>
 #include <windows.h>
 extern BOOL WINAPI GetCurrentConsoleFont(HANDLE hConsoleOutput, BOOL bMaximumWindow, PCONSOLE_FONT_INFO lpConsoleCurrentFont);
 #else
 #include <sys/ioctl.h>
 #include <unistd.h>
 #endif
+
+static bool sync_output_enabled = false;
+static bool sync_output_active = false;
+
+bool term_supports_sync_output(void)
+{
+#if defined(_WIN32)
+    return false;
+#else
+    if (!isatty(STDOUT_FILENO))
+    {
+        return false;
+    }
+
+    const char *term = getenv("TERM");
+    if (term != NULL && (strstr(term, "kitty") != NULL || strstr(term, "ghostty") != NULL || strstr(term, "wezterm") != NULL ||
+                         strstr(term, "alacritty") != NULL || strstr(term, "foot") != NULL || strstr(term, "contour") != NULL))
+    {
+        return true;
+    }
+
+    return false;
+#endif
+}
+
+void term_sync_begin(void)
+{
+    if (sync_output_enabled && !sync_output_active)
+    {
+        fputs("\x1b[?2026h", stdout);
+        fflush(stdout);
+        sync_output_active = true;
+    }
+}
+
+void term_sync_end(void)
+{
+    if (sync_output_enabled && sync_output_active)
+    {
+        fputs("\x1b[?2026l", stdout);
+        fflush(stdout);
+        sync_output_active = false;
+    }
+}
 
 void ncurses_init(bool color)
 {
@@ -23,6 +67,8 @@ void ncurses_init(bool color)
     cbreak();    // Disable line buffering
     curs_set(0); // Make cursor invisible
     timeout(0);  // Non-blocking read for getch
+
+    sync_output_enabled = term_supports_sync_output();
 
     // Set the console output code page to UTF-8 on Windows
 #ifdef _WIN32
@@ -55,6 +101,7 @@ void ncurses_init(bool color)
 
 void ncurses_kill(void)
 {
+    term_sync_end();
     endwin();
 }
 
@@ -178,17 +225,20 @@ float get_cell_aspect_ratio(void)
 #define MAX_STR_LEN 2048
 void mvwaddstr_truncate(WINDOW *win, int y, int x, const char *str)
 {
-    // Remaining space on the current line
+    if (win == NULL || str == NULL)
+    {
+        return;
+    }
+
     int max_x = getmaxx(win);
     int space_left = max_x - x;
 
-    // Don't write beyond the line
     if (space_left > 0)
     {
-        // Truncate if necessary
         char truncated[MAX_STR_LEN];
-        strncpy(truncated, str, space_left);
-        truncated[space_left] = '\0';
+        int copy_len = space_left < MAX_STR_LEN ? space_left : (MAX_STR_LEN - 1);
+        strncpy(truncated, str, copy_len);
+        truncated[copy_len] = '\0';
         mvwaddstr(win, y, x, truncated);
     }
 }

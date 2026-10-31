@@ -2,6 +2,8 @@
 #include "macros.h"
 #include "unity.h"
 
+#include <math.h>
+
 void setUp(void)
 {
 }
@@ -67,12 +69,49 @@ void test_polar_to_win(void)
     TEST_ASSERT_EQUAL_INT(50, col);
 }
 
+// equatorial_to_horizontal
+
+void test_equatorial_to_horizontal_no_nan(void)
+{
+    double azimuth = 0.0;
+    double altitude = 0.0;
+
+    // Test case 1: Zenith transit in southern hemisphere (lat = dec = -29.94 deg, HA = 0)
+    double lat1 = -29.94 * M_PI / 180.0;
+    double dec1 = -29.94 * M_PI / 180.0;
+    equatorial_to_horizontal(0.0, dec1, 0.0, lat1, 0.0, &azimuth, &altitude);
+    TEST_ASSERT_FALSE(isnan(altitude));
+    TEST_ASSERT_FALSE(isnan(azimuth));
+
+    // Test case 2: Zenith transit in northern hemisphere (lat = dec = 86.4048 deg, HA = 0)
+    double lat2 = 86.4048 * M_PI / 180.0;
+    double dec2 = 86.4048 * M_PI / 180.0;
+    equatorial_to_horizontal(0.0, dec2, 0.0, lat2, 0.0, &azimuth, &altitude);
+    TEST_ASSERT_FALSE(isnan(altitude));
+    TEST_ASSERT_FALSE(isnan(azimuth));
+
+    // Test case 3: North Celestial Pole (dec = +M_PI / 2.0)
+    double lat3 = 45.0 * M_PI / 180.0;
+    double dec3 = M_PI / 2.0;
+    equatorial_to_horizontal(0.0, dec3, 0.0, lat3, 0.0, &azimuth, &altitude);
+    TEST_ASSERT_FALSE(isnan(altitude));
+    TEST_ASSERT_FALSE(isnan(azimuth));
+
+    // Test case 4: South Celestial Pole (dec = -M_PI / 2.0)
+    double lat4 = -45.0 * M_PI / 180.0;
+    double dec4 = -M_PI / 2.0;
+    equatorial_to_horizontal(0.0, dec4, 0.0, lat4, 0.0, &azimuth, &altitude);
+    TEST_ASSERT_FALSE(isnan(altitude));
+    TEST_ASSERT_FALSE(isnan(azimuth));
+}
+
 int main(void)
 {
     UNITY_BEGIN();
 
     RUN_TEST(test_project_stereographic_top);
     RUN_TEST(test_polar_to_win);
+    RUN_TEST(test_equatorial_to_horizontal_no_nan);
 
     return UNITY_END();
 }

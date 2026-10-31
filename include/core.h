@@ -37,7 +37,10 @@ struct ObjectBase
 {
     double azimuth; // Coordinates used for rendering
     double altitude;
-    int color_pair; // 0 indicates no color pair
+    double radius_polar; // Cached stereographic polar radius
+    double theta_polar;  // Cached stereographic polar angle
+    bool proj_valid;     // True if polar coordinates are valid for current position
+    int color_pair;      // 0 indicates no color pair
     char symbol_ASCII;
     const char *symbol_unicode;
     const char *label;
