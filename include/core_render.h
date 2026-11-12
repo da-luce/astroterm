@@ -25,9 +25,16 @@ void render_moon_stereo(WINDOW *win, const struct Conf *config, struct Moon moon
 void render_constells(WINDOW *win, const struct Conf *config, struct Constell **constell_table, int num_const,
                       const struct Star *star_table);
 
-/* Render an azimuthal grid on a stereographic projection
+/* Render the lines of a dashed alt-az grid (altitude rings and azimuth spokes)
+ * on the stereographic projection. Intended to be drawn before sky objects so
+ * that they appear on top of it
  */
 void render_azimuthal_grid(WINDOW *win, const struct Conf *config);
+
+/* Render the labels of the alt-az grid (compass azimuths and ring altitudes).
+ * Intended to be drawn after sky objects so that labels stay legible
+ */
+void render_azimuthal_grid_labels(WINDOW *win, const struct Conf *config);
 
 /* Render cardinal direction indicators for the Northern, Eastern, Southern, and
  * Western horizons

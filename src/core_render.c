@@ -7,8 +7,12 @@
 #include "term.h"
 
 #include <curses.h>
+#include <limits.h>
 #include <math.h>
+#include <stdbool.h>
+#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 void horizontal_to_polar(double azimuth, double altitude, double *radius, double *theta)
 {
@@ -236,107 +240,419 @@ void render_moon_stereo(WINDOW *win, const struct Conf *config, struct Moon moon
     return;
 }
 
-int gcd(int a, int b)
-{
-    while (b != 0)
-    {
-        int temp = a % b;
+// ---------------------------------------------------------------------------
+// Azimuthal (alt-az) grid
+// ---------------------------------------------------------------------------
+//
+// The grid is a light, dashed graticule drawn *behind* all sky objects:
+//
+//  - altitude rings (30 and 60 deg, more on large windows)
+//  - azimuth spokes (every 30/45/90 deg, depending on window size) running
+//    from the 60 deg ring out to the horizon, so they never pile up at the
+//    zenith
+//  - compass azimuth labels at the outer end of each spoke, and altitude labels
+//    set into each ring
+//
+// Every grid point is mapped with horizontal_to_polar() + polar_to_win(), the
+// same functions used for stars. So the grid lines up with the sky exactly,
+// including orientation (N up, E left, as seen looking up at the sky).
+//
+// Dashes take their glyph from the local direction of the line ('-', '/', ':'
+// or '\' in ASCII; '─' and '│' replace '-' and ':' in Unicode). None of
+// these are used as star symbols, so dashes can't be confused with faint stars.
 
-        a = b;
-        b = temp;
-    }
-    return a;
+#define GRID_MAX_RINGS 5
+#define GRID_MAX_LABELS 32
+
+// Color pair used for the grid (same blue as the cardinal directions)
+#define GRID_COLOR_PAIR 5
+
+struct GridLabel
+{
+    int y;
+    int x0;
+    int x1;
+    bool dim;
+    char text[12];
+};
+
+struct GridState
+{
+    WINDOW *win;
+    const struct Conf *config;
+    int height;
+    int width;
+    // Layout
+    int spoke_step;
+    int spoke_start;
+    int num_rings;
+    int rings[GRID_MAX_RINGS];
+    // Placed labels
+    struct GridLabel labels[GRID_MAX_LABELS];
+    int num_labels;
+};
+
+/* Map a horizontal coordinate (degrees) to a continuous, normalized screen
+ * position where the horizon is the unit circle, +x is screen right and +y is
+ * screen up
+ */
+static void grid_normalized(double az_deg, double alt_deg, double *nx, double *ny)
+{
+    double r, theta;
+    horizontal_to_polar(az_deg * TO_RAD, alt_deg * TO_RAD, &r, &theta);
+    *nx = r * cos(theta);
+    *ny = r * sin(theta);
 }
 
-int compare_angles(const void *a, const void *b)
+/* Map a horizontal coordinate (degrees) to a window cell. Same mapping as
+ * polar_to_win(), but values that land exactly halfway between two cells
+ * (the center line of even-sized windows) always round the same way, up, as the
+ * N/E/S/W letters do. Otherwise floating point noise in sin/cos (e.g.
+ * cos(90deg) = +6e-17, cos(270deg) = -2e-16) splits opposite spokes onto
+ * neighboring columns/rows
+ */
+static void grid_cell(const struct GridState *g, double az_deg, double alt_deg, int *row, int *col)
 {
-    int x = *(int *)a;
-    int y = *(int *)b;
-    return (90 / gcd(x, 90)) < (90 / gcd(y, 90));
+    double r, theta;
+    horizontal_to_polar(az_deg * TO_RAD, alt_deg * TO_RAD, &r, &theta);
+
+    double rad_y = (g->height - 1) / 2.0;
+    double rad_x = (g->width - 1) / 2.0;
+
+    double row_d = r * -rad_y * sin(theta) + rad_y;
+    double col_d = r * rad_x * cos(theta) + rad_x;
+
+    const double eps = 1e-9;
+    *row = (int)floor(row_d + 0.5 + eps);
+    *col = (int)floor(col_d + 0.5 + eps);
+}
+
+static bool grid_in_bounds(const struct GridState *g, int row, int col)
+{
+    return row >= 0 && row < g->height && col >= 0 && col < g->width;
+}
+
+/* Choose a dash glyph from the on-screen direction (dx, dy) of the line, with
+ * +y pointing up. The window is visually square, so normalized coordinates
+ * give the true visual angle.
+ */
+static void grid_put_dash(const struct GridState *g, int row, int col, double dx, double dy)
+{
+    double angle = atan2(dy, dx) / TO_RAD; // (-180, 180]
+    if (angle < 0)
+    {
+        angle += 180.0; // Direction, not orientation: fold to [0, 180)
+    }
+
+    bool unicode = g->config->unicode;
+
+    if (angle < 22.5 || angle >= 157.5)
+    {
+        if (unicode)
+        {
+            mvwaddstr(g->win, row, col, "─");
+        }
+        else
+        {
+            mvwaddch(g->win, row, col, '-');
+        }
+    }
+    else if (angle < 67.5)
+    {
+        mvwaddch(g->win, row, col, '/');
+    }
+    else if (angle < 112.5)
+    {
+        if (unicode)
+        {
+            mvwaddstr(g->win, row, col, "│");
+        }
+        else
+        {
+            mvwaddch(g->win, row, col, ':');
+        }
+    }
+    else
+    {
+        mvwaddch(g->win, row, col, '\\');
+    }
+}
+
+/* True if the cell belongs to a label (plus one cell of padding on each side),
+ * so lines leave a clean gap for the label text
+ */
+static bool grid_reserved(const struct GridState *g, int row, int col)
+{
+    for (int i = 0; i < g->num_labels; ++i)
+    {
+        const struct GridLabel *l = &g->labels[i];
+        if (l->y == row && col >= l->x0 - 1 && col <= l->x1 + 1)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+/* Trace a path of horizontal coordinates from (az0, alt0) to (az1, alt1),
+ * interpolated linearly in (az, alt), as a "stitched" line: one glyph every
+ * `GRID_STITCH` rows of on-screen length, oriented along the path. Even
+ * spacing by on-screen length keeps the pattern regular in every direction
+ */
+#define GRID_STITCH 1.5
+
+static void grid_trace(const struct GridState *g, double az0, double alt0, double az1, double alt1)
+{
+    double radius_rows = (g->height - 1) / 2.0;
+
+    // Sample finely enough that stitch positions are accurate to a cell
+    double span_deg = fmax(fabs(az1 - az0), fabs(alt1 - alt0));
+    int cells = MAX(g->width, g->height);
+    int samples = MAX(8, (int)ceil(span_deg * TO_RAD * cells * 2.0));
+
+    double prev_x = 0.0, prev_y = 0.0;
+    double length = 0.0; // Distance travelled along the path, in rows
+    double next_stitch = 0.0;
+    int last_row = INT_MIN, last_col = INT_MIN;
+
+    for (int i = 0; i <= samples; ++i)
+    {
+        double t = (double)i / samples;
+        double az = az0 + (az1 - az0) * t;
+        double alt = alt0 + (alt1 - alt0) * t;
+
+        double x, y;
+        grid_normalized(az, alt, &x, &y);
+        double dx = x - prev_x;
+        double dy = y - prev_y;
+        if (i > 0)
+        {
+            // The window is visually square: normalized units scale equally
+            length += hypot(dx, dy) * radius_rows;
+        }
+        prev_x = x;
+        prev_y = y;
+
+        if (length < next_stitch)
+        {
+            continue;
+        }
+        next_stitch += GRID_STITCH;
+
+        int row, col;
+        grid_cell(g, az, alt, &row, &col);
+        if ((row == last_row && col == last_col) || !grid_in_bounds(g, row, col) || grid_reserved(g, row, col))
+        {
+            continue;
+        }
+        last_row = row;
+        last_col = col;
+
+        // Local direction of the path, from a short step forward
+        double t2 = fmin(t + 1e-3, 1.0);
+        double t1 = t2 - 1e-3;
+        double ax, ay, bx, by;
+        grid_normalized(az0 + (az1 - az0) * t1, alt0 + (alt1 - alt0) * t1, &ax, &ay);
+        grid_normalized(az0 + (az1 - az0) * t2, alt0 + (alt1 - alt0) * t2, &bx, &by);
+
+        grid_put_dash(g, row, col, bx - ax, by - ay);
+    }
+}
+
+/* Reserve a label centered on (row, col), clamped inside the window. Labels
+ * overlapping a previously placed label are skipped
+ */
+static void grid_place_label(struct GridState *g, int row, int col, const char *text, bool dim)
+{
+    // Display width: count UTF-8 lead bytes only (labels may contain '°')
+    int len = 0;
+    for (const char *c = text; *c != '\0'; ++c)
+    {
+        len += ((*c & 0xC0) != 0x80);
+    }
+
+    if (row < 0 || row >= g->height || len > g->width || g->num_labels >= GRID_MAX_LABELS)
+    {
+        return;
+    }
+
+    int x0 = col - len / 2;
+    x0 = MAX(0, MIN(x0, g->width - len));
+    int x1 = x0 + len - 1;
+
+    for (int i = 0; i < g->num_labels; ++i)
+    {
+        const struct GridLabel *l = &g->labels[i];
+        // One cell of padding around each label
+        if (l->y == row && x0 <= l->x1 + 1 && x1 >= l->x0 - 1)
+        {
+            return;
+        }
+    }
+
+    struct GridLabel *l = &g->labels[g->num_labels++];
+    l->y = row;
+    l->x0 = x0;
+    l->x1 = x1;
+    l->dim = dim;
+    snprintf(l->text, sizeof(l->text), "%s", text);
+}
+
+/* Compute the grid layout (density, rings, spokes, and label positions) for
+ * the current window size. Returns false if the window is too small for a grid
+ */
+static bool grid_setup(struct GridState *g, WINDOW *win, const struct Conf *config)
+{
+    g->win = win;
+    g->config = config;
+    g->num_labels = 0;
+    getmaxyx(win, g->height, g->width);
+
+    if (g->height < 5 || g->width < 5)
+    {
+        return false; // Too small for a meaningful grid
+    }
+
+    // Choose density from the vertical radius of the projection (in rows)
+    double radius_rows = (g->height - 1) / 2.0;
+
+    if (radius_rows < 8)
+    {
+        g->spoke_step = 90;
+        g->num_rings = 1;
+        g->rings[0] = 45;
+    }
+    else if (radius_rows < 16)
+    {
+        g->spoke_step = 45;
+        g->num_rings = 2;
+        g->rings[0] = 30;
+        g->rings[1] = 60;
+    }
+    else if (radius_rows < 35)
+    {
+        g->spoke_step = 30;
+        g->num_rings = 2;
+        g->rings[0] = 30;
+        g->rings[1] = 60;
+    }
+    else
+    {
+        g->spoke_step = 30;
+        g->num_rings = 5;
+        for (int i = 0; i < g->num_rings; ++i)
+        {
+            g->rings[i] = 15 * (i + 1);
+        }
+    }
+
+    // Spokes start at the highest ring at or below 60 deg so they stay clear of
+    // the zenith
+    g->spoke_start = g->rings[0];
+    for (int i = 0; i < g->num_rings; ++i)
+    {
+        if (g->rings[i] <= 60)
+        {
+            g->spoke_start = g->rings[i];
+        }
+    }
+
+    char buf[12];
+
+    // Compass azimuth at the outer end of each spoke, ~1.5 rows inside the
+    // horizon. Cardinal directions are skipped: N/E/S/W letters mark those
+    double label_alt = 90.0 - 2.0 * atan(1.0 - 1.5 / radius_rows) / TO_RAD;
+    for (int az = 0; az < 360; az += g->spoke_step)
+    {
+        if (az % 90 == 0)
+        {
+            continue;
+        }
+        int row, col;
+        grid_cell(g, az, label_alt, &row, &col);
+        snprintf(buf, sizeof(buf), config->unicode ? "%d°" : "%d", az);
+        grid_place_label(g, row, col, buf, false);
+    }
+
+    // Altitude labels set into each ring, halfway between the North spoke and
+    // the next one. Dimmed like the rings so they read as part of them, and
+    // stay distinct from the azimuth labels
+    double ring_label_az = g->spoke_step / 2.0;
+    for (int i = 0; i < g->num_rings; ++i)
+    {
+        int row, col;
+        grid_cell(g, ring_label_az, g->rings[i], &row, &col);
+        snprintf(buf, sizeof(buf), "%d", g->rings[i]);
+        grid_place_label(g, row, col, buf, true);
+    }
+
+    return true;
 }
 
 void render_azimuthal_grid(WINDOW *win, const struct Conf *config)
 {
-    const double to_rad = M_PI / 180.0;
-
-    int height, width;
-    getmaxyx(win, height, width);
-    int maxy = height - 1;
-    int maxx = width - 1;
-
-    int rad_vertical = round(maxy / 2.0);
-    int rad_horizontal = round(maxx / 2.0);
-
-    // Possible step sizes in degrees (multiples of 5 and factors of 90)
-    int step_sizes[5] = {10, 15, 30, 45, 90};
-    int length = sizeof(step_sizes) / sizeof(step_sizes[0]);
-
-    // Minimum number of rows separating grid line (at end of window)
-    int min_height = 10;
-
-    int inc = step_sizes[length - 1]; // Fallback to large delta on small windows
-    for (int i = 0; i < length; ++i)
+    struct GridState g;
+    if (!grid_setup(&g, win, config))
     {
-        // Vertical offset (rows) of the angle at edge of window -- approximately the "arc length" for small angles
-        int vertical_offset = (int)round(rad_vertical * sin(step_sizes[i] * to_rad));
-        if (vertical_offset >= min_height)
+        return;
+    }
+
+    // Lines: dim, so they recede behind the sky. Cells reserved for labels are
+    // left blank (see grid_trace)
+    wattron(win, A_DIM);
+    if (config->color)
+    {
+        wattron(win, COLOR_PAIR(GRID_COLOR_PAIR));
+    }
+
+    for (int i = 0; i < g.num_rings; ++i)
+    {
+        grid_trace(&g, 0.0, g.rings[i], 360.0, g.rings[i]);
+    }
+
+    for (int az = 0; az < 360; az += g.spoke_step)
+    {
+        grid_trace(&g, az, g.spoke_start, az, 0.0);
+    }
+
+    if (config->color)
+    {
+        wattroff(win, COLOR_PAIR(GRID_COLOR_PAIR));
+    }
+    wattroff(win, A_DIM);
+}
+
+void render_azimuthal_grid_labels(WINDOW *win, const struct Conf *config)
+{
+    struct GridState g;
+    if (!grid_setup(&g, win, config))
+    {
+        return;
+    }
+
+    if (config->color)
+    {
+        wattron(win, COLOR_PAIR(GRID_COLOR_PAIR));
+    }
+
+    for (int i = 0; i < g.num_labels; ++i)
+    {
+        const struct GridLabel *l = &g.labels[i];
+        if (l->dim)
         {
-            inc = step_sizes[i];
-            break;
+            wattron(win, A_DIM);
+        }
+        mvwaddstr(win, l->y, l->x0, l->text);
+        if (l->dim)
+        {
+            wattroff(win, A_DIM);
         }
     }
 
-    // Sort grid angles in the first quadrant by rendering priority
-    int number_angles = 90 / inc + 1;
-    int *angles = malloc(number_angles * sizeof(int));
-
-    for (int i = 0; i < number_angles; ++i)
+    if (config->color)
     {
-        angles[i] = inc * i;
+        wattroff(win, COLOR_PAIR(GRID_COLOR_PAIR));
     }
-    qsort(angles, number_angles, sizeof(int), compare_angles);
-
-    // Draw angles in all four quadrants
-    int quad;
-    for (quad = 0; quad < 4; ++quad)
-    {
-        for (int i = 0; i < number_angles; ++i)
-        {
-            int angle = angles[i] + 90 * quad;
-
-            int y = rad_vertical - round(rad_vertical * sin(angle * to_rad));
-            int x = rad_horizontal + round(rad_horizontal * cos(angle * to_rad));
-
-            if (config->unicode)
-            {
-                draw_line_smooth(win, y, x, rad_vertical, rad_horizontal);
-            }
-            else
-            {
-                draw_line_ASCII(win, y, x, rad_vertical, rad_horizontal);
-            }
-
-            int str_len = snprintf(NULL, 0, "%d", angle);
-            char *label = malloc(str_len + 1);
-
-            snprintf(label, str_len + 1, "%d", angle);
-
-            // Offset to avoid truncating string
-            int x_off = (x < rad_horizontal) ? 0 : -(str_len - 1);
-
-            mvwaddstr(win, y, x + x_off, label);
-
-            free(label);
-        }
-    }
-
-    // while (angle <= 90.0)
-    // {
-    //     int rad_x = rad_horizontal * angle / 90.0;
-    //     int rad_x = rad_vertical * angle / 90.0;
-    //     // draw_ellipse(win, win->_maxy/2, win->_maxx/2, 20, 20,
-    //     ascii); angle += inc;
-    // }
 }
 
 void render_cardinal_directions(WINDOW *win, const struct Conf *config)

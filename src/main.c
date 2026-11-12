@@ -171,6 +171,12 @@ int main(int argc, char *argv[])
         update_moon_position(&moon_object, julian_date, config.latitude, config.longitude);
         update_moon_phase(&moon_object, julian_date, config.latitude);
 
+        // Render grid first so that all sky objects are drawn on top of it
+        if (config.grid)
+        {
+            render_azimuthal_grid(main_win, &config);
+        }
+
         // Render objects
         render_stars_stereo(main_win, &config, star_table, num_stars, num_by_mag);
         if (config.constell)
@@ -181,12 +187,9 @@ int main(int argc, char *argv[])
         render_moon_stereo(main_win, &config, moon_object);
         if (config.grid)
         {
-            render_azimuthal_grid(main_win, &config);
+            render_azimuthal_grid_labels(main_win, &config);
         }
-        else
-        {
-            render_cardinal_directions(main_win, &config);
-        }
+        render_cardinal_directions(main_win, &config);
 
         // Render metadata
         if (config.metadata)
